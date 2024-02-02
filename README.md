@@ -44,15 +44,16 @@ Contributing
 
 Contributions to this project are welcome! Please follow the Contributing Guidelines for details on how to contribute.
 
-# Other Contributors
+# Collaborators
 
-1. Fadi Essam
-2. Ibrahim El-Samanoudy
-3. Islam Ayman
+1. [Ali Elmansoury](https://github.com/Ali-Elmansoury)
+2. [Fadi Essam](https://github.com/FadiEssam)
+3. [Ibrahim El-Samanoudy](https://github.com/samanoudy)
+4. [Islam Ayman](https://github.com/MrDark0o0)
 
 # License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 # Acknowledgments
 
