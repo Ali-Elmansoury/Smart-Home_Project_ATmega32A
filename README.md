@@ -47,9 +47,10 @@ Contributions to this project are welcome! Please follow the Contributing Guidel
 # Collaborators
 
 1. [Ali Elmansoury](https://github.com/Ali-Elmansoury)
-2. [Fadi Essam](https://github.com/FadiEssam)
-3. [Ibrahim El-Samanoudy](https://github.com/samanoudy)
-4. [Islam Ayman](https://github.com/MrDark0o0)
+2. [David Mina](https://github.com/DavidMina88)
+3. [Fadi Essam](https://github.com/FadiEssam)
+4. [Ibrahim El-Samanoudy](https://github.com/samanoudy)
+5. [Islam Ayman](https://github.com/MrDark0o0)
 
 # License
 
