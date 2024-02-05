@@ -461,16 +461,18 @@ Discarded input sections
                 0x00000000       0x3e Source/MCAL/UART/Source/uart.o
  .text.uart_receiveByte
                 0x00000000       0x32 Source/MCAL/UART/Source/uart.o
- .debug_info    0x00000000      0x112 Source/MCAL/UART/Source/uart.o
- .debug_abbrev  0x00000000       0xa3 Source/MCAL/UART/Source/uart.o
- .debug_loc     0x00000000      0x113 Source/MCAL/UART/Source/uart.o
+ .text.uart_receiveString
+                0x00000000       0x40 Source/MCAL/UART/Source/uart.o
+ .debug_info    0x00000000      0x137 Source/MCAL/UART/Source/uart.o
+ .debug_abbrev  0x00000000       0xbb Source/MCAL/UART/Source/uart.o
+ .debug_loc     0x00000000      0x15b Source/MCAL/UART/Source/uart.o
  .debug_aranges
-                0x00000000       0x38 Source/MCAL/UART/Source/uart.o
- .debug_ranges  0x00000000       0x28 Source/MCAL/UART/Source/uart.o
- .debug_line    0x00000000      0x11a Source/MCAL/UART/Source/uart.o
- .debug_str     0x00000000      0x1b6 Source/MCAL/UART/Source/uart.o
+                0x00000000       0x40 Source/MCAL/UART/Source/uart.o
+ .debug_ranges  0x00000000       0x30 Source/MCAL/UART/Source/uart.o
+ .debug_line    0x00000000      0x148 Source/MCAL/UART/Source/uart.o
+ .debug_str     0x00000000      0x1f0 Source/MCAL/UART/Source/uart.o
  .comment       0x00000000       0x31 Source/MCAL/UART/Source/uart.o
- .debug_frame   0x00000000       0x94 Source/MCAL/UART/Source/uart.o
+ .debug_frame   0x00000000       0xb4 Source/MCAL/UART/Source/uart.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)

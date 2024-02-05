@@ -43,5 +43,7 @@ void uart_sendByte(u8 byte);
 void uart_sendString(u8* str);
 /*UART receive data byte*/
 u8 uart_receiveByte(void);
+/*UART receive string*/
+void uart_receiveString(u8* receivedStr);
 
 #endif /* UART_H_ */
