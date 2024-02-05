@@ -1,4 +1,5 @@
-#include MM74C922.h
+#include "MM74C922.h"
+#include "std_types.h"
 
 static u8 PortId;
 static u8 PinId_S;
