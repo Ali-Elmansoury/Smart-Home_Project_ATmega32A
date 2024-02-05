@@ -1,5 +1,4 @@
-#include "MM74C922.h"
-#include "dio.h"
+#include MM74C922.h
 
 static u8 PortId;
 static u8 PinId_S;
@@ -21,8 +20,8 @@ void MM74C922_Init(u8 portId, u8 pinId_S , u8 pinId_E)
         }
         PortId = portId;
         PinId_S = pinId_S;
-    #else
-        //#error "Invalid pin configuration"
+    #elseif (pinId_S => pinId_E)
+        #error "Invalid pin configuration"
     #endif
 }
 
