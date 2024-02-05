@@ -46,3 +46,5 @@ Source\MCAL\Timer1\Source\timer1.c
 
 Source\MCAL\UART\Source\uart.c
 
+Source\SERVICE\LocalMode_DB\Source\localDB.c
+
