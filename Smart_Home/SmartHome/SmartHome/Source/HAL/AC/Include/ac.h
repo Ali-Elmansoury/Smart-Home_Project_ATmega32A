@@ -13,6 +13,8 @@
 
 /*Air conditioner initialization*/
 void airConditioner_init(void);
+/* Air conditioner status check*/
+void airConditioner_status(void);
 /*Air conditioner ON*/
 void airConditioner_on(void);
 /*Air conditioner OFF*/
