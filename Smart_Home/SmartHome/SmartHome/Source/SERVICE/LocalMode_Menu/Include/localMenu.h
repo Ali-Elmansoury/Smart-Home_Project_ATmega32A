@@ -1,16 +1,16 @@
 #ifndef LOCALMENU_H_
 #define LOCALMENU_H_
 
-#define LOCAL_MENU 0
-#define LED_MENU 1
-#define AC_MENU 2
-#define MOVE_UP 0
-#define MOVE_DOWN 1
+#define LOCAL_MENU		(0)
+#define LED_MENU		(1)
+#define AC_MENU			(2)
+#define MOVE_UP			(0)
+#define MOVE_DOWN		(1)
 
-#define AC_ON_OFF 0
-#define AC_RUN_TEMP 1
-#define AC_STOP_TEMP 2
-#define AC_RETURN 3
+#define AC_ON_OFF		(0)
+#define AC_RUN_TEMP		(1)
+#define AC_STOP_TEMP	(2)
+#define AC_RETURN		(3)
 
 void menuInit(void);
 

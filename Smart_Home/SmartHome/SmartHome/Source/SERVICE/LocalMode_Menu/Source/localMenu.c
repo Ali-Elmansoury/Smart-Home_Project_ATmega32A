@@ -1,8 +1,8 @@
-AC ac;
 #include "std_types.h"
 #include "lcd.h"
 #include "ac.h"
 #include "localMenu.h"
+AC ac;
 u8 number_of_active_devices = 0;
 void local_Menu_Slector_Display(u8 menu_selector_position)
 {
@@ -23,7 +23,7 @@ void local_Menu_Slector_Display(u8 menu_selector_position)
 
 void local_Menu_Display(u8 menu_position , u8 menu_selector_position)
 {
-    lcd_goTo(0,1)
+    lcd_goTo(0,1);
     switch (menu_position)
     {
     case 0:
@@ -91,16 +91,16 @@ void local_Menu_AC_Display(u8 menu_position , AC *ac)
     {
     case 0:
         lcd_displayStr("AC [");
-        lcd_displayStr(ac.AC_Status ? "ON" : "OFF");
+        lcd_displayStr(ac->AC_Status ? "ON" : "OFF");
         lcd_displayChar(']');
         lcd_goTo(1, 1);
         lcd_displayStr("Run Temp:");
-        lcd_displayNums(ac.AC_Run_Temperature_threshold);
+        lcd_displayNums(ac->AC_Run_Temperature_threshold);
         lcd_displayChar('C');
         break;
     case 1:
         lcd_displayStr("Stop Temp:");
-        lcd_displayNums(ac.AC_Sop_Temperature_threshold);
+        lcd_displayNums(ac->AC_Stop_Temperature_threshold);
         lcd_displayChar('C');
         lcd_goTo(1, 1);
         lcd_displayStr("Return");

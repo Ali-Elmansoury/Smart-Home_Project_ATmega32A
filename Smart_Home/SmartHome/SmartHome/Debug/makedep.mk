@@ -4,8 +4,6 @@
 
 Source\APP\main.c
 
-Source\HAL\AC\Source\ac.c
-
 Source\HAL\Buzzer\Source\buzzer.c
 
 Source\HAL\DC_Motor\Source\dc.c
@@ -48,5 +46,9 @@ Source\MCAL\Timer2\Source\timer2.c
 
 Source\MCAL\UART\Source\uart.c
 
+Source\SERVICE\AC\Source\ac.c
+
 Source\SERVICE\LocalMode_DB\Source\localDB.c
+
+Source\SERVICE\LocalMode_Menu\Source\localMenu.c
 

@@ -16,6 +16,6 @@ void keypad_init(void)
 u8 keypad_readKey(void)
 {
 	u8 key = 0;
-	MM74C922_Decode(&key);
+	key = MM74C922_GetKey();
 	return key;
 }

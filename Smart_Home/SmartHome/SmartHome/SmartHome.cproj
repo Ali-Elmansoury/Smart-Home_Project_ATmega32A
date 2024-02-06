@@ -115,13 +115,14 @@
       <Value>../Source/HAL/Servo/Include</Value>
       <Value>../Source/MCAL/EEPROM/Include</Value>
       <Value>../Source/HAL/Lamp/Include</Value>
-      <Value>../Source/HAL/AC/Include</Value>
       <Value>../Source/HAL/DC_Motor/Include</Value>
       <Value>../Source/HAL/MM74C922/Include</Value>
       <Value>../Source/HAL/POT/Include</Value>
       <Value>../Source/SERVICE/LocalMode_DB/Include</Value>
       <Value>../Source/SERVICE/RemoteMode_DB/Include</Value>
       <Value>../Source/MCAL/Timer2/Include</Value>
+      <Value>../Source/SERVICE/AC/Include</Value>
+      <Value>../Source/SERVICE/LocalMode_Menu/Include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
@@ -144,12 +145,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Source\APP\main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Source\HAL\AC\Include\ac.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Source\HAL\AC\Source\ac.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\HAL\Buzzer\Include\buzzer.h">
@@ -311,17 +306,27 @@
     <Compile Include="Source\MCAL\UART\Source\uart.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\SERVICE\AC\Include\ac.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\AC\Source\ac.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Source\SERVICE\LocalMode_DB\Include\localDB.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\SERVICE\LocalMode_DB\Source\localDB.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\SERVICE\LocalMode_Menu\Include\localMenu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\LocalMode_Menu\Source\localMenu.c">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source" />
-    <Folder Include="Source\HAL\AC\Include" />
-    <Folder Include="Source\HAL\AC\Source" />
     <Folder Include="Source\HAL\Buzzer\Include" />
     <Folder Include="Source\HAL\Buzzer\Source" />
     <Folder Include="Source\HAL\DC_Motor\Include" />
@@ -346,7 +351,6 @@
     <Folder Include="Source\HAL\Dimmer" />
     <Folder Include="Source\HAL\Lamp" />
     <Folder Include="Source\HAL\DC_Motor" />
-    <Folder Include="Source\HAL\AC" />
     <Folder Include="Source\HAL\MM74C922" />
     <Folder Include="Source\HAL\MM74C922\Include" />
     <Folder Include="Source\HAL\MM74C922\Source" />
@@ -388,9 +392,15 @@
     <Folder Include="Source\MCAL\UART\Include" />
     <Folder Include="Source\MCAL\UART\Source" />
     <Folder Include="Source\SERVICE" />
+    <Folder Include="Source\SERVICE\AC\" />
+    <Folder Include="Source\SERVICE\AC\Include\" />
+    <Folder Include="Source\SERVICE\AC\Source\" />
     <Folder Include="Source\SERVICE\LocalMode_DB" />
     <Folder Include="Source\SERVICE\LocalMode_DB\Include" />
     <Folder Include="Source\SERVICE\LocalMode_DB\Source" />
+    <Folder Include="Source\SERVICE\LocalMode_Menu\" />
+    <Folder Include="Source\SERVICE\LocalMode_Menu\Include\" />
+    <Folder Include="Source\SERVICE\LocalMode_Menu\Source\" />
     <Folder Include="Source\SERVICE\RemoteMode_DB" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Include" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Source" />
