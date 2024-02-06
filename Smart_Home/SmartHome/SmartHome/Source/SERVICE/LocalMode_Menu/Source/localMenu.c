@@ -7,6 +7,8 @@
 #include "Lamp_Dim_Service.h"
 u8 number_of_active_devices = 0;
 
+void local_Menu_value_adj(u8 *value, u8 *v_adj_flag);
+void local_Menu_AC_Set_Temp(u8 temp, u8 AC_TEMP_MENU);
 
 
 void local_Menu_Slector_Display(const u8 *menu_selector_position)
@@ -54,35 +56,43 @@ void local_Menu_LED_Display(const u8 *menu_position)
     {
     case 0:
 		
-        lcd_displayStr("Lamp1 [ON]");
-		lcd_displayStr(Lamp_Service_state() ? "[ON]" : "[OFF]");
+        lcd_displayStr("Lamp1 ");
+		lcd_displayStr(lamp_Getstate(LAMP1_ID) ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
-        lcd_displayStr("Lamp2 [ON]");
+        lcd_displayStr("Lamp2 ");
+		lcd_displayStr(lamp_Getstate(LAMP2_ID) ? "[ON]" : "[OFF]");
         break;
     case 1:
-        lcd_displayStr("Lamp2 [ON]");
+        lcd_displayStr("Lamp2 ");
+		lcd_displayStr(lamp_Getstate(LAMP2_ID) ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
-        lcd_displayStr("Lamp3 [ON]");
+        lcd_displayStr("Lamp3 ");
+		lcd_displayStr(lamp_Getstate(LAMP3_ID) ? "[ON]" : "[OFF]");
         break;
     case 2:
-        lcd_displayStr("Lamp3 [ON]");
+        lcd_displayStr("Lamp3 ");
+		lcd_displayStr(lamp_Getstate(LAMP3_ID) ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
-        lcd_displayStr("Lamp4 [ON]");
+        lcd_displayStr("Lamp4 ");
+		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON]" : "[OFF]");
         break;
     case 3:
-        lcd_displayStr("Lamp4 [ON]");
+        lcd_displayStr("Lamp4 ");
+		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
-        lcd_displayStr("Lamp5 [ON]");
+        lcd_displayStr("Lamp5 ");
+		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON]" : "[OFF]");
         break;
     case 4:
-        lcd_displayStr("Lamp5 [ON]");
+        lcd_displayStr("Lamp5 ");
+		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("DimLamp ");
-		lcd_displayStr(Lamp_Service_state() ? "[ON]" : "[OFF]");
+		lcd_displayStr(Lamp_Service_Dim_state() ? "[ON]" : "[OFF]");
         break;
     case 5:
 		lcd_displayStr("DimLamp ");
-        lcd_displayStr(Lamp_Service_state() ? "[ON]" : "[OFF]");
+        lcd_displayStr(Lamp_Service_Dim_state() ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Return");
         break;    
@@ -211,6 +221,8 @@ void local_Menu_AC(u8 *current_menu)
             // AC1 Run Temp
 			v_adj_flag=TRUE;
 			local_Menu_value_adj(&AC_CFG.AC_Run_Temperature_threshold,&v_adj_flag);
+			AC_CFG.AC_Run_Temperature_threshold = AC_CFG.AC_Run_Temperature_threshold > 32 ? 32 : AC_CFG.AC_Run_Temperature_threshold;
+			AC_CFG.AC_Run_Temperature_threshold = AC_CFG.AC_Run_Temperature_threshold < AC_CFG.AC_Stop_Temperature_threshold ? AC_CFG.AC_Stop_Temperature_threshold : AC_CFG.AC_Run_Temperature_threshold;
 			if (v_adj_flag == FALSE)
 				{airConditioner_Set_Config(&AC_CFG);}
 			else{/* do nothing */;}
@@ -219,6 +231,8 @@ void local_Menu_AC(u8 *current_menu)
             // AC1 Stop Temp
 			v_adj_flag=TRUE;
 			local_Menu_value_adj(&AC_CFG.AC_Stop_Temperature_threshold,&v_adj_flag);
+			AC_CFG.AC_Stop_Temperature_threshold = AC_CFG.AC_Stop_Temperature_threshold < 18 ? 18 : AC_CFG.AC_Stop_Temperature_threshold;
+			AC_CFG.AC_Stop_Temperature_threshold = AC_CFG.AC_Stop_Temperature_threshold > AC_CFG.AC_Run_Temperature_threshold ? AC_CFG.AC_Run_Temperature_threshold : AC_CFG.AC_Stop_Temperature_threshold;
 			if (v_adj_flag == FALSE)
 				{airConditioner_Set_Config(&AC_CFG);}
 			else{/* do nothing */;}
@@ -275,22 +289,28 @@ void local_Menu_LED(u8 *current_menu)
         switch (menu_position+menu_selector_position)
         {
         case 0:
-            // LED1 ON/OFF (Toggle LED1 Status)
+            // Lamp1 ON/OFF (Toggle LED1 Status)
+			lamp_toggle(LAMP1_ID);
             break;
         case 1:
             // LED2 ON/OFF (Toggle LED2 Status)
+			lamp_toggle(LAMP2_ID);
             break;
         case 2:
             // LED3 ON/OFF (Toggle LED3 Status)
+			lamp_toggle(LAMP3_ID);
             break;
         case 3:
             // LED4 ON/OFF (Toggle LED4 Status)
+			lamp_toggle(LAMP4_ID);
             break;
         case 4:
             // LED5 ON/OFF (Toggle LED5 Status)
+			lamp_toggle(LAMP5_ID);
             break;
         case 5:
             // DimmerLED ON/OFF (Toggle DimmerLED Status)
+			Lamp_Service_Dim_Toggle();
             break;
         case 6:
             // Return
@@ -309,10 +329,10 @@ void local_Menu_value_adj(u8 *value, u8 *v_adj_flag)
     switch (keypad_readKey())
     {
     case KEY_A:
-        *value++;
+        (*value)++;
         break;
     case KEY_B:
-        *value--;
+        (*value)--;
         break;
     case KEY_C:
         *v_adj_flag = FALSE;

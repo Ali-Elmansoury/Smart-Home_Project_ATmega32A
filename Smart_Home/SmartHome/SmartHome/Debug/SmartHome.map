@@ -28,6 +28,8 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o) (__mulsf3x)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o (exit)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                              Source/SERVICE/LocalMode_Menu/Source/localMenu.o (__tablejump2__)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
                               Source/HAL/LCD/Source/lcd.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
@@ -83,7 +85,7 @@ Discarded input sections
                 0x00000000       0x30 Source/HAL/Buzzer/Source/buzzer.o
  .debug_ranges  0x00000000       0x20 Source/HAL/Buzzer/Source/buzzer.o
  .debug_line    0x00000000       0xa8 Source/HAL/Buzzer/Source/buzzer.o
- .debug_str     0x00000000      0x1d7 Source/HAL/Buzzer/Source/buzzer.o
+ .debug_str     0x00000000      0x1d4 Source/HAL/Buzzer/Source/buzzer.o
  .comment       0x00000000       0x31 Source/HAL/Buzzer/Source/buzzer.o
  .debug_frame   0x00000000       0x44 Source/HAL/Buzzer/Source/buzzer.o
  .text          0x00000000        0x0 Source/HAL/DC_Motor/Source/dc.o
@@ -101,7 +103,7 @@ Discarded input sections
                 0x00000000       0x30 Source/HAL/DC_Motor/Source/dc.o
  .debug_ranges  0x00000000       0x20 Source/HAL/DC_Motor/Source/dc.o
  .debug_line    0x00000000       0xa6 Source/HAL/DC_Motor/Source/dc.o
- .debug_str     0x00000000      0x1d8 Source/HAL/DC_Motor/Source/dc.o
+ .debug_str     0x00000000      0x1d5 Source/HAL/DC_Motor/Source/dc.o
  .comment       0x00000000       0x31 Source/HAL/DC_Motor/Source/dc.o
  .debug_frame   0x00000000       0x44 Source/HAL/DC_Motor/Source/dc.o
  .text          0x00000000        0x0 Source/HAL/Dimmer/Source/dimmer.o
@@ -120,7 +122,7 @@ Discarded input sections
                 0x00000000       0x30 Source/HAL/Dimmer/Source/dimmer.o
  .debug_ranges  0x00000000       0x20 Source/HAL/Dimmer/Source/dimmer.o
  .debug_line    0x00000000      0x124 Source/HAL/Dimmer/Source/dimmer.o
- .debug_str     0x00000000      0x20a Source/HAL/Dimmer/Source/dimmer.o
+ .debug_str     0x00000000      0x207 Source/HAL/Dimmer/Source/dimmer.o
  .comment       0x00000000       0x31 Source/HAL/Dimmer/Source/dimmer.o
  .debug_frame   0x00000000       0x44 Source/HAL/Dimmer/Source/dimmer.o
  .text          0x00000000        0x0 Source/HAL/Keypad/Source/keypad.o
@@ -137,7 +139,7 @@ Discarded input sections
                 0x00000000       0x28 Source/HAL/Keypad/Source/keypad.o
  .debug_ranges  0x00000000       0x18 Source/HAL/Keypad/Source/keypad.o
  .debug_line    0x00000000       0xbe Source/HAL/Keypad/Source/keypad.o
- .debug_str     0x00000000      0x1ca Source/HAL/Keypad/Source/keypad.o
+ .debug_str     0x00000000      0x1c7 Source/HAL/Keypad/Source/keypad.o
  .comment       0x00000000       0x31 Source/HAL/Keypad/Source/keypad.o
  .debug_frame   0x00000000       0x34 Source/HAL/Keypad/Source/keypad.o
  .text          0x00000000        0x0 Source/HAL/L293D/Source/l293d.o
@@ -156,7 +158,7 @@ Discarded input sections
                 0x00000000       0x30 Source/HAL/L293D/Source/l293d.o
  .debug_ranges  0x00000000       0x20 Source/HAL/L293D/Source/l293d.o
  .debug_line    0x00000000      0x160 Source/HAL/L293D/Source/l293d.o
- .debug_str     0x00000000      0x214 Source/HAL/L293D/Source/l293d.o
+ .debug_str     0x00000000      0x211 Source/HAL/L293D/Source/l293d.o
  .comment       0x00000000       0x31 Source/HAL/L293D/Source/l293d.o
  .debug_frame   0x00000000       0x44 Source/HAL/L293D/Source/l293d.o
  .text          0x00000000        0x0 Source/HAL/Lamp/Source/lamp.o
@@ -177,7 +179,7 @@ Discarded input sections
                 0x00000000       0x30 Source/HAL/Lamp/Source/lamp.o
  .debug_ranges  0x00000000       0x20 Source/HAL/Lamp/Source/lamp.o
  .debug_line    0x00000000       0xd6 Source/HAL/Lamp/Source/lamp.o
- .debug_str     0x00000000      0x1f0 Source/HAL/Lamp/Source/lamp.o
+ .debug_str     0x00000000      0x1ed Source/HAL/Lamp/Source/lamp.o
  .comment       0x00000000       0x31 Source/HAL/Lamp/Source/lamp.o
  .debug_frame   0x00000000       0x4c Source/HAL/Lamp/Source/lamp.o
  .text          0x00000000        0x0 Source/HAL/LCD/Source/lcd.o
@@ -210,7 +212,7 @@ Discarded input sections
                 0x00000000       0x60 Source/HAL/LCD/Source/lcd.o
  .debug_ranges  0x00000000       0x50 Source/HAL/LCD/Source/lcd.o
  .debug_line    0x00000000      0x393 Source/HAL/LCD/Source/lcd.o
- .debug_str     0x00000000      0x2eb Source/HAL/LCD/Source/lcd.o
+ .debug_str     0x00000000      0x2e8 Source/HAL/LCD/Source/lcd.o
  .comment       0x00000000       0x31 Source/HAL/LCD/Source/lcd.o
  .debug_frame   0x00000000       0xfc Source/HAL/LCD/Source/lcd.o
  .text          0x00000000        0x0 Source/HAL/LCD/Source/lcd_cfg.o
@@ -223,7 +225,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 Source/HAL/LCD/Source/lcd_cfg.o
  .debug_line    0x00000000       0x5d Source/HAL/LCD/Source/lcd_cfg.o
- .debug_str     0x00000000      0x1a3 Source/HAL/LCD/Source/lcd_cfg.o
+ .debug_str     0x00000000      0x1a0 Source/HAL/LCD/Source/lcd_cfg.o
  .comment       0x00000000       0x31 Source/HAL/LCD/Source/lcd_cfg.o
  .text          0x00000000        0x0 Source/HAL/LM35/Source/lm35.o
  .data          0x00000000        0x0 Source/HAL/LM35/Source/lm35.o
@@ -239,7 +241,7 @@ Discarded input sections
                 0x00000000       0x28 Source/HAL/LM35/Source/lm35.o
  .debug_ranges  0x00000000       0x18 Source/HAL/LM35/Source/lm35.o
  .debug_line    0x00000000       0xb7 Source/HAL/LM35/Source/lm35.o
- .debug_str     0x00000000      0x1d6 Source/HAL/LM35/Source/lm35.o
+ .debug_str     0x00000000      0x1d3 Source/HAL/LM35/Source/lm35.o
  .comment       0x00000000       0x31 Source/HAL/LM35/Source/lm35.o
  .debug_frame   0x00000000       0x34 Source/HAL/LM35/Source/lm35.o
  .text          0x00000000        0x0 Source/HAL/MM74C922/Source/MM74C922.o
@@ -260,7 +262,7 @@ Discarded input sections
                 0x00000000       0x30 Source/HAL/MM74C922/Source/MM74C922.o
  .debug_ranges  0x00000000       0x20 Source/HAL/MM74C922/Source/MM74C922.o
  .debug_line    0x00000000       0xf5 Source/HAL/MM74C922/Source/MM74C922.o
- .debug_str     0x00000000      0x21b Source/HAL/MM74C922/Source/MM74C922.o
+ .debug_str     0x00000000      0x218 Source/HAL/MM74C922/Source/MM74C922.o
  .comment       0x00000000       0x31 Source/HAL/MM74C922/Source/MM74C922.o
  .debug_frame   0x00000000       0x60 Source/HAL/MM74C922/Source/MM74C922.o
  .text          0x00000000        0x0 Source/HAL/POT/Source/pot.o
@@ -277,7 +279,7 @@ Discarded input sections
                 0x00000000       0x28 Source/HAL/POT/Source/pot.o
  .debug_ranges  0x00000000       0x18 Source/HAL/POT/Source/pot.o
  .debug_line    0x00000000       0xb5 Source/HAL/POT/Source/pot.o
- .debug_str     0x00000000      0x1c9 Source/HAL/POT/Source/pot.o
+ .debug_str     0x00000000      0x1c6 Source/HAL/POT/Source/pot.o
  .comment       0x00000000       0x31 Source/HAL/POT/Source/pot.o
  .debug_frame   0x00000000       0x34 Source/HAL/POT/Source/pot.o
  .text          0x00000000        0x0 Source/HAL/Relay/Source/relay.o
@@ -294,7 +296,7 @@ Discarded input sections
                 0x00000000       0x28 Source/HAL/Relay/Source/relay.o
  .debug_ranges  0x00000000       0x18 Source/HAL/Relay/Source/relay.o
  .debug_line    0x00000000       0xfb Source/HAL/Relay/Source/relay.o
- .debug_str     0x00000000      0x1cd Source/HAL/Relay/Source/relay.o
+ .debug_str     0x00000000      0x1ca Source/HAL/Relay/Source/relay.o
  .comment       0x00000000       0x31 Source/HAL/Relay/Source/relay.o
  .debug_frame   0x00000000       0x34 Source/HAL/Relay/Source/relay.o
  .text          0x00000000        0x0 Source/HAL/Servo/Source/servo.o
@@ -311,7 +313,7 @@ Discarded input sections
                 0x00000000       0x28 Source/HAL/Servo/Source/servo.o
  .debug_ranges  0x00000000       0x18 Source/HAL/Servo/Source/servo.o
  .debug_line    0x00000000       0xe9 Source/HAL/Servo/Source/servo.o
- .debug_str     0x00000000      0x228 Source/HAL/Servo/Source/servo.o
+ .debug_str     0x00000000      0x225 Source/HAL/Servo/Source/servo.o
  .comment       0x00000000       0x31 Source/HAL/Servo/Source/servo.o
  .debug_frame   0x00000000       0x48 Source/HAL/Servo/Source/servo.o
  .text          0x00000000        0x0 Source/MCAL/ADC/Source/adc.o
@@ -328,7 +330,7 @@ Discarded input sections
                 0x00000000       0x28 Source/MCAL/ADC/Source/adc.o
  .debug_ranges  0x00000000       0x18 Source/MCAL/ADC/Source/adc.o
  .debug_line    0x00000000       0xba Source/MCAL/ADC/Source/adc.o
- .debug_str     0x00000000      0x1a8 Source/MCAL/ADC/Source/adc.o
+ .debug_str     0x00000000      0x1a5 Source/MCAL/ADC/Source/adc.o
  .comment       0x00000000       0x31 Source/MCAL/ADC/Source/adc.o
  .debug_frame   0x00000000       0x34 Source/MCAL/ADC/Source/adc.o
  .text          0x00000000        0x0 Source/MCAL/DIO/Source/dio.o
@@ -351,7 +353,7 @@ Discarded input sections
                 0x00000000       0x40 Source/MCAL/DIO/Source/dio.o
  .debug_ranges  0x00000000       0x30 Source/MCAL/DIO/Source/dio.o
  .debug_line    0x00000000      0x21c Source/MCAL/DIO/Source/dio.o
- .debug_str     0x00000000      0x209 Source/MCAL/DIO/Source/dio.o
+ .debug_str     0x00000000      0x206 Source/MCAL/DIO/Source/dio.o
  .comment       0x00000000       0x31 Source/MCAL/DIO/Source/dio.o
  .debug_frame   0x00000000       0x64 Source/MCAL/DIO/Source/dio.o
  .text          0x00000000        0x0 Source/MCAL/EEPROM/Source/eeprom.o
@@ -372,7 +374,7 @@ Discarded input sections
                 0x00000000       0x38 Source/MCAL/EEPROM/Source/eeprom.o
  .debug_ranges  0x00000000       0x28 Source/MCAL/EEPROM/Source/eeprom.o
  .debug_line    0x00000000      0x138 Source/MCAL/EEPROM/Source/eeprom.o
- .debug_str     0x00000000      0x1f2 Source/MCAL/EEPROM/Source/eeprom.o
+ .debug_str     0x00000000      0x1ef Source/MCAL/EEPROM/Source/eeprom.o
  .comment       0x00000000       0x31 Source/MCAL/EEPROM/Source/eeprom.o
  .debug_frame   0x00000000       0x94 Source/MCAL/EEPROM/Source/eeprom.o
  .text          0x00000000        0x0 Source/MCAL/GIE/Source/gie.o
@@ -388,7 +390,7 @@ Discarded input sections
                 0x00000000       0x28 Source/MCAL/GIE/Source/gie.o
  .debug_ranges  0x00000000       0x18 Source/MCAL/GIE/Source/gie.o
  .debug_line    0x00000000       0x86 Source/MCAL/GIE/Source/gie.o
- .debug_str     0x00000000      0x1bd Source/MCAL/GIE/Source/gie.o
+ .debug_str     0x00000000      0x1ba Source/MCAL/GIE/Source/gie.o
  .comment       0x00000000       0x31 Source/MCAL/GIE/Source/gie.o
  .debug_frame   0x00000000       0x34 Source/MCAL/GIE/Source/gie.o
  .text          0x00000000        0x0 Source/MCAL/Timer0/Source/timer0.o
@@ -492,7 +494,7 @@ Discarded input sections
                 0x00000000       0x40 Source/MCAL/UART/Source/uart.o
  .debug_ranges  0x00000000       0x30 Source/MCAL/UART/Source/uart.o
  .debug_line    0x00000000      0x120 Source/MCAL/UART/Source/uart.o
- .debug_str     0x00000000      0x1f0 Source/MCAL/UART/Source/uart.o
+ .debug_str     0x00000000      0x1ed Source/MCAL/UART/Source/uart.o
  .comment       0x00000000       0x31 Source/MCAL/UART/Source/uart.o
  .debug_frame   0x00000000       0x7c Source/MCAL/UART/Source/uart.o
  .text          0x00000000        0x0 Source/SERVICE/AC/Source/ac.o
@@ -522,7 +524,7 @@ Discarded input sections
                 0x00000000       0x58 Source/SERVICE/AC/Source/ac.o
  .debug_ranges  0x00000000       0x48 Source/SERVICE/AC/Source/ac.o
  .debug_line    0x00000000      0x1b4 Source/SERVICE/AC/Source/ac.o
- .debug_str     0x00000000      0x2f3 Source/SERVICE/AC/Source/ac.o
+ .debug_str     0x00000000      0x2f0 Source/SERVICE/AC/Source/ac.o
  .comment       0x00000000       0x31 Source/SERVICE/AC/Source/ac.o
  .debug_frame   0x00000000       0x94 Source/SERVICE/AC/Source/ac.o
  .text          0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
@@ -534,7 +536,7 @@ Discarded input sections
                 0x00000000       0x3e Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .text.Lamp_Service_Dim_Toggle
                 0x00000000        0xe Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .text.Lamp_Service_state
+ .text.Lamp_Service_Dim_state
                 0x00000000        0x6 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .data.Dim_Service_state
                 0x00000000        0x1 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
@@ -545,7 +547,7 @@ Discarded input sections
                 0x00000000       0x38 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .debug_ranges  0x00000000       0x28 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .debug_line    0x00000000      0x12c Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_str     0x00000000      0x245 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_str     0x00000000      0x246 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .comment       0x00000000       0x31 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .debug_frame   0x00000000       0x54 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .text          0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
@@ -580,7 +582,7 @@ Discarded input sections
                 0x00000000       0x60 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .debug_ranges  0x00000000       0x68 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .debug_line    0x00000000      0x4d3 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_str     0x00000000      0x403 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_str     0x00000000      0x400 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .comment       0x00000000       0x31 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .debug_frame   0x00000000      0x168 Source/SERVICE/LocalMode_DB/Source/localDB.o
  COMMON         0x00000000       0xd2 Source/SERVICE/LocalMode_DB/Source/localDB.o
@@ -590,11 +592,11 @@ Discarded input sections
  .text.local_Menu_Slector_Display
                 0x00000000       0x2e Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .rodata.str1.1
-                0x00000000       0x89 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000000       0x75 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_Display
                 0x00000000       0x52 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_LED_Display
-                0x00000000      0x118 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000000      0x1de Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_AC_Display
                 0x00000000       0x9c Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_Move_Selector
@@ -604,39 +606,41 @@ Discarded input sections
  .text.local_Menu_AC_Set_Temp
                 0x00000000       0x30 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_LED
-                0x00000000       0x78 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000000       0xb2 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .progmem.gcc_sw_table.local_Menu_LED
+                0x00000000        0xe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_value_adj
-                0x00000000       0x16 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000000       0x3a Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_AC
                 0x00000000       0xfe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.1749
+ .bss.menu_selector_position.1754
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.1748
+ .bss.menu_position.1753
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.1713
+ .bss.menu_selector_position.1722
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.1712
+ .bss.menu_position.1721
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_key.1715
+ .bss.menu_key.1724
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.v_adj_flag.1716
+ .bss.v_adj_flag.1725
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.1697
+ .bss.menu_selector_position.1706
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.1696
+ .bss.menu_position.1705
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.number_of_active_devices
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_info    0x00000000      0xb8d Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_abbrev  0x00000000      0x234 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_loc     0x00000000      0x60d Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_info    0x00000000      0xcda Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_abbrev  0x00000000      0x211 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_loc     0x00000000      0x637 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_aranges
                 0x00000000       0x68 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_ranges  0x00000000       0x58 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_line    0x00000000      0x551 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_str     0x00000000      0x41d Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_line    0x00000000      0x6c4 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_str     0x00000000      0x450 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .comment       0x00000000       0x31 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_frame   0x00000000      0x144 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_frame   0x00000000      0x14c Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text          0x00000000        0x0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .data          0x00000000        0x0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .bss           0x00000000        0x0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
@@ -669,7 +673,7 @@ Discarded input sections
                 0x00000000       0x60 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .debug_ranges  0x00000000       0x68 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .debug_line    0x00000000      0x448 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_str     0x00000000      0x3fa Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_str     0x00000000      0x3f7 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .comment       0x00000000       0x31 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .debug_frame   0x00000000      0x16c Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  COMMON         0x00000000       0xd2 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
@@ -677,7 +681,7 @@ Discarded input sections
  .data          0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .bss           0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .debug_line    0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .debug_str     0x00000000      0x143 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_str     0x00000000      0x140 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .comment       0x00000000       0x31 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
@@ -760,6 +764,22 @@ Discarded input sections
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc   0x00000000        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
@@ -1300,17 +1320,17 @@ END GROUP
  .debug_frame   0x000001b8      0x10c Source/MCAL/Timer1/Source/timer1.o
  .debug_frame   0x000002c4      0x194 Source/MCAL/Timer2/Source/timer2.o
 
-.debug_str      0x00000000      0x70b
+.debug_str      0x00000000      0x708
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_str     0x00000196      0x15a Source/APP/main.o
-                                0x18e (size before relaxing)
- .debug_str     0x000002f0      0x1a5 Source/MCAL/Timer0/Source/timer0.o
-                                0x31e (size before relaxing)
- .debug_str     0x00000495      0x11c Source/MCAL/Timer1/Source/timer1.o
-                                0x2d8 (size before relaxing)
- .debug_str     0x000005b1      0x15a Source/MCAL/Timer2/Source/timer2.o
-                                0x31c (size before relaxing)
+ .debug_str     0x00000196      0x157 Source/APP/main.o
+                                0x18b (size before relaxing)
+ .debug_str     0x000002ed      0x1a5 Source/MCAL/Timer0/Source/timer0.o
+                                0x31b (size before relaxing)
+ .debug_str     0x00000492      0x11c Source/MCAL/Timer1/Source/timer1.o
+                                0x2d5 (size before relaxing)
+ .debug_str     0x000005ae      0x15a Source/MCAL/Timer2/Source/timer2.o
+                                0x319 (size before relaxing)
 
 .debug_loc      0x00000000      0x5fc
  *(.debug_loc)

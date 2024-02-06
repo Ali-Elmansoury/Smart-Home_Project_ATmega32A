@@ -30,6 +30,8 @@ AC airConditioner_Status(void);
 void airConditioner_service(void);
 /* Set AC Temp config */
 void airConditioner_Set_Config(AC *ac_config);
+/* Turns AC service ON/OFF */
+void airConditioner_Toggle(void);
 /* Air conditioner ON */
 void airConditioner_on(void);
 /* Air conditioner OFF */

@@ -36,7 +36,7 @@ void Lamp_Service_Dim_Toggle()
 	Dim_Service_state^= TRUE;
 }
 
-boolean Lamp_Service_state()
+boolean Lamp_Service_Dim_state()
 {
 	return Dim_Service_state;
 }

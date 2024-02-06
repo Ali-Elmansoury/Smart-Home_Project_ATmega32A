@@ -26,5 +26,7 @@
 void lamp_init(void);
 /*toggle lamp state*/
 void lamp_toggle(u8 id);
+/*return lamp state*/
+boolean lamp_Getstate(u8 id);
 
 #endif /* LAMP_H_ */
