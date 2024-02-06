@@ -121,6 +121,7 @@
       <Value>../Source/HAL/POT/Include</Value>
       <Value>../Source/SERVICE/LocalMode_DB/Include</Value>
       <Value>../Source/SERVICE/RemoteMode_DB/Include</Value>
+      <Value>../Source/MCAL/Timer2/Include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
@@ -292,6 +293,15 @@
     <Compile Include="Source\MCAL\Timer1\Source\timer1.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\MCAL\Timer2\Include\timer2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer2\Include\timer2_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer2\Source\timer2.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Source\MCAL\UART\Include\uart.h">
       <SubType>compile</SubType>
     </Compile>
@@ -365,12 +375,15 @@
     <Folder Include="Source\MCAL\GIE\Include" />
     <Folder Include="Source\MCAL\GIE\Source" />
     <Folder Include="Source\MCAL\EEPROM" />
+    <Folder Include="Source\MCAL\Timer2" />
     <Folder Include="Source\MCAL\Timer0\Include" />
     <Folder Include="Source\MCAL\Timer0\Source" />
     <Folder Include="Source\MCAL\Timer1" />
     <Folder Include="Source\MCAL\Timer0" />
     <Folder Include="Source\MCAL\Timer1\Include" />
     <Folder Include="Source\MCAL\Timer1\Source" />
+    <Folder Include="Source\MCAL\Timer2\Include" />
+    <Folder Include="Source\MCAL\Timer2\Source" />
     <Folder Include="Source\MCAL\UART" />
     <Folder Include="Source\MCAL\UART\Include" />
     <Folder Include="Source\MCAL\UART\Source" />
