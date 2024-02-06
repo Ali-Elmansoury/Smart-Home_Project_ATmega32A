@@ -96,29 +96,13 @@ Disassembly of section .text:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000092 <main>:
-#include "std_types.h"
-#include "bit_math.h"
-#include "dio.h"
-
-int main(void)
-{
   92:	cf 93       	push	r28
   94:	df 93       	push	r29
   96:	cd b7       	in	r28, 0x3d	; 61
   98:	de b7       	in	r29, 0x3e	; 62
-    /* Replace with your application code */
-    while (1) 
-    {
-    }
   9a:	ff cf       	rjmp	.-2      	; 0x9a <main+0x8>
 
 0000009c <__vector_11>:
-}
-
-void timer0_setCTCCallBack(void (*fptr) (void))
-{
-	timer0CTCClbkPtr = fptr;
-}
   9c:	1f 92       	push	r1
   9e:	0f 92       	push	r0
   a0:	00 90 5f 00 	lds	r0, 0x005F	; 0x80005f <__TEXT_REGION_LENGTH__+0x7f805f>
@@ -170,9 +154,6 @@ void timer0_setCTCCallBack(void (*fptr) (void))
  108:	18 95       	reti
 
 0000010a <__vector_10>:
-
-ISR(TIMER0_COMP_vect)
-{
  10a:	1f 92       	push	r1
  10c:	0f 92       	push	r0
  10e:	00 90 5f 00 	lds	r0, 0x005F	; 0x80005f <__TEXT_REGION_LENGTH__+0x7f805f>
@@ -194,19 +175,14 @@ ISR(TIMER0_COMP_vect)
  130:	df 93       	push	r29
  132:	cd b7       	in	r28, 0x3d	; 61
  134:	de b7       	in	r29, 0x3e	; 62
-	if (timer0CTCClbkPtr != NULL)
  136:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <timer0CTCClbkPtr>
  13a:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <timer0CTCClbkPtr+0x1>
  13e:	89 2b       	or	r24, r25
  140:	31 f0       	breq	.+12     	; 0x14e <__vector_10+0x44>
-	{
-		timer0CTCClbkPtr();
  142:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <timer0CTCClbkPtr>
  146:	90 91 63 00 	lds	r25, 0x0063	; 0x800063 <timer0CTCClbkPtr+0x1>
  14a:	fc 01       	movw	r30, r24
  14c:	09 95       	icall
-	}
-}
  14e:	00 00       	nop
  150:	df 91       	pop	r29
  152:	cf 91       	pop	r28
@@ -229,12 +205,6 @@ ISR(TIMER0_COMP_vect)
  176:	18 95       	reti
 
 00000178 <__vector_9>:
-{
-	timer1OvClbkPtr = fptr;
-}
-
-ISR(TIMER1_OVF_vect)
-{
  178:	1f 92       	push	r1
  17a:	0f 92       	push	r0
  17c:	00 90 5f 00 	lds	r0, 0x005F	; 0x80005f <__TEXT_REGION_LENGTH__+0x7f805f>
@@ -256,19 +226,14 @@ ISR(TIMER1_OVF_vect)
  19e:	df 93       	push	r29
  1a0:	cd b7       	in	r28, 0x3d	; 61
  1a2:	de b7       	in	r29, 0x3e	; 62
-	if (timer1OvClbkPtr != NULL)
  1a4:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <timer1OvClbkPtr>
  1a8:	90 91 65 00 	lds	r25, 0x0065	; 0x800065 <timer1OvClbkPtr+0x1>
  1ac:	89 2b       	or	r24, r25
  1ae:	31 f0       	breq	.+12     	; 0x1bc <__vector_9+0x44>
-	{
-		timer1OvClbkPtr();
  1b0:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <timer1OvClbkPtr>
  1b4:	90 91 65 00 	lds	r25, 0x0065	; 0x800065 <timer1OvClbkPtr+0x1>
  1b8:	fc 01       	movw	r30, r24
  1ba:	09 95       	icall
-	}
-}
  1bc:	00 00       	nop
  1be:	df 91       	pop	r29
  1c0:	cf 91       	pop	r28
@@ -291,12 +256,6 @@ ISR(TIMER1_OVF_vect)
  1e4:	18 95       	reti
 
 000001e6 <__vector_5>:
-}
-
-void timer2_setCTCCallBack(void (*fptr) (void))
-{
-	timer2CTCClbkPtr = fptr;
-}
  1e6:	1f 92       	push	r1
  1e8:	0f 92       	push	r0
  1ea:	00 90 5f 00 	lds	r0, 0x005F	; 0x80005f <__TEXT_REGION_LENGTH__+0x7f805f>
@@ -348,9 +307,6 @@ void timer2_setCTCCallBack(void (*fptr) (void))
  252:	18 95       	reti
 
 00000254 <__vector_4>:
-
-ISR(TIMER2_COMP_vect)
-{
  254:	1f 92       	push	r1
  256:	0f 92       	push	r0
  258:	00 90 5f 00 	lds	r0, 0x005F	; 0x80005f <__TEXT_REGION_LENGTH__+0x7f805f>
@@ -372,19 +328,14 @@ ISR(TIMER2_COMP_vect)
  27a:	df 93       	push	r29
  27c:	cd b7       	in	r28, 0x3d	; 61
  27e:	de b7       	in	r29, 0x3e	; 62
-	if (timer2CTCClbkPtr != NULL)
  280:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <timer2CTCClbkPtr>
  284:	90 91 69 00 	lds	r25, 0x0069	; 0x800069 <timer2CTCClbkPtr+0x1>
  288:	89 2b       	or	r24, r25
  28a:	31 f0       	breq	.+12     	; 0x298 <__vector_4+0x44>
-	{
-		timer2CTCClbkPtr();
  28c:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <timer2CTCClbkPtr>
  290:	90 91 69 00 	lds	r25, 0x0069	; 0x800069 <timer2CTCClbkPtr+0x1>
  294:	fc 01       	movw	r30, r24
  296:	09 95       	icall
-	}
-}
  298:	00 00       	nop
  29a:	df 91       	pop	r29
  29c:	cf 91       	pop	r28

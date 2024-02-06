@@ -138,13 +138,13 @@ void local_Menu(u8 *Last_key, u8 *current_menu)
     local_Menu_Slector_Display(menu_selector_position);
     switch (*Last_key)
     {
-    case 'KEY_A':
+    case KEY_A:
         local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
         break;
-    case 'KEY_B':
+    case KEY_B:
         local_Menu_Move_Selector(MOVE_DOWN,&menu_selector_position, &menu_position, max_menu_position);
         break;
-    case 'KEY_C':
+    case KEY_D:
     switch (menu_position+menu_selector_position)
     {
     case LED_MENU:
@@ -174,13 +174,13 @@ void local_Menu_AC(AC *AC , u8 *Last_key, u8 *current_menu)
     local_Menu_Slector_Display(menu_selector_position);
     switch (*Last_key)
     {
-    case 'A':
+    case KEY_A:
         local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
         break;
-    case 'B':
+    case KEY_B:
         local_Menu_Move_Selector(MOVE_DOWN,&menu_selector_position, &menu_position, max_menu_position);
         break;
-        case 'C':
+    case KEY_C:
         switch (menu_position+menu_selector_position)
         {
         case AC_ON_OFF:
