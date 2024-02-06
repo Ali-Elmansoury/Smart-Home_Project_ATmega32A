@@ -27,7 +27,7 @@ void getPassword(char* password, u8 maxLength)
 		char key = keypad_readKey();
 
 		// Check for Enter key
-		if (key == '\n' || key == '\r') 
+		if (key == 'D') 
 		{
 			// Check if the password is exactly 8 digits
 			if (index == 8) 
@@ -46,7 +46,7 @@ void getPassword(char* password, u8 maxLength)
 				continue;
 			}
 		} 
-		else if (key == '\b') 
+		else if (key == 'C') 
 		{  // Backspace
 			if (index > 0) 
 			{
@@ -130,22 +130,33 @@ void displayUsersOnLCD(u8 startIndex, u8 endIndex)
 	}
 }
 
-void scrollUsersOnLCD() 
+void scrollUsersOnLCD()
 {
 	u8 startIndex = 0;
 	u8 endIndex = 2;  // Display two users at a time
 
-	while (endIndex < 11) {  // Assuming a maximum of 10 users
+	while (1) {
 		displayUsersOnLCD(startIndex, endIndex);
-		lcd_displayStr("Press Scroll Button");
 
-		// Wait for keypad input (replace with actual keypad reading function)
-		while (keypad_readKey() != 's') {}  // Assume 's' for scroll
+		char key = keypad_readKey();  // Assume keypad_readKey() returns the pressed key
 
-		startIndex += 2;
-		endIndex += 2;
+		if (key == 'A') {  // Scroll up
+			if (startIndex >= 2) {
+				startIndex -= 2;
+				endIndex -= 2;
+			}
+			} else if (key == 'B') {  // Scroll down
+			if (endIndex < 11) {  // Assuming a maximum of 10 users
+				startIndex += 2;
+				endIndex += 2;
+			}
+		}
+
+		// Add a delay to avoid rapid scrolling due to continuous key press
+		_delay_ms(200);
 	}
 }
+
 
 void selectUserAndLogin() 
 {
