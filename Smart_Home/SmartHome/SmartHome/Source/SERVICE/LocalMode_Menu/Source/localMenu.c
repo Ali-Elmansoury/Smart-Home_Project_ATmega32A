@@ -136,7 +136,7 @@ void local_Menu(u8 *Last_key, u8 *current_menu)
 
     local_Menu_Display(menu_position, menu_selector_position);
     local_Menu_Slector_Display(menu_selector_position);
-    switch (Last_key)
+    switch (*Last_key)
     {
     case 'KEY_A':
         local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
@@ -147,10 +147,10 @@ void local_Menu(u8 *Last_key, u8 *current_menu)
     case 'KEY_C':
     switch (menu_position+menu_selector_position)
     {
-    case 0:
+    case LED_MENU:
         *current_menu = LED_MENU;   // Select LED Menu
         break;
-    case 1:
+    case AC_MENU:
         *current_menu = AC_MENU;    // Select AC Menu
         break;
     case 2:
@@ -172,7 +172,7 @@ void local_Menu_AC(AC *AC , u8 *Last_key, u8 *current_menu)
 
     local_Menu_AC_Display(menu_position, AC);
     local_Menu_Slector_Display(menu_selector_position);
-    switch (Last_key)
+    switch (*Last_key)
     {
     case 'A':
         local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
@@ -205,10 +205,10 @@ void local_Menu_AC(AC *AC , u8 *Last_key, u8 *current_menu)
     }
 }
 
-void local_Menu_AC_Set_Temp(u8 temp, u8 AC_MENU)
+void local_Menu_AC_Set_Temp(u8 temp, u8 AC_TEMP_MENU)
 {
     AC ac_config;
-    switch (AC_MENU)
+    switch (AC_TEMP_MENU)
     {
     case AC_RUN_TEMP:
         ac_config.AC_Run_Temperature_threshold=temp;

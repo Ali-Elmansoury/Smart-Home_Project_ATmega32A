@@ -50,11 +50,12 @@ AC airConditioner_Status(void)
 }
 
 void airConditioner_service(void){
+	static u8 current_temperature = 0;
 	switch (AC_CFG.AC_Status)
 	{
 	case 1:
 		// Sample temperature value
-		u16 current_temperature = LM35_read();  // Get temp sensor reading
+		 current_temperature = LM35_read();  // Get temp sensor reading
 
 		// Check if the current temperature is above the turn on threshold
 		if (current_temperature > AC_CFG.AC_Run_Temperature_threshold) {
