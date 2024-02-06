@@ -14,6 +14,7 @@ static AC ac = {
 	.AC_Run_Temperature_threshold = 21,
 	.AC_Stop_Temperature_threshold = 28
 };
+
 void airConditioner_init(void)
 {
 	dcMotor_init();
