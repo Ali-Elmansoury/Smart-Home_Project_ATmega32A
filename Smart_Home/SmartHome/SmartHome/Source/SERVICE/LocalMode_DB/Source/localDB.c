@@ -152,8 +152,6 @@ void selectUserAndLogin()
 	u8 selectedID;
 	lcd_displayStr("Enter User ID:");
 
-	// Simulate getting user input for order number from keypad
-	// Replace with actual keypad input reading function
 	selectedID = keypad_readKey();
 
 	if (selectedID >= 1 && selectedID <= 10) 
@@ -163,8 +161,6 @@ void selectUserAndLogin()
 		char enteredPassword[20];
 		lcd_displayStr("Enter Password:");
 
-		// Simulate getting secure user input for the password
-		// Replace with actual function to get password from keypad
 		getPassword(enteredPassword, sizeof(enteredPassword));
 
 		if (strcmp(enteredPassword, localUsers->password) == 0) 
