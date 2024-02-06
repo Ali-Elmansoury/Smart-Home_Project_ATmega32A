@@ -7,6 +7,11 @@
 #define MOVE_UP 0
 #define MOVE_DOWN 1
 
+#define AC_ON_OFF 0
+#define AC_RUN_TEMP 1
+#define AC_STOP_TEMP 2
+#define AC_RETURN 3
+
 void menuInit(void);
 
 

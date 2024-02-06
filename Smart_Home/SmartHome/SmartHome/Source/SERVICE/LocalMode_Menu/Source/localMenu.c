@@ -91,16 +91,16 @@ void local_Menu_AC_Display(u8 menu_position , AC *ac)
     {
     case 0:
         lcd_displayStr("AC [");
-        lcd_displayStr(ac.AC_On ? "ON" : "OFF");
+        lcd_displayStr(ac.AC_Status ? "ON" : "OFF");
         lcd_displayChar(']');
         lcd_goTo(1, 1);
         lcd_displayStr("Run Temp:");
-        lcd_displayNums(ac.AC_Run_Temp);
+        lcd_displayNums(ac.AC_Run_Temperature_threshold);
         lcd_displayChar('C');
         break;
     case 1:
         lcd_displayStr("Stop Temp:");
-        lcd_displayNums(ac.AC_Stop_Temp);
+        lcd_displayNums(ac.AC_Sop_Temperature_threshold);
         lcd_displayChar('C');
         lcd_goTo(1, 1);
         lcd_displayStr("Return");
@@ -181,17 +181,17 @@ void local_Menu_AC(AC *AC , u8 *Last_key, u8 *current_menu)
         case 'C':
         switch (menu_position+menu_selector_position)
         {
-        case 0:
+        case AC_ON_OFF:
             // AC1 ON/OFF
             airConditioner_Toggle();
             break;
-        case 1:
+        case AC_RUN_TEMP:
             // AC1 Run Temp
             break;
-        case 2:
+        case AC_STOP_TEMP:
             // AC1 Stop Temp
             break;
-        case 3:
+        case AC_RETURN:
             // Return
             *current_menu = LOCAL_MENU;
             break;
@@ -203,15 +203,43 @@ void local_Menu_AC(AC *AC , u8 *Last_key, u8 *current_menu)
     }
 }
 
-void local_Menu_LED(u8 *Last_key, u8 *current_menu)
+void local_Menu_AC_Set_Temp(u8 temp, u8 AC_MENU)
+{
+    AC ac_config;
+    switch (AC_MENU)
+    {
+    case AC_RUN_TEMP:
+        ac_config.AC_Run_Temperature_threshold=temp;
+        break;
+    case AC_STOP_TEMP:
+        ac_config.AC_Stop_Temperature_threshold=temp;
+        break;
+    default:
+        break;
+    }
+    airConditioner_Set_Config(&ac_config);
+}
+
+void local_Menu_LED(u8 *current_menu)
 {
     static u8 menu_position = 0;
     static u8 menu_selector_position = 0;
     static u8 max_menu_position = 5;
+    static u8 menu_key = 0;
+    static boolean v_adj_flag = FALSE;
+    
+    switch (v_adj_flag)
+    {
+    case FALSE:
+        menu_key = MM74C922_GetKey();
+        break;
+    default:
+        break;
+    }
 
     local_Menu_LED_Display(menu_position);
     local_Menu_Slector_Display(menu_selector_position);
-    switch (Last_key)
+    switch (menu_key)
     {
     case 'A':
         local_Menu_Slector_UP(&menu_selector_position, &menu_position, max_menu_position);
@@ -219,7 +247,7 @@ void local_Menu_LED(u8 *Last_key, u8 *current_menu)
     case 'B':
         local_Menu_Slector_DOWN(&menu_selector_position, &menu_position, max_menu_position);
         break;
-        case 'C':
+    case 'C':
         switch (menu_position+menu_selector_position)
         {
         case 0:
@@ -247,6 +275,25 @@ void local_Menu_LED(u8 *Last_key, u8 *current_menu)
         default:
             break;
         }
+    default:
+        break;
+    }
+}
+
+void local_Menu_value_adj(u8 *value, u8 *v_adj_flag)
+{
+    switch (MM74C922_GetKey())
+    {
+    case KEY_A:
+        *value++;
+        break;
+    case KEY_B:
+        *value--;
+        break;
+    case KEY_C:
+        *v_adj_flag = FALSE;
+        break;
+    
     default:
         break;
     }
