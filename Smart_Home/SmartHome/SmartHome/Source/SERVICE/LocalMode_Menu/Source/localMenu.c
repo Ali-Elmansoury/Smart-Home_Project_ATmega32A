@@ -43,7 +43,7 @@ void local_Menu_Display(u8 menu_position , u8 menu_selector_position)
 
 void local_Menu_LED_Display(u8 menu_position)
 {
-    lcd_clear();
+   lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
     lcd_goTo(0,1);
     switch (menu_position)
     {
@@ -84,7 +84,7 @@ void local_Menu_LED_Display(u8 menu_position)
 
 void local_Menu_AC_Display(u8 menu_position , AC *ac)
 {
-    lcd_clear();
+    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
     lcd_goTo(0,1);
     ac = airConditioner_Status();
     switch (menu_position)
@@ -137,10 +137,10 @@ void local_Menu(u8 *Last_key, u8 *current_menu)
     switch (Last_key)
     {
     case 'KEY_A':
-        local_Menu_Move_Selector( ,&menu_selector_position, &menu_position, max_menu_position);
+        local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
         break;
     case 'KEY_B':
-        local_Menu_Slector_DOWN(&menu_selector_position, &menu_position, max_menu_position);
+        local_Menu_Move_Selector(MOVE_DOWN,&menu_selector_position, &menu_position, max_menu_position);
         break;
     case 'KEY_C':
     switch (menu_position+menu_selector_position)
@@ -173,10 +173,10 @@ void local_Menu_AC(AC *AC , u8 *Last_key, u8 *current_menu)
     switch (Last_key)
     {
     case 'A':
-        local_Menu_Slector_UP(&menu_selector_position, &menu_position, max_menu_position);
+        local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
         break;
     case 'B':
-        local_Menu_Slector_DOWN(&menu_selector_position, &menu_position, max_menu_position);
+        local_Menu_Move_Selector(MOVE_DOWN,&menu_selector_position, &menu_position, max_menu_position);
         break;
         case 'C':
         switch (menu_position+menu_selector_position)
@@ -242,10 +242,10 @@ void local_Menu_LED(u8 *current_menu)
     switch (menu_key)
     {
     case 'A':
-        local_Menu_Slector_UP(&menu_selector_position, &menu_position, max_menu_position);
+        local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
         break;
     case 'B':
-        local_Menu_Slector_DOWN(&menu_selector_position, &menu_position, max_menu_position);
+        local_Menu_Move_Selector(MOVE_DOWN,&menu_selector_position, &menu_position, max_menu_position);
         break;
     case 'C':
         switch (menu_position+menu_selector_position)
