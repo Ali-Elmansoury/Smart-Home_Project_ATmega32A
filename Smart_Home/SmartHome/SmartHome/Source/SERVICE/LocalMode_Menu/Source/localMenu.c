@@ -2,6 +2,8 @@
 #include "lcd.h"
 #include "ac.h"
 #include "localMenu.h"
+#include "keypad.h"
+
 AC ac;
 u8 number_of_active_devices = 0;
 void local_Menu_Slector_Display(u8 menu_selector_position)
@@ -231,7 +233,7 @@ void local_Menu_LED(u8 *current_menu)
     switch (v_adj_flag)
     {
     case FALSE:
-        menu_key = MM74C922_GetKey();
+        menu_key = keypad_readKey();
         break;
     default:
         break;
@@ -282,7 +284,7 @@ void local_Menu_LED(u8 *current_menu)
 
 void local_Menu_value_adj(u8 *value, u8 *v_adj_flag)
 {
-    switch (MM74C922_GetKey())
+    switch (keypad_readKey())
     {
     case KEY_A:
         *value++;
