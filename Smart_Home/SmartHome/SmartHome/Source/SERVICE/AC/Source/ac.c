@@ -9,11 +9,7 @@
 #include "dc.h"
 #include "lm35.h"
 
-static AC ac = {
-	.AC_Status = FALSE,
-	.AC_Run_Temperature_threshold = 21,
-	.AC_Stop_Temperature_threshold = 28
-};
+static AC AC_CFG;
 
 void airConditioner_init(void)
 {
