@@ -17,7 +17,7 @@ void airConditioner_init(void)
 	LM35_init();
 }
 
-u8 airConditioner_Temperature(void)
+u16 airConditioner_Temperature(void)
 {
 	u16 current_temperature = LM35_read();  // Get temp sensor reading
 	return current_temperature;
