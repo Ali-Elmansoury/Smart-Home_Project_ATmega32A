@@ -23,3 +23,8 @@ void dimmer_setIntensity(void)
 	potRead = POT_read();
 	pwm0_setDutyCycle(potRead);
 }
+
+void dimmer_turnOff(void)
+{
+	pwm0_setDutyCycle(DIMMER_TURN_OFF);
+}

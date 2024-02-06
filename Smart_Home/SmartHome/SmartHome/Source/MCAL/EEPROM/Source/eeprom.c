@@ -31,3 +31,27 @@ u8 EEPROM_read(u16 address)
 	/* Return data from data register */
 	return EEPROM_EEDR_REG;
 }
+
+void EEPROM_write_block(const void *src, void *dst, size_t size)
+{
+	const u8 *src_ptr = (const u8 *)src;
+	u8 *dst_ptr = (u8 *)dst;
+
+	for (size_t i = 0; i < size; ++i) {
+		EEPROM_write((u16)dst_ptr, *src_ptr);
+		++dst_ptr;
+		++src_ptr;
+	}
+}
+
+void EEPROM_read_block(void *dst, const void *src, size_t size)
+{
+	const u8 *src_ptr = (const u8 *)src;
+	u8 *dst_ptr = (u8 *)dst;
+
+	for (size_t i = 0; i < size; ++i) {
+		*dst_ptr = EEPROM_read((u16)src_ptr);
+		++dst_ptr;
+		++src_ptr;
+	}
+}
