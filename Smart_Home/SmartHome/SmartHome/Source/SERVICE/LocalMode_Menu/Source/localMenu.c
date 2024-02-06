@@ -4,11 +4,10 @@
 #include "localMenu.h"
 #include "keypad.h"
 
-AC ac;
 u8 number_of_active_devices = 0;
-void local_Menu_Slector_Display(u8 menu_selector_position)
+void local_Menu_Slector_Display(const u8 *menu_selector_position)
 {
-    switch (menu_selector_position)
+    switch (*menu_selector_position)
     {
     case 0:
         lcd_goTo(0, 0);
@@ -23,10 +22,10 @@ void local_Menu_Slector_Display(u8 menu_selector_position)
     }
 }
 
-void local_Menu_Display(u8 menu_position , u8 menu_selector_position)
+void local_Menu_Display(const u8 *menu_position)
 {
     lcd_goTo(0,1);
-    switch (menu_position)
+    switch (*menu_position)
     {
     case 0:
         lcd_displayStr("LED ON/OFF");
@@ -43,11 +42,11 @@ void local_Menu_Display(u8 menu_position , u8 menu_selector_position)
     }
 }
 
-void local_Menu_LED_Display(u8 menu_position)
+void local_Menu_LED_Display(const u8 *menu_position)
 {
    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
     lcd_goTo(0,1);
-    switch (menu_position)
+    switch (*menu_position)
     {
     case 0:
         lcd_displayStr("LED1 [ON]");
@@ -84,25 +83,25 @@ void local_Menu_LED_Display(u8 menu_position)
     }
 }
 
-void local_Menu_AC_Display(u8 menu_position , AC *ac)
+void local_Menu_AC_Display(const u8 *menu_position)
 {
     lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
     lcd_goTo(0,1);
-    ac = airConditioner_Status();
-    switch (menu_position)
+	AC AC_Status = airConditioner_Status();
+    switch (*menu_position)
     {
     case 0:
         lcd_displayStr("AC [");
-        lcd_displayStr(ac->AC_Status ? "ON" : "OFF");
+        lcd_displayStr(AC_Status.AC_Status ? "ON" : "OFF");
         lcd_displayChar(']');
         lcd_goTo(1, 1);
         lcd_displayStr("Run Temp:");
-        lcd_displayNums(ac->AC_Run_Temperature_threshold);
+        lcd_displayNums(AC_Status.AC_Run_Temperature_threshold);
         lcd_displayChar('C');
         break;
     case 1:
         lcd_displayStr("Stop Temp:");
-        lcd_displayNums(ac->AC_Stop_Temperature_threshold);
+        lcd_displayNums(AC_Status.AC_Stop_Temperature_threshold);
         lcd_displayChar('C');
         lcd_goTo(1, 1);
         lcd_displayStr("Return");
@@ -134,8 +133,8 @@ void local_Menu(u8 *Last_key, u8 *current_menu)
     static u8 menu_selector_position = 0;
     static u8 max_menu_position = 1;
 
-    local_Menu_Display(menu_position, menu_selector_position);
-    local_Menu_Slector_Display(menu_selector_position);
+    local_Menu_Display(&menu_position);
+    local_Menu_Slector_Display(&menu_selector_position);
     switch (*Last_key)
     {
     case KEY_A:
@@ -164,15 +163,29 @@ void local_Menu(u8 *Last_key, u8 *current_menu)
     }
 }
 
-void local_Menu_AC(AC *AC , u8 *Last_key, u8 *current_menu)
+void local_Menu_AC(u8 *current_menu)
 {
     static u8 menu_position = 0;
     static u8 menu_selector_position = 0;
     static u8 max_menu_position = 1;
-
-    local_Menu_AC_Display(menu_position, AC);
-    local_Menu_Slector_Display(menu_selector_position);
-    switch (*Last_key)
+	
+	static u8 menu_key = 0;
+	static boolean v_adj_flag = FALSE;
+	
+	AC AC_CFG;
+	
+	switch (v_adj_flag)
+	{
+		case FALSE:
+			menu_key = keypad_readKey();
+			break;
+		default:
+			break;
+	}
+	
+    local_Menu_AC_Display(&menu_position);
+    local_Menu_Slector_Display(&menu_selector_position);
+    switch (menu_key)
     {
     case KEY_A:
         local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
@@ -189,9 +202,20 @@ void local_Menu_AC(AC *AC , u8 *Last_key, u8 *current_menu)
             break;
         case AC_RUN_TEMP:
             // AC1 Run Temp
+			v_adj_flag=TRUE;
+			local_Menu_value_adj(&AC_CFG.AC_Run_Temperature_threshold,&v_adj_flag);
+			if (v_adj_flag == FALSE)
+				{airConditioner_Set_Config(&AC_CFG);}
+			else{/* do nothing */;}
             break;
         case AC_STOP_TEMP:
             // AC1 Stop Temp
+			v_adj_flag=TRUE;
+			local_Menu_value_adj(&AC_CFG.AC_Stop_Temperature_threshold,&v_adj_flag);
+			if (v_adj_flag == FALSE)
+				{airConditioner_Set_Config(&AC_CFG);}
+			else{/* do nothing */;}
+			break;
             break;
         case AC_RETURN:
             // Return
@@ -227,20 +251,11 @@ void local_Menu_LED(u8 *current_menu)
     static u8 menu_position = 0;
     static u8 menu_selector_position = 0;
     static u8 max_menu_position = 5;
-    static u8 menu_key = 0;
-    static boolean v_adj_flag = FALSE;
+	
+    u8 menu_key = keypad_readKey();
     
-    switch (v_adj_flag)
-    {
-    case FALSE:
-        menu_key = keypad_readKey();
-        break;
-    default:
-        break;
-    }
-
-    local_Menu_LED_Display(menu_position);
-    local_Menu_Slector_Display(menu_selector_position);
+    local_Menu_LED_Display(&menu_position);
+    local_Menu_Slector_Display(&menu_selector_position);
     switch (menu_key)
     {
     case 'A':

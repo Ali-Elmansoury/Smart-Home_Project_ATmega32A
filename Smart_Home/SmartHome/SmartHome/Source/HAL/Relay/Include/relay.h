@@ -23,9 +23,6 @@
 
 /*Relay initialization*/
 void relay_init(void);
-/*Turn relay on*/
-void relay_on(u8 id);
-/*Turn relay off*/
-void relay_off(u8 id);
-
+/*Turn relay state*/
+void relay_toggle(u8 id);
 #endif /* RELAY_H_ */

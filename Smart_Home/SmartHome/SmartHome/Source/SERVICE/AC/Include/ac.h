@@ -22,13 +22,17 @@ typedef struct AC AC;
 
 /*Function prototype*/
 
-/*Air conditioner initialization*/
+/* Air conditioner initialization */
 void airConditioner_init(void);
-/* Air conditioner status check*/
-void airConditioner_status(void);
-/*Air conditioner ON*/
+/* Air conditioner status check */
+AC airConditioner_Status(void);
+/* Air conditioner service */
+void airConditioner_service(void);
+/* Set AC Temp config */
+void airConditioner_Set_Config(AC *ac_config);
+/* Air conditioner ON */
 void airConditioner_on(void);
-/*Air conditioner OFF*/
+/* Air conditioner OFF */
 void airConditioner_off(void);
 
 #endif /* AC_H_ */

@@ -20,10 +20,10 @@
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
     <ProgFlashFromRam>true</ProgFlashFromRam>
-    <RamSnippetAddress />
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
     <UncachedRange />
     <preserveEEPROM>true</preserveEEPROM>
-    <OverrideVtorValue />
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <ResetRule>0</ResetRule>
     <eraseonlaunchrule>0</eraseonlaunchrule>
@@ -82,65 +82,65 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGcc>
-  <avrgcc.common.Device>-mmcu=atmega32a -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a"</avrgcc.common.Device>
-  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
-  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
-  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
-  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
-  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
-  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
-  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
-  <avrgcc.compiler.symbols.DefSymbols>
-    <ListValues>
-      <Value>DEBUG</Value>
-    </ListValues>
-  </avrgcc.compiler.symbols.DefSymbols>
-  <avrgcc.compiler.directories.IncludePaths>
-    <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
-      <Value>../Source/LIB</Value>
-      <Value>../Source/MCAL/ADC/Include</Value>
-      <Value>../Source/MCAL/DIO/Include</Value>
-      <Value>../Source/MCAL/GIE/Include</Value>
-      <Value>../Source/MCAL/Timer0/Include</Value>
-      <Value>../Source/MCAL/Timer1/Include</Value>
-      <Value>../Source/MCAL/UART/Include</Value>
-      <Value>../Source/HAL/Buzzer/Include</Value>
-      <Value>../Source/HAL/Dimmer/Include</Value>
-      <Value>../Source/HAL/Keypad/Include</Value>
-      <Value>../Source/HAL/L293D/Include</Value>
-      <Value>../Source/HAL/LCD/Include</Value>
-      <Value>../Source/HAL/LM35/Include</Value>
-      <Value>../Source/HAL/Relay/Include</Value>
-      <Value>../Source/HAL/Servo/Include</Value>
-      <Value>../Source/MCAL/EEPROM/Include</Value>
-      <Value>../Source/HAL/Lamp/Include</Value>
-      <Value>../Source/HAL/DC_Motor/Include</Value>
-      <Value>../Source/HAL/MM74C922/Include</Value>
-      <Value>../Source/HAL/POT/Include</Value>
-      <Value>../Source/SERVICE/LocalMode_DB/Include</Value>
-      <Value>../Source/SERVICE/RemoteMode_DB/Include</Value>
-      <Value>../Source/MCAL/Timer2/Include</Value>
-      <Value>../Source/SERVICE/AC/Include</Value>
-      <Value>../Source/SERVICE/LocalMode_Menu/Include</Value>
-    </ListValues>
-  </avrgcc.compiler.directories.IncludePaths>
-  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
-  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
-  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
-  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
-  <avrgcc.linker.libraries.Libraries>
-    <ListValues>
-      <Value>libm</Value>
-    </ListValues>
-  </avrgcc.linker.libraries.Libraries>
-  <avrgcc.assembler.general.IncludePaths>
-    <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
-    </ListValues>
-  </avrgcc.assembler.general.IncludePaths>
-  <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
-</AvrGcc>
+        <avrgcc.common.Device>-mmcu=atmega32a -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a"</avrgcc.common.Device>
+        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcc.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>DEBUG</Value>
+          </ListValues>
+        </avrgcc.compiler.symbols.DefSymbols>
+        <avrgcc.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+            <Value>../Source/LIB</Value>
+            <Value>../Source/MCAL/ADC/Include</Value>
+            <Value>../Source/MCAL/DIO/Include</Value>
+            <Value>../Source/MCAL/GIE/Include</Value>
+            <Value>../Source/MCAL/Timer0/Include</Value>
+            <Value>../Source/MCAL/Timer1/Include</Value>
+            <Value>../Source/MCAL/UART/Include</Value>
+            <Value>../Source/HAL/Buzzer/Include</Value>
+            <Value>../Source/HAL/Dimmer/Include</Value>
+            <Value>../Source/HAL/Keypad/Include</Value>
+            <Value>../Source/HAL/L293D/Include</Value>
+            <Value>../Source/HAL/LCD/Include</Value>
+            <Value>../Source/HAL/LM35/Include</Value>
+            <Value>../Source/HAL/Relay/Include</Value>
+            <Value>../Source/HAL/Servo/Include</Value>
+            <Value>../Source/MCAL/EEPROM/Include</Value>
+            <Value>../Source/HAL/Lamp/Include</Value>
+            <Value>../Source/HAL/DC_Motor/Include</Value>
+            <Value>../Source/HAL/MM74C922/Include</Value>
+            <Value>../Source/HAL/POT/Include</Value>
+            <Value>../Source/SERVICE/LocalMode_DB/Include</Value>
+            <Value>../Source/SERVICE/RemoteMode_DB/Include</Value>
+            <Value>../Source/MCAL/Timer2/Include</Value>
+            <Value>../Source/SERVICE/AC/Include</Value>
+            <Value>../Source/SERVICE/LocalMode_Menu/Include</Value>
+          </ListValues>
+        </avrgcc.compiler.directories.IncludePaths>
+        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+        <avrgcc.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </avrgcc.linker.libraries.Libraries>
+        <avrgcc.assembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+          </ListValues>
+        </avrgcc.assembler.general.IncludePaths>
+        <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
+      </AvrGcc>
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
@@ -312,6 +312,12 @@
     <Compile Include="Source\SERVICE\AC\Source\ac.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\SERVICE\LED\Include\LED_Dim_Service.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\LED\Source\LED_Dim_Service.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Source\SERVICE\LocalMode_DB\Include\localDB.h">
       <SubType>compile</SubType>
     </Compile>
@@ -395,12 +401,15 @@
     <Folder Include="Source\SERVICE\AC\" />
     <Folder Include="Source\SERVICE\AC\Include\" />
     <Folder Include="Source\SERVICE\AC\Source\" />
+    <Folder Include="Source\SERVICE\LED\Include" />
+    <Folder Include="Source\SERVICE\LED\Source" />
     <Folder Include="Source\SERVICE\LocalMode_DB" />
     <Folder Include="Source\SERVICE\LocalMode_DB\Include" />
     <Folder Include="Source\SERVICE\LocalMode_DB\Source" />
     <Folder Include="Source\SERVICE\LocalMode_Menu\" />
     <Folder Include="Source\SERVICE\LocalMode_Menu\Include\" />
     <Folder Include="Source\SERVICE\LocalMode_Menu\Source\" />
+    <Folder Include="Source\SERVICE\LED" />
     <Folder Include="Source\SERVICE\RemoteMode_DB" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Include" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Source" />

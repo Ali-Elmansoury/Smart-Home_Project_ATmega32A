@@ -17,54 +17,28 @@ void relay_init(void)
 	dio_setPinDirection(PORTA_ID,PIN4_ID,OUTPUT);
 }
 
-void relay_on(u8 id)
+void relay_toggle(u8 id)
 {
 	switch(id)
 	{
 		case RELAY1_ID:
-			dio_writeChannel(PORTA_ID,PIN0_ID,HIGH);
+			dio_toggleChannel(PORTA_ID,PIN0_ID);
 		break;
 		
 		case RELAY2_ID:
-			dio_writeChannel(PORTA_ID,PIN1_ID,HIGH);
+			dio_toggleChannel(PORTA_ID,PIN1_ID);
 		break;
 		
 		case RELAY3_ID:
-			dio_writeChannel(PORTA_ID,PIN2_ID,HIGH);
+			dio_toggleChannel(PORTA_ID,PIN2_ID);
 		break;
 		
 		case RELAY4_ID:
-			dio_writeChannel(PORTA_ID,PIN3_ID,HIGH);
+			dio_toggleChannel(PORTA_ID,PIN3_ID);
 		break;
 		
 		case RELAY5_ID:
-			dio_writeChannel(PORTA_ID,PIN4_ID,HIGH);
-		break;
-	}
-}
-
-void relay_off(u8 id)
-{
-	switch(id)
-	{
-		case RELAY1_ID:
-			dio_writeChannel(PORTA_ID,PIN0_ID,LOW);
-		break;
-		
-		case RELAY2_ID:
-			dio_writeChannel(PORTA_ID,PIN1_ID,LOW);
-		break;
-		
-		case RELAY3_ID:
-			dio_writeChannel(PORTA_ID,PIN2_ID,LOW);
-		break;
-		
-		case RELAY4_ID:
-			dio_writeChannel(PORTA_ID,PIN3_ID,LOW);
-		break;
-		
-		case RELAY5_ID:
-			dio_writeChannel(PORTA_ID,PIN4_ID,LOW);
+			dio_toggleChannel(PORTA_ID,PIN4_ID);
 		break;
 	}
 }

@@ -18,14 +18,13 @@
 #define LAMP3_ID			(3)
 #define LAMP4_ID			(4)
 #define LAMP5_ID			(5)
+#define LAMP_DIM_ID			(6)
 
 /*Function prototypes*/
 
 /*Lamp initialization*/
 void lamp_init(void);
-/*Turn lamp on*/
-void lamp_on(u8 id);
-/*Turn lamp off*/
-void lamp_off(u8 id);
+/*toggle lamp state*/
+void lamp_toggle(u8 id);
 
 #endif /* LAMP_H_ */
