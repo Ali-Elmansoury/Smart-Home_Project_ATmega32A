@@ -31,7 +31,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
                               Source/HAL/LCD/Source/lcd.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                              Source/HAL/MM74C922/Source/MM74C922.o (__do_clear_bss)
+                              Source/HAL/Lamp/Source/lamp.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
                               Source/SERVICE/LocalMode_DB/Source/localDB.o (strcmp)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strncpy.o)
@@ -165,17 +165,21 @@ Discarded input sections
  .text.lamp_init
                 0x00000000        0x6 Source/HAL/Lamp/Source/lamp.o
  .text.lamp_toggle
-                0x00000000        0xa Source/HAL/Lamp/Source/lamp.o
- .debug_info    0x00000000       0xe4 Source/HAL/Lamp/Source/lamp.o
- .debug_abbrev  0x00000000       0x8b Source/HAL/Lamp/Source/lamp.o
- .debug_loc     0x00000000       0x21 Source/HAL/Lamp/Source/lamp.o
+                0x00000000       0x1c Source/HAL/Lamp/Source/lamp.o
+ .text.lamp_Getstate
+                0x00000000        0xc Source/HAL/Lamp/Source/lamp.o
+ .bss.lamp_state
+                0x00000000        0x5 Source/HAL/Lamp/Source/lamp.o
+ .debug_info    0x00000000      0x15d Source/HAL/Lamp/Source/lamp.o
+ .debug_abbrev  0x00000000      0x109 Source/HAL/Lamp/Source/lamp.o
+ .debug_loc     0x00000000       0x6f Source/HAL/Lamp/Source/lamp.o
  .debug_aranges
-                0x00000000       0x28 Source/HAL/Lamp/Source/lamp.o
- .debug_ranges  0x00000000       0x18 Source/HAL/Lamp/Source/lamp.o
- .debug_line    0x00000000       0xb4 Source/HAL/Lamp/Source/lamp.o
- .debug_str     0x00000000      0x1bb Source/HAL/Lamp/Source/lamp.o
+                0x00000000       0x30 Source/HAL/Lamp/Source/lamp.o
+ .debug_ranges  0x00000000       0x20 Source/HAL/Lamp/Source/lamp.o
+ .debug_line    0x00000000       0xd6 Source/HAL/Lamp/Source/lamp.o
+ .debug_str     0x00000000      0x1f0 Source/HAL/Lamp/Source/lamp.o
  .comment       0x00000000       0x31 Source/HAL/Lamp/Source/lamp.o
- .debug_frame   0x00000000       0x34 Source/HAL/Lamp/Source/lamp.o
+ .debug_frame   0x00000000       0x4c Source/HAL/Lamp/Source/lamp.o
  .text          0x00000000        0x0 Source/HAL/LCD/Source/lcd.o
  .data          0x00000000        0x0 Source/HAL/LCD/Source/lcd.o
  .bss           0x00000000        0x0 Source/HAL/LCD/Source/lcd.o
@@ -244,18 +248,18 @@ Discarded input sections
  .text.MM74C922_Init
                 0x00000000        0x2 Source/HAL/MM74C922/Source/MM74C922.o
  .text.MM74C922_Decode
-                0x00000000       0x52 Source/HAL/MM74C922/Source/MM74C922.o
+                0x00000000       0x50 Source/HAL/MM74C922/Source/MM74C922.o
  .text.MM74C922_GetKey
                 0x00000000        0x6 Source/HAL/MM74C922/Source/MM74C922.o
  .rodata.Table  0x00000000       0x10 Source/HAL/MM74C922/Source/MM74C922.o
  .bss.Last_key  0x00000000        0x1 Source/HAL/MM74C922/Source/MM74C922.o
- .debug_info    0x00000000      0x1c1 Source/HAL/MM74C922/Source/MM74C922.o
- .debug_abbrev  0x00000000      0x14b Source/HAL/MM74C922/Source/MM74C922.o
+ .debug_info    0x00000000      0x19e Source/HAL/MM74C922/Source/MM74C922.o
+ .debug_abbrev  0x00000000      0x128 Source/HAL/MM74C922/Source/MM74C922.o
  .debug_loc     0x00000000       0xe4 Source/HAL/MM74C922/Source/MM74C922.o
  .debug_aranges
                 0x00000000       0x30 Source/HAL/MM74C922/Source/MM74C922.o
  .debug_ranges  0x00000000       0x20 Source/HAL/MM74C922/Source/MM74C922.o
- .debug_line    0x00000000       0xd1 Source/HAL/MM74C922/Source/MM74C922.o
+ .debug_line    0x00000000       0xf5 Source/HAL/MM74C922/Source/MM74C922.o
  .debug_str     0x00000000      0x21b Source/HAL/MM74C922/Source/MM74C922.o
  .comment       0x00000000       0x31 Source/HAL/MM74C922/Source/MM74C922.o
  .debug_frame   0x00000000       0x60 Source/HAL/MM74C922/Source/MM74C922.o
@@ -499,7 +503,7 @@ Discarded input sections
  .text.airConditioner_Temperature
                 0x00000000        0x6 Source/SERVICE/AC/Source/ac.o
  .text.airConditioner_Toggle
-                0x00000000       0x1c Source/SERVICE/AC/Source/ac.o
+                0x00000000        0xe Source/SERVICE/AC/Source/ac.o
  .text.airConditioner_Set_Config
                 0x00000000       0x16 Source/SERVICE/AC/Source/ac.o
  .text.airConditioner_Status
@@ -517,31 +521,33 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x58 Source/SERVICE/AC/Source/ac.o
  .debug_ranges  0x00000000       0x48 Source/SERVICE/AC/Source/ac.o
- .debug_line    0x00000000      0x1c6 Source/SERVICE/AC/Source/ac.o
+ .debug_line    0x00000000      0x1b4 Source/SERVICE/AC/Source/ac.o
  .debug_str     0x00000000      0x2f3 Source/SERVICE/AC/Source/ac.o
  .comment       0x00000000       0x31 Source/SERVICE/AC/Source/ac.o
  .debug_frame   0x00000000       0x94 Source/SERVICE/AC/Source/ac.o
- .text          0x00000000        0x0 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .data          0x00000000        0x0 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .bss           0x00000000        0x0 Source/SERVICE/LED/Source/LED_Dim_Service.o
+ .text          0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .data          0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .bss           0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .text.lamp_Dim_service_init
-                0x00000000        0xe Source/SERVICE/LED/Source/LED_Dim_Service.o
+                0x00000000        0xe Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .text.lamp_Dim_service
-                0x00000000       0x3e Source/SERVICE/LED/Source/LED_Dim_Service.o
- .text.lamp_Dim_Service_Toggle
-                0x00000000       0x1c Source/SERVICE/LED/Source/LED_Dim_Service.o
+                0x00000000       0x3e Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .text.Lamp_Service_Dim_Toggle
+                0x00000000        0xe Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .text.Lamp_Service_state
+                0x00000000        0x6 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .data.Dim_Service_state
-                0x00000000        0x1 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_info    0x00000000      0x177 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_abbrev  0x00000000       0xef Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_loc     0x00000000       0x30 Source/SERVICE/LED/Source/LED_Dim_Service.o
+                0x00000000        0x1 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_info    0x00000000      0x190 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_abbrev  0x00000000      0x107 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_loc     0x00000000       0x30 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .debug_aranges
-                0x00000000       0x30 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_ranges  0x00000000       0x20 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_line    0x00000000      0x123 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_str     0x00000000      0x22d Source/SERVICE/LED/Source/LED_Dim_Service.o
- .comment       0x00000000       0x31 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_frame   0x00000000       0x44 Source/SERVICE/LED/Source/LED_Dim_Service.o
+                0x00000000       0x38 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_ranges  0x00000000       0x28 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_line    0x00000000      0x12c Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_str     0x00000000      0x245 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .comment       0x00000000       0x31 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_frame   0x00000000       0x54 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .text          0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .data          0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .bss           0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
@@ -583,13 +589,13 @@ Discarded input sections
  .text.local_Menu_Slector_Display
                 0x00000000       0x2e Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .rodata.str1.1
-                0x00000000       0x87 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000000       0x89 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_Display
                 0x00000000       0x52 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_LED_Display
-                0x00000000       0xd4 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000000      0x118 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_AC_Display
-                0x00000000       0xa2 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000000       0x9c Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_Move_Selector
                 0x00000000       0x30 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu
@@ -602,32 +608,32 @@ Discarded input sections
                 0x00000000       0x16 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_AC
                 0x00000000       0xfe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.1740
+ .bss.menu_selector_position.1749
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.1739
+ .bss.menu_position.1748
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.1704
+ .bss.menu_selector_position.1713
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.1703
+ .bss.menu_position.1712
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_key.1706
+ .bss.menu_key.1715
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.v_adj_flag.1707
+ .bss.v_adj_flag.1716
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.1688
+ .bss.menu_selector_position.1697
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.1687
+ .bss.menu_position.1696
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.number_of_active_devices
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_info    0x00000000      0xb58 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_abbrev  0x00000000      0x207 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_info    0x00000000      0xb8d Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_abbrev  0x00000000      0x234 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_loc     0x00000000      0x60d Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_aranges
                 0x00000000       0x68 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_ranges  0x00000000       0x58 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_line    0x00000000      0x4d2 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_str     0x00000000      0x40a Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_line    0x00000000      0x551 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_str     0x00000000      0x41d Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .comment       0x00000000       0x31 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_frame   0x00000000      0x144 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text          0x00000000        0x0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
@@ -652,6 +658,12 @@ Discarded input sections
  .comment       0x00000000       0x31 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .debug_frame   0x00000000       0x5c Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  COMMON         0x00000000       0xd2 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .text          0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .data          0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .bss           0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_line    0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_str     0x00000000      0x143 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .comment       0x00000000       0x31 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
@@ -885,10 +897,11 @@ LOAD Source/MCAL/Timer1/Source/timer1.o
 LOAD Source/MCAL/Timer2/Source/timer2.o
 LOAD Source/MCAL/UART/Source/uart.o
 LOAD Source/SERVICE/AC/Source/ac.o
-LOAD Source/SERVICE/LED/Source/LED_Dim_Service.o
+LOAD Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
 LOAD Source/SERVICE/LocalMode_DB/Source/localDB.o
 LOAD Source/SERVICE/LocalMode_Menu/Source/localMenu.o
 LOAD Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+LOAD Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
 END GROUP
