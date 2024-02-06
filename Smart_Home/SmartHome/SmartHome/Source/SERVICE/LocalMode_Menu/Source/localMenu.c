@@ -1,13 +1,9 @@
-u8 number_of_active_devices = 0;
-#define LOCAL_MENU 0
-#define LED_MENU 1
-#define AC_MENU 2
-#define MOVE_UP 0
-#define MOVE_DOWN 1
 AC ac;
-#include "LCD.h"
+#include "std_types.h"
+#include "lcd.h"
 #include "ac.h"
-
+#include "localMenu.h"
+u8 number_of_active_devices = 0;
 void local_Menu_Slector_Display(u8 menu_selector_position)
 {
     switch (menu_selector_position)
