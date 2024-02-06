@@ -19,7 +19,7 @@ void airConditioner_init(void)
 
 u8 airConditioner_Temperature(void)
 {
-	u8 current_temperature = LM35_read();  // Get temp sensor reading
+	u16 current_temperature = LM35_read();  // Get temp sensor reading
 	return current_temperature;
 }
 
@@ -54,7 +54,7 @@ void airConditioner_service(void){
 	{
 	case 1:
 		// Sample temperature value
-		u8 current_temperature = LM35_read();  // Get temp sensor reading
+		u16 current_temperature = LM35_read();  // Get temp sensor reading
 
 		// Check if the current temperature is above the turn on threshold
 		if (current_temperature > AC_CFG.AC_Run_Temperature_threshold) {
