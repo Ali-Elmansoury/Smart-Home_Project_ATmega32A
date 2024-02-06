@@ -23,20 +23,21 @@ typedef struct localDB
 {
 	u8 uname[UNAME_MAZ_SIZE];
 	u32 password;
+	u8 id;
 }user;
 
 /*Function prototype*/
 
 /*Function to add a new user and store in EEPROM*/
-void addUserToEEPROM(const u8* username, const u32* password)
-// Function to delete a user from EEPROM by id number
+void addUserToEEPROM(const u8 username, const u32 password);
+/*Function to delete a user from EEPROM by id number*/
 void deleteUserFromEEPROM(u8 id);
-// Function to select a user by order number and verify the password
+/*Function to select a user by order number and verify the password*/
 void selectUserAndLogin();
 /*Function to retrieve a user from EEPROM by order number*/
-void getUserFromEEPROM(u8 id, User* user);
+void getUserFromEEPROM(u8 id, user* users);
 /*Function to display users on LCD with scrolling*/
-void displayUsersOnLCD(size_t startIndex, size_t endIndex);
+void displayUsersOnLCD(u8 startIndex, u8 endIndex);
 /*Function to handle scrolling through users*/
 void scrollUsersOnLCD();
 
