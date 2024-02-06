@@ -7,9 +7,6 @@
 
 #define F_CPU 16000000UL
 #include <util/delay.h>
-#include "std_types.h"
-#include "bit_math.h"
-#include "dio.h"
 
 int main(void)
 {
