@@ -7,8 +7,13 @@
 
 #include "ac.h"
 #include "dc.h"
+#include "lm35.h"
 
-static AC ac;
+static AC ac = {
+	.AC_Status = FALSE,
+	.AC_Run_Temperature_threshold = 21,
+	.AC_Stop_Temperature_threshold = 28
+};
 void airConditioner_init(void)
 {
 	dcMotor_init();
@@ -25,11 +30,11 @@ void airConditioner_Toggle(void)
 {
 	switch (ac_on)
 	{
-	case false:
-		ac_on = true;
+	case FALSE:
+		ac_on = TRUE;
 		break;
-	case true:
-		ac_on = false;
+	case TRUE:
+		ac_on = FALSE;
 		break;
 	default:
 		break;
