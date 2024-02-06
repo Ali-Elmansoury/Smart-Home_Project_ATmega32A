@@ -15,16 +15,16 @@
 #define UNAME_MAZ_SIZE			(16)
 
 // EEPROM addresses for storing user data
-#define EEPROM_START_ADDR 211
-#define EEPROM_USER_COUNT_ADDR EEPROM_START_ADDR
-#define EEPROM_USER_DATA_ADDR (EEPROM_START_ADDR + 1)
+#define EEPROM_START_ADDR_REMOTE					(211)
+#define EEPROM_USER_COUNT_ADDR_REMOTE		(EEPROM_START_ADDR_REMOTE)
+#define EEPROM_USER_DATA_ADDR_REMOTE		(EEPROM_START_ADDR_REMOTE + 1)
 
 typedef struct remoteDB
 {
 	u8 uname[UNAME_MAZ_SIZE];
 	u32 password;
 	u8 id;
-}user;
+}user_remote;
 
 /*Function prototype*/
 
@@ -35,13 +35,13 @@ void deleteUserFromEEPROM_remote(u8 id);
 /*Function to select a user by order number and verify the password*/
 void selectUserAndLogin_remote();
 /*Function to retrieve a user from EEPROM by order number*/
-void getUserFromEEPROM_remote(u8 id, user* users);
+void getUserFromEEPROM_remote(u8 id, user_remote* users);
 /*Function to display users on Terminal*/
 void displayAllUsersOnRemote();
 /*Login acknowledgment*/
-boolean loginAck();
+boolean loginAck_remote();
 /*Logout*/
-void logout();
+void logout_remote();
 /*Initialization*/
 void remoteDB_init();
 

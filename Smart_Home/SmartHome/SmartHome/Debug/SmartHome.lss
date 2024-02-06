@@ -174,8 +174,8 @@ ISR(TIMER0_COMP_vect)
  104:	ef 93       	push	r30
  106:	ff 93       	push	r31
 	if (timer0CTCClbkPtr != NULL)
- 108:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 10c:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 108:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__data_end>
+ 10c:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <__data_end+0x1>
  110:	30 97       	sbiw	r30, 0x00	; 0
  112:	09 f0       	breq	.+2      	; 0x116 <__vector_10+0x30>
 	{

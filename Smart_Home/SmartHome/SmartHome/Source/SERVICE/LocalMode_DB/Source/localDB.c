@@ -14,7 +14,7 @@
 #include "eeprom.h"
 #include "string.h"
 
-user localUsers[DB_MAX_SIZE];
+user_local localUsers[DB_MAX_SIZE];
 boolean login_flag_local = FALSE;
 
 // Function to get an 8-digit password from the user securely
@@ -75,48 +75,48 @@ void getPassword_local(char* password, u8 maxLength)
 	password[index] = '\0';  // Null-terminate the password
 }
 
-void addUserToEEPROM(const u8 *username, const u32 password) 
+void addUserToEEPROM_local(const u8 *username, const u32 password) 
 {
 	u8 userCount;
-	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR, sizeof(userCount));
+	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
 
 	if (userCount < 11) {  // Assuming a maximum of 10 users
 		strncpy(localUsers->uname, username, sizeof(localUsers->uname) - 1);
 		localUsers->password = password;
 		localUsers->id = userCount + 1;
 
-		EEPROM_write_block(&localUsers, (void*)(EEPROM_USER_DATA_ADDR + userCount * sizeof(user)), sizeof(user));
+		EEPROM_write_block(&localUsers, (void*)(EEPROM_USER_DATA_ADDR_LOCAL + userCount * sizeof(user_local)), sizeof(user_local));
 
 		userCount++;
-		EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR, sizeof(userCount));
+		EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
 		} else {
 		// Handle error: User array is full
 	}
 }
 
-void getUserFromEEPROM(u8 id, user* users)
+void getUserFromEEPROM_local(u8 id, user_local* users)
 {
 	if (id >= 1 && id <= 10) {  // Assuming a maximum of 10 users
-		EEPROM_read_block(users, (const void*)(EEPROM_USER_DATA_ADDR + (id - 1) * sizeof(user)), sizeof(user));
+		EEPROM_read_block(users, (const void*)(EEPROM_USER_DATA_ADDR_LOCAL + (id - 1) * sizeof(user_local)), sizeof(user_local));
 	}
 }
 
-void deleteUserFromEEPROM(u8 id)
+void deleteUserFromEEPROM_local(u8 id)
 {
 	if (id >= 1 && id <= 10) {  // Assuming a maximum of 10 users
 		u8 userCount;
-		EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR, sizeof(userCount));
+		EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
 
 		if (userCount > 0) {
 			// Shift remaining users to fill the gap
 			for (int i = id - 1; i < userCount - 1; ++i) {
-				getUserFromEEPROM(i + 2, &localUsers);  // Shift next user to the current position
-				EEPROM_write_block(&localUsers, (void*)(EEPROM_USER_DATA_ADDR + i * sizeof(user)), sizeof(user));
+				getUserFromEEPROM_local(i + 2, &localUsers);  // Shift next user to the current position
+				EEPROM_write_block(&localUsers, (void*)(EEPROM_USER_DATA_ADDR_LOCAL + i * sizeof(user_local)), sizeof(user_local));
 			}
 
 			// Decrement user count
 			userCount--;
-			EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR, sizeof(userCount));
+			EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
 		}
 	}
 }
@@ -125,7 +125,7 @@ void displayUsersOnLCD(u8 startIndex, u8 endIndex)
 {
 	lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
 	for (u8 i = startIndex; i < endIndex && i < 10; ++i) {  // Assuming a maximum of 10 users
-		getUserFromEEPROM(i + 1, &localUsers);
+		getUserFromEEPROM_local(i + 1, &localUsers);
 
 		char displayText[50];
 		snprintf(displayText, sizeof(displayText), "User: %s, ID: %d", localUsers->uname, localUsers->id);
@@ -161,7 +161,7 @@ void scrollUsersOnLCD()
 }
 
 
-void selectUserAndLogin() 
+void selectUserAndLogin_local() 
 {
 	u8 selectedID;
 	lcd_displayStr("Enter User ID:");
@@ -170,7 +170,7 @@ void selectUserAndLogin()
 
 	if (selectedID >= 1 && selectedID <= 10) 
 	{  // Assuming a maximum of 10 users
-		getUserFromEEPROM(selectedID, &localUsers);
+		getUserFromEEPROM_local(selectedID, &localUsers);
 
 		char enteredPassword[20];
 		lcd_displayStr("Enter Password:");
@@ -193,12 +193,12 @@ void selectUserAndLogin()
 	}
 }
 
-boolean loginAck()
+boolean loginAck_local()
 {
 	return login_flag_local;
 }
 
-void logout()
+void logout_local()
 {
 	login_flag_local = FALSE;
 }

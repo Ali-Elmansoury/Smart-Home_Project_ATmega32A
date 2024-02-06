@@ -555,21 +555,22 @@ Discarded input sections
                 0x00000000       0x88 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .text.getPassword_local
                 0x00000000       0xea Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.addUserToEEPROM
+ .text.addUserToEEPROM_local
                 0x00000000       0x90 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.getUserFromEEPROM
+ .text.getUserFromEEPROM_local
                 0x00000000       0x2c Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.deleteUserFromEEPROM
+ .text.deleteUserFromEEPROM_local
                 0x00000000       0xa6 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .text.displayUsersOnLCD
                 0x00000000       0xb2 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .text.scrollUsersOnLCD
                 0x00000000       0x3e Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.selectUserAndLogin
+ .text.selectUserAndLogin_local
                 0x00000000       0x8a Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.loginAck
+ .text.loginAck_local
                 0x00000000        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.logout   0x00000000        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .text.logout_local
+                0x00000000        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .bss.login_flag_local
                 0x00000000        0x1 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .debug_info    0x00000000      0x8bf Source/SERVICE/LocalMode_DB/Source/localDB.o
@@ -579,7 +580,7 @@ Discarded input sections
                 0x00000000       0x60 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .debug_ranges  0x00000000       0x68 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .debug_line    0x00000000      0x4d3 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_str     0x00000000      0x3d9 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_str     0x00000000      0x403 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .comment       0x00000000       0x31 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .debug_frame   0x00000000      0x168 Source/SERVICE/LocalMode_DB/Source/localDB.o
  COMMON         0x00000000       0xd2 Source/SERVICE/LocalMode_DB/Source/localDB.o
@@ -642,21 +643,35 @@ Discarded input sections
  .text.remoteDB_init
                 0x00000000        0xa Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .rodata.str1.1
-                0x00000000       0x25 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00000000       0xbd Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .text.getPassword_remote
                 0x00000000       0xd8 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .text.addUserToEEPROM_remote
+                0x00000000       0x90 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .text.getUserFromEEPROM_remote
+                0x00000000       0x2c Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .text.deleteUserFromEEPROM_remote
+                0x00000000       0xa6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .text.displayAllUsersOnRemote
+                0x00000000       0xb0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .text.selectUserAndLogin_remote
+                0x00000000       0x8a Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .text.loginAck_remote
+                0x00000000        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .text.logout_remote
+                0x00000000        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .bss.login_flag_remote
                 0x00000000        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_info    0x00000000      0x341 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_abbrev  0x00000000      0x1d3 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_loc     0x00000000      0x1f4 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_info    0x00000000      0x7f4 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_abbrev  0x00000000      0x26a Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_loc     0x00000000      0x571 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .debug_aranges
-                0x00000000       0x28 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_ranges  0x00000000       0x30 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_line    0x00000000      0x272 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_str     0x00000000      0x2da Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00000000       0x60 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_ranges  0x00000000       0x68 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_line    0x00000000      0x448 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_str     0x00000000      0x3fa Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .comment       0x00000000       0x31 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_frame   0x00000000       0x5c Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_frame   0x00000000      0x16c Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  COMMON         0x00000000       0xd2 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .text          0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .data          0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o

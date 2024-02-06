@@ -14,7 +14,7 @@
 #include "eeprom.h"
 #include "string.h"
 
-user remoteUsers[DB_MAX_SIZE];
+user_remote remoteUsers[DB_MAX_SIZE];
 boolean login_flag_remote = FALSE;
 
 void remoteDB_init()
@@ -77,3 +77,103 @@ void getPassword_remote(char* password, u8 maxLength)
 	password[index] = '\0';  // Null-terminate the password
 }
 
+void addUserToEEPROM_remote(const u8 *username, const u32 password)
+{
+	u8 userCount;
+	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+
+	if (userCount < 11) {  // Assuming a maximum of 10 users
+		strncpy(remoteUsers->uname, username, sizeof(remoteUsers->uname) - 1);
+		remoteUsers->password = password;
+		remoteUsers->id = userCount + 1;
+
+		EEPROM_write_block(&remoteUsers, (void*)(EEPROM_USER_DATA_ADDR_REMOTE + userCount * sizeof(user_remote)), sizeof(user_remote));
+
+		userCount++;
+		EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+		} else {
+		// Handle error: User array is full
+	}
+}
+
+void getUserFromEEPROM_remote(u8 id, user_remote* users)
+{
+	if (id >= 1 && id <= 10) {  // Assuming a maximum of 10 users
+		EEPROM_read_block(users, (const void*)(EEPROM_USER_DATA_ADDR_REMOTE + (id - 1) * sizeof(user_remote)), sizeof(user_remote));
+	}
+}
+
+void deleteUserFromEEPROM_remote(u8 id)
+{
+	if (id >= 1 && id <= 10) {  // Assuming a maximum of 10 users
+		u8 userCount;
+		EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+
+		if (userCount > 0) {
+			// Shift remaining users to fill the gap
+			for (int i = id - 1; i < userCount - 1; ++i) {
+				getUserFromEEPROM_remote(i + 2, &remoteUsers);  // Shift next user to the current position
+				EEPROM_write_block(&remoteUsers, (void*)(EEPROM_USER_DATA_ADDR_REMOTE + i * sizeof(user_remote)), sizeof(user_remote));
+			}
+
+			// Decrement user count
+			userCount--;
+			EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+		}
+	}
+}
+
+void displayAllUsersOnRemote() {
+	uart_sendString("Displaying all users:\n");
+
+	for (u8 i = 0; i < DB_MAX_SIZE; ++i) {
+		getUserFromEEPROM_remote(i + 1, &remoteUsers);
+
+		char displayText[50];
+		snprintf(displayText, sizeof(displayText), "Remote: User: %s, ID: %d\n", remoteUsers[i].uname, remoteUsers[i].id);
+		uart_sendString(displayText);
+	}
+}
+
+
+void selectUserAndLogin_remote()
+{
+	u8 selectedID;
+	uart_sendString("Enter User ID:");
+
+	selectedID = uart_receiveByte();
+
+	if (selectedID >= 1 && selectedID <= 10)
+	{  // Assuming a maximum of 10 users
+		getUserFromEEPROM_remote(selectedID, &remoteUsers);
+
+		char enteredPassword[20];
+		uart_sendString("Enter Password:");
+
+		getPassword_remote(enteredPassword, sizeof(enteredPassword));
+
+		if (strcmp(enteredPassword, remoteUsers->password) == 0)
+		{
+			uart_sendString("Login Successful\n");
+			login_flag_remote = TRUE;
+		}
+		else
+		{
+			uart_sendString("Error: Incorrect Password\n");
+		}
+	}
+	else
+	{
+		uart_sendString("Error: Invalid User Order\n");
+	}
+}
+
+boolean loginAck_remote()
+{
+	return login_flag_remote;
+}
+
+void logout_remote()
+{
+	login_flag_remote = FALSE;
+}
