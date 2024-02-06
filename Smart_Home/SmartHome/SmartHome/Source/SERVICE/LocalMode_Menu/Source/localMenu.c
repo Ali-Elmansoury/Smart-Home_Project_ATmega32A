@@ -6,6 +6,9 @@
 #include "lamp.h"
 #include "Lamp_Dim_Service.h"
 u8 number_of_active_devices = 0;
+
+
+
 void local_Menu_Slector_Display(const u8 *menu_selector_position)
 {
     switch (*menu_selector_position)
@@ -50,7 +53,9 @@ void local_Menu_LED_Display(const u8 *menu_position)
     switch (*menu_position)
     {
     case 0:
+		
         lcd_displayStr("Lamp1 [ON]");
+		lcd_displayStr(Lamp_Service_state() ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Lamp2 [ON]");
         break;
