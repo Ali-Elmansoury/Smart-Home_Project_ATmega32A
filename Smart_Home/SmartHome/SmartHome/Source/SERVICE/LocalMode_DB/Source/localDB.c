@@ -72,14 +72,14 @@ void getPassword(char* password, u8 maxLength)
 	password[index] = '\0';  // Null-terminate the password
 }
 
-void addUserToEEPROM(const u8 username, const u32 password) 
+void addUserToEEPROM(const u8 *username, const u32 password) 
 {
 	u8 userCount;
 	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR, sizeof(userCount));
 
 	if (userCount < 11) {  // Assuming a maximum of 10 users
 		strncpy(localUsers->uname, username, sizeof(localUsers->uname) - 1);
-		strncpy(localUsers->password, password, sizeof(localUsers->password) - 1);
+		localUsers->password = password;
 		localUsers->id = userCount + 1;
 
 		EEPROM_write_block(&localUsers, (void*)(EEPROM_USER_DATA_ADDR + userCount * sizeof(user)), sizeof(user));

@@ -29,7 +29,7 @@ typedef struct localDB
 /*Function prototype*/
 
 /*Function to add a new user and store in EEPROM*/
-void addUserToEEPROM(const u8 username, const u32 password);
+void addUserToEEPROM(const u8 *username, const u32 password);
 /*Function to delete a user from EEPROM by id number*/
 void deleteUserFromEEPROM(u8 id);
 /*Function to select a user by order number and verify the password*/
