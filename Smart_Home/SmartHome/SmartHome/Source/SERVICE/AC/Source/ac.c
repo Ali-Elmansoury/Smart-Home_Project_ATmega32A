@@ -25,17 +25,7 @@ u16 airConditioner_Temperature(void)
 
 void airConditioner_Toggle(void)
 {
-	switch (AC_CFG.AC_Status)
-	{
-	case FALSE:
-		AC_CFG.AC_Status = TRUE;
-		break;
-	case TRUE:
-		AC_CFG.AC_Status = FALSE;
-		break;
-	default:
-		break;
-	}
+	AC_CFG.AC_Status^= TRUE;
 }
 
 void airConditioner_Set_Config(AC *ac_config)

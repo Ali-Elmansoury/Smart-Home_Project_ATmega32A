@@ -39,7 +39,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_copy_data.o)
                               Source/HAL/LCD/Source/lcd.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_clear_bss.o)
-                              Source/HAL/MM74C922/Source/MM74C922.o (__do_clear_bss)
+                              Source/HAL/Lamp/Source/lamp.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
                               Source/SERVICE/LocalMode_DB/Source/localDB.o (strcmp)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strncpy.o)
@@ -171,20 +171,24 @@ Discarded input sections
  .text          0x00000000        0x0 Source/HAL/Lamp/Source/lamp.o
  .data          0x00000000        0x0 Source/HAL/Lamp/Source/lamp.o
  .bss           0x00000000        0x0 Source/HAL/Lamp/Source/lamp.o
+ .bss.lamp_state
+                0x00000000        0x5 Source/HAL/Lamp/Source/lamp.o
  .text.lamp_init
                 0x00000000       0x14 Source/HAL/Lamp/Source/lamp.o
  .text.lamp_toggle
-                0x00000000       0x2a Source/HAL/Lamp/Source/lamp.o
- .debug_info    0x00000000       0xa6 Source/HAL/Lamp/Source/lamp.o
- .debug_abbrev  0x00000000       0x6d Source/HAL/Lamp/Source/lamp.o
- .debug_loc     0x00000000       0x83 Source/HAL/Lamp/Source/lamp.o
+                0x00000000       0x3c Source/HAL/Lamp/Source/lamp.o
+ .text.lamp_Getstate
+                0x00000000       0x22 Source/HAL/Lamp/Source/lamp.o
+ .debug_info    0x00000000      0x123 Source/HAL/Lamp/Source/lamp.o
+ .debug_abbrev  0x00000000       0xd3 Source/HAL/Lamp/Source/lamp.o
+ .debug_loc     0x00000000       0xcb Source/HAL/Lamp/Source/lamp.o
  .debug_aranges
-                0x00000000       0x28 Source/HAL/Lamp/Source/lamp.o
- .debug_ranges  0x00000000       0x18 Source/HAL/Lamp/Source/lamp.o
- .debug_line    0x00000000       0xa5 Source/HAL/Lamp/Source/lamp.o
- .debug_str     0x00000000      0x1a0 Source/HAL/Lamp/Source/lamp.o
+                0x00000000       0x30 Source/HAL/Lamp/Source/lamp.o
+ .debug_ranges  0x00000000       0x20 Source/HAL/Lamp/Source/lamp.o
+ .debug_line    0x00000000       0xb5 Source/HAL/Lamp/Source/lamp.o
+ .debug_str     0x00000000      0x1d5 Source/HAL/Lamp/Source/lamp.o
  .comment       0x00000000       0x31 Source/HAL/Lamp/Source/lamp.o
- .debug_frame   0x00000000       0x54 Source/HAL/Lamp/Source/lamp.o
+ .debug_frame   0x00000000       0x74 Source/HAL/Lamp/Source/lamp.o
  .text          0x00000000        0x0 Source/HAL/LCD/Source/lcd.o
  .data          0x00000000        0x0 Source/HAL/LCD/Source/lcd.o
  .bss           0x00000000        0x0 Source/HAL/LCD/Source/lcd.o
@@ -511,7 +515,7 @@ Discarded input sections
  .text.airConditioner_Temperature
                 0x00000000       0x20 Source/SERVICE/AC/Source/ac.o
  .text.airConditioner_Toggle
-                0x00000000       0x30 Source/SERVICE/AC/Source/ac.o
+                0x00000000       0x1c Source/SERVICE/AC/Source/ac.o
  .text.airConditioner_Set_Config
                 0x00000000       0x32 Source/SERVICE/AC/Source/ac.o
  .text.airConditioner_Status
@@ -522,7 +526,7 @@ Discarded input sections
                 0x00000000       0x14 Source/SERVICE/AC/Source/ac.o
  .text.airConditioner_off
                 0x00000000       0x14 Source/SERVICE/AC/Source/ac.o
- .bss.current_temperature.1633
+ .bss.current_temperature.1629
                 0x00000000        0x1 Source/SERVICE/AC/Source/ac.o
  .debug_info    0x00000000      0x1e6 Source/SERVICE/AC/Source/ac.o
  .debug_abbrev  0x00000000      0x132 Source/SERVICE/AC/Source/ac.o
@@ -530,31 +534,33 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x58 Source/SERVICE/AC/Source/ac.o
  .debug_ranges  0x00000000       0x48 Source/SERVICE/AC/Source/ac.o
- .debug_line    0x00000000      0x1d4 Source/SERVICE/AC/Source/ac.o
+ .debug_line    0x00000000      0x1b6 Source/SERVICE/AC/Source/ac.o
  .debug_str     0x00000000      0x2b8 Source/SERVICE/AC/Source/ac.o
  .comment       0x00000000       0x31 Source/SERVICE/AC/Source/ac.o
  .debug_frame   0x00000000      0x114 Source/SERVICE/AC/Source/ac.o
- .text          0x00000000        0x0 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .data          0x00000000        0x0 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .bss           0x00000000        0x0 Source/SERVICE/LED/Source/LED_Dim_Service.o
+ .text          0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .data          0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .bss           0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .data.Dim_Service_state
-                0x00000000        0x1 Source/SERVICE/LED/Source/LED_Dim_Service.o
+                0x00000000        0x1 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .text.lamp_Dim_service_init
-                0x00000000       0x1c Source/SERVICE/LED/Source/LED_Dim_Service.o
+                0x00000000       0x1c Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .text.lamp_Dim_service
-                0x00000000       0x7e Source/SERVICE/LED/Source/LED_Dim_Service.o
- .text.lamp_Dim_Service_Toggle
-                0x00000000       0x30 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_info    0x00000000       0xff Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_abbrev  0x00000000       0xb7 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_loc     0x00000000       0xbe Source/SERVICE/LED/Source/LED_Dim_Service.o
+                0x00000000       0x7e Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .text.Lamp_Service_Dim_Toggle
+                0x00000000       0x1c Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .text.Lamp_Service_state
+                0x00000000       0x12 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_info    0x00000000      0x118 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_abbrev  0x00000000       0xcf Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_loc     0x00000000       0xf9 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .debug_aranges
-                0x00000000       0x30 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_ranges  0x00000000       0x20 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_line    0x00000000       0xff Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_str     0x00000000      0x1fc Source/SERVICE/LED/Source/LED_Dim_Service.o
- .comment       0x00000000       0x31 Source/SERVICE/LED/Source/LED_Dim_Service.o
- .debug_frame   0x00000000       0x74 Source/SERVICE/LED/Source/LED_Dim_Service.o
+                0x00000000       0x38 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_ranges  0x00000000       0x28 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_line    0x00000000      0x102 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_str     0x00000000      0x214 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .comment       0x00000000       0x31 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_frame   0x00000000       0x94 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .text          0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .data          0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .bss           0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
@@ -596,13 +602,13 @@ Discarded input sections
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_Slector_Display
                 0x00000000       0x50 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .rodata        0x00000000       0x87 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .rodata        0x00000000       0x89 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_Display
                 0x00000000       0x6c Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_LED_Display
-                0x00000000       0xfa Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000000      0x126 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_AC_Display
-                0x00000000       0xc4 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000000       0xbe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_Move_Selector
                 0x00000000       0xa2 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu
@@ -617,35 +623,35 @@ Discarded input sections
                 0x00000000        0xe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .text.local_Menu_value_adj
                 0x00000000       0x62 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.1687
+ .bss.menu_position.1696
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.1688
+ .bss.menu_selector_position.1697
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .data.max_menu_position.1689
+ .data.max_menu_position.1698
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.v_adj_flag.1707
+ .bss.v_adj_flag.1716
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_key.1706
+ .bss.menu_key.1715
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.1703
+ .bss.menu_position.1712
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.1704
+ .bss.menu_selector_position.1713
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .data.max_menu_position.1705
+ .data.max_menu_position.1714
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.1739
+ .bss.menu_position.1748
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.1740
+ .bss.menu_selector_position.1749
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .data.max_menu_position.1741
+ .data.max_menu_position.1750
                 0x00000000        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_info    0x00000000      0x406 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_abbrev  0x00000000      0x148 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_info    0x00000000      0x407 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_abbrev  0x00000000      0x157 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_loc     0x00000000      0x2cf Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_aranges
                 0x00000000       0x68 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_ranges  0x00000000       0x70 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_line    0x00000000      0x57c Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_line    0x00000000      0x5d0 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_str     0x00000000      0x380 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .comment       0x00000000       0x31 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_frame   0x00000000      0x154 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
@@ -919,7 +925,7 @@ LOAD Source/MCAL/Timer1/Source/timer1.o
 LOAD Source/MCAL/Timer2/Source/timer2.o
 LOAD Source/MCAL/UART/Source/uart.o
 LOAD Source/SERVICE/AC/Source/ac.o
-LOAD Source/SERVICE/LED/Source/LED_Dim_Service.o
+LOAD Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
 LOAD Source/SERVICE/LocalMode_DB/Source/localDB.o
 LOAD Source/SERVICE/LocalMode_Menu/Source/localMenu.o
 LOAD Source/SERVICE/RemoteMode_DB/Source/remoteDB.o

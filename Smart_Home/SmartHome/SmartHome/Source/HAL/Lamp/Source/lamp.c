@@ -8,6 +8,8 @@
 #include "relay.h"
 #include "lamp.h"
 
+boolean lamp_state[5]={FALSE};
+
 void lamp_init_state();
 
 void lamp_init(void)
@@ -15,17 +17,14 @@ void lamp_init(void)
 	relay_init();
 }
 
-
-
 void lamp_toggle(u8 id)
 {
-	switch(id)
-	{
-		case LAMP_DIM_ID:
-			
-			break;
-		default:
-			relay_toggle(id);
-			break;
-	}
+	relay_toggle(id);
+	lamp_state[id] ^= TRUE;
 }
+
+boolean lamp_Getstate(u8 id)
+{
+	return lamp_state[id];
+}
+

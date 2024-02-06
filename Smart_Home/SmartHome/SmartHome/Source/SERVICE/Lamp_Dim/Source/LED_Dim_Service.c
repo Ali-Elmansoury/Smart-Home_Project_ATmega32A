@@ -31,17 +31,12 @@ void lamp_Dim_service()
 	}
 }
 
-void lamp_Dim_Service_Toggle()
+void Lamp_Service_Dim_Toggle()
 {
-	switch (Dim_Service_state)
-	{
-		case FALSE:
-		Dim_Service_state = TRUE;
-		break;
-		case TRUE:
-		Dim_Service_state = FALSE;
-		break;
-		default:
-		break;
-	}
+	Dim_Service_state^= TRUE;
+}
+
+boolean Lamp_Service_state()
+{
+	return Dim_Service_state;
 }

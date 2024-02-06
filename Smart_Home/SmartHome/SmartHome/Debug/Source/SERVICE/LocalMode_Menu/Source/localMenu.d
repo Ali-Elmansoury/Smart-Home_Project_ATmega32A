@@ -6,7 +6,9 @@ Source/SERVICE/LocalMode_Menu/Source/localMenu.d \
  ../Source/SERVICE/AC/Include/ac.h \
  ../Source/SERVICE/LocalMode_Menu/Include/localMenu.h \
  ../Source/HAL/Keypad/Include/keypad.h \
- ../Source/HAL/MM74C922/Include/MM74C922.h
+ ../Source/HAL/MM74C922/Include/MM74C922.h \
+ ../Source/HAL/Lamp/Include/lamp.h \
+ ../Source/SERVICE/Lamp_Dim/Include/Lamp_Dim_Service.h
 
 ../Source/LIB/std_types.h:
 
@@ -23,3 +25,7 @@ Source/SERVICE/LocalMode_Menu/Source/localMenu.d \
 ../Source/HAL/Keypad/Include/keypad.h:
 
 ../Source/HAL/MM74C922/Include/MM74C922.h:
+
+../Source/HAL/Lamp/Include/lamp.h:
+
+../Source/SERVICE/Lamp_Dim/Include/Lamp_Dim_Service.h:

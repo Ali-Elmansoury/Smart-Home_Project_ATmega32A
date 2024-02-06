@@ -3,7 +3,8 @@
 #include "ac.h"
 #include "localMenu.h"
 #include "keypad.h"
-
+#include "lamp.h"
+#include "Lamp_Dim_Service.h"
 u8 number_of_active_devices = 0;
 void local_Menu_Slector_Display(const u8 *menu_selector_position)
 {
@@ -49,32 +50,34 @@ void local_Menu_LED_Display(const u8 *menu_position)
     switch (*menu_position)
     {
     case 0:
-        lcd_displayStr("LED1 [ON]");
+        lcd_displayStr("Lamp1 [ON]");
         lcd_goTo(1, 1);
-        lcd_displayStr("LED2 [ON]");
+        lcd_displayStr("Lamp2 [ON]");
         break;
     case 1:
-        lcd_displayStr("LED2 [ON]");
+        lcd_displayStr("Lamp2 [ON]");
         lcd_goTo(1, 1);
-        lcd_displayStr("LED3 [ON]");
+        lcd_displayStr("Lamp3 [ON]");
         break;
     case 2:
-        lcd_displayStr("LED3 [ON]");
+        lcd_displayStr("Lamp3 [ON]");
         lcd_goTo(1, 1);
-        lcd_displayStr("LED4 [ON]");
+        lcd_displayStr("Lamp4 [ON]");
         break;
     case 3:
-        lcd_displayStr("LED4 [ON]");
+        lcd_displayStr("Lamp4 [ON]");
         lcd_goTo(1, 1);
-        lcd_displayStr("LED5 [ON]");
+        lcd_displayStr("Lamp5 [ON]");
         break;
     case 4:
-        lcd_displayStr("LED5 [ON]");
+        lcd_displayStr("Lamp5 [ON]");
         lcd_goTo(1, 1);
-        lcd_displayStr("DimmerLED [ON]");
+        lcd_displayStr("DimLamp ");
+		lcd_displayStr(Lamp_Service_state() ? "[ON]" : "[OFF]");
         break;
     case 5:
-        lcd_displayStr("DimmerLED [ON]");
+		lcd_displayStr("DimLamp ");
+        lcd_displayStr(Lamp_Service_state() ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Return");
         break;    
@@ -91,9 +94,8 @@ void local_Menu_AC_Display(const u8 *menu_position)
     switch (*menu_position)
     {
     case 0:
-        lcd_displayStr("AC [");
-        lcd_displayStr(AC_Status.AC_Status ? "ON" : "OFF");
-        lcd_displayChar(']');
+        lcd_displayStr("AC ");
+        lcd_displayStr(AC_Status.AC_Status ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Run Temp:");
         lcd_displayNums(AC_Status.AC_Run_Temperature_threshold);
