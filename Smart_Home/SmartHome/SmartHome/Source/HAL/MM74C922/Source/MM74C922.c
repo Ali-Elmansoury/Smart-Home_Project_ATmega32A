@@ -4,6 +4,8 @@
 static u8 PortId;
 static u8 PinId_S;
 
+static u8 Last_key = 0;
+
 static u8 Table[16] = {0x00, 0x01, 0x02, 0x03,
                        0x04, 0x05, 0x06, 0x07,
                        0x08, 0x09, 0x0A, 0x0B,
@@ -33,5 +35,11 @@ void MM74C922_Decode(u8 *data)
     {
         temp |= (dio_readChannel(PortId, PinId_S + i) << i);
     }
-    *data = Table[temp];
+    Last_key = Table[temp];
+    *data = Last_key;
+}
+
+u8 MM74C922_GetKey(void)
+{
+    return Last_key;
 }
