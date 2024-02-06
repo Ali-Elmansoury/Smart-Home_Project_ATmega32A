@@ -3,31 +3,31 @@ SmartHome.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000001ea  00000000  00000000  00000074  2**1
+  0 .text         000002c6  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000000  00800060  00800060  0000025e  2**0
+  1 .data         00000000  00800060  00800060  0000033a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000006  00800060  00800060  0000025e  2**0
+  2 .bss          0000000a  00800060  00800060  0000033a  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000025e  2**0
+  3 .comment      00000030  00000000  00000000  0000033a  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000290  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000036c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000120  00000000  00000000  000002cc  2**0
+  5 .debug_aranges 000001b0  00000000  00000000  000003a8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000a89  00000000  00000000  000003ec  2**0
+  6 .debug_info   00000d3f  00000000  00000000  00000558  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000694  00000000  00000000  00000e75  2**0
+  7 .debug_abbrev 00000770  00000000  00000000  00001297  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000058b  00000000  00000000  00001509  2**0
+  8 .debug_line   000007a7  00000000  00000000  00001a07  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000474  00000000  00000000  00001a94  2**2
+  9 .debug_frame  000006fc  00000000  00000000  000021b0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000005b1  00000000  00000000  00001f08  2**0
+ 10 .debug_str    0000070b  00000000  00000000  000028ac  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000938  00000000  00000000  000024b9  2**0
+ 11 .debug_loc    00000e9b  00000000  00000000  00002fb7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000f0  00000000  00000000  00002df1  2**0
+ 12 .debug_ranges 00000170  00000000  00000000  00003e52  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -37,8 +37,8 @@ Disassembly of section .text:
    4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
    8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
    c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
-  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 2a 01 	jmp	0x254	; 0x254 <__vector_4>
+  14:	0c 94 f3 00 	jmp	0x1e6	; 0x1e6 <__vector_5>
   18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
   20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
@@ -67,8 +67,8 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ea ee       	ldi	r30, 0xEA	; 234
-  68:	f1 e0       	ldi	r31, 0x01	; 1
+  66:	e6 ec       	ldi	r30, 0xC6	; 198
+  68:	f2 e0       	ldi	r31, 0x02	; 2
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
@@ -86,11 +86,11 @@ Disassembly of section .text:
   7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-  80:	a6 36       	cpi	r26, 0x66	; 102
+  80:	aa 36       	cpi	r26, 0x6A	; 106
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 49 00 	call	0x92	; 0x92 <main>
-  8a:	0c 94 f3 00 	jmp	0x1e6	; 0x1e6 <_exit>
+  8a:	0c 94 61 01 	jmp	0x2c2	; 0x2c2 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -290,8 +290,124 @@ ISR(TIMER1_OVF_vect)
  1e2:	1f 90       	pop	r1
  1e4:	18 95       	reti
 
-000001e6 <_exit>:
- 1e6:	f8 94       	cli
+000001e6 <__vector_5>:
+}
 
-000001e8 <__stop_program>:
- 1e8:	ff cf       	rjmp	.-2      	; 0x1e8 <__stop_program>
+void timer2_setCTCCallBack(void (*fptr) (void))
+{
+	timer2CTCClbkPtr = fptr;
+}
+ 1e6:	1f 92       	push	r1
+ 1e8:	0f 92       	push	r0
+ 1ea:	00 90 5f 00 	lds	r0, 0x005F	; 0x80005f <__TEXT_REGION_LENGTH__+0x7f805f>
+ 1ee:	0f 92       	push	r0
+ 1f0:	11 24       	eor	r1, r1
+ 1f2:	2f 93       	push	r18
+ 1f4:	3f 93       	push	r19
+ 1f6:	4f 93       	push	r20
+ 1f8:	5f 93       	push	r21
+ 1fa:	6f 93       	push	r22
+ 1fc:	7f 93       	push	r23
+ 1fe:	8f 93       	push	r24
+ 200:	9f 93       	push	r25
+ 202:	af 93       	push	r26
+ 204:	bf 93       	push	r27
+ 206:	ef 93       	push	r30
+ 208:	ff 93       	push	r31
+ 20a:	cf 93       	push	r28
+ 20c:	df 93       	push	r29
+ 20e:	cd b7       	in	r28, 0x3d	; 61
+ 210:	de b7       	in	r29, 0x3e	; 62
+ 212:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <timer2OvClbkPtr>
+ 216:	90 91 67 00 	lds	r25, 0x0067	; 0x800067 <timer2OvClbkPtr+0x1>
+ 21a:	89 2b       	or	r24, r25
+ 21c:	31 f0       	breq	.+12     	; 0x22a <__vector_5+0x44>
+ 21e:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <timer2OvClbkPtr>
+ 222:	90 91 67 00 	lds	r25, 0x0067	; 0x800067 <timer2OvClbkPtr+0x1>
+ 226:	fc 01       	movw	r30, r24
+ 228:	09 95       	icall
+ 22a:	00 00       	nop
+ 22c:	df 91       	pop	r29
+ 22e:	cf 91       	pop	r28
+ 230:	ff 91       	pop	r31
+ 232:	ef 91       	pop	r30
+ 234:	bf 91       	pop	r27
+ 236:	af 91       	pop	r26
+ 238:	9f 91       	pop	r25
+ 23a:	8f 91       	pop	r24
+ 23c:	7f 91       	pop	r23
+ 23e:	6f 91       	pop	r22
+ 240:	5f 91       	pop	r21
+ 242:	4f 91       	pop	r20
+ 244:	3f 91       	pop	r19
+ 246:	2f 91       	pop	r18
+ 248:	0f 90       	pop	r0
+ 24a:	00 92 5f 00 	sts	0x005F, r0	; 0x80005f <__TEXT_REGION_LENGTH__+0x7f805f>
+ 24e:	0f 90       	pop	r0
+ 250:	1f 90       	pop	r1
+ 252:	18 95       	reti
+
+00000254 <__vector_4>:
+
+ISR(TIMER2_COMP_vect)
+{
+ 254:	1f 92       	push	r1
+ 256:	0f 92       	push	r0
+ 258:	00 90 5f 00 	lds	r0, 0x005F	; 0x80005f <__TEXT_REGION_LENGTH__+0x7f805f>
+ 25c:	0f 92       	push	r0
+ 25e:	11 24       	eor	r1, r1
+ 260:	2f 93       	push	r18
+ 262:	3f 93       	push	r19
+ 264:	4f 93       	push	r20
+ 266:	5f 93       	push	r21
+ 268:	6f 93       	push	r22
+ 26a:	7f 93       	push	r23
+ 26c:	8f 93       	push	r24
+ 26e:	9f 93       	push	r25
+ 270:	af 93       	push	r26
+ 272:	bf 93       	push	r27
+ 274:	ef 93       	push	r30
+ 276:	ff 93       	push	r31
+ 278:	cf 93       	push	r28
+ 27a:	df 93       	push	r29
+ 27c:	cd b7       	in	r28, 0x3d	; 61
+ 27e:	de b7       	in	r29, 0x3e	; 62
+	if (timer2CTCClbkPtr != NULL)
+ 280:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <timer2CTCClbkPtr>
+ 284:	90 91 69 00 	lds	r25, 0x0069	; 0x800069 <timer2CTCClbkPtr+0x1>
+ 288:	89 2b       	or	r24, r25
+ 28a:	31 f0       	breq	.+12     	; 0x298 <__vector_4+0x44>
+	{
+		timer2CTCClbkPtr();
+ 28c:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <timer2CTCClbkPtr>
+ 290:	90 91 69 00 	lds	r25, 0x0069	; 0x800069 <timer2CTCClbkPtr+0x1>
+ 294:	fc 01       	movw	r30, r24
+ 296:	09 95       	icall
+	}
+}
+ 298:	00 00       	nop
+ 29a:	df 91       	pop	r29
+ 29c:	cf 91       	pop	r28
+ 29e:	ff 91       	pop	r31
+ 2a0:	ef 91       	pop	r30
+ 2a2:	bf 91       	pop	r27
+ 2a4:	af 91       	pop	r26
+ 2a6:	9f 91       	pop	r25
+ 2a8:	8f 91       	pop	r24
+ 2aa:	7f 91       	pop	r23
+ 2ac:	6f 91       	pop	r22
+ 2ae:	5f 91       	pop	r21
+ 2b0:	4f 91       	pop	r20
+ 2b2:	3f 91       	pop	r19
+ 2b4:	2f 91       	pop	r18
+ 2b6:	0f 90       	pop	r0
+ 2b8:	00 92 5f 00 	sts	0x005F, r0	; 0x80005f <__TEXT_REGION_LENGTH__+0x7f805f>
+ 2bc:	0f 90       	pop	r0
+ 2be:	1f 90       	pop	r1
+ 2c0:	18 95       	reti
+
+000002c2 <_exit>:
+ 2c2:	f8 94       	cli
+
+000002c4 <__stop_program>:
+ 2c4:	ff cf       	rjmp	.-2      	; 0x2c4 <__stop_program>

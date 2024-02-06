@@ -481,7 +481,7 @@ Discarded input sections
                 0x00000000       0x26 Source/MCAL/Timer2/Source/timer2.o
  .text.pwm2_init
                 0x00000000       0x42 Source/MCAL/Timer2/Source/timer2.o
- .text.pwm0_setDutyCycle
+ .text.pwm2_setDutyCycle
                 0x00000000       0x70 Source/MCAL/Timer2/Source/timer2.o
  .text          0x00000000        0x0 Source/MCAL/UART/Source/uart.o
  .data          0x00000000        0x0 Source/MCAL/UART/Source/uart.o
@@ -1277,7 +1277,7 @@ END GROUP
  .debug_frame   0x000002bc      0x1b8 Source/MCAL/Timer1/Source/timer1.o
  .debug_frame   0x00000474      0x288 Source/MCAL/Timer2/Source/timer2.o
 
-.debug_str      0x00000000      0x6f9
+.debug_str      0x00000000      0x70b
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_str     0x00000196      0x184 Source/APP/main.o
@@ -1286,7 +1286,7 @@ END GROUP
                                 0x31e (size before relaxing)
  .debug_str     0x00000495      0x11c Source/MCAL/Timer1/Source/timer1.o
                                 0x2d8 (size before relaxing)
- .debug_str     0x000005b1      0x148 Source/MCAL/Timer2/Source/timer2.o
+ .debug_str     0x000005b1      0x15a Source/MCAL/Timer2/Source/timer2.o
                                 0x31c (size before relaxing)
 
 .debug_loc      0x00000000      0xe9b

@@ -94,7 +94,7 @@ void pwm2_init(u8 mode, u8 freq)
 	TIMER2_TCCR2_REG |= freq;
 }
 
-void pwm0_setDutyCycle(u8 dutyCycle)
+void pwm2_setDutyCycle(u8 dutyCycle)
 {
 	TIMER2_OCR2_REG = ((f32)dutyCycle/100)*(TIMER2_TOP);
 }
