@@ -330,6 +330,12 @@
     <Compile Include="Source\SERVICE\LocalMode_Menu\Source\localMenu.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\SERVICE\RemoteMode_DB\Include\remoteDB.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\RemoteMode_DB\Source\remoteDB.c">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source" />

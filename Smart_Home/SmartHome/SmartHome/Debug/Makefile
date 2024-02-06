@@ -143,7 +143,8 @@ C_SRCS +=  \
 ../Source/SERVICE/AC/Source/ac.c \
 ../Source/SERVICE/LED/Source/LED_Dim_Service.c \
 ../Source/SERVICE/LocalMode_DB/Source/localDB.c \
-../Source/SERVICE/LocalMode_Menu/Source/localMenu.c
+../Source/SERVICE/LocalMode_Menu/Source/localMenu.c \
+../Source/SERVICE/RemoteMode_DB/Source/remoteDB.c
 
 
 PREPROCESSING_SRCS += 
@@ -178,7 +179,8 @@ Source/MCAL/UART/Source/uart.o \
 Source/SERVICE/AC/Source/ac.o \
 Source/SERVICE/LED/Source/LED_Dim_Service.o \
 Source/SERVICE/LocalMode_DB/Source/localDB.o \
-Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+Source/SERVICE/LocalMode_Menu/Source/localMenu.o \
+Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
 
 OBJS_AS_ARGS +=  \
 Source/APP/main.o \
@@ -206,7 +208,8 @@ Source/MCAL/UART/Source/uart.o \
 Source/SERVICE/AC/Source/ac.o \
 Source/SERVICE/LED/Source/LED_Dim_Service.o \
 Source/SERVICE/LocalMode_DB/Source/localDB.o \
-Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+Source/SERVICE/LocalMode_Menu/Source/localMenu.o \
+Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
 
 C_DEPS +=  \
 Source/APP/main.d \
@@ -234,7 +237,8 @@ Source/MCAL/UART/Source/uart.d \
 Source/SERVICE/AC/Source/ac.d \
 Source/SERVICE/LED/Source/LED_Dim_Service.d \
 Source/SERVICE/LocalMode_DB/Source/localDB.d \
-Source/SERVICE/LocalMode_Menu/Source/localMenu.d
+Source/SERVICE/LocalMode_Menu/Source/localMenu.d \
+Source/SERVICE/RemoteMode_DB/Source/remoteDB.d
 
 C_DEPS_AS_ARGS +=  \
 Source/APP/main.d \
@@ -262,7 +266,8 @@ Source/MCAL/UART/Source/uart.d \
 Source/SERVICE/AC/Source/ac.d \
 Source/SERVICE/LED/Source/LED_Dim_Service.d \
 Source/SERVICE/LocalMode_DB/Source/localDB.d \
-Source/SERVICE/LocalMode_Menu/Source/localMenu.d
+Source/SERVICE/LocalMode_Menu/Source/localMenu.d \
+Source/SERVICE/RemoteMode_DB/Source/remoteDB.d
 
 OUTPUT_FILE_PATH +=SmartHome.elf
 
@@ -454,6 +459,13 @@ Source/SERVICE/LocalMode_DB/Source/localDB.o: ../Source/SERVICE/LocalMode_DB/Sou
 	
 
 Source/SERVICE/LocalMode_Menu/Source/localMenu.o: ../Source/SERVICE/LocalMode_Menu/Source/localMenu.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../Source/LIB" -I"../Source/MCAL/ADC/Include" -I"../Source/MCAL/DIO/Include" -I"../Source/MCAL/GIE/Include" -I"../Source/MCAL/Timer0/Include" -I"../Source/MCAL/Timer1/Include" -I"../Source/MCAL/UART/Include" -I"../Source/HAL/Buzzer/Include" -I"../Source/HAL/Dimmer/Include" -I"../Source/HAL/Keypad/Include" -I"../Source/HAL/L293D/Include" -I"../Source/HAL/LCD/Include" -I"../Source/HAL/LM35/Include" -I"../Source/HAL/Relay/Include" -I"../Source/HAL/Servo/Include" -I"../Source/MCAL/EEPROM/Include" -I"../Source/HAL/Lamp/Include" -I"../Source/HAL/DC_Motor/Include" -I"../Source/HAL/MM74C922/Include" -I"../Source/HAL/POT/Include" -I"../Source/SERVICE/LocalMode_DB/Include" -I"../Source/SERVICE/RemoteMode_DB/Include" -I"../Source/MCAL/Timer2/Include" -I"../Source/SERVICE/AC/Include" -I"../Source/SERVICE/LocalMode_Menu/Include"  -O0 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Source/SERVICE/RemoteMode_DB/Source/remoteDB.o: ../Source/SERVICE/RemoteMode_DB/Source/remoteDB.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../Source/LIB" -I"../Source/MCAL/ADC/Include" -I"../Source/MCAL/DIO/Include" -I"../Source/MCAL/GIE/Include" -I"../Source/MCAL/Timer0/Include" -I"../Source/MCAL/Timer1/Include" -I"../Source/MCAL/UART/Include" -I"../Source/HAL/Buzzer/Include" -I"../Source/HAL/Dimmer/Include" -I"../Source/HAL/Keypad/Include" -I"../Source/HAL/L293D/Include" -I"../Source/HAL/LCD/Include" -I"../Source/HAL/LM35/Include" -I"../Source/HAL/Relay/Include" -I"../Source/HAL/Servo/Include" -I"../Source/MCAL/EEPROM/Include" -I"../Source/HAL/Lamp/Include" -I"../Source/HAL/DC_Motor/Include" -I"../Source/HAL/MM74C922/Include" -I"../Source/HAL/POT/Include" -I"../Source/SERVICE/LocalMode_DB/Include" -I"../Source/SERVICE/RemoteMode_DB/Include" -I"../Source/MCAL/Timer2/Include" -I"../Source/SERVICE/AC/Include" -I"../Source/SERVICE/LocalMode_Menu/Include"  -O0 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

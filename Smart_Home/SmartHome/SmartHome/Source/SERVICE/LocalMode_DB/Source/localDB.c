@@ -13,6 +13,7 @@
 #include "keypad.h"
 
 user localUsers[DB_MAX_SIZE];
+boolean login_flag = FALSE;
 
 // Function to get an 8-digit password from the user securely
 void getPassword(char* password, u8 maxLength) 
@@ -177,7 +178,7 @@ void selectUserAndLogin()
 		if (strcmp(enteredPassword, localUsers->password) == 0) 
 		{
 			lcd_displayStr("Login Successful");
-			// Perform actions for successful login
+			login_flag = TRUE;
 		} 
 		else 
 		{
@@ -188,4 +189,14 @@ void selectUserAndLogin()
 	{
 		lcd_displayStr("Error: Invalid User Order");
 	}
+}
+
+boolean loginAck()
+{
+	return login_flag;
+}
+
+void logout()
+{
+	login_flag = FALSE;
 }

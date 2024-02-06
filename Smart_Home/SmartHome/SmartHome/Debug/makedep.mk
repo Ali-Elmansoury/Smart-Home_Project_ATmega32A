@@ -54,3 +54,5 @@ Source\SERVICE\LocalMode_DB\Source\localDB.c
 
 Source\SERVICE\LocalMode_Menu\Source\localMenu.c
 
+Source\SERVICE\RemoteMode_DB\Source\remoteDB.c
+

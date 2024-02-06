@@ -40,5 +40,9 @@ void getUserFromEEPROM(u8 id, user* users);
 void displayUsersOnLCD(u8 startIndex, u8 endIndex);
 /*Function to handle scrolling through users*/
 void scrollUsersOnLCD();
+/*Login acknowledgment*/
+boolean loginAck();
+/*Logout*/
+void logout();
 
 #endif /* LOCALDB_H_ */
