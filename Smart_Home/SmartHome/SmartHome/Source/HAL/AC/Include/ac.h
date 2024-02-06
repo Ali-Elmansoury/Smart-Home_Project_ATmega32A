@@ -9,6 +9,15 @@
 #ifndef AC_H_
 #define AC_H_
 
+#include "std_types.h"
+
+typedef struct AC
+{
+    bool AC_Status=false;
+    u8 AC_Run_Temperature_threshold=21;
+    u8 AC_Stop_Temperature_threshold=28;
+};
+
 /*Function prototype*/
 
 /*Air conditioner initialization*/

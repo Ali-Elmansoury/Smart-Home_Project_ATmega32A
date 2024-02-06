@@ -8,34 +8,75 @@
 #include "ac.h"
 #include "dc.h"
 
+static AC ac;
 void airConditioner_init(void)
 {
 	dcMotor_init();
 	LM35_init();
 }
 
-void airConditioner_status(void){
-	// Sample temperature value
-	u16 current_temperature = LM35_read();  // Get temp sensor reading
+u8 airConditioner_Temperature(void)
+{
+	u8 current_temperature = LM35_read();  // Get temp sensor reading
+	return current_temperature;
+}
 
-	// Thresholds for turning on and off the air conditioner
-	u16 turn_on_threshold = 28;  // If the temperature goes above 28°C, turn on the AC
-	u16 turn_off_threshold = 21;  // If the temperature goes below 21°C, turn off the AC
-
-	// Check if the temperature is above the turn on threshold
-	if (current_temperature > turn_on_threshold) {
-		airConditioner_on(); // Turn on the DC motor for the air conditioner
+void airConditioner_Toggle(void)
+{
+	switch (ac_on)
+	{
+	case false:
+		ac_on = true;
+		break;
+	case true:
+		ac_on = false;
+		break;
+	default:
+		break;
 	}
+}
 
-	// Check if the temperature is below the turn off threshold
-	else if (current_temperature < turn_off_threshold) {
+void airConditioner_Set_Config(AC *ac_config)
+{
+	ac.AC_Run_Temperature_threshold = ac_config->AC_Run_Temperature_threshold;
+	ac.AC_Stop_Temperature_threshold = ac_config->AC_Stop_Temperature_threshold;
+}
+
+AC airConditioner_Status(void)
+{
+	return ac;
+}
+
+void airConditioner_service(void){
+	switch (ac_on)
+	{
+	case /* constant-expression */:
+		/* code */
+		break;
+	case 1:
+		// Sample temperature value
+		u8 current_temperature = LM35_read();  // Get temp sensor reading
+
+		// Check if the current temperature is above the turn on threshold
+		if (current_temperature > ac.AC_Run_Temperature_threshold) {
+			airConditioner_on(); // Turn on the DC motor for the air conditioner
+		}
+
+		// Check if the current temperature is below the turn off threshold
+		else if (current_temperature < ac.AC_Stop_Temperature_threshold) {
+			airConditioner_off(); // Turn off the DC motor for the air conditioner
+		}
+
+		// If the temperature is within the desired range, do nothing
+		else {
+			// Do nothing
+		};
+		break;
+	case 0:
 		airConditioner_off(); // Turn off the DC motor for the air conditioner
-		
-	}
-
-	// If the temperature is within the desired range, do nothing
-	else {
-		;
+		break;
+	default:
+		break;
 	}
 
 }
