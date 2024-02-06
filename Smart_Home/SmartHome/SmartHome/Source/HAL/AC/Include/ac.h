@@ -13,9 +13,9 @@
 
 typedef struct 
 {
-    boolean AC_Status = FALSE;
-    u8 AC_Run_Temperature_threshold=21;
-    u8 AC_Stop_Temperature_threshold=28;
+    boolean AC_Status;
+    u8 AC_Run_Temperature_threshold;
+    u8 AC_Stop_Temperature_threshold;
 }AC;
 
 /*Function prototype*/
