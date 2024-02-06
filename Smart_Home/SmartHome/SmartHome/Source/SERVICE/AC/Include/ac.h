@@ -11,12 +11,14 @@
 
 #include "std_types.h"
 
-typedef struct AC
+struct AC
 {
     boolean AC_Status;
     u8 AC_Run_Temperature_threshold;
     u8 AC_Stop_Temperature_threshold;
 };
+
+typedef struct AC AC;
 
 /*Function prototype*/
 

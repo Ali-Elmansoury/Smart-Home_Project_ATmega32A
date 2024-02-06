@@ -25,13 +25,13 @@ u8 airConditioner_Temperature(void)
 
 void airConditioner_Toggle(void)
 {
-	switch (ac_on)
+	switch (AC_CFG.AC_Status)
 	{
 	case FALSE:
-		ac_on = TRUE;
+		AC_CFG.AC_Status = TRUE;
 		break;
 	case TRUE:
-		ac_on = FALSE;
+		AC_CFG.AC_Status = FALSE;
 		break;
 	default:
 		break;
@@ -40,32 +40,29 @@ void airConditioner_Toggle(void)
 
 void airConditioner_Set_Config(AC *ac_config)
 {
-	ac.AC_Run_Temperature_threshold = ac_config->AC_Run_Temperature_threshold;
-	ac.AC_Stop_Temperature_threshold = ac_config->AC_Stop_Temperature_threshold;
+	AC_CFG.AC_Run_Temperature_threshold = ac_config->AC_Run_Temperature_threshold;
+	AC_CFG.AC_Stop_Temperature_threshold = ac_config->AC_Stop_Temperature_threshold;
 }
 
 AC airConditioner_Status(void)
 {
-	return ac;
+	return AC_CFG;
 }
 
 void airConditioner_service(void){
-	switch (ac_on)
+	switch (AC_CFG.AC_Status)
 	{
-	case /* constant-expression */:
-		/* code */
-		break;
 	case 1:
 		// Sample temperature value
 		u8 current_temperature = LM35_read();  // Get temp sensor reading
 
 		// Check if the current temperature is above the turn on threshold
-		if (current_temperature > ac.AC_Run_Temperature_threshold) {
+		if (current_temperature > AC_CFG.AC_Run_Temperature_threshold) {
 			airConditioner_on(); // Turn on the DC motor for the air conditioner
 		}
 
 		// Check if the current temperature is below the turn off threshold
-		else if (current_temperature < ac.AC_Stop_Temperature_threshold) {
+		else if (current_temperature < AC_CFG.AC_Stop_Temperature_threshold) {
 			airConditioner_off(); // Turn off the DC motor for the air conditioner
 		}
 
