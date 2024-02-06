@@ -123,9 +123,9 @@
       <Value>../Source/MCAL/Timer2/Include</Value>
       <Value>../Source/SERVICE/AC/Include</Value>
       <Value>../Source/SERVICE/LocalMode_Menu/Include</Value>
-      <Value>../Source/SERVICE/Lamp_Dim/Include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
   <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
   <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
   <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
@@ -313,10 +313,10 @@
     <Compile Include="Source\SERVICE\AC\Source\ac.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Source\SERVICE\Lamp_Dim\Include\Lamp_Dim_Service.h">
+    <Compile Include="Source\SERVICE\LED\Include\LED_Dim_Service.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Source\SERVICE\Lamp_Dim\Source\LED_Dim_Service.c">
+    <Compile Include="Source\SERVICE\LED\Source\LED_Dim_Service.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Source\SERVICE\LocalMode_DB\Include\localDB.h">
@@ -408,15 +408,15 @@
     <Folder Include="Source\SERVICE\AC\" />
     <Folder Include="Source\SERVICE\AC\Include\" />
     <Folder Include="Source\SERVICE\AC\Source\" />
-    <Folder Include="Source\SERVICE\Lamp_Dim\" />
-    <Folder Include="Source\SERVICE\Lamp_Dim\Include\" />
-    <Folder Include="Source\SERVICE\Lamp_Dim\Source\" />
+    <Folder Include="Source\SERVICE\LED\Include" />
+    <Folder Include="Source\SERVICE\LED\Source" />
     <Folder Include="Source\SERVICE\LocalMode_DB" />
     <Folder Include="Source\SERVICE\LocalMode_DB\Include" />
     <Folder Include="Source\SERVICE\LocalMode_DB\Source" />
     <Folder Include="Source\SERVICE\LocalMode_Menu\" />
     <Folder Include="Source\SERVICE\LocalMode_Menu\Include\" />
     <Folder Include="Source\SERVICE\LocalMode_Menu\Source\" />
+    <Folder Include="Source\SERVICE\LED" />
     <Folder Include="Source\SERVICE\RemoteMode_DB" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Include" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Source" />

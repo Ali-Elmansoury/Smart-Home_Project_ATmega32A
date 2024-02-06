@@ -6,17 +6,19 @@
  */ 
 
 #define F_CPU 16000000UL
-#include <avr/io.h>
+#include <stdio.h>
 #include <util/delay.h>
 #include "localDB.h"
 #include "lcd.h"
 #include "keypad.h"
+#include "eeprom.h"
+#include "string.h"
 
 user localUsers[DB_MAX_SIZE];
-boolean login_flag = FALSE;
+boolean login_flag_local = FALSE;
 
 // Function to get an 8-digit password from the user securely
-void getPassword(char* password, u8 maxLength) 
+void getPassword_local(char* password, u8 maxLength) 
 {
 	u8 index = 0;
 
@@ -25,7 +27,7 @@ void getPassword(char* password, u8 maxLength)
 	// Simulate getting secure user input for the password
 	while (index < maxLength - 1) 
 	{
-		char key = keypad_readKey();
+		u8 key = keypad_readKey();
 
 		// Check for Enter key
 		if (key == 'D') 
@@ -173,12 +175,12 @@ void selectUserAndLogin()
 		char enteredPassword[20];
 		lcd_displayStr("Enter Password:");
 
-		getPassword(enteredPassword, sizeof(enteredPassword));
+		getPassword_local(enteredPassword, sizeof(enteredPassword));
 
 		if (strcmp(enteredPassword, localUsers->password) == 0) 
 		{
 			lcd_displayStr("Login Successful");
-			login_flag = TRUE;
+			login_flag_local = TRUE;
 		} 
 		else 
 		{
@@ -193,10 +195,10 @@ void selectUserAndLogin()
 
 boolean loginAck()
 {
-	return login_flag;
+	return login_flag_local;
 }
 
 void logout()
 {
-	login_flag = FALSE;
+	login_flag_local = FALSE;
 }
