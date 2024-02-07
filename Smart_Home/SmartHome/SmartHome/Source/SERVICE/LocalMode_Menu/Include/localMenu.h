@@ -13,7 +13,7 @@
 #define AC_STOP_TEMP	(2)
 #define AC_RETURN		(3)
 
-void menuInit(void);
+void local_menu_Service(void);
 
 
 #endif /* LOCALMENU_H_ */

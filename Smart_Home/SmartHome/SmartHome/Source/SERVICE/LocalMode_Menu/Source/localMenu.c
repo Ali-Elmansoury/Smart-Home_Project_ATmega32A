@@ -144,15 +144,17 @@ void local_Menu_Move_Selector(int direction, u8 *menu_selector_position, u8 *men
     }
 }
 
-void local_Menu(u8 *Last_key, u8 *current_menu)
+void local_Menu(u8 *current_menu)
 {
     static u8 menu_position = 0;
     static u8 menu_selector_position = 0;
     static u8 max_menu_position = 1;
-
+	
+	u8 menu_key = keypad_readKey();
+	
     local_Menu_Display(&menu_position);
     local_Menu_Slector_Display(&menu_selector_position);
-    switch (*Last_key)
+    switch (menu_key)
     {
     case KEY_A:
         local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
@@ -341,4 +343,30 @@ void local_Menu_value_adj(u8 *value, u8 *v_adj_flag)
     default:
         break;
     }
+}
+
+void local_menu_Service()
+{
+	static u8 current_menu = LOCAL_MENU;
+	//check if login
+	if( /* login or not idle */ )
+	{
+		switch(current_menu)
+		{
+			case LOCAL_MENU:
+			local_Menu(&current_menu);
+			break;
+			case AC_MENU:
+			local_Menu_AC(&current_menu);
+			break;
+			case LED_MENU:
+			local_Menu_LED(&current_menu);
+			break;
+		}
+	}
+	else
+	{
+		//display idle
+	}
+	
 }
