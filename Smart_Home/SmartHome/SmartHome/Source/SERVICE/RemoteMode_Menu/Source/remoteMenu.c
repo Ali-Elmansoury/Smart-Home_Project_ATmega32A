@@ -154,8 +154,9 @@ void remote_Menu_User()
 	while (1) {
 		uart_sendString("User Menu:\n");
 		uart_sendString("1. Lamps\n");
-		uart_sendString("2. AC\n");
-		uart_sendString("3. Logout\n");
+		uart_sendString("2. Dimmer\n");
+		uart_sendString("3. AC\n");
+		uart_sendString("4. Logout\n");
 
 		u8 userChoice = uart_receiveByte();
 
@@ -164,9 +165,12 @@ void remote_Menu_User()
 				//Lamps code
 			break;
 			case '2':
-				//AC code
+				//Dimmer code
 			break;
 			case '3':
+				//AC code
+			break;
+			case '4':
 				logout_remote();
 			return;
 			default:

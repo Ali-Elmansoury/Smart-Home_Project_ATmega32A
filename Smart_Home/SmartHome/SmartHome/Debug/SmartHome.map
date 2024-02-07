@@ -714,9 +714,9 @@ Discarded input sections
  .data          0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .bss           0x00000000        0x0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .rodata.str1.1
-                0x00000000      0x156 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00000000      0x165 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .text.remote_admin_register
-                0x00000000       0x9e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00000000       0x96 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .text.registerUserRemote
                 0x00000000       0x84 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .text.registerUserLocal
@@ -724,19 +724,19 @@ Discarded input sections
  .text.remote_Menu_Admin
                 0x00000000       0x64 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .text.remote_Menu_User
-                0x00000000       0x40 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00000000       0x48 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .text.remote_menu_Service
-                0x00000000       0x5a Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00000000       0x62 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .bss.hasRun.1826
                 0x00000000        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .debug_info    0x00000000      0x829 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_info    0x00000000      0x845 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .debug_abbrev  0x00000000      0x165 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .debug_loc     0x00000000      0x294 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .debug_aranges
                 0x00000000       0x48 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .debug_ranges  0x00000000       0x38 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .debug_line    0x00000000      0x3b7 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .debug_str     0x00000000      0x39d Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_line    0x00000000      0x3bd Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_str     0x00000000      0x3a8 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .comment       0x00000000       0x31 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .debug_frame   0x00000000       0xb4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
