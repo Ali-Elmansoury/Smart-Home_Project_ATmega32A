@@ -6,6 +6,7 @@
 #include "lamp.h"
 #include "Lamp_Dim_Service.h"
 #include "localDB.h"
+#include "remoteDB.h"
 
 u8 number_of_active_devices = 0;
 boolean local_idle = FALSE;
@@ -103,7 +104,7 @@ void local_Menu_LED_Display(const u8 *menu_position)
     }
 }
 
-void local_Menu_AC_Display(const u8 *menu_position)
+void local_Menu_AC_Display(const u8 *menu_position, const Ac *AC_Status)
 {
     lcd_goTo(0,1);
 	AC AC_Status = airConditioner_Status();
@@ -197,8 +198,6 @@ void local_Menu_AC(u8 *current_menu)
 	static u8 menu_key = 0;
 	static boolean v_adj_flag = FALSE;
 	
-	AC AC_CFG;
-	
 	switch (v_adj_flag)
 	{
 		case FALSE:
@@ -210,8 +209,9 @@ void local_Menu_AC(u8 *current_menu)
 	
     if (menu_key != NULL)
     {
+		AC AC_Status = airConditioner_Status();
 	    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
-	    local_Menu_Display(&menu_position);
+	    local_Menu_AC_Display(&menu_position, &AC_Status);
 	    local_Menu_Slector_Display(&menu_selector_position);
     }
     switch (menu_key)
@@ -286,7 +286,7 @@ void local_Menu_LED(u8 *current_menu)
     static u8 max_menu_position = 5;
 	
     u8 menu_key = keypad_readKey();
-    
+	
     if (menu_key != NULL)
     {
 	    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
@@ -378,7 +378,7 @@ void local_menu_Service()
 			break;
 		}
 	}
-	else if(local_idle)
+	else if(local_idle || loginAck_remote())
 	{
 		local_menu_Idle();
 	}
