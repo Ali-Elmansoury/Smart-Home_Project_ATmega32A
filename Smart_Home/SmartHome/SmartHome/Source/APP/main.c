@@ -15,7 +15,8 @@
 #include "door.h"
 #include "lcd.h"
 #include "adc.h"
-
+#include "dio.h"
+#include "uart.h"
 int main(void)
 {
 	//airConditioner_init();
@@ -23,16 +24,15 @@ int main(void)
 	//lamp_Dim_service_init();
 	//local_menu_init();
 	lcd_init();
-	_delay_ms(1000);
+	uart_init(BAUD_RATE_9600);
 	
     /* Replace with your application code */
     while (1) 
     {
 		//airConditioner_service();
-		lcd_displayNums(15);
 		//lamp_Dim_service();
 		//local_menu_Service();
-		//remote_menu_Service();
+		remote_menu_Service();
 		_delay_ms(1000);
     }
 }

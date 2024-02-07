@@ -18,7 +18,8 @@ Source/SERVICE/LocalMode_Menu/Source/localMenu.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../Source/MCAL/Timer2/Include/timer2.h \
- ../Source/MCAL/Timer2/Include/timer2_reg.h
+ ../Source/MCAL/Timer2/Include/timer2_reg.h \
+ ../Source/MCAL/GIE/Include/gie.h ../Source/MCAL/GIE/Include/gie_reg.h
 
 ../Source/LIB/std_types.h:
 
@@ -59,3 +60,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../Source/MCAL/Timer2/Include/timer2.h:
 
 ../Source/MCAL/Timer2/Include/timer2_reg.h:
+
+../Source/MCAL/GIE/Include/gie.h:
+
+../Source/MCAL/GIE/Include/gie_reg.h:

@@ -16,7 +16,6 @@ void lamp_Dim_service_init()
 
 void lamp_Dim_service()
 {
-	u8 dim;
 	switch(Dim_Service_state)
 	{
 		case TRUE:

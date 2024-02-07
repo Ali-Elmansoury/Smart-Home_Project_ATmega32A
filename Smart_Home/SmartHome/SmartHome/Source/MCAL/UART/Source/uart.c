@@ -19,7 +19,7 @@ void uart_init(u16 baud)
 	SET_BIT(UART_UCSRB_REG,RX_ENABLE_BIT_NO);
 	
 	/*Set data size=8, parity=even, stop=2*/
-	UART_UCSRC_REG = URSEL_SET|DATA_8BIT|PARITY_EVEN|STOP_BIT2;
+	UART_UCSRC_REG = URSEL_SET|DATA_8BIT|PARITY_OFF|STOP_BIT1;
 }
 
 void uart_sendByte(u8 byte)
@@ -31,7 +31,7 @@ void uart_sendByte(u8 byte)
 	UART_UDR_REG = byte;
 }
 
-void uart_sendString(u8* str)
+void uart_sendString(u8 *str)
 {
 	while(*str != '\0')
 	{
@@ -49,7 +49,7 @@ u8 uart_receiveByte(void)
 	return UART_UDR_REG;
 }
 
-void uart_receiveString(u8* receivedStr)
+void uart_receiveString(u8 *receivedStr)
 {
 	// Receive the string
 	while (*receivedStr != '\0')

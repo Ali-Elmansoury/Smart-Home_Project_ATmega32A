@@ -31,14 +31,21 @@ void lcd_init(void)
 	dio_writeChannel(LCD_CMD_PORT,LCD_RW,LOW);
 	
 	/*Initialization by instructions*/
-	_delay_ms(15);
+	lcd_writeData(0x00);
+	_delay_ms(30);
 	lcd_sendCommand(0x03);
 	_delay_ms(5);
 	lcd_sendCommand(0x03);
-	_delay_us(100);
+	_delay_us(150);
 	lcd_sendCommand(0x03);
 	lcd_sendCommand(0x02);
+	lcd_sendCommand(0x02);
 	lcd_sendCommand(LCD_CMD_4BIT_MODE);
+	lcd_sendCommand(0x08);
+	lcd_sendCommand(0x00);
+	lcd_sendCommand(0x0C);
+	lcd_sendCommand(0x00);
+	lcd_sendCommand(LCD_CMD_CURSOR_INCREMENT);
 	
 	/*Write custom chars*/
 	//lcd_writeCustomChar();
@@ -48,10 +55,11 @@ void lcd_init(void)
 static void enablePulse(void)
 {
 	/*Enable pulse*/
+	_delay_ms(1);
 	dio_writeChannel(LCD_CMD_PORT,LCD_EN,HIGH);
-	_delay_us(1);
+	_delay_ms(1);
 	dio_writeChannel(LCD_CMD_PORT,LCD_EN,LOW);
-	_delay_ms(2);
+	_delay_ms(1);
 }
 
 void lcd_sendCommand(u8 cmd)

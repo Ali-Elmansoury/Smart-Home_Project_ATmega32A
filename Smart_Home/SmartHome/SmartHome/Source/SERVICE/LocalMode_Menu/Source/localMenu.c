@@ -9,13 +9,14 @@
 #include "remoteDB.h"
 #include "stdio.h"
 #include "timer2.h"
+#include "gie.h"
 
 u8 number_of_active_devices = 0;
 boolean local_idle = FALSE;
 
 void local_Menu_value_adj(u8 *value, u8 *v_adj_flag);
 void local_Menu_AC_Set_Temp(u8 temp, u8 AC_TEMP_MENU);
-
+void local_menu_Idle();
 
 void local_Menu_Slector_Display(const u8 *menu_selector_position)
 {
@@ -364,19 +365,22 @@ void local_menu_Service()
 {
 	static u8 current_menu = LOCAL_MENU;
 	//check if login & not in idle mode
-	if(loginAck_local() && local_idle == FALSE)
+	if(/*loginAck_local() &&*/ local_idle == FALSE)
 	{
 		switch(current_menu)
 		{
 			case LOCAL_MENU:
-			local_Menu(&current_menu);
-			break;
+				local_Menu(&current_menu);
+				break;
 			case AC_MENU:
-			local_Menu_AC(&current_menu);
-			break;
+				local_Menu_AC(&current_menu);
+				break;
 			case LED_MENU:
-			local_Menu_LED(&current_menu);
-			break;
+				local_Menu_LED(&current_menu);
+				break;
+			default:
+				lcd_displayStr("ERROR");
+				break;
 		}
 	}
 	else if(local_idle || loginAck_remote())
@@ -387,7 +391,6 @@ void local_menu_Service()
 	{
 		scrollUsersOnLCD();
 	}
-	
 }
 
 void local_menu_Idle()
