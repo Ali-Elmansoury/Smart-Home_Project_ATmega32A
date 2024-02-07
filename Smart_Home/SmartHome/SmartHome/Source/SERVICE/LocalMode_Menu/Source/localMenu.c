@@ -384,7 +384,7 @@ void local_menu_Service()
 	}
 	else
 	{
-		//login menu<
+		scrollUsersOnLCD();
 	}
 	
 }
