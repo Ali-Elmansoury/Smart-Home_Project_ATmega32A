@@ -396,3 +396,26 @@ void local_menu_Idle()
 	lcd_goTo(1,7);
 	lcd_displayNums(number_of_active_devices);
 }
+
+void local_menu_Idle_timer()
+{
+	static u8 secondCounter;
+	secondCounter++;
+	timer2_setPreLoad(6);
+	if (secondCounter == 312)
+	{
+		//your desired function to be run every 5 secs
+		secondCounter=0;
+		local_idle=TRUE;
+	}
+}
+
+void local_menu_init()
+{
+	gie_enableAllInterrupts();
+	timer2_init(TIMER2_MODE_NORMAL);
+	timer2_setPreLoad(6);
+	timer2_setOvCallBack(&local_menu_Idle_timer);
+	timer2_enableOvInterrupt();
+	timer2_start(TIMER2_F_CPU_DIV_64);
+}
