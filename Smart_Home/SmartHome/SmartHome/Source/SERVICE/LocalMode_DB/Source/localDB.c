@@ -135,32 +135,32 @@ void displayUsersOnLCD(u8 startIndex, u8 endIndex)
 	}
 }
 
-void scrollUsersOnLCD()
-{
-	u8 startIndex = 0;
-	u8 endIndex = 2;  // Display two users at a time
-
-	while (1) {
-		displayUsersOnLCD(startIndex, endIndex);
-
-		char key = keypad_readKey();  // Assume keypad_readKey() returns the pressed key
-
-		if (key == 'A') {  // Scroll up
-			if (startIndex >= 2) {
-				startIndex -= 2;
-				endIndex -= 2;
-			}
-			} else if (key == 'B') {  // Scroll down
-			if (endIndex < 11) {  // Assuming a maximum of 10 users
-				startIndex += 2;
-				endIndex += 2;
-			}
-		}
-
-		// Add a delay to avoid rapid scrolling due to continuous key press
-		_delay_ms(200);
-	}
-}
+//void scrollUsersOnLCD()
+//{
+	//u8 startIndex = 0;
+	//u8 endIndex = 2;  // Display two users at a time
+//
+	//while (1) {
+		//displayUsersOnLCD(startIndex, endIndex);
+//
+		//char key = keypad_readKey();  // Assume keypad_readKey() returns the pressed key
+//
+		//if (key == 'A') {  // Scroll up
+			//if (startIndex >= 2) {
+				//startIndex -= 2;
+				//endIndex -= 2;
+			//}
+			//} else if (key == 'B') {  // Scroll down
+			//if (endIndex < 11) {  // Assuming a maximum of 10 users
+				//startIndex += 2;
+				//endIndex += 2;
+			//}
+		//}
+//
+		//// Add a delay to avoid rapid scrolling due to continuous key press
+		//_delay_ms(200);
+	//}
+//}
 
 
 void selectUserAndLogin_local() 
@@ -193,6 +193,38 @@ void selectUserAndLogin_local()
 	{
 		lcd_displayStr("Error: Invalid User Order");
 	}
+}
+
+void scrollUsersOnLCD()
+{
+	u8 startIndex = 0;
+	u8 endIndex = 2;  // Display two users at a time
+
+	while (1) {
+		displayUsersOnLCD(startIndex, endIndex);
+
+		char key = keypad_readKey();  // Assume keypad_readKey() returns the pressed key
+
+		if (key == 'A') {  // Scroll up
+			if (startIndex >= 2) {
+				startIndex -= 2;
+				endIndex -= 2;
+			}
+			} else if (key == 'B') {  // Scroll down
+			if (endIndex < 11) {  // Assuming a maximum of 10 users
+				startIndex += 2;
+				endIndex += 2;
+				if (endIndex == 10)
+				{
+					break;;
+				}
+			}
+		}
+		// Add a delay to avoid rapid scrolling due to continuous key press
+		_delay_ms(200);
+	}
+
+	selectUserAndLogin_local();
 }
 
 boolean loginAck_local()
