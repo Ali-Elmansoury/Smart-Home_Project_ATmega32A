@@ -48,6 +48,8 @@ Source\MCAL\UART\Source\uart.c
 
 Source\SERVICE\AC\Source\ac.c
 
+Source\SERVICE\Door\Source\door.c
+
 Source\SERVICE\Lamp_Dim\Source\LED_Dim_Service.c
 
 Source\SERVICE\LocalMode_DB\Source\localDB.c

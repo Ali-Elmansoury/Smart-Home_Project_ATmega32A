@@ -14,6 +14,10 @@
 #define DB_MAX_SIZE				(10)
 #define UNAME_MAZ_SIZE			(16)
 
+#define REGISTRATION_SUCCESS		(0)
+#define ERROR_USER_ARRAY_FULL		(1)
+#define ERROR_EEPROM_WRITE			(2)
+
 // EEPROM addresses for storing user data
 #define EEPROM_START_ADDR_REMOTE					(211)
 #define EEPROM_USER_COUNT_ADDR_REMOTE		(EEPROM_START_ADDR_REMOTE)
@@ -29,11 +33,11 @@ typedef struct remoteDB
 /*Function prototype*/
 
 /*Function to add a new user and store in EEPROM*/
-void addUserToEEPROM_remote(const u8 *username, const u32 password);
+u8 addUserToEEPROM_remote(const u8 *username, const u32 password);
 /*Function to delete a user from EEPROM by id number*/
 void deleteUserFromEEPROM_remote(u8 id);
 /*Function to select a user by order number and verify the password*/
-void selectUserAndLogin_remote();
+u8 selectUserAndLogin_remote();
 /*Function to retrieve a user from EEPROM by order number*/
 void getUserFromEEPROM_remote(u8 id, user_remote* users);
 /*Function to display users on Terminal*/
@@ -44,5 +48,7 @@ boolean loginAck_remote();
 void logout_remote();
 /*Initialization*/
 void remoteDB_init();
+/*Function to get an 8-digit password from the user securely*/
+void getPassword_remote(u8* password, u8 maxLength);
 
 #endif /* REMOTEDB_H_ */

@@ -18,7 +18,7 @@ user_local localUsers[DB_MAX_SIZE];
 boolean login_flag_local = FALSE;
 
 // Function to get an 8-digit password from the user securely
-void getPassword_local(char* password, u8 maxLength) 
+void getPassword_local(u8* password, u8 maxLength) 
 {
 	u8 index = 0;
 
@@ -75,12 +75,12 @@ void getPassword_local(char* password, u8 maxLength)
 	password[index] = '\0';  // Null-terminate the password
 }
 
-void addUserToEEPROM_local(const u8 *username, const u32 password) 
+u8 addUserToEEPROM_local(const u8 *username, const u32 password) 
 {
 	u8 userCount;
 	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
 
-	if (userCount < 11) {  // Assuming a maximum of 10 users
+	if (userCount < 10) {  // Assuming a maximum of 10 users
 		strncpy(localUsers->uname, username, sizeof(localUsers->uname) - 1);
 		localUsers->password = password;
 		localUsers->id = userCount + 1;
@@ -89,8 +89,10 @@ void addUserToEEPROM_local(const u8 *username, const u32 password)
 
 		userCount++;
 		EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
+		return REGISTRATION_SUCCESS;
 		} else {
 		// Handle error: User array is full
+		return ERROR_USER_ARRAY_FULL;
 	}
 }
 

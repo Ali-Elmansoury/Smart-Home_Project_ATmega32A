@@ -14,6 +14,10 @@
 #define DB_MAX_SIZE				(10)
 #define UNAME_MAZ_SIZE			(16)
 
+#define REGISTRATION_SUCCESS		(0)
+#define ERROR_USER_ARRAY_FULL		(1)
+#define ERROR_EEPROM_WRITE			(2)
+
 // EEPROM addresses for storing user data
 #define EEPROM_START_ADDR_LOCAL					(0)
 #define EEPROM_USER_COUNT_ADDR_LOCAL	(EEPROM_START_ADDR_LOCAL)
@@ -29,7 +33,7 @@ typedef struct localDB
 /*Function prototype*/
 
 /*Function to add a new user and store in EEPROM*/
-void addUserToEEPROM_local(const u8 *username, const u32 password);
+u8 addUserToEEPROM_local(const u8 *username, const u32 password);
 /*Function to delete a user from EEPROM by id number*/
 void deleteUserFromEEPROM_local(u8 id);
 /*Function to select a user by order number and verify the password*/

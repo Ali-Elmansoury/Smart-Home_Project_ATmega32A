@@ -125,6 +125,7 @@
       <Value>../Source/SERVICE/LocalMode_Menu/Include</Value>
       <Value>../Source/SERVICE/Lamp_Dim/Include</Value>
       <Value>../Source/SERVICE/RemoteMode_Menu/Include</Value>
+      <Value>../Source/SERVICE/Door/Include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -315,6 +316,12 @@
     <Compile Include="Source\SERVICE\AC\Source\ac.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\SERVICE\Door\Include\door.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\Door\Source\door.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Source\SERVICE\Lamp_Dim\Include\Lamp_Dim_Service.h">
       <SubType>compile</SubType>
     </Compile>
@@ -416,6 +423,8 @@
     <Folder Include="Source\SERVICE\AC\" />
     <Folder Include="Source\SERVICE\AC\Include\" />
     <Folder Include="Source\SERVICE\AC\Source\" />
+    <Folder Include="Source\SERVICE\Door\Include" />
+    <Folder Include="Source\SERVICE\Door\Source" />
     <Folder Include="Source\SERVICE\Lamp_Dim\" />
     <Folder Include="Source\SERVICE\Lamp_Dim\Include\" />
     <Folder Include="Source\SERVICE\Lamp_Dim\Source\" />
@@ -425,6 +434,7 @@
     <Folder Include="Source\SERVICE\LocalMode_Menu\" />
     <Folder Include="Source\SERVICE\LocalMode_Menu\Include\" />
     <Folder Include="Source\SERVICE\LocalMode_Menu\Source\" />
+    <Folder Include="Source\SERVICE\Door" />
     <Folder Include="Source\SERVICE\RemoteMode_DB" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Include" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Source" />

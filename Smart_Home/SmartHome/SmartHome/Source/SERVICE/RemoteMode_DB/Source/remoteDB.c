@@ -23,7 +23,7 @@ void remoteDB_init()
 }
 
 // Function to get an 8-digit password from the user securely
-void getPassword_remote(char* password, u8 maxLength)
+void getPassword_remote(u8* password, u8 maxLength)
 {
 	u8 index = 0;
 
@@ -35,7 +35,7 @@ void getPassword_remote(char* password, u8 maxLength)
 		u8 key = uart_receiveByte();
 
 		// Check for Enter key
-		if (key == 'D')
+		if (key == '\n' || key == '\r')
 		{
 			// Check if the password is exactly 8 digits
 			if (index == 8)
@@ -52,7 +52,7 @@ void getPassword_remote(char* password, u8 maxLength)
 				continue;
 			}
 		}
-		else if (key == 'C')
+		else if (key == '\b')
 		{  // Backspace
 			if (index > 0)
 			{
@@ -77,12 +77,12 @@ void getPassword_remote(char* password, u8 maxLength)
 	password[index] = '\0';  // Null-terminate the password
 }
 
-void addUserToEEPROM_remote(const u8 *username, const u32 password)
+u8 addUserToEEPROM_remote(const u8 *username, const u32 password)
 {
 	u8 userCount;
 	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
 
-	if (userCount < 11) {  // Assuming a maximum of 10 users
+	if (userCount < 10) {  // Assuming a maximum of 10 users
 		strncpy(remoteUsers->uname, username, sizeof(remoteUsers->uname) - 1);
 		remoteUsers->password = password;
 		remoteUsers->id = userCount + 1;
@@ -91,8 +91,10 @@ void addUserToEEPROM_remote(const u8 *username, const u32 password)
 
 		userCount++;
 		EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+		return REGISTRATION_SUCCESS;
 		} else {
 		// Handle error: User array is full
+		return ERROR_USER_ARRAY_FULL;
 	}
 }
 
@@ -136,7 +138,7 @@ void displayAllUsersOnRemote() {
 }
 
 
-void selectUserAndLogin_remote()
+u8 selectUserAndLogin_remote()
 {
 	u8 selectedID;
 	uart_sendString("Enter User ID:");
@@ -166,11 +168,14 @@ void selectUserAndLogin_remote()
 	{
 		uart_sendString("Error: Invalid User Order\n");
 	}
+	return selectedID;
 }
 
 boolean loginAck_remote()
 {
-	return login_flag_remote;
+	return login_flag_remote;boolean result = login_flag_remote;
+	login_flag_remote = FALSE;  // Clear the flag after checking
+	return result;
 }
 
 void logout_remote()
