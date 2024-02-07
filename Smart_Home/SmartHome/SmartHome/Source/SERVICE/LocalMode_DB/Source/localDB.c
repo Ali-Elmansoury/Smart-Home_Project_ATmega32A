@@ -216,7 +216,7 @@ void scrollUsersOnLCD()
 				endIndex += 2;
 				if (endIndex == 10)
 				{
-					break;;
+					break;
 				}
 			}
 		}
