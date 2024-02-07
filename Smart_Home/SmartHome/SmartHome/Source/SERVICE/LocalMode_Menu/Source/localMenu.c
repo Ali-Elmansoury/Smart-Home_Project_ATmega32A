@@ -5,6 +5,8 @@
 #include "keypad.h"
 #include "lamp.h"
 #include "Lamp_Dim_Service.h"
+#include "localDB.h"
+
 u8 number_of_active_devices = 0;
 
 void local_Menu_value_adj(u8 *value, u8 *v_adj_flag);
@@ -172,7 +174,7 @@ void local_Menu(u8 *current_menu)
         *current_menu = AC_MENU;    // Select AC Menu
         break;
     case 2:
-        // Log-out
+        logout_local();
         break;
     default:
         break;
@@ -349,7 +351,7 @@ void local_menu_Service()
 {
 	static u8 current_menu = LOCAL_MENU;
 	//check if login
-	if( /* login or not idle */ )
+	if(loginAck_local())
 	{
 		switch(current_menu)
 		{
