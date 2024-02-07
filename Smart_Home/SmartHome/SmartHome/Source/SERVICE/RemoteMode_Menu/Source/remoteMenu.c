@@ -103,6 +103,29 @@ void registerUserLocal()
 	}
 }
 
+void remote_login_menu()
+{
+	user_remote registeredUsers;
+	displayAllUsersOnRemote();
+	u8 id = selectUserAndLogin_remote();
+	getUserFromEEPROM_remote(id,&registeredUsers);
+	if (registeredUsers.id == 1 && loginAck_remote())
+	{
+		remote_Menu_Admin();
+	}
+	else
+	{
+		//login
+		if (loginAck_remote())
+		{
+			remote_Menu_User();
+		}
+		else{
+			//do nothing
+		}
+	}
+}
+
 void remote_Menu_Admin()
 {
 	while (1) {
@@ -126,26 +149,73 @@ void remote_Menu_Admin()
 			break;
 			case '4':
 				logout_remote();
+				remote_login_menu();
 			return;
 			default:
 				uart_sendString("Invalid choice. Please try again.\n");
 			continue;
 		}
 	}
-	
-	uart_sendString("Choose a mode:");
-	uart_sendString(" 1.Remote Mode\n 2.Local Mode");
-	u8 choice = uart_receiveByte();
-	switch(choice)
+}
+
+void lamp_menu()
+{
+	uart_sendString("Lamp Menu\n");
+	uart_sendString("Choose lamp number you want to turn on/off: \n");
+	uart_sendString("1. Lamp1\n");
+	uart_sendString("2. Lamp2\n");
+	uart_sendString("3. Lamp3\n");
+	uart_sendString("4. Lamp4\n");
+	uart_sendString("5. Lamp5\n");
+	uart_sendString("6. Dimmer\n");
+	u8 lamp_choice = uart_receiveByte();
+	switch (lamp_choice)
 	{
-		case '1':
-			remote_menu_Service();
+		case 1:
+			// Lamp1 ON/OFF (Toggle LED1 Status)
+			lamp_toggle(LAMP1_ID);
 		break;
-		case '2':
-			local_menu_Service();
+		case 2:
+			// LED2 ON/OFF (Toggle LED2 Status)
+			lamp_toggle(LAMP2_ID);
+		break;
+		case 3:
+			// LED3 ON/OFF (Toggle LED3 Status)
+			lamp_toggle(LAMP3_ID);
+		break;
+		case 4:
+			// LED4 ON/OFF (Toggle LED4 Status)
+			lamp_toggle(LAMP4_ID);
+		break;
+		case 5:
+			// LED5 ON/OFF (Toggle LED5 Status)
+			lamp_toggle(LAMP5_ID);
+		break;
+		case 6:
+			// DimmerLED ON/OFF (Toggle DimmerLED Status)
+			Lamp_Service_Dim_Toggle();
 		break;
 		default:
 			uart_sendString("Invalid choice. Please try again.\n");
+		break;		
+	}
+}
+
+void AC_menu()
+{
+	uart_sendString("AC Menu");
+	AC ac_struct = airConditioner_Status();
+	uart_sendString(ac_struct->AC_Status ? "[ON]" : "[OFF]");
+	uart_sendString("Press (T) to turn ");
+	uart_sendString(ac_struct->AC_Status ? "[OFF]" : "[ON]");
+	u8 key = uart_receiveByte();
+	if (key == 'T')
+	{
+		airConditioner_Toggle();
+	}
+	else
+	{
+		uart_sendString("Wrong Input");
 	}
 }
 
@@ -154,44 +224,26 @@ void remote_Menu_User()
 	while (1) {
 		uart_sendString("User Menu:\n");
 		uart_sendString("1. Lamps\n");
-		uart_sendString("2. Dimmer\n");
-		uart_sendString("3. AC\n");
-		uart_sendString("4. Logout\n");
+		uart_sendString("2. AC\n");
+		uart_sendString("3. Logout\n");
 
 		u8 userChoice = uart_receiveByte();
 
 		switch (userChoice) {
 			case '1':
-				//Lamps code
+				lamp_menu();
 			break;
 			case '2':
-				//Dimmer code
+				AC_menu();
 			break;
 			case '3':
-				//AC code
-			break;
-			case '4':
 				logout_remote();
+				remote_login_menu();
 			return;
 			default:
 				uart_sendString("Invalid choice. Please try again.\n");
 			continue;
 		}
-	}
-	
-	uart_sendString("Choose a mode:");
-	uart_sendString(" 1.Remote Mode\n 2.Local Mode");
-	u8 choice = uart_receiveByte();
-	switch(choice)
-	{
-		case '1':
-			remote_menu_Service();
-		break;
-		case '2':
-			local_menu_Service();
-		break;
-		default:
-			uart_sendString("Invalid choice. Please try again.\n");
 	}
 }
 
@@ -199,24 +251,6 @@ void remote_menu_Service(void)
 {
 	uart_sendString("System is starting in remote mode\n");
 	remote_admin_register();
-	user_remote registeredUsers;
-	displayAllUsersOnRemote();
-	u8 id = selectUserAndLogin_remote();
-	getUserFromEEPROM_remote(id,&registeredUsers);
-	if (registeredUsers.id == 1 && loginAck_remote())
-	{
-		remote_Menu_Admin();
-	}
-	else
-	{
-		//login
-		if (loginAck_remote())
-		{
-			remote_Menu_User();
-		}
-		else{
-			//do nothing
-		}
-	}
+	remote_login_menu();
 }
 
