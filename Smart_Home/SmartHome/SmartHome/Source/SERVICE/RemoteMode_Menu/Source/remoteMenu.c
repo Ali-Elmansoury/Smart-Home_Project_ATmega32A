@@ -16,6 +16,17 @@
 #include "remoteDB.h"
 #include "stdlib.h"
 
+// Function prototypes
+void remote_admin_register(void);
+void registerUserRemote(void);
+void registerUserLocal(void);
+void remote_login_menu(void);
+void remote_Menu_User(void);
+void remote_Menu_Admin(void);
+void lamp_menu(void);
+void AC_menu(void);
+void remote_menu_Service(void);
+
 void remote_admin_register()
 {
 	static u8 hasRun = 0;
@@ -126,6 +137,34 @@ void remote_login_menu()
 	}
 }
 
+void remote_Menu_User()
+{
+	while (1) {
+		uart_sendString("User Menu:\n");
+		uart_sendString("1. Lamps\n");
+		uart_sendString("2. AC\n");
+		uart_sendString("3. Logout\n");
+
+		u8 userChoice = uart_receiveByte();
+
+		switch (userChoice) {
+			case '1':
+			lamp_menu();
+			break;
+			case '2':
+			AC_menu();
+			break;
+			case '3':
+			logout_remote();
+			remote_login_menu();
+			return;
+			default:
+			uart_sendString("Invalid choice. Please try again.\n");
+			continue;
+		}
+	}
+}
+
 void remote_Menu_Admin()
 {
 	while (1) {
@@ -205,9 +244,9 @@ void AC_menu()
 {
 	uart_sendString("AC Menu");
 	AC ac_struct = airConditioner_Status();
-	uart_sendString(ac_struct->AC_Status ? "[ON]" : "[OFF]");
+	uart_sendString(ac_struct.AC_Status ? "[ON]" : "[OFF]");
 	uart_sendString("Press (T) to turn ");
-	uart_sendString(ac_struct->AC_Status ? "[OFF]" : "[ON]");
+	uart_sendString(ac_struct.AC_Status ? "[OFF]" : "[ON]");
 	u8 key = uart_receiveByte();
 	if (key == 'T')
 	{
@@ -216,34 +255,6 @@ void AC_menu()
 	else
 	{
 		uart_sendString("Wrong Input");
-	}
-}
-
-void remote_Menu_User()
-{
-	while (1) {
-		uart_sendString("User Menu:\n");
-		uart_sendString("1. Lamps\n");
-		uart_sendString("2. AC\n");
-		uart_sendString("3. Logout\n");
-
-		u8 userChoice = uart_receiveByte();
-
-		switch (userChoice) {
-			case '1':
-				lamp_menu();
-			break;
-			case '2':
-				AC_menu();
-			break;
-			case '3':
-				logout_remote();
-				remote_login_menu();
-			return;
-			default:
-				uart_sendString("Invalid choice. Please try again.\n");
-			continue;
-		}
 	}
 }
 
