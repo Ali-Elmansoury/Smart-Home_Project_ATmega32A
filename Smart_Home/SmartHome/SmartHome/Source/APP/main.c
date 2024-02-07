@@ -13,20 +13,27 @@
 #include "Lamp_Dim_Service.h"
 #include "ac.h"
 #include "door.h"
+#include "lcd.h"
+#include "adc.h"
 
 int main(void)
 {
-	airConditioner_init();
-	doorService_init();
-	lamp_Dim_service_init();
-	local_menu_init();
+	//airConditioner_init();
+	//doorService_init();
+	//lamp_Dim_service_init();
+	//local_menu_init();
+	lcd_init();
+	_delay_ms(1000);
+	
     /* Replace with your application code */
     while (1) 
     {
-		airConditioner_service();
-		lamp_Dim_service();
-		local_menu_Service();
-		remote_menu_Service();
+		//airConditioner_service();
+		lcd_displayNums(15);
+		//lamp_Dim_service();
+		//local_menu_Service();
+		//remote_menu_Service();
+		_delay_ms(1000);
     }
 }
 

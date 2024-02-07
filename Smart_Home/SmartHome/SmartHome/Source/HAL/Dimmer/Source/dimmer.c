@@ -21,6 +21,7 @@ void dimmer_setIntensity(void)
 {
 	u16 potRead = 0;
 	potRead = POT_read();
+	potRead = (((f32)potRead/1023)*100);
 	pwm0_setDutyCycle(potRead);
 }
 

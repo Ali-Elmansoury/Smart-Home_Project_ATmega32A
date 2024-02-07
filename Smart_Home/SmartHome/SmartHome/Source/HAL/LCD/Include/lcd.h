@@ -33,13 +33,13 @@
 /*LCD pins*/
 #define LCD_DATA_PORT		PORTC_ID
 #define LCD_CMD_PORT		PORTC_ID
-#define LCD_RS				(6)
-#define LCD_RW				(5)
-#define LCD_EN				(4)
-#define LCD_D4				(0)
-#define LCD_D5				(1)
-#define LCD_D6				(2)
-#define LCD_D7				(3)
+#define LCD_RS				(PIN6_ID)
+#define LCD_RW				(PIN5_ID)
+#define LCD_EN				(PIN4_ID)
+#define LCD_D4				(PIN0_ID)
+#define LCD_D5				(PIN1_ID)
+#define LCD_D6				(PIN2_ID)
+#define LCD_D7				(PIN3_ID)
 
 
 /*Functions prototype*/

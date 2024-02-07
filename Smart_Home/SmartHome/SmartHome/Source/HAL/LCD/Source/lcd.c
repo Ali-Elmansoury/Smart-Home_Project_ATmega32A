@@ -41,8 +41,8 @@ void lcd_init(void)
 	lcd_sendCommand(LCD_CMD_4BIT_MODE);
 	
 	/*Write custom chars*/
-	lcd_writeCustomChar();
-	lcd_sendCommand(LCD_CMD_DDRAM_START_ADDRESS);
+	//lcd_writeCustomChar();
+	//lcd_sendCommand(LCD_CMD_DDRAM_START_ADDRESS);
 }
 
 static void enablePulse(void)

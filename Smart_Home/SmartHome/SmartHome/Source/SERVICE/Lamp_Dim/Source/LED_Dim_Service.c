@@ -5,15 +5,13 @@
  *  Author: MrDark
  */ 
 #include "std_types.h"
-#include "timer0.h"
-#include "adc.h"
+#include "dimmer.h"
 
 boolean Dim_Service_state = TRUE;
 
 void lamp_Dim_service_init()
 {
-	pwm0_init(TIMER0_INVERTED_PWM_PHASE_CORRECT,PWM_F_31_25KHZ);
-	adc_init();
+	dimmer_init();
 }
 
 void lamp_Dim_service()
@@ -22,9 +20,10 @@ void lamp_Dim_service()
 	switch(Dim_Service_state)
 	{
 		case TRUE:
-			dim = adc_read(ADC7_CHANNEL);
-			dim = ((f32)dim/TIMER0_TOP)*(100);
-			pwm0_setDutyCycle(dim);
+			dimmer_setIntensity();
+			break;
+		case FALSE:
+			dimmer_turnOff();
 			break;
 		default:
 			break;

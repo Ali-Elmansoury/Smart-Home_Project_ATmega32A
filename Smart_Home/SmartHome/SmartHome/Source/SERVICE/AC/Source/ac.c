@@ -9,12 +9,15 @@
 #include "dc.h"
 #include "lm35.h"
 
-static AC AC_CFG;
+AC AC_CFG;
 
 void airConditioner_init(void)
 {
 	dcMotor_init();
 	LM35_init();
+	AC_CFG.AC_Status = TRUE;
+	AC_CFG.AC_Run_Temperature_threshold=28;
+	AC_CFG.AC_Stop_Temperature_threshold=21;
 }
 
 u16 airConditioner_Temperature(void)
@@ -40,7 +43,7 @@ AC airConditioner_Status(void)
 }
 
 void airConditioner_service(void){
-	static u8 current_temperature = 0;
+	u8 current_temperature = 0;
 	switch (AC_CFG.AC_Status)
 	{
 	case 1:
