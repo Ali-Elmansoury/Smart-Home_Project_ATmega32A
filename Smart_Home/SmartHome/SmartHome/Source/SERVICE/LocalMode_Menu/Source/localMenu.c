@@ -8,6 +8,7 @@
 #include "localDB.h"
 
 u8 number_of_active_devices = 0;
+boolean local_idle = FALSE;
 
 void local_Menu_value_adj(u8 *value, u8 *v_adj_flag);
 void local_Menu_AC_Set_Temp(u8 temp, u8 AC_TEMP_MENU);
@@ -52,7 +53,6 @@ void local_Menu_Display(const u8 *menu_position)
 
 void local_Menu_LED_Display(const u8 *menu_position)
 {
-   lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
     lcd_goTo(0,1);
     switch (*menu_position)
     {
@@ -105,7 +105,6 @@ void local_Menu_LED_Display(const u8 *menu_position)
 
 void local_Menu_AC_Display(const u8 *menu_position)
 {
-    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
     lcd_goTo(0,1);
 	AC AC_Status = airConditioner_Status();
     switch (*menu_position)
@@ -154,8 +153,13 @@ void local_Menu(u8 *current_menu)
 	
 	u8 menu_key = keypad_readKey();
 	
-    local_Menu_Display(&menu_position);
-    local_Menu_Slector_Display(&menu_selector_position);
+	if (menu_key != NULL)
+	{
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+		local_Menu_Display(&menu_position);
+		local_Menu_Slector_Display(&menu_selector_position);
+	}
+    
     switch (menu_key)
     {
     case KEY_A:
@@ -204,8 +208,12 @@ void local_Menu_AC(u8 *current_menu)
 			break;
 	}
 	
-    local_Menu_AC_Display(&menu_position);
-    local_Menu_Slector_Display(&menu_selector_position);
+    if (menu_key != NULL)
+    {
+	    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+	    local_Menu_Display(&menu_position);
+	    local_Menu_Slector_Display(&menu_selector_position);
+    }
     switch (menu_key)
     {
     case KEY_A:
@@ -279,8 +287,12 @@ void local_Menu_LED(u8 *current_menu)
 	
     u8 menu_key = keypad_readKey();
     
-    local_Menu_LED_Display(&menu_position);
-    local_Menu_Slector_Display(&menu_selector_position);
+    if (menu_key != NULL)
+    {
+	    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+	    local_Menu_Display(&menu_position);
+	    local_Menu_Slector_Display(&menu_selector_position);
+    }
     switch (menu_key)
     {
     case 'A':
@@ -350,8 +362,8 @@ void local_Menu_value_adj(u8 *value, u8 *v_adj_flag)
 void local_menu_Service()
 {
 	static u8 current_menu = LOCAL_MENU;
-	//check if login
-	if(loginAck_local())
+	//check if login & not in idle mode
+	if(loginAck_local() && local_idle == FALSE)
 	{
 		switch(current_menu)
 		{
@@ -366,9 +378,21 @@ void local_menu_Service()
 			break;
 		}
 	}
+	else if(local_idle)
+	{
+		local_menu_Idle();
+	}
 	else
 	{
-		//display idle
+		//login menu<
 	}
 	
+}
+
+void local_menu_Idle()
+{
+	lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+	lcd_displayStr("active devices:");
+	lcd_goTo(1,7);
+	lcd_displayNums(number_of_active_devices);
 }

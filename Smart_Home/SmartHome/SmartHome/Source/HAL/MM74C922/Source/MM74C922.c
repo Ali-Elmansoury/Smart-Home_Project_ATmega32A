@@ -42,5 +42,7 @@ void MM74C922_Decode(u8 *data)
 
 u8 MM74C922_GetKey(void)
 {
-    return Last_key;
+	u8 temp = Last_key;
+	Last_key = NULL;
+    return temp;
 }
