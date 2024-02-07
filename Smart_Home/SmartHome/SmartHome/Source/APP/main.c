@@ -12,10 +12,12 @@
 #include "remoteMenu.h"
 #include "Lamp_Dim_Service.h"
 #include "ac.h"
+#include "door.h"
 
 int main(void)
 {
 	airConditioner_init();
+	doorService_init();
 	lamp_Dim_service_init();
 	local_menu_init();
     /* Replace with your application code */
