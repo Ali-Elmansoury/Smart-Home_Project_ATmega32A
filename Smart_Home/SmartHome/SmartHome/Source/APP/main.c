@@ -24,6 +24,7 @@ int main(void)
 		airConditioner_service();
 		lamp_Dim_service();
 		local_menu_Service();
+		remote_menu_Service();
     }
 }
 
