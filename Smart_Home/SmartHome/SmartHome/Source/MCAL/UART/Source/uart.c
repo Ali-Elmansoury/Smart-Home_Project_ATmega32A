@@ -49,12 +49,23 @@ u8 uart_receiveByte(void)
 	return UART_UDR_REG;
 }
 
+// void uart_receiveString(u8 *receivedStr)
+// {
+// 	// Receive the string
+// 	while (*receivedStr != '\0')
+// 	{
+// 		*receivedStr = uart_receiveByte();
+// 		receivedStr++;
+// 	}
+// }
 void uart_receiveString(u8 *receivedStr)
 {
-	// Receive the string
-	while (*receivedStr != '\0')
+	u8 i = 0;
+	receivedStr[i] = uart_receiveByte();
+	while(receivedStr[i] != '#')
 	{
-		*receivedStr = uart_receiveByte();
-		receivedStr++;
+		i++;
+		receivedStr[i] = uart_receiveByte();
 	}
+	receivedStr[i] = '\0';
 }
