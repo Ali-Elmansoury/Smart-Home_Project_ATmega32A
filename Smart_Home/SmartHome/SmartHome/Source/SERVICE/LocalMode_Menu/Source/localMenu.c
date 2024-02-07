@@ -401,7 +401,7 @@ void local_menu_Idle_timer()
 {
 	static u8 secondCounter;
 	secondCounter++;
-	timer2_setPreLoad(6);
+	timer2_setPreLoad(6); // 16ms 
 	if (secondCounter == 312)
 	{
 		//your desired function to be run every 5 secs
