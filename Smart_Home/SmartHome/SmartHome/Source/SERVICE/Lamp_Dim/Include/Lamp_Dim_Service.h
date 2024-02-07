@@ -8,6 +8,7 @@
 
 #ifndef LED_SERVICE_H_
 #define LED_SERVICE_H_
+#include "std_types.h"
 /* Dimmer Lamp service init */
 void lamp_Dim_service_init();
 /* The Dimmer service */

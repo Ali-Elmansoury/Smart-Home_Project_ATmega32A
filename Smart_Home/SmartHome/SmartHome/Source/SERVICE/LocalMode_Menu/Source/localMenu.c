@@ -7,6 +7,8 @@
 #include "Lamp_Dim_Service.h"
 #include "localDB.h"
 #include "remoteDB.h"
+#include "stdio.h"
+#include "timer2.h"
 
 u8 number_of_active_devices = 0;
 boolean local_idle = FALSE;
@@ -104,23 +106,22 @@ void local_Menu_LED_Display(const u8 *menu_position)
     }
 }
 
-void local_Menu_AC_Display(const u8 *menu_position, const Ac *AC_Status)
+void local_Menu_AC_Display(const u8 *menu_position, const AC *AC_Status)
 {
     lcd_goTo(0,1);
-	AC AC_Status = airConditioner_Status();
     switch (*menu_position)
     {
     case 0:
         lcd_displayStr("AC ");
-        lcd_displayStr(AC_Status.AC_Status ? "[ON]" : "[OFF]");
+        lcd_displayStr(AC_Status->AC_Status ? "[ON]" : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Run Temp:");
-        lcd_displayNums(AC_Status.AC_Run_Temperature_threshold);
+        lcd_displayNums(AC_Status->AC_Run_Temperature_threshold);
         lcd_displayChar('C');
         break;
     case 1:
         lcd_displayStr("Stop Temp:");
-        lcd_displayNums(AC_Status.AC_Stop_Temperature_threshold);
+        lcd_displayNums(AC_Status->AC_Stop_Temperature_threshold);
         lcd_displayChar('C');
         lcd_goTo(1, 1);
         lcd_displayStr("Return");
@@ -197,7 +198,7 @@ void local_Menu_AC(u8 *current_menu)
 	
 	static u8 menu_key = 0;
 	static boolean v_adj_flag = FALSE;
-	
+	static AC AC_CFG;
 	switch (v_adj_flag)
 	{
 		case FALSE:
@@ -209,9 +210,9 @@ void local_Menu_AC(u8 *current_menu)
 	
     if (menu_key != NULL)
     {
-		AC AC_Status = airConditioner_Status();
+		AC_CFG = airConditioner_Status();
 	    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
-	    local_Menu_AC_Display(&menu_position, &AC_Status);
+	    local_Menu_AC_Display(&menu_position, &AC_CFG);
 	    local_Menu_Slector_Display(&menu_selector_position);
     }
     switch (menu_key)

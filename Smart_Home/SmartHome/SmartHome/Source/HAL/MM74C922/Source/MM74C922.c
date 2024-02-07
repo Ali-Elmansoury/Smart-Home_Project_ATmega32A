@@ -1,6 +1,7 @@
 #include "MM74C922.h"
 #include "std_types.h"
 #include "dio.h"
+#include "stdio.h"
 
 static u8 PortId;
 static u8 PinId_S;
