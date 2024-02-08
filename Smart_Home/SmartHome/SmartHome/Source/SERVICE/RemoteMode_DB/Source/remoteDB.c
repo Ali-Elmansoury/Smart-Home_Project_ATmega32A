@@ -36,8 +36,9 @@ void getPassword_remote(u8* password)
 
 u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 {
-	u8 userCount = 0;
-	//EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+	EEPROM_write(EEPROM_USER_COUNT_ADDR_REMOTE,0);
+	u8 userCount;
+	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
 
 	if (userCount < 10) {  // Assuming a maximum of 10 users
 		strcpy(remoteUsers->uname, username);
@@ -47,7 +48,7 @@ u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 		EEPROM_write_block(&remoteUsers, (void*)(EEPROM_USER_DATA_ADDR_REMOTE + userCount * sizeof(user_remote)), sizeof(user_remote));
 
 		userCount++;
-		//EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+		EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
 		return REGISTRATION_SUCCESS;
 		} else {
 		// Handle error: User array is full

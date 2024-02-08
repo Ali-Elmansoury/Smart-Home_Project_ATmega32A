@@ -71,6 +71,7 @@ void getPassword_local(u8* password, u8 maxLength)
 
 u8 addUserToEEPROM_local(const u8 *username, const u8* password)
 {
+	EEPROM_write(EEPROM_USER_COUNT_ADDR_LOCAL,0);
 	u8 userCount;
 	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
 
