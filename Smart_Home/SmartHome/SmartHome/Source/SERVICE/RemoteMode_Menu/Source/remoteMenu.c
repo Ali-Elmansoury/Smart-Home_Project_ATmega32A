@@ -28,10 +28,12 @@ void remote_menu_Service(void);
 
 void remote_admin_register()
 {
-	static u8 hasRun = 0;
-	if (!hasRun)
-	{
-		remoteDB_init();
+	static u8 hasRun;
+	if (EEPROM_read(EEPROM_USER_COUNT_ADDR)>0)
+	{return;}
+	
+		//remoteDB_init();
+
 		uart_sendString("Register as an admin\n");
 		uart_sendString("Enter username: ");
 		u8 username[16];
@@ -55,18 +57,19 @@ void remote_admin_register()
 			uart_sendString("Error: EEPROM write failed\n");
 		}
 		hasRun = 1;
-	}
+	
 }
 
 void registerUserRemote()
 {
+	u8 registrationResult = ERROR_USER_ARRAY_FULL;
 	uart_sendString("Register a new user\n");
 	uart_sendString("Enter username: ");
 	u8 username[16];
 	uart_receiveString(&username);
 	u8 password[9];
 	getPassword_remote(&password);  // Get password from user
-	u8 registrationResult = addUserToEEPROM_remote(&username,&password);
+	registrationResult = addUserToEEPROM_remote(&username,&password);
 	if (registrationResult == REGISTRATION_SUCCESS)
 	{
 		// Registration successful

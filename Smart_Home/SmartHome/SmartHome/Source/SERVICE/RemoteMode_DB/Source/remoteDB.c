@@ -16,12 +16,18 @@
 
 user_remote remoteUsers[DB_MAX_SIZE];
 boolean login_flag_remote = FALSE;
-u8 userCount;
+u8 userCount = 0;
 
 void remoteDB_init()
 {
-	userCount = 0;
-	EEPROM_write(EEPROM_USER_COUNT_ADDR, &userCount);
+	if (EEPROM_read(EEPROM_USER_COUNT_ADDR) == 0xFF)
+	{
+		EEPROM_write(EEPROM_USER_COUNT_ADDR, userCount);
+	}
+	else
+	{
+		userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
+	}
 	uart_init(BAUD_RATE_9600);
 }
 
@@ -36,14 +42,18 @@ void getPassword_remote(u8* password)
 	uart_sendString("\n");  // Move to the next line after password entry
 }
 
-void writeUserToEEPROM(const user_remote *user, u8 userId) {
-	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + userId * sizeof(user_remote);
-	EEPROM_write_block((const u8 *)user, startAddress, sizeof(user_remote));
+void writeUserToEEPROM(user_remote *user, u8 userId) {
+	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + (userId * 26);
+	EEPROM_write_block(user->uname, startAddress, 16);
+	EEPROM_write_block(user->password, (startAddress+16), 9);
+	EEPROM_write((startAddress+16+9),user->id);
 }
 
 void readUserFromEEPROM(user_remote *user, u8 userId) {
-	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + userId * sizeof(user_remote);
-	EEPROM_read_block((u8 *)user, startAddress, sizeof(user_remote));
+	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + (userId * 26);
+	EEPROM_read_block(user->uname, startAddress, 16);
+	EEPROM_read_block(user->password, (startAddress+16), 9);
+	user->id = EEPROM_read((startAddress+16+9));
 }
 
 
@@ -56,10 +66,10 @@ u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 		strcpy(remoteUsers->password, password);
 		remoteUsers->id = userCount + 1;
 
-		writeUserToEEPROM(remoteUsers,userCount);
+		writeUserToEEPROM(&remoteUsers,userCount);
 
 		userCount++;
-		EEPROM_write(EEPROM_USER_COUNT_ADDR, &userCount);
+		EEPROM_write(EEPROM_USER_COUNT_ADDR, userCount);
 		return REGISTRATION_SUCCESS;
 		} else {
 		// Handle error: User array is full
@@ -69,7 +79,7 @@ u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 
 void getUserFromEEPROM_remote(u8 id, user_remote* users)
 {
-	if (id >= 1 && id <= 10) {  // Assuming a maximum of 10 users
+	if (id >= 0 && id <= 9) {  // Assuming a maximum of 10 users
 		readUserFromEEPROM(users,id);
 	}
 }
@@ -97,8 +107,8 @@ void getUserFromEEPROM_remote(u8 id, user_remote* users)
 void displayAllUsersOnRemote() {
 	uart_sendString("Displaying all users:\n");
 
-	for (u8 i = 0; i < userCount; ++i) {
-		getUserFromEEPROM_remote(i + 1, &remoteUsers);
+	for (u8 i = 0; i < userCount; i++) {
+		getUserFromEEPROM_remote(i, &remoteUsers);
 
 		char displayText[50];
 		snprintf(displayText, sizeof(displayText), "Remote: User: %s, ID: %d\n", remoteUsers[i].uname, remoteUsers[i].id);

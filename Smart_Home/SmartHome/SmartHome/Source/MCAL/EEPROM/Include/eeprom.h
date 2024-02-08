@@ -19,7 +19,7 @@ void EEPROM_write(u16 address, u8 data);
 /*EEPROM Read Data*/
 u8 EEPROM_read(u16 address);
 /*EEPROM Write Block*/
-void EEPROM_write_block(const u8 *str, u16 start_byte_adr,u8 n_byte);
+void EEPROM_write_block(u8 *str, u16 start_byte_adr,u8 n_byte);
 /*EEPROM Read Block*/
 void EEPROM_read_block(u8 *str, u16 start_byte_adr, u8 n_byte);
 

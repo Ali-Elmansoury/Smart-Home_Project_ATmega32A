@@ -25,6 +25,7 @@ int main(void)
 	//local_menu_init();
 	lcd_init();
 	uart_init(BAUD_RATE_9600);
+	remoteDB_init();
 	
     /* Replace with your application code */
     while (1) 
