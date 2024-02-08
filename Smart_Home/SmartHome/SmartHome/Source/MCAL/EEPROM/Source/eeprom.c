@@ -32,26 +32,25 @@ u8 EEPROM_read(u16 address)
 	return EEPROM_EEDR_REG;
 }
 
-void EEPROM_write_block(const void *src, void *dst, u8 size)
+void EEPROM_write_block(const u8 *str, u16 start_byte_adr,u8 n_byte)
 {
-	const u8 *src_ptr = (const u8 *)src;
-	u8 *dst_ptr = (u8 *)dst;
-
-	for (u8 i = 0; i < size; ++i) {
-		EEPROM_write((u16)dst_ptr, *src_ptr);
-		++dst_ptr;
-		++src_ptr;
+	u16 end_byte_adr = start_byte_adr + n_byte;
+	while(start_byte_adr < end_byte_adr) /* Loop For Counts And Copy */
+	{
+		EEPROM_write(start_byte_adr,*str);
+		str++;
+		start_byte_adr++;
 	}
 }
 
-void EEPROM_read_block(void *dst, const void *src, u8 size)
+void EEPROM_read_block(u8 *str, u16 start_byte_adr, u8 n_byte)
 {
-	const u8 *src_ptr = (const u8 *)src;
-	u8 *dst_ptr = (u8 *)dst;
-
-	for (u8 i = 0; i < size; ++i) {
-		*dst_ptr = EEPROM_read((u16)src_ptr);
-		++dst_ptr;
-		++src_ptr;
+	u16 end_byte_adr = start_byte_adr + n_byte;
+	while (start_byte_adr < end_byte_adr) /* Loop For Counts And Copy */
+	{
+		*str = EEPROM_read(start_byte_adr);
+		str++;
+		start_byte_adr++;
 	}
 }
+

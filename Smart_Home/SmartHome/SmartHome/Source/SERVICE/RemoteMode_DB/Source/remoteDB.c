@@ -21,7 +21,7 @@ u8 userCount;
 void remoteDB_init()
 {
 	userCount = 0;
-	EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+	EEPROM_write(EEPROM_USER_COUNT_ADDR, &userCount);
 	uart_init(BAUD_RATE_9600);
 }
 
@@ -36,22 +36,30 @@ void getPassword_remote(u8* password)
 	uart_sendString("\n");  // Move to the next line after password entry
 }
 
+void writeUserToEEPROM(const user_remote *user, u8 userId) {
+	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + userId * sizeof(user_remote);
+	EEPROM_write_block((const u8 *)user, startAddress, sizeof(user_remote));
+}
+
+void readUserFromEEPROM(user_remote *user, u8 userId) {
+	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + userId * sizeof(user_remote);
+	EEPROM_read_block((u8 *)user, startAddress, sizeof(user_remote));
+}
+
 
 u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 {
-	//EEPROM_write(EEPROM_USER_COUNT_ADDR_REMOTE,0);
-	//u8 userCount;
-	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+	userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
 
 	if (userCount < 10) {  // Assuming a maximum of 10 users
 		strcpy(remoteUsers->uname, username);
 		strcpy(remoteUsers->password, password);
 		remoteUsers->id = userCount + 1;
 
-		EEPROM_write_block(&remoteUsers, (void*)(EEPROM_USER_DATA_ADDR_REMOTE + userCount * sizeof(user_remote)), sizeof(user_remote));
+		writeUserToEEPROM(remoteUsers,userCount);
 
 		userCount++;
-		EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+		EEPROM_write(EEPROM_USER_COUNT_ADDR, &userCount);
 		return REGISTRATION_SUCCESS;
 		} else {
 		// Handle error: User array is full
@@ -62,7 +70,7 @@ u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 void getUserFromEEPROM_remote(u8 id, user_remote* users)
 {
 	if (id >= 1 && id <= 10) {  // Assuming a maximum of 10 users
-		EEPROM_read_block(users, (const void*)(EEPROM_USER_DATA_ADDR_REMOTE + (id - 1) * sizeof(user_remote)), sizeof(user_remote));
+		readUserFromEEPROM(users,id);
 	}
 }
 

@@ -35,10 +35,10 @@ void remote_admin_register()
 		uart_sendString("Register as an admin\n");
 		uart_sendString("Enter username: ");
 		u8 username[16];
-		uart_receiveString(username);
+		uart_receiveString(&username);
 		u8 password[9];
 		getPassword_remote(&password);  // Get password from user
-		u8 registrationResult = addUserToEEPROM_remote(username,password);
+		u8 registrationResult = addUserToEEPROM_remote(&username,&password);
 		if (registrationResult == REGISTRATION_SUCCESS)
 		{
 			// Registration successful
@@ -63,10 +63,10 @@ void registerUserRemote()
 	uart_sendString("Register a new user\n");
 	uart_sendString("Enter username: ");
 	u8 username[16];
-	uart_receiveString(username);
+	uart_receiveString(&username);
 	u8 password[9];
 	getPassword_remote(&password);  // Get password from user
-	u8 registrationResult = addUserToEEPROM_remote(username,password);
+	u8 registrationResult = addUserToEEPROM_remote(&username,&password);
 	if (registrationResult == REGISTRATION_SUCCESS)
 	{
 		// Registration successful
@@ -89,10 +89,10 @@ void registerUserLocal()
 	uart_sendString("Register a new user\n");
 	uart_sendString("Enter username: ");
 	u8 username[16];
-	uart_receiveString(username);
+	uart_receiveString(&username);
 	u8 password[9];
 	getPassword_remote(&password);  // Get password from user
-	u8 registrationResult = addUserToEEPROM_local(username,password);
+	u8 registrationResult = addUserToEEPROM_local(&username,&password);
 	if (registrationResult == REGISTRATION_SUCCESS)
 	{
 		// Registration successful
