@@ -13,6 +13,7 @@
 
 #define DB_MAX_SIZE				(10)
 #define UNAME_MAZ_SIZE			(16)
+#define PASSWORD_MAX_SIZE		(9)
 
 #define REGISTRATION_SUCCESS		(0)
 #define ERROR_USER_ARRAY_FULL		(1)
@@ -26,20 +27,20 @@
 typedef struct localDB
 {
 	u8 uname[UNAME_MAZ_SIZE];
-	u32 password;
+	u8 password[PASSWORD_MAX_SIZE];
 	u8 id;
 }user_local;
 
 /*Function prototype*/
 
 /*Function to add a new user and store in EEPROM*/
-u8 addUserToEEPROM_local(const u8 *username, const u32 password);
+u8 addUserToEEPROM_local(const u8 *username, const u8* password);
 /*Function to delete a user from EEPROM by id number*/
 void deleteUserFromEEPROM_local(u8 id);
 /*Function to select a user by order number and verify the password*/
 void selectUserAndLogin_local();
 /*Function to retrieve a user from EEPROM by order number*/
-void getUserFromEEPROM_local(u8 id, user_local* users);
+boolean getUserFromEEPROM_local(u8 id, user_local* users);
 /*Function to display users on LCD with scrolling*/
 void displayUsersOnLCD(u8 startIndex, u8 endIndex);
 /*Function to handle scrolling through users*/

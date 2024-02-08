@@ -14,7 +14,6 @@
 #include "door.h"
 #include "localDB.h"
 #include "remoteDB.h"
-#include "stdlib.h"
 
 // Function prototypes
 void remote_admin_register(void);
@@ -38,9 +37,8 @@ void remote_admin_register()
 		u8 username[16];
 		uart_receiveString(username);
 		u8 password[9];
-		getPassword_remote(&password, 9);  // Get password from user
-		u32 passwordValue = atoi(&password);
-		u8 registrationResult = addUserToEEPROM_remote(username,passwordValue);
+		getPassword_remote(&password);  // Get password from user
+		u8 registrationResult = addUserToEEPROM_remote(username,password);
 		if (registrationResult == REGISTRATION_SUCCESS)
 		{
 			// Registration successful
@@ -67,9 +65,8 @@ void registerUserRemote()
 	u8 username[16];
 	uart_receiveString(username);
 	u8 password[9];
-	getPassword_remote(&password, 9);  // Get password from user
-	u32 passwordValue = atoi(&password);
-	u8 registrationResult = addUserToEEPROM_remote(username,passwordValue);
+	getPassword_remote(&password);  // Get password from user
+	u8 registrationResult = addUserToEEPROM_remote(username,password);
 	if (registrationResult == REGISTRATION_SUCCESS)
 	{
 		// Registration successful
@@ -94,9 +91,8 @@ void registerUserLocal()
 	u8 username[16];
 	uart_receiveString(username);
 	u8 password[9];
-	getPassword_remote(&password, 9);  // Get password from user
-	u32 passwordValue = atoi(&password);
-	u8 registrationResult = addUserToEEPROM_local(username,passwordValue);
+	getPassword_remote(&password);  // Get password from user
+	u8 registrationResult = addUserToEEPROM_local(username,password);
 	if (registrationResult == REGISTRATION_SUCCESS)
 	{
 		// Registration successful

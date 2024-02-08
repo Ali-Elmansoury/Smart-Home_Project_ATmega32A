@@ -23,68 +23,25 @@ void remoteDB_init()
 }
 
 // Function to get an 8-digit password from the user securely
-void getPassword_remote(u8* password, u8 maxLength)
+void getPassword_remote(u8* password)
 {
-	u8 index = 0;
-
 	uart_sendString("Enter Password:\n");
 
-	// Simulate getting secure user input for the password
-	while (index < maxLength - 1)
-	{
-		u8 key = uart_receiveByte();
+	// Simulate getting user input for the password
+	uart_receiveString(password);
 
-		// Check for Enter key
-		if (key == '\n' || key == '\r')
-		{
-			// Check if the password is exactly 8 digits
-			if (index == 8)
-			{
-				break;
-			}
-			else
-			{
-				// Password length is incorrect, clear and ask again
-				uart_sendString("Invalid Password\n");
-				_delay_ms(1000);  // Wait for 1 second
-				uart_sendString("Enter Password:\n");
-				index = 0;
-				continue;
-			}
-		}
-		else if (key == '\b')
-		{  // Backspace
-			if (index > 0)
-			{
-				index--;
-				password[index] = '\0';
-				uart_sendString("Enter Password:\n");
-
-				// Display asterisks for entered characters
-				for (u8 i = 0; i < index; ++i) {
-					uart_sendByte("*");
-				}
-			}
-		}
-		else if (key >= '0' && key <= '9')
-		{  // Numeric keys
-			password[index] = key;
-			index++;
-			uart_sendByte("*");
-		}
-		// Add more conditions for other keys as needed
-	}
-	password[index] = '\0';  // Null-terminate the password
+	uart_sendString("\n");  // Move to the next line after password entry
 }
 
-u8 addUserToEEPROM_remote(const u8 *username, const u32 password)
+
+u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 {
 	u8 userCount;
 	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
 
 	if (userCount < 10) {  // Assuming a maximum of 10 users
-		strncpy(remoteUsers->uname, username, sizeof(remoteUsers->uname) - 1);
-		remoteUsers->password = password;
+		strcpy(remoteUsers->uname, username);
+		strcpy(remoteUsers->password, password);
 		remoteUsers->id = userCount + 1;
 
 		EEPROM_write_block(&remoteUsers, (void*)(EEPROM_USER_DATA_ADDR_REMOTE + userCount * sizeof(user_remote)), sizeof(user_remote));
@@ -105,25 +62,25 @@ void getUserFromEEPROM_remote(u8 id, user_remote* users)
 	}
 }
 
-void deleteUserFromEEPROM_remote(u8 id)
-{
-	if (id >= 1 && id <= 10) {  // Assuming a maximum of 10 users
-		u8 userCount;
-		EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
-
-		if (userCount > 0) {
-			// Shift remaining users to fill the gap
-			for (int i = id - 1; i < userCount - 1; ++i) {
-				getUserFromEEPROM_remote(i + 2, &remoteUsers);  // Shift next user to the current position
-				EEPROM_write_block(&remoteUsers, (void*)(EEPROM_USER_DATA_ADDR_REMOTE + i * sizeof(user_remote)), sizeof(user_remote));
-			}
-
-			// Decrement user count
-			userCount--;
-			EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
-		}
-	}
-}
+//void deleteUserFromEEPROM_remote(u8 id)
+//{
+	//if (id >= 1 && id <= 10) {  // Assuming a maximum of 10 users
+		//u8 userCount;
+		//EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+//
+		//if (userCount > 0) {
+			//// Shift remaining users to fill the gap
+			//for (int i = id - 1; i < userCount - 1; ++i) {
+				//getUserFromEEPROM_remote(i + 2, &remoteUsers);  // Shift next user to the current position
+				//EEPROM_write_block(&remoteUsers, (void*)(EEPROM_USER_DATA_ADDR_REMOTE + i * sizeof(user_remote)), sizeof(user_remote));
+			//}
+//
+			//// Decrement user count
+			//userCount--;
+			//EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+		//}
+	//}
+//}
 
 void displayAllUsersOnRemote() {
 	uart_sendString("Displaying all users:\n");
@@ -152,7 +109,7 @@ u8 selectUserAndLogin_remote()
 		char enteredPassword[20];
 		uart_sendString("Enter Password:");
 
-		getPassword_remote(enteredPassword, sizeof(enteredPassword));
+		getPassword_remote(enteredPassword);
 
 		if (strcmp(enteredPassword, remoteUsers->password) == 0)
 		{
@@ -173,7 +130,7 @@ u8 selectUserAndLogin_remote()
 
 boolean loginAck_remote()
 {
-	return login_flag_remote;boolean result = login_flag_remote;
+	boolean result = login_flag_remote;
 	login_flag_remote = FALSE;  // Clear the flag after checking
 	return result;
 }
