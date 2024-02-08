@@ -16,9 +16,12 @@
 
 user_remote remoteUsers[DB_MAX_SIZE];
 boolean login_flag_remote = FALSE;
+u8 userCount;
 
 void remoteDB_init()
 {
+	userCount = 0;
+	EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
 	uart_init(BAUD_RATE_9600);
 }
 
@@ -36,8 +39,8 @@ void getPassword_remote(u8* password)
 
 u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 {
-	EEPROM_write(EEPROM_USER_COUNT_ADDR_REMOTE,0);
-	u8 userCount;
+	//EEPROM_write(EEPROM_USER_COUNT_ADDR_REMOTE,0);
+	//u8 userCount;
 	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
 
 	if (userCount < 10) {  // Assuming a maximum of 10 users
@@ -86,7 +89,7 @@ void getUserFromEEPROM_remote(u8 id, user_remote* users)
 void displayAllUsersOnRemote() {
 	uart_sendString("Displaying all users:\n");
 
-	for (u8 i = 0; i < DB_MAX_SIZE; ++i) {
+	for (u8 i = 0; i < userCount; ++i) {
 		getUserFromEEPROM_remote(i + 1, &remoteUsers);
 
 		char displayText[50];
