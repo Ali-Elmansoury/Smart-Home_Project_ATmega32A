@@ -27,6 +27,10 @@ void remoteDB_init()
 	else
 	{
 		userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
+		for (u8 i = 0; i < userCount; i++) {
+			getUserFromEEPROM_remote(i, remoteUsers);
+		}
+		
 	}
 	uart_init(BAUD_RATE_9600);
 }
@@ -34,7 +38,7 @@ void remoteDB_init()
 // Function to get an 8-digit password from the user securely
 void getPassword_remote(u8* password)
 {
-	uart_sendString("Enter Password:\n");
+	uart_sendString("Enter Password:");
 
 	// Simulate getting user input for the password
 	uart_receiveString(password);
@@ -108,8 +112,6 @@ void displayAllUsersOnRemote() {
 	uart_sendString("Displaying all users:\n");
 
 	for (u8 i = 0; i < userCount; i++) {
-		getUserFromEEPROM_remote(i, &remoteUsers);
-
 		char displayText[50];
 		snprintf(displayText, sizeof(displayText), "Remote: User: %s, ID: %d\n", remoteUsers[i].uname, remoteUsers[i].id);
 		uart_sendString(displayText);
@@ -122,20 +124,19 @@ u8 selectUserAndLogin_remote()
 	u8 selectedID;
 	uart_sendString("Enter User ID:");
 
-	selectedID = uart_receiveByte();
+	selectedID = uart_receiveByte()-'0';
 
 	if (selectedID >= 1 && selectedID <= 10)
 	{  // Assuming a maximum of 10 users
-		getUserFromEEPROM_remote(selectedID, &remoteUsers);
-
-		char enteredPassword[20];
-		uart_sendString("Enter Password:");
-
+		
+		char enteredPassword[9];
+		uart_sendString(remoteUsers[selectedID-1].password);
 		getPassword_remote(enteredPassword);
-
-		if (strcmp(enteredPassword, remoteUsers->password) == 0)
+		
+		if (strcmp(enteredPassword, remoteUsers[selectedID-1].password) == 0)
 		{
 			uart_sendString("Login Successful\n");
+			
 			login_flag_remote = TRUE;
 		}
 		else
