@@ -19,15 +19,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 00001855  00000000  00000000  00006170  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00002474  00000000  00000000  000079c5  2**0
+  8 .debug_line   00002476  00000000  00000000  000079c5  2**0
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  00000c7c  00000000  00000000  00009e3c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001181  00000000  00000000  0000aab8  2**0
+ 10 .debug_str    000011e3  00000000  00000000  0000aab8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00002228  00000000  00000000  0000bc39  2**0
+ 11 .debug_loc    00002228  00000000  00000000  0000bc9b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000440  00000000  00000000  0000de61  2**0
+ 12 .debug_ranges 00000440  00000000  00000000  0000dec3  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -96,25 +96,11 @@ Disassembly of section .text:
       8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000092 <main>:
-{
-	//airConditioner_init();
-	//doorService_init();
-	//lamp_Dim_service_init();
-	//local_menu_init();
-	lcd_init();
       92:	0e 94 12 01 	call	0x224	; 0x224 <lcd_init>
-	uart_init(BAUD_RATE_9600);
       96:	87 e6       	ldi	r24, 0x67	; 103
       98:	90 e0       	ldi	r25, 0x00	; 0
       9a:	0e 94 d9 03 	call	0x7b2	; 0x7b2 <uart_init>
-	remoteDB_init();
       9e:	0e 94 31 05 	call	0xa62	; 0xa62 <remoteDB_init>
-    while (1) 
-    {
-		//airConditioner_service();
-		//lamp_Dim_service();
-		//local_menu_Service();
-		remote_menu_Service();
       a2:	0e 94 c4 07 	call	0xf88	; 0xf88 <remote_menu_Service>
 	#else
 		//round up by default
@@ -134,17 +120,9 @@ Disassembly of section .text:
       b8:	f4 cf       	rjmp	.-24     	; 0xa2 <main+0x10>
 
 000000ba <lamp_toggle>:
-{
-	relay_init();
-}
-
-void lamp_toggle(u8 id)
-{
       ba:	cf 93       	push	r28
       bc:	c8 2f       	mov	r28, r24
-	relay_toggle(id);
       be:	0e 94 74 01 	call	0x2e8	; 0x2e8 <relay_toggle>
-	lamp_state[id] ^= TRUE;
       c2:	ec 2f       	mov	r30, r28
       c4:	f0 e0       	ldi	r31, 0x00	; 0
       c6:	ea 5f       	subi	r30, 0xFA	; 250
@@ -153,7 +131,6 @@ void lamp_toggle(u8 id)
       cc:	81 e0       	ldi	r24, 0x01	; 1
       ce:	89 27       	eor	r24, r25
       d0:	80 83       	st	Z, r24
-}
       d2:	cf 91       	pop	r28
       d4:	08 95       	ret
 
@@ -164,12 +141,6 @@ void lamp_toggle(u8 id)
       dc:	f1 f7       	brne	.-4      	; 0xda <enablePulse+0x4>
       de:	00 c0       	rjmp	.+0      	; 0xe0 <enablePulse+0xa>
       e0:	00 00       	nop
-
-static void enablePulse(void)
-{
-	/*Enable pulse*/
-	_delay_ms(1);
-	dio_writeChannel(LCD_CMD_PORT,LCD_EN,HIGH);
       e2:	41 e0       	ldi	r20, 0x01	; 1
       e4:	64 e0       	ldi	r22, 0x04	; 4
       e6:	82 e0       	ldi	r24, 0x02	; 2
@@ -180,8 +151,6 @@ static void enablePulse(void)
       f2:	f1 f7       	brne	.-4      	; 0xf0 <enablePulse+0x1a>
       f4:	00 c0       	rjmp	.+0      	; 0xf6 <enablePulse+0x20>
       f6:	00 00       	nop
-	_delay_ms(1);
-	dio_writeChannel(LCD_CMD_PORT,LCD_EN,LOW);
       f8:	40 e0       	ldi	r20, 0x00	; 0
       fa:	64 e0       	ldi	r22, 0x04	; 4
       fc:	82 e0       	ldi	r24, 0x02	; 2
@@ -195,44 +164,30 @@ static void enablePulse(void)
      10e:	08 95       	ret
 
 00000110 <lcd_sendCommand>:
-	_delay_ms(1);
-}
-
-void lcd_sendCommand(u8 cmd)
-{
      110:	cf 93       	push	r28
      112:	c8 2f       	mov	r28, r24
-	/*MSB first*/
-	/*Set RS--> 0 (Command) */
-	dio_writeChannel(LCD_CMD_PORT,LCD_RS,LOW);
      114:	40 e0       	ldi	r20, 0x00	; 0
      116:	66 e0       	ldi	r22, 0x06	; 6
      118:	82 e0       	ldi	r24, 0x02	; 2
      11a:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	
-	/*Set MSB data part*/
-	dio_writeChannel(LCD_DATA_PORT,LCD_D4,CHECK_BIT(cmd,4));
      11e:	c4 fb       	bst	r28, 4
      120:	44 27       	eor	r20, r20
      122:	40 f9       	bld	r20, 0
      124:	60 e0       	ldi	r22, 0x00	; 0
      126:	82 e0       	ldi	r24, 0x02	; 2
      128:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D5,CHECK_BIT(cmd,5));
      12c:	c5 fb       	bst	r28, 5
      12e:	44 27       	eor	r20, r20
      130:	40 f9       	bld	r20, 0
      132:	61 e0       	ldi	r22, 0x01	; 1
      134:	82 e0       	ldi	r24, 0x02	; 2
      136:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D6,CHECK_BIT(cmd,6));
      13a:	c6 fb       	bst	r28, 6
      13c:	44 27       	eor	r20, r20
      13e:	40 f9       	bld	r20, 0
      140:	62 e0       	ldi	r22, 0x02	; 2
      142:	82 e0       	ldi	r24, 0x02	; 2
      144:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D7,CHECK_BIT(cmd,7));
      148:	4c 2f       	mov	r20, r28
      14a:	44 1f       	adc	r20, r20
      14c:	44 27       	eor	r20, r20
@@ -240,82 +195,59 @@ void lcd_sendCommand(u8 cmd)
      150:	63 e0       	ldi	r22, 0x03	; 3
      152:	82 e0       	ldi	r24, 0x02	; 2
      154:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	
-	enablePulse();
      158:	0e 94 6b 00 	call	0xd6	; 0xd6 <enablePulse>
-	
-	/*Set LSB data part*/
-	dio_writeChannel(LCD_DATA_PORT,LCD_D4,CHECK_BIT(cmd,0));
      15c:	4c 2f       	mov	r20, r28
      15e:	41 70       	andi	r20, 0x01	; 1
      160:	60 e0       	ldi	r22, 0x00	; 0
      162:	82 e0       	ldi	r24, 0x02	; 2
      164:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D5,CHECK_BIT(cmd,1));
      168:	c1 fb       	bst	r28, 1
      16a:	44 27       	eor	r20, r20
      16c:	40 f9       	bld	r20, 0
      16e:	61 e0       	ldi	r22, 0x01	; 1
      170:	82 e0       	ldi	r24, 0x02	; 2
      172:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D6,CHECK_BIT(cmd,2));
      176:	c2 fb       	bst	r28, 2
      178:	44 27       	eor	r20, r20
      17a:	40 f9       	bld	r20, 0
      17c:	62 e0       	ldi	r22, 0x02	; 2
      17e:	82 e0       	ldi	r24, 0x02	; 2
      180:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D7,CHECK_BIT(cmd,3));
      184:	c3 fb       	bst	r28, 3
      186:	44 27       	eor	r20, r20
      188:	40 f9       	bld	r20, 0
      18a:	63 e0       	ldi	r22, 0x03	; 3
      18c:	82 e0       	ldi	r24, 0x02	; 2
      18e:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	
-	enablePulse();
      192:	0e 94 6b 00 	call	0xd6	; 0xd6 <enablePulse>
-}
      196:	cf 91       	pop	r28
      198:	08 95       	ret
 
 0000019a <lcd_writeData>:
-
-void lcd_writeData(u8 data)
-{
      19a:	cf 93       	push	r28
      19c:	c8 2f       	mov	r28, r24
-	/*MSB first*/
-	/*Set RS--> 1 (Data) */
-	dio_writeChannel(LCD_CMD_PORT,LCD_RS,HIGH);
      19e:	41 e0       	ldi	r20, 0x01	; 1
      1a0:	66 e0       	ldi	r22, 0x06	; 6
      1a2:	82 e0       	ldi	r24, 0x02	; 2
      1a4:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	
-	/*Set MSB data part*/
-	dio_writeChannel(LCD_DATA_PORT,LCD_D4,CHECK_BIT(data,4));
      1a8:	c4 fb       	bst	r28, 4
      1aa:	44 27       	eor	r20, r20
      1ac:	40 f9       	bld	r20, 0
      1ae:	60 e0       	ldi	r22, 0x00	; 0
      1b0:	82 e0       	ldi	r24, 0x02	; 2
      1b2:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D5,CHECK_BIT(data,5));
      1b6:	c5 fb       	bst	r28, 5
      1b8:	44 27       	eor	r20, r20
      1ba:	40 f9       	bld	r20, 0
      1bc:	61 e0       	ldi	r22, 0x01	; 1
      1be:	82 e0       	ldi	r24, 0x02	; 2
      1c0:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D6,CHECK_BIT(data,6));
      1c4:	c6 fb       	bst	r28, 6
      1c6:	44 27       	eor	r20, r20
      1c8:	40 f9       	bld	r20, 0
      1ca:	62 e0       	ldi	r22, 0x02	; 2
      1cc:	82 e0       	ldi	r24, 0x02	; 2
      1ce:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D7,CHECK_BIT(data,7));
      1d2:	4c 2f       	mov	r20, r28
      1d4:	44 1f       	adc	r20, r20
      1d6:	44 27       	eor	r20, r20
@@ -323,98 +255,67 @@ void lcd_writeData(u8 data)
      1da:	63 e0       	ldi	r22, 0x03	; 3
      1dc:	82 e0       	ldi	r24, 0x02	; 2
      1de:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	
-	enablePulse();
      1e2:	0e 94 6b 00 	call	0xd6	; 0xd6 <enablePulse>
-	
-	/*Set LSB data part*/
-	dio_writeChannel(LCD_DATA_PORT,LCD_D4,CHECK_BIT(data,0));
      1e6:	4c 2f       	mov	r20, r28
      1e8:	41 70       	andi	r20, 0x01	; 1
      1ea:	60 e0       	ldi	r22, 0x00	; 0
      1ec:	82 e0       	ldi	r24, 0x02	; 2
      1ee:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D5,CHECK_BIT(data,1));
      1f2:	c1 fb       	bst	r28, 1
      1f4:	44 27       	eor	r20, r20
      1f6:	40 f9       	bld	r20, 0
      1f8:	61 e0       	ldi	r22, 0x01	; 1
      1fa:	82 e0       	ldi	r24, 0x02	; 2
      1fc:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D6,CHECK_BIT(data,2));
      200:	c2 fb       	bst	r28, 2
      202:	44 27       	eor	r20, r20
      204:	40 f9       	bld	r20, 0
      206:	62 e0       	ldi	r22, 0x02	; 2
      208:	82 e0       	ldi	r24, 0x02	; 2
      20a:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	dio_writeChannel(LCD_DATA_PORT,LCD_D7,CHECK_BIT(data,3));
      20e:	c3 fb       	bst	r28, 3
      210:	44 27       	eor	r20, r20
      212:	40 f9       	bld	r20, 0
      214:	63 e0       	ldi	r22, 0x03	; 3
      216:	82 e0       	ldi	r24, 0x02	; 2
      218:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	
-	enablePulse();
      21c:	0e 94 6b 00 	call	0xd6	; 0xd6 <enablePulse>
-}
      220:	cf 91       	pop	r28
      222:	08 95       	ret
 
 00000224 <lcd_init>:
-extern u8 customChar[NO_CUSTOM_CHAR][NO_CUSTOM_CHAR_BYTES];
-
-void lcd_init(void)
-{
-	/*Set LCD control lines direction --> output*/
-	dio_setPinDirection(LCD_CMD_PORT,LCD_RS,OUTPUT);
      224:	41 e0       	ldi	r20, 0x01	; 1
      226:	66 e0       	ldi	r22, 0x06	; 6
      228:	82 e0       	ldi	r24, 0x02	; 2
      22a:	0e 94 9d 01 	call	0x33a	; 0x33a <dio_setPinDirection>
-	dio_setPinDirection(LCD_CMD_PORT,LCD_RW,OUTPUT);
      22e:	41 e0       	ldi	r20, 0x01	; 1
      230:	65 e0       	ldi	r22, 0x05	; 5
      232:	82 e0       	ldi	r24, 0x02	; 2
      234:	0e 94 9d 01 	call	0x33a	; 0x33a <dio_setPinDirection>
-	dio_setPinDirection(LCD_CMD_PORT,LCD_EN,OUTPUT);
      238:	41 e0       	ldi	r20, 0x01	; 1
      23a:	64 e0       	ldi	r22, 0x04	; 4
      23c:	82 e0       	ldi	r24, 0x02	; 2
      23e:	0e 94 9d 01 	call	0x33a	; 0x33a <dio_setPinDirection>
-	
-	/*Set LCD data lines direction --> output*/
-	dio_setPinDirection(LCD_DATA_PORT,LCD_D4,OUTPUT);
      242:	41 e0       	ldi	r20, 0x01	; 1
      244:	60 e0       	ldi	r22, 0x00	; 0
      246:	82 e0       	ldi	r24, 0x02	; 2
      248:	0e 94 9d 01 	call	0x33a	; 0x33a <dio_setPinDirection>
-	dio_setPinDirection(LCD_DATA_PORT,LCD_D5,OUTPUT);
      24c:	41 e0       	ldi	r20, 0x01	; 1
      24e:	61 e0       	ldi	r22, 0x01	; 1
      250:	82 e0       	ldi	r24, 0x02	; 2
      252:	0e 94 9d 01 	call	0x33a	; 0x33a <dio_setPinDirection>
-	dio_setPinDirection(LCD_DATA_PORT,LCD_D6,OUTPUT);
      256:	41 e0       	ldi	r20, 0x01	; 1
      258:	62 e0       	ldi	r22, 0x02	; 2
      25a:	82 e0       	ldi	r24, 0x02	; 2
      25c:	0e 94 9d 01 	call	0x33a	; 0x33a <dio_setPinDirection>
-	dio_setPinDirection(LCD_DATA_PORT,LCD_D7,OUTPUT);
      260:	41 e0       	ldi	r20, 0x01	; 1
      262:	63 e0       	ldi	r22, 0x03	; 3
      264:	82 e0       	ldi	r24, 0x02	; 2
      266:	0e 94 9d 01 	call	0x33a	; 0x33a <dio_setPinDirection>
-	
-	/*Always write to LCD*/
-	dio_writeChannel(LCD_CMD_PORT,LCD_RW,LOW);
      26a:	40 e0       	ldi	r20, 0x00	; 0
      26c:	65 e0       	ldi	r22, 0x05	; 5
      26e:	82 e0       	ldi	r24, 0x02	; 2
      270:	0e 94 12 02 	call	0x424	; 0x424 <dio_writeChannel>
-	
-	/*Initialization by instructions*/
-	lcd_writeData(0x00);
      274:	80 e0       	ldi	r24, 0x00	; 0
      276:	0e 94 cd 00 	call	0x19a	; 0x19a <lcd_writeData>
      27a:	2f ef       	ldi	r18, 0xFF	; 255
@@ -426,8 +327,6 @@ void lcd_init(void)
      286:	e1 f7       	brne	.-8      	; 0x280 <lcd_init+0x5c>
      288:	00 c0       	rjmp	.+0      	; 0x28a <lcd_init+0x66>
      28a:	00 00       	nop
-	_delay_ms(30);
-	lcd_sendCommand(0x03);
      28c:	83 e0       	ldi	r24, 0x03	; 3
      28e:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
      292:	8f e1       	ldi	r24, 0x1F	; 31
@@ -436,8 +335,6 @@ void lcd_init(void)
      298:	f1 f7       	brne	.-4      	; 0x296 <lcd_init+0x72>
      29a:	00 c0       	rjmp	.+0      	; 0x29c <lcd_init+0x78>
      29c:	00 00       	nop
-	_delay_ms(5);
-	lcd_sendCommand(0x03);
      29e:	83 e0       	ldi	r24, 0x03	; 3
      2a0:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
 	#else
@@ -452,43 +349,27 @@ void lcd_init(void)
      2aa:	f1 f7       	brne	.-4      	; 0x2a8 <lcd_init+0x84>
      2ac:	00 c0       	rjmp	.+0      	; 0x2ae <lcd_init+0x8a>
      2ae:	00 00       	nop
-	_delay_us(150);
-	lcd_sendCommand(0x03);
      2b0:	83 e0       	ldi	r24, 0x03	; 3
      2b2:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
-	lcd_sendCommand(0x02);
      2b6:	82 e0       	ldi	r24, 0x02	; 2
      2b8:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
-	lcd_sendCommand(0x02);
      2bc:	82 e0       	ldi	r24, 0x02	; 2
      2be:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
-	lcd_sendCommand(LCD_CMD_4BIT_MODE);
      2c2:	88 e2       	ldi	r24, 0x28	; 40
      2c4:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
-	lcd_sendCommand(0x08);
      2c8:	88 e0       	ldi	r24, 0x08	; 8
      2ca:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
-	lcd_sendCommand(0x00);
      2ce:	80 e0       	ldi	r24, 0x00	; 0
      2d0:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
-	lcd_sendCommand(0x0C);
      2d4:	8c e0       	ldi	r24, 0x0C	; 12
      2d6:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
-	lcd_sendCommand(0x00);
      2da:	80 e0       	ldi	r24, 0x00	; 0
      2dc:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
-	lcd_sendCommand(LCD_CMD_CURSOR_INCREMENT);
      2e0:	86 e0       	ldi	r24, 0x06	; 6
      2e2:	0e 94 88 00 	call	0x110	; 0x110 <lcd_sendCommand>
      2e6:	08 95       	ret
 
 000002e8 <relay_toggle>:
-	dio_setPinDirection(PORTA_ID,PIN4_ID,OUTPUT);
-}
-
-void relay_toggle(u8 id)
-{
-	switch(id)
      2e8:	83 30       	cpi	r24, 0x03	; 3
      2ea:	a9 f0       	breq	.+42     	; 0x316 <relay_toggle+0x2e>
      2ec:	28 f4       	brcc	.+10     	; 0x2f8 <relay_toggle+0x10>
@@ -502,63 +383,32 @@ void relay_toggle(u8 id)
      2fc:	85 30       	cpi	r24, 0x05	; 5
      2fe:	a9 f0       	breq	.+42     	; 0x32a <relay_toggle+0x42>
      300:	08 95       	ret
-	{
-		case RELAY1_ID:
-			dio_toggleChannel(PORTA_ID,PIN0_ID);
      302:	60 e0       	ldi	r22, 0x00	; 0
      304:	80 e0       	ldi	r24, 0x00	; 0
      306:	0e 94 87 02 	call	0x50e	; 0x50e <dio_toggleChannel>
-		break;
      30a:	08 95       	ret
-		
-		case RELAY2_ID:
-			dio_toggleChannel(PORTA_ID,PIN1_ID);
      30c:	61 e0       	ldi	r22, 0x01	; 1
      30e:	80 e0       	ldi	r24, 0x00	; 0
      310:	0e 94 87 02 	call	0x50e	; 0x50e <dio_toggleChannel>
-		break;
      314:	08 95       	ret
-		
-		case RELAY3_ID:
-			dio_toggleChannel(PORTA_ID,PIN2_ID);
      316:	62 e0       	ldi	r22, 0x02	; 2
      318:	80 e0       	ldi	r24, 0x00	; 0
      31a:	0e 94 87 02 	call	0x50e	; 0x50e <dio_toggleChannel>
-		break;
      31e:	08 95       	ret
-		
-		case RELAY4_ID:
-			dio_toggleChannel(PORTA_ID,PIN3_ID);
      320:	63 e0       	ldi	r22, 0x03	; 3
      322:	80 e0       	ldi	r24, 0x00	; 0
      324:	0e 94 87 02 	call	0x50e	; 0x50e <dio_toggleChannel>
-		break;
      328:	08 95       	ret
-		
-		case RELAY5_ID:
-			dio_toggleChannel(PORTA_ID,PIN4_ID);
      32a:	64 e0       	ldi	r22, 0x04	; 4
      32c:	80 e0       	ldi	r24, 0x00	; 0
      32e:	0e 94 87 02 	call	0x50e	; 0x50e <dio_toggleChannel>
      332:	08 95       	ret
 
 00000334 <servo_setAngleDegree>:
-	pwm1_init(modeA, modeB, freq);
-}
-
-void servo_setAngleDegree(u16 degree)
-{
-	pwm1_setDutyCycle(degree);
      334:	0e 94 83 03 	call	0x706	; 0x706 <pwm1_setDutyCycle>
      338:	08 95       	ret
 
 0000033a <dio_setPinDirection>:
-#include "dio.h"
-#include "bit_math.h"
-
-void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
-{
-	switch (portId)
      33a:	81 30       	cpi	r24, 0x01	; 1
      33c:	11 f1       	breq	.+68     	; 0x382 <dio_setPinDirection+0x48>
      33e:	30 f0       	brcs	.+12     	; 0x34c <dio_setPinDirection+0x12>
@@ -568,14 +418,8 @@ void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
      346:	09 f4       	brne	.+2      	; 0x34a <dio_setPinDirection+0x10>
      348:	52 c0       	rjmp	.+164    	; 0x3ee <dio_setPinDirection+0xb4>
      34a:	08 95       	ret
-	{
-		case PORTA_ID:
-		//DDRA
-			if (direction == OUTPUT) 
      34c:	41 30       	cpi	r20, 0x01	; 1
      34e:	59 f4       	brne	.+22     	; 0x366 <dio_setPinDirection+0x2c>
-			{
-				SET_BIT(DIO_DDRA_REG,pinId);
      350:	2a b3       	in	r18, 0x1a	; 26
      352:	81 e0       	ldi	r24, 0x01	; 1
      354:	90 e0       	ldi	r25, 0x00	; 0
@@ -587,12 +431,8 @@ void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
      360:	82 2b       	or	r24, r18
      362:	8a bb       	out	0x1a, r24	; 26
      364:	08 95       	ret
-			}
-			else if (direction == INPUT)
      366:	41 11       	cpse	r20, r1
      368:	5c c0       	rjmp	.+184    	; 0x422 <__EEPROM_REGION_LENGTH__+0x22>
-			{
-				CLEAR_BIT(DIO_DDRA_REG,pinId);
      36a:	2a b3       	in	r18, 0x1a	; 26
      36c:	81 e0       	ldi	r24, 0x01	; 1
      36e:	90 e0       	ldi	r25, 0x00	; 0
@@ -605,16 +445,8 @@ void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
      37c:	82 23       	and	r24, r18
      37e:	8a bb       	out	0x1a, r24	; 26
      380:	08 95       	ret
-			}
-		break;
-		
-		case PORTB_ID:
-		//DDRB
-			if (direction == OUTPUT)
      382:	41 30       	cpi	r20, 0x01	; 1
      384:	59 f4       	brne	.+22     	; 0x39c <dio_setPinDirection+0x62>
-			{
-				SET_BIT(DIO_DDRB_REG,pinId);
      386:	27 b3       	in	r18, 0x17	; 23
      388:	81 e0       	ldi	r24, 0x01	; 1
      38a:	90 e0       	ldi	r25, 0x00	; 0
@@ -626,12 +458,8 @@ void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
      396:	82 2b       	or	r24, r18
      398:	87 bb       	out	0x17, r24	; 23
      39a:	08 95       	ret
-			}
-			else if (direction == INPUT)
      39c:	41 11       	cpse	r20, r1
      39e:	41 c0       	rjmp	.+130    	; 0x422 <__EEPROM_REGION_LENGTH__+0x22>
-			{
-				CLEAR_BIT(DIO_DDRB_REG,pinId);
      3a0:	27 b3       	in	r18, 0x17	; 23
      3a2:	81 e0       	ldi	r24, 0x01	; 1
      3a4:	90 e0       	ldi	r25, 0x00	; 0
@@ -644,16 +472,8 @@ void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
      3b2:	82 23       	and	r24, r18
      3b4:	87 bb       	out	0x17, r24	; 23
      3b6:	08 95       	ret
-			}
-		break;
-		
-		case PORTC_ID:
-		//DDRC
-			if (direction == OUTPUT)
      3b8:	41 30       	cpi	r20, 0x01	; 1
      3ba:	59 f4       	brne	.+22     	; 0x3d2 <dio_setPinDirection+0x98>
-			{
-				SET_BIT(DIO_DDRC_REG,pinId);
      3bc:	24 b3       	in	r18, 0x14	; 20
      3be:	81 e0       	ldi	r24, 0x01	; 1
      3c0:	90 e0       	ldi	r25, 0x00	; 0
@@ -665,12 +485,8 @@ void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
      3cc:	82 2b       	or	r24, r18
      3ce:	84 bb       	out	0x14, r24	; 20
      3d0:	08 95       	ret
-			}
-			else if (direction == INPUT)
      3d2:	41 11       	cpse	r20, r1
      3d4:	26 c0       	rjmp	.+76     	; 0x422 <__EEPROM_REGION_LENGTH__+0x22>
-			{
-				CLEAR_BIT(DIO_DDRC_REG,pinId);
      3d6:	24 b3       	in	r18, 0x14	; 20
      3d8:	81 e0       	ldi	r24, 0x01	; 1
      3da:	90 e0       	ldi	r25, 0x00	; 0
@@ -683,16 +499,8 @@ void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
      3e8:	82 23       	and	r24, r18
      3ea:	84 bb       	out	0x14, r24	; 20
      3ec:	08 95       	ret
-			}
-		break;
-		
-		case PORTD_ID:
-		//DDRD
-			if (direction == OUTPUT)
      3ee:	41 30       	cpi	r20, 0x01	; 1
      3f0:	59 f4       	brne	.+22     	; 0x408 <__EEPROM_REGION_LENGTH__+0x8>
-			{
-				SET_BIT(DIO_DDRD_REG,pinId);
      3f2:	21 b3       	in	r18, 0x11	; 17
      3f4:	81 e0       	ldi	r24, 0x01	; 1
      3f6:	90 e0       	ldi	r25, 0x00	; 0
@@ -704,12 +512,8 @@ void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
      402:	82 2b       	or	r24, r18
      404:	81 bb       	out	0x11, r24	; 17
      406:	08 95       	ret
-			}
-			else if (direction == INPUT)
      408:	41 11       	cpse	r20, r1
      40a:	0b c0       	rjmp	.+22     	; 0x422 <__EEPROM_REGION_LENGTH__+0x22>
-			{
-				CLEAR_BIT(DIO_DDRD_REG,pinId);
      40c:	21 b3       	in	r18, 0x11	; 17
      40e:	81 e0       	ldi	r24, 0x01	; 1
      410:	90 e0       	ldi	r25, 0x00	; 0
@@ -724,12 +528,6 @@ void dio_setPinDirection(u8 portId, u8 pinId, u8 direction)
      422:	08 95       	ret
 
 00000424 <dio_writeChannel>:
-	}
-}
-
-void dio_writeChannel(u8 portId, u8 pinId, u8 level)
-{
-	switch (portId)
      424:	81 30       	cpi	r24, 0x01	; 1
      426:	11 f1       	breq	.+68     	; 0x46c <dio_writeChannel+0x48>
      428:	30 f0       	brcs	.+12     	; 0x436 <dio_writeChannel+0x12>
@@ -739,14 +537,8 @@ void dio_writeChannel(u8 portId, u8 pinId, u8 level)
      430:	09 f4       	brne	.+2      	; 0x434 <dio_writeChannel+0x10>
      432:	52 c0       	rjmp	.+164    	; 0x4d8 <dio_writeChannel+0xb4>
      434:	08 95       	ret
-	{
-		case PORTA_ID:
-		//PORTA
-			if (level == HIGH)
      436:	41 30       	cpi	r20, 0x01	; 1
      438:	59 f4       	brne	.+22     	; 0x450 <dio_writeChannel+0x2c>
-			{
-				SET_BIT(DIO_PORTA_REG,pinId);
      43a:	2b b3       	in	r18, 0x1b	; 27
      43c:	81 e0       	ldi	r24, 0x01	; 1
      43e:	90 e0       	ldi	r25, 0x00	; 0
@@ -758,12 +550,8 @@ void dio_writeChannel(u8 portId, u8 pinId, u8 level)
      44a:	82 2b       	or	r24, r18
      44c:	8b bb       	out	0x1b, r24	; 27
      44e:	08 95       	ret
-			}
-			else if (level == LOW)
      450:	41 11       	cpse	r20, r1
      452:	5c c0       	rjmp	.+184    	; 0x50c <dio_writeChannel+0xe8>
-			{
-				CLEAR_BIT(DIO_PORTA_REG,pinId);
      454:	2b b3       	in	r18, 0x1b	; 27
      456:	81 e0       	ldi	r24, 0x01	; 1
      458:	90 e0       	ldi	r25, 0x00	; 0
@@ -776,16 +564,8 @@ void dio_writeChannel(u8 portId, u8 pinId, u8 level)
      466:	82 23       	and	r24, r18
      468:	8b bb       	out	0x1b, r24	; 27
      46a:	08 95       	ret
-			}
-		break;
-		
-		case PORTB_ID:
-		//PORTB
-			if (level == HIGH)
      46c:	41 30       	cpi	r20, 0x01	; 1
      46e:	59 f4       	brne	.+22     	; 0x486 <dio_writeChannel+0x62>
-			{
-				SET_BIT(DIO_PORTB_REG,pinId);
      470:	28 b3       	in	r18, 0x18	; 24
      472:	81 e0       	ldi	r24, 0x01	; 1
      474:	90 e0       	ldi	r25, 0x00	; 0
@@ -797,12 +577,8 @@ void dio_writeChannel(u8 portId, u8 pinId, u8 level)
      480:	82 2b       	or	r24, r18
      482:	88 bb       	out	0x18, r24	; 24
      484:	08 95       	ret
-			}
-			else if (level == LOW)
      486:	41 11       	cpse	r20, r1
      488:	41 c0       	rjmp	.+130    	; 0x50c <dio_writeChannel+0xe8>
-			{
-				CLEAR_BIT(DIO_PORTB_REG,pinId);
      48a:	28 b3       	in	r18, 0x18	; 24
      48c:	81 e0       	ldi	r24, 0x01	; 1
      48e:	90 e0       	ldi	r25, 0x00	; 0
@@ -815,16 +591,8 @@ void dio_writeChannel(u8 portId, u8 pinId, u8 level)
      49c:	82 23       	and	r24, r18
      49e:	88 bb       	out	0x18, r24	; 24
      4a0:	08 95       	ret
-			}
-		break;
-		
-		case PORTC_ID:
-		//PORTC
-			if (level == HIGH)
      4a2:	41 30       	cpi	r20, 0x01	; 1
      4a4:	59 f4       	brne	.+22     	; 0x4bc <dio_writeChannel+0x98>
-			{
-				SET_BIT(DIO_PORTC_REG,pinId);
      4a6:	25 b3       	in	r18, 0x15	; 21
      4a8:	81 e0       	ldi	r24, 0x01	; 1
      4aa:	90 e0       	ldi	r25, 0x00	; 0
@@ -836,12 +604,8 @@ void dio_writeChannel(u8 portId, u8 pinId, u8 level)
      4b6:	82 2b       	or	r24, r18
      4b8:	85 bb       	out	0x15, r24	; 21
      4ba:	08 95       	ret
-			}
-			else if (level == LOW)
      4bc:	41 11       	cpse	r20, r1
      4be:	26 c0       	rjmp	.+76     	; 0x50c <dio_writeChannel+0xe8>
-			{
-				CLEAR_BIT(DIO_PORTC_REG,pinId);
      4c0:	25 b3       	in	r18, 0x15	; 21
      4c2:	81 e0       	ldi	r24, 0x01	; 1
      4c4:	90 e0       	ldi	r25, 0x00	; 0
@@ -854,16 +618,8 @@ void dio_writeChannel(u8 portId, u8 pinId, u8 level)
      4d2:	82 23       	and	r24, r18
      4d4:	85 bb       	out	0x15, r24	; 21
      4d6:	08 95       	ret
-			}
-		break;
-		
-		case PORTD_ID:
-		//PORTD
-			if (level == HIGH)
      4d8:	41 30       	cpi	r20, 0x01	; 1
      4da:	59 f4       	brne	.+22     	; 0x4f2 <dio_writeChannel+0xce>
-			{
-				SET_BIT(DIO_PORTD_REG,pinId);
      4dc:	22 b3       	in	r18, 0x12	; 18
      4de:	81 e0       	ldi	r24, 0x01	; 1
      4e0:	90 e0       	ldi	r25, 0x00	; 0
@@ -875,12 +631,8 @@ void dio_writeChannel(u8 portId, u8 pinId, u8 level)
      4ec:	82 2b       	or	r24, r18
      4ee:	82 bb       	out	0x12, r24	; 18
      4f0:	08 95       	ret
-			}
-			else if (level == LOW)
      4f2:	41 11       	cpse	r20, r1
      4f4:	0b c0       	rjmp	.+22     	; 0x50c <dio_writeChannel+0xe8>
-			{
-				CLEAR_BIT(DIO_PORTD_REG,pinId);
      4f6:	22 b3       	in	r18, 0x12	; 18
      4f8:	81 e0       	ldi	r24, 0x01	; 1
      4fa:	90 e0       	ldi	r25, 0x00	; 0
@@ -895,12 +647,6 @@ void dio_writeChannel(u8 portId, u8 pinId, u8 level)
      50c:	08 95       	ret
 
 0000050e <dio_toggleChannel>:
-	}
-}
-
-void dio_toggleChannel(u8 portId, u8 pinId)
-{
-	switch (portId)
      50e:	81 30       	cpi	r24, 0x01	; 1
      510:	89 f0       	breq	.+34     	; 0x534 <dio_toggleChannel+0x26>
      512:	28 f0       	brcs	.+10     	; 0x51e <dio_toggleChannel+0x10>
@@ -909,10 +655,6 @@ void dio_toggleChannel(u8 portId, u8 pinId)
      518:	83 30       	cpi	r24, 0x03	; 3
      51a:	11 f1       	breq	.+68     	; 0x560 <dio_toggleChannel+0x52>
      51c:	08 95       	ret
-	{
-		case PORTA_ID:
-		//PORTA
-			TOGGLE_BIT(DIO_PORTA_REG,pinId);
      51e:	2b b3       	in	r18, 0x1b	; 27
      520:	81 e0       	ldi	r24, 0x01	; 1
      522:	90 e0       	ldi	r25, 0x00	; 0
@@ -923,12 +665,7 @@ void dio_toggleChannel(u8 portId, u8 pinId)
      52c:	e2 f7       	brpl	.-8      	; 0x526 <dio_toggleChannel+0x18>
      52e:	82 27       	eor	r24, r18
      530:	8b bb       	out	0x1b, r24	; 27
-		break;
      532:	08 95       	ret
-		
-		case PORTB_ID:
-		//PORTB
-			TOGGLE_BIT(DIO_PORTB_REG,pinId);
      534:	28 b3       	in	r18, 0x18	; 24
      536:	81 e0       	ldi	r24, 0x01	; 1
      538:	90 e0       	ldi	r25, 0x00	; 0
@@ -939,12 +676,7 @@ void dio_toggleChannel(u8 portId, u8 pinId)
      542:	e2 f7       	brpl	.-8      	; 0x53c <dio_toggleChannel+0x2e>
      544:	82 27       	eor	r24, r18
      546:	88 bb       	out	0x18, r24	; 24
-		break;
      548:	08 95       	ret
-		
-		case PORTC_ID:
-		//PORTC
-			TOGGLE_BIT(DIO_PORTC_REG,pinId);
      54a:	25 b3       	in	r18, 0x15	; 21
      54c:	81 e0       	ldi	r24, 0x01	; 1
      54e:	90 e0       	ldi	r25, 0x00	; 0
@@ -955,12 +687,7 @@ void dio_toggleChannel(u8 portId, u8 pinId)
      558:	e2 f7       	brpl	.-8      	; 0x552 <dio_toggleChannel+0x44>
      55a:	82 27       	eor	r24, r18
      55c:	85 bb       	out	0x15, r24	; 21
-		break;
      55e:	08 95       	ret
-		
-		case PORTD_ID:
-		//PORTD
-			TOGGLE_BIT(DIO_PORTD_REG,pinId);
      560:	22 b3       	in	r18, 0x12	; 18
      562:	81 e0       	ldi	r24, 0x01	; 1
      564:	90 e0       	ldi	r25, 0x00	; 0
@@ -974,54 +701,25 @@ void dio_toggleChannel(u8 portId, u8 pinId)
      574:	08 95       	ret
 
 00000576 <EEPROM_write>:
-#include "eeprom.h"
-#include "avr/io.h"
-void EEPROM_write(u16 address, u8 data)
-{
-	/* Wait for completion of previous write */
-	while(EEPROM_EECR_REG & (1<<EEPROM_WRITE_ENABLE_BIT_NO));
      576:	e1 99       	sbic	0x1c, 1	; 28
      578:	fe cf       	rjmp	.-4      	; 0x576 <EEPROM_write>
-	/* Set up address and data registers */
-	EEAR = address;
      57a:	9f bb       	out	0x1f, r25	; 31
      57c:	8e bb       	out	0x1e, r24	; 30
-	EEPROM_EEDR_REG = data;
      57e:	6d bb       	out	0x1d, r22	; 29
-	/* Write logical one to EEMWE */
-	EEPROM_EECR_REG |= (1<<EEPROM_MASTER_WRITE_ENABLE_BIT_NO);
      580:	e2 9a       	sbi	0x1c, 2	; 28
-	/* Start EEPROM write by setting EEWE */
-	EEPROM_EECR_REG |= (1<<EEPROM_WRITE_ENABLE_BIT_NO);
      582:	e1 9a       	sbi	0x1c, 1	; 28
      584:	08 95       	ret
 
 00000586 <EEPROM_read>:
-}
-
-u8 EEPROM_read(u16 address)
-{
-	/* Wait for completion of previous write */
-	while(EEPROM_EECR_REG & (1<<EEPROM_WRITE_ENABLE_BIT_NO));
      586:	e1 99       	sbic	0x1c, 1	; 28
      588:	fe cf       	rjmp	.-4      	; 0x586 <EEPROM_read>
-	/* Set up address register */
-	EEAR = address;
      58a:	9f bb       	out	0x1f, r25	; 31
      58c:	8e bb       	out	0x1e, r24	; 30
-	/* Start EEPROM read by writing EERE */
-	EEPROM_EECR_REG |= (1<<EEPROM_READ_ENABLE_BIT_NO);
      58e:	e0 9a       	sbi	0x1c, 0	; 28
-	/* Return data from data register */
-	return EEPROM_EEDR_REG;
      590:	8d b3       	in	r24, 0x1d	; 29
-}
      592:	08 95       	ret
 
 00000594 <EEPROM_write_block>:
-
-void EEPROM_write_block(u8 *str, u16 start_byte_adr,u8 n_byte)
-{
      594:	ef 92       	push	r14
      596:	ff 92       	push	r15
      598:	0f 93       	push	r16
@@ -1030,39 +728,21 @@ void EEPROM_write_block(u8 *str, u16 start_byte_adr,u8 n_byte)
      59e:	df 93       	push	r29
      5a0:	8c 01       	movw	r16, r24
      5a2:	eb 01       	movw	r28, r22
-	u16 end_byte_adr = start_byte_adr + n_byte;
      5a4:	7b 01       	movw	r14, r22
      5a6:	e4 0e       	add	r14, r20
      5a8:	f1 1c       	adc	r15, r1
-	while(start_byte_adr < end_byte_adr) /* Loop For Counts And Copy */
      5aa:	6e 15       	cp	r22, r14
      5ac:	7f 05       	cpc	r23, r15
      5ae:	50 f4       	brcc	.+20     	; 0x5c4 <EEPROM_write_block+0x30>
-	{
-		EEPROM_write(start_byte_adr, str[0]);
      5b0:	f8 01       	movw	r30, r16
      5b2:	61 91       	ld	r22, Z+
      5b4:	8f 01       	movw	r16, r30
      5b6:	ce 01       	movw	r24, r28
      5b8:	0e 94 bb 02 	call	0x576	; 0x576 <EEPROM_write>
-		str++;
-		start_byte_adr++;
      5bc:	21 96       	adiw	r28, 0x01	; 1
-}
-
-void EEPROM_write_block(u8 *str, u16 start_byte_adr,u8 n_byte)
-{
-	u16 end_byte_adr = start_byte_adr + n_byte;
-	while(start_byte_adr < end_byte_adr) /* Loop For Counts And Copy */
      5be:	ce 15       	cp	r28, r14
      5c0:	df 05       	cpc	r29, r15
      5c2:	b0 f3       	brcs	.-20     	; 0x5b0 <EEPROM_write_block+0x1c>
-	{
-		EEPROM_write(start_byte_adr, str[0]);
-		str++;
-		start_byte_adr++;
-	}
-}
      5c4:	df 91       	pop	r29
      5c6:	cf 91       	pop	r28
      5c8:	1f 91       	pop	r17
@@ -1072,9 +752,6 @@ void EEPROM_write_block(u8 *str, u16 start_byte_adr,u8 n_byte)
      5d0:	08 95       	ret
 
 000005d2 <EEPROM_read_block>:
-
-void EEPROM_read_block(u8 *str, u16 start_byte_adr, u8 n_byte)
-{
      5d2:	ef 92       	push	r14
      5d4:	ff 92       	push	r15
      5d6:	0f 93       	push	r16
@@ -1083,39 +760,21 @@ void EEPROM_read_block(u8 *str, u16 start_byte_adr, u8 n_byte)
      5dc:	df 93       	push	r29
      5de:	8c 01       	movw	r16, r24
      5e0:	eb 01       	movw	r28, r22
-	u16 end_byte_adr = start_byte_adr + n_byte;
      5e2:	7b 01       	movw	r14, r22
      5e4:	e4 0e       	add	r14, r20
      5e6:	f1 1c       	adc	r15, r1
-	while (start_byte_adr < end_byte_adr) /* Loop For Counts And Copy */
      5e8:	6e 15       	cp	r22, r14
      5ea:	7f 05       	cpc	r23, r15
      5ec:	50 f4       	brcc	.+20     	; 0x602 <EEPROM_read_block+0x30>
-	{
-		*str = EEPROM_read(start_byte_adr);
      5ee:	ce 01       	movw	r24, r28
      5f0:	0e 94 c3 02 	call	0x586	; 0x586 <EEPROM_read>
      5f4:	f8 01       	movw	r30, r16
      5f6:	81 93       	st	Z+, r24
      5f8:	8f 01       	movw	r16, r30
-		str++;
-		start_byte_adr++;
      5fa:	21 96       	adiw	r28, 0x01	; 1
-}
-
-void EEPROM_read_block(u8 *str, u16 start_byte_adr, u8 n_byte)
-{
-	u16 end_byte_adr = start_byte_adr + n_byte;
-	while (start_byte_adr < end_byte_adr) /* Loop For Counts And Copy */
      5fc:	ce 15       	cp	r28, r14
      5fe:	df 05       	cpc	r29, r15
      600:	b0 f3       	brcs	.-20     	; 0x5ee <EEPROM_read_block+0x1c>
-	{
-		*str = EEPROM_read(start_byte_adr);
-		str++;
-		start_byte_adr++;
-	}
-}
      602:	df 91       	pop	r29
      604:	cf 91       	pop	r28
      606:	1f 91       	pop	r17
@@ -1125,12 +784,6 @@ void EEPROM_read_block(u8 *str, u16 start_byte_adr, u8 n_byte)
      60e:	08 95       	ret
 
 00000610 <__vector_11>:
-	CLEAR_BIT(TIMER0_TIMSK_REG,OCIE_BIT_NO);
-}
-
-void timer0_setCTCCallBack(void (*fptr) (void))
-{
-	timer0CTCClbkPtr = fptr;
      610:	1f 92       	push	r1
      612:	0f 92       	push	r0
      614:	0f b6       	in	r0, 0x3f	; 63
@@ -1172,10 +825,6 @@ void timer0_setCTCCallBack(void (*fptr) (void))
      660:	18 95       	reti
 
 00000662 <__vector_10>:
-}
-
-ISR(TIMER0_COMP_vect)
-{
      662:	1f 92       	push	r1
      664:	0f 92       	push	r0
      666:	0f b6       	in	r0, 0x3f	; 63
@@ -1193,16 +842,11 @@ ISR(TIMER0_COMP_vect)
      67e:	bf 93       	push	r27
      680:	ef 93       	push	r30
      682:	ff 93       	push	r31
-	if (timer0CTCClbkPtr != NULL)
      684:	e0 91 0b 03 	lds	r30, 0x030B	; 0x80030b <timer0CTCClbkPtr>
      688:	f0 91 0c 03 	lds	r31, 0x030C	; 0x80030c <timer0CTCClbkPtr+0x1>
      68c:	30 97       	sbiw	r30, 0x00	; 0
      68e:	09 f0       	breq	.+2      	; 0x692 <__vector_10+0x30>
-	{
-		timer0CTCClbkPtr();
      690:	09 95       	icall
-	}
-}
      692:	ff 91       	pop	r31
      694:	ef 91       	pop	r30
      696:	bf 91       	pop	r27
@@ -1227,7 +871,7 @@ ISR(TIMER0_COMP_vect)
 
 void pwm1_setTopValue(u8 topValue)
 {
-	TIMER1_ICR1_REG = topValue;
+	ICR1 = topValue;
      6b4:	1f 92       	push	r1
      6b6:	0f 92       	push	r0
      6b8:	0f b6       	in	r0, 0x3f	; 63
@@ -1273,19 +917,13 @@ void pwm1_setTopValue(u8 topValue)
 
 void pwm1_setDutyCycle(u8 dutyCycle)
 {
-	TIMER1_OCR1A_REG = dutyCycle;
+	OCR1A = dutyCycle;
      706:	90 e0       	ldi	r25, 0x00	; 0
      708:	9b bd       	out	0x2b, r25	; 43
      70a:	8a bd       	out	0x2a, r24	; 42
      70c:	08 95       	ret
 
 0000070e <__vector_5>:
-	CLEAR_BIT(TIMER2_TIMSK_REG,OCIE_BIT_NO);
-}
-
-void timer2_setCTCCallBack(void (*fptr) (void))
-{
-	timer2CTCClbkPtr = fptr;
      70e:	1f 92       	push	r1
      710:	0f 92       	push	r0
      712:	0f b6       	in	r0, 0x3f	; 63
@@ -1327,10 +965,6 @@ void timer2_setCTCCallBack(void (*fptr) (void))
      75e:	18 95       	reti
 
 00000760 <__vector_4>:
-}
-
-ISR(TIMER2_COMP_vect)
-{
      760:	1f 92       	push	r1
      762:	0f 92       	push	r0
      764:	0f b6       	in	r0, 0x3f	; 63
@@ -1348,16 +982,11 @@ ISR(TIMER2_COMP_vect)
      77c:	bf 93       	push	r27
      77e:	ef 93       	push	r30
      780:	ff 93       	push	r31
-	if (timer2CTCClbkPtr != NULL)
      782:	e0 91 11 03 	lds	r30, 0x0311	; 0x800311 <timer2CTCClbkPtr>
      786:	f0 91 12 03 	lds	r31, 0x0312	; 0x800312 <timer2CTCClbkPtr+0x1>
      78a:	30 97       	sbiw	r30, 0x00	; 0
      78c:	09 f0       	breq	.+2      	; 0x790 <__vector_4+0x30>
-	{
-		timer2CTCClbkPtr();
      78e:	09 95       	icall
-	}
-}
      790:	ff 91       	pop	r31
      792:	ef 91       	pop	r30
      794:	bf 91       	pop	r27
@@ -1377,139 +1006,66 @@ ISR(TIMER2_COMP_vect)
      7b0:	18 95       	reti
 
 000007b2 <uart_init>:
-#include "bit_math.h"
-
-void uart_init(u16 baud)
-{
-	/*Set baud rate*/
-	UART_UBRRL_REG = baud;
      7b2:	89 b9       	out	0x09, r24	; 9
-	UART_UBRRH_REG = baud >> 8;
      7b4:	90 bd       	out	0x20, r25	; 32
-	
-	/*Enable Tx, Rx*/
-	SET_BIT(UART_UCSRB_REG,TX_ENABLE_BIT_NO);
      7b6:	53 9a       	sbi	0x0a, 3	; 10
-	SET_BIT(UART_UCSRB_REG,RX_ENABLE_BIT_NO);
      7b8:	54 9a       	sbi	0x0a, 4	; 10
-	
-	/*Set data size=8, parity=even, stop=2*/
-	UART_UCSRC_REG = URSEL_SET|DATA_8BIT|PARITY_OFF|STOP_BIT1;
      7ba:	86 e8       	ldi	r24, 0x86	; 134
      7bc:	80 bd       	out	0x20, r24	; 32
      7be:	08 95       	ret
 
 000007c0 <uart_sendByte>:
-}
-
-void uart_sendByte(u8 byte)
-{
-	/*Make sure UDRE is empty*/
-	while(CHECK_BIT(UART_UCSRA_REG,UDR_EMPTY_FLAG)==0);
      7c0:	5d 9b       	sbis	0x0b, 5	; 11
      7c2:	fe cf       	rjmp	.-4      	; 0x7c0 <uart_sendByte>
-	
-	/*Set UDR with data*/
-	UART_UDR_REG = byte;
      7c4:	8c b9       	out	0x0c, r24	; 12
      7c6:	08 95       	ret
 
 000007c8 <uart_sendString>:
-}
-
-void uart_sendString(u8 *str)
-{
      7c8:	cf 93       	push	r28
      7ca:	df 93       	push	r29
      7cc:	ec 01       	movw	r28, r24
-	while(*str != '\0')
      7ce:	88 81       	ld	r24, Y
      7d0:	88 23       	and	r24, r24
      7d2:	31 f0       	breq	.+12     	; 0x7e0 <uart_sendString+0x18>
      7d4:	21 96       	adiw	r28, 0x01	; 1
-	{
-		uart_sendByte(*str);
      7d6:	0e 94 e0 03 	call	0x7c0	; 0x7c0 <uart_sendByte>
-	UART_UDR_REG = byte;
-}
-
-void uart_sendString(u8 *str)
-{
-	while(*str != '\0')
      7da:	89 91       	ld	r24, Y+
      7dc:	81 11       	cpse	r24, r1
      7de:	fb cf       	rjmp	.-10     	; 0x7d6 <uart_sendString+0xe>
-	{
-		uart_sendByte(*str);
-		str++;
-	}
-}
      7e0:	df 91       	pop	r29
      7e2:	cf 91       	pop	r28
      7e4:	08 95       	ret
 
 000007e6 <uart_receiveByte>:
-
-u8 uart_receiveByte(void)
-{
-	/*Wait until byte is received in UDR*/
-	while(CHECK_BIT(UART_UCSRA_REG,UDR_RECEIVE_COMPLETE_FLAG)==0);
      7e6:	5f 9b       	sbis	0x0b, 7	; 11
      7e8:	fe cf       	rjmp	.-4      	; 0x7e6 <uart_receiveByte>
-	
-	/*Return the received byte*/
-	return UART_UDR_REG;
      7ea:	8c b1       	in	r24, 0x0c	; 12
-}
      7ec:	08 95       	ret
 
 000007ee <uart_receiveString>:
-// 		*receivedStr = uart_receiveByte();
-// 		receivedStr++;
-// 	}
-// }
-void uart_receiveString(u8 *receivedStr)
-{
      7ee:	ef 92       	push	r14
      7f0:	ff 92       	push	r15
      7f2:	0f 93       	push	r16
      7f4:	1f 93       	push	r17
      7f6:	cf 93       	push	r28
      7f8:	7c 01       	movw	r14, r24
-	u8 i = 0;
-	receivedStr[i] = uart_receiveByte();
      7fa:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <uart_receiveByte>
      7fe:	f7 01       	movw	r30, r14
      800:	80 83       	st	Z, r24
-	while(receivedStr[i] != '#')
      802:	83 32       	cpi	r24, 0x23	; 35
      804:	61 f0       	breq	.+24     	; 0x81e <__DATA_REGION_LENGTH__+0x1e>
      806:	c0 e0       	ldi	r28, 0x00	; 0
-	{
-		i++;
      808:	cf 5f       	subi	r28, 0xFF	; 255
-		receivedStr[i] = uart_receiveByte();
      80a:	87 01       	movw	r16, r14
      80c:	0c 0f       	add	r16, r28
      80e:	11 1d       	adc	r17, r1
      810:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <uart_receiveByte>
      814:	f8 01       	movw	r30, r16
      816:	80 83       	st	Z, r24
-// }
-void uart_receiveString(u8 *receivedStr)
-{
-	u8 i = 0;
-	receivedStr[i] = uart_receiveByte();
-	while(receivedStr[i] != '#')
      818:	83 32       	cpi	r24, 0x23	; 35
      81a:	b1 f7       	brne	.-20     	; 0x808 <__DATA_REGION_LENGTH__+0x8>
      81c:	01 c0       	rjmp	.+2      	; 0x820 <__DATA_REGION_LENGTH__+0x20>
      81e:	87 01       	movw	r16, r14
-	{
-		i++;
-		receivedStr[i] = uart_receiveByte();
-	}
-	receivedStr[i] = '\0';
      820:	f8 01       	movw	r30, r16
      822:	10 82       	st	Z, r1
      824:	cf 91       	pop	r28
@@ -1520,12 +1076,6 @@ void uart_receiveString(u8 *receivedStr)
      82e:	08 95       	ret
 
 00000830 <airConditioner_Toggle>:
-}
-
-void airConditioner_Set_Config(AC *ac_config)
-{
-	AC_CFG.AC_Run_Temperature_threshold = ac_config->AC_Run_Temperature_threshold;
-	AC_CFG.AC_Stop_Temperature_threshold = ac_config->AC_Stop_Temperature_threshold;
      830:	e8 e1       	ldi	r30, 0x18	; 24
      832:	f3 e0       	ldi	r31, 0x03	; 3
      834:	90 81       	ld	r25, Z
@@ -1535,69 +1085,36 @@ void airConditioner_Set_Config(AC *ac_config)
      83c:	08 95       	ret
 
 0000083e <airConditioner_Status>:
-}
-
-AC airConditioner_Status(void)
-{
-	return AC_CFG;
      83e:	60 91 18 03 	lds	r22, 0x0318	; 0x800318 <AC_CFG>
      842:	70 91 19 03 	lds	r23, 0x0319	; 0x800319 <AC_CFG+0x1>
      846:	80 91 1a 03 	lds	r24, 0x031A	; 0x80031a <AC_CFG+0x2>
-}
      84a:	08 95       	ret
 
 0000084c <doorOpen>:
-	servo_init(PORTD_ID,PIN5_ID,OUTPUT,TIMER1_NON_INVERTED_PWM_FAST_OC1A,TIMER1_PWM_FAST_ICR,TIMER1_F_CPU_DIV_64,SERVO_TOP_VALUE_50_HZ);
-}
-
-void doorOpen()
-{
-	servo_setAngleDegree(SERVO_ANGLE_90_DEGREE);
      84c:	88 e5       	ldi	r24, 0x58	; 88
      84e:	92 e0       	ldi	r25, 0x02	; 2
      850:	0e 94 9a 01 	call	0x334	; 0x334 <servo_setAngleDegree>
-	doorState = DOOR_OPENED;
      854:	81 e0       	ldi	r24, 0x01	; 1
      856:	80 93 15 03 	sts	0x0315, r24	; 0x800315 <doorState>
      85a:	08 95       	ret
 
 0000085c <doorClose>:
-}
-
-void doorClose()
-{
-	servo_setAngleDegree(SERVO_ANGLE_0_DEGREE);
      85c:	8e e5       	ldi	r24, 0x5E	; 94
      85e:	91 e0       	ldi	r25, 0x01	; 1
      860:	0e 94 9a 01 	call	0x334	; 0x334 <servo_setAngleDegree>
-	doorState = DOOR_CLOSED;
      864:	10 92 15 03 	sts	0x0315, r1	; 0x800315 <doorState>
      868:	08 95       	ret
 
 0000086a <doorToggle>:
-}
-
-void doorToggle()
-{
-	if (doorState == DOOR_CLOSED) {
      86a:	80 91 15 03 	lds	r24, 0x0315	; 0x800315 <doorState>
      86e:	81 11       	cpse	r24, r1
      870:	03 c0       	rjmp	.+6      	; 0x878 <doorToggle+0xe>
-		doorOpen();
      872:	0e 94 26 04 	call	0x84c	; 0x84c <doorOpen>
      876:	08 95       	ret
-		} else {
-		doorClose();
      878:	0e 94 2e 04 	call	0x85c	; 0x85c <doorClose>
      87c:	08 95       	ret
 
 0000087e <Lamp_Service_Dim_Toggle>:
-	}
-}
-
-void Lamp_Service_Dim_Toggle()
-{
-	Dim_Service_state^= TRUE;
      87e:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
      882:	81 e0       	ldi	r24, 0x01	; 1
      884:	89 27       	eor	r24, r25
@@ -1605,12 +1122,6 @@ void Lamp_Service_Dim_Toggle()
      88a:	08 95       	ret
 
 0000088c <addUserToEEPROM_local>:
-	}
-	password[index] = '\0';  // Null-terminate the password
-}
-
-u8 addUserToEEPROM_local(const u8 *username, const u8* password)
-{
      88c:	cf 92       	push	r12
      88e:	df 92       	push	r13
      890:	ef 92       	push	r14
@@ -1628,48 +1139,34 @@ u8 addUserToEEPROM_local(const u8 *username, const u8* password)
      8a8:	cd bf       	out	0x3d, r28	; 61
      8aa:	6c 01       	movw	r12, r24
      8ac:	7b 01       	movw	r14, r22
-	EEPROM_write(EEPROM_USER_COUNT_ADDR_LOCAL,0);
      8ae:	60 e0       	ldi	r22, 0x00	; 0
      8b0:	80 e0       	ldi	r24, 0x00	; 0
      8b2:	90 e0       	ldi	r25, 0x00	; 0
      8b4:	0e 94 bb 02 	call	0x576	; 0x576 <EEPROM_write>
-	u8 userCount;
-	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
      8b8:	41 e0       	ldi	r20, 0x01	; 1
      8ba:	60 e0       	ldi	r22, 0x00	; 0
      8bc:	70 e0       	ldi	r23, 0x00	; 0
      8be:	ce 01       	movw	r24, r28
      8c0:	01 96       	adiw	r24, 0x01	; 1
      8c2:	0e 94 e9 02 	call	0x5d2	; 0x5d2 <EEPROM_read_block>
-
-	if (userCount < 10) {  // Assuming a maximum of 10 users
      8c6:	19 81       	ldd	r17, Y+1	; 0x01
      8c8:	1a 30       	cpi	r17, 0x0A	; 10
      8ca:	40 f5       	brcc	.+80     	; 0x91c <addUserToEEPROM_local+0x90>
-		user_local newUser;  // Temporary variable to store the new user data
-
-		// Populate the new user data
-		strncpy(newUser.uname, username, sizeof(newUser.uname) - 1);
      8cc:	4f e0       	ldi	r20, 0x0F	; 15
      8ce:	50 e0       	ldi	r21, 0x00	; 0
      8d0:	b6 01       	movw	r22, r12
      8d2:	ce 01       	movw	r24, r28
      8d4:	02 96       	adiw	r24, 0x02	; 2
      8d6:	0e 94 dd 07 	call	0xfba	; 0xfba <strncpy>
-		strncpy(newUser.password, password, sizeof(newUser.password) - 1);
      8da:	48 e0       	ldi	r20, 0x08	; 8
      8dc:	50 e0       	ldi	r21, 0x00	; 0
      8de:	b7 01       	movw	r22, r14
      8e0:	ce 01       	movw	r24, r28
      8e2:	42 96       	adiw	r24, 0x12	; 18
      8e4:	0e 94 dd 07 	call	0xfba	; 0xfba <strncpy>
-		newUser.id = userCount + 1;
      8e8:	81 e0       	ldi	r24, 0x01	; 1
      8ea:	81 0f       	add	r24, r17
      8ec:	8b 8f       	std	Y+27, r24	; 0x1b
-
-		// Write the new user data to EEPROM
-		EEPROM_write_block(&newUser, (void*)(EEPROM_USER_DATA_ADDR_LOCAL + userCount * sizeof(user_local)), sizeof(user_local));
      8ee:	8a e1       	ldi	r24, 0x1A	; 26
      8f0:	18 9f       	mul	r17, r24
      8f2:	b0 01       	movw	r22, r0
@@ -1680,29 +1177,18 @@ u8 addUserToEEPROM_local(const u8 *username, const u8* password)
      8fc:	ce 01       	movw	r24, r28
      8fe:	02 96       	adiw	r24, 0x02	; 2
      900:	0e 94 ca 02 	call	0x594	; 0x594 <EEPROM_write_block>
-
-		// Update the user count
-		userCount++;
      904:	89 81       	ldd	r24, Y+1	; 0x01
      906:	8f 5f       	subi	r24, 0xFF	; 255
      908:	89 83       	std	Y+1, r24	; 0x01
-		EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
      90a:	41 e0       	ldi	r20, 0x01	; 1
      90c:	60 e0       	ldi	r22, 0x00	; 0
      90e:	70 e0       	ldi	r23, 0x00	; 0
      910:	ce 01       	movw	r24, r28
      912:	01 96       	adiw	r24, 0x01	; 1
      914:	0e 94 ca 02 	call	0x594	; 0x594 <EEPROM_write_block>
-
-		return REGISTRATION_SUCCESS;
      918:	80 e0       	ldi	r24, 0x00	; 0
      91a:	01 c0       	rjmp	.+2      	; 0x91e <addUserToEEPROM_local+0x92>
-		} else {
-		// Handle error: User array is full
-		return ERROR_USER_ARRAY_FULL;
      91c:	81 e0       	ldi	r24, 0x01	; 1
-	}
-}
      91e:	6b 96       	adiw	r28, 0x1b	; 27
      920:	0f b6       	in	r0, 0x3f	; 63
      922:	f8 94       	cli
@@ -1719,56 +1205,37 @@ u8 addUserToEEPROM_local(const u8 *username, const u8* password)
      938:	08 95       	ret
 
 0000093a <getPassword_remote>:
-	uart_init(BAUD_RATE_9600);
-}
-
-// Function to get an 8-digit password from the user securely
-void getPassword_remote(u8* password)
-{
      93a:	cf 93       	push	r28
      93c:	df 93       	push	r29
      93e:	ec 01       	movw	r28, r24
-	uart_sendString("Enter Password:");
      940:	81 e6       	ldi	r24, 0x61	; 97
      942:	90 e0       	ldi	r25, 0x00	; 0
      944:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-
-	// Simulate getting user input for the password
-	uart_receiveString(password);
      948:	ce 01       	movw	r24, r28
      94a:	0e 94 f7 03 	call	0x7ee	; 0x7ee <uart_receiveString>
-
-	uart_sendString("\n");  // Move to the next line after password entry
      94e:	8c eb       	ldi	r24, 0xBC	; 188
      950:	91 e0       	ldi	r25, 0x01	; 1
      952:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-}
      956:	df 91       	pop	r29
      958:	cf 91       	pop	r28
      95a:	08 95       	ret
 
 0000095c <writeUserToEEPROM>:
-
-void writeUserToEEPROM(user_remote *user, u8 userId) {
      95c:	0f 93       	push	r16
      95e:	1f 93       	push	r17
      960:	cf 93       	push	r28
      962:	df 93       	push	r29
      964:	8c 01       	movw	r16, r24
-	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + (userId * 26);
      966:	8a e1       	ldi	r24, 0x1A	; 26
      968:	68 9f       	mul	r22, r24
      96a:	e0 01       	movw	r28, r0
      96c:	11 24       	eor	r1, r1
      96e:	cf 5f       	subi	r28, 0xFF	; 255
      970:	dd 4f       	sbci	r29, 0xFD	; 253
-	EEPROM_write_block(user->uname, startAddress, 16);
      972:	40 e1       	ldi	r20, 0x10	; 16
      974:	be 01       	movw	r22, r28
      976:	c8 01       	movw	r24, r16
      978:	0e 94 ca 02 	call	0x594	; 0x594 <EEPROM_write_block>
-	startAddress+=16;
-	EEPROM_write_block(user->password,startAddress, 9);
      97c:	be 01       	movw	r22, r28
      97e:	60 5f       	subi	r22, 0xF0	; 240
      980:	7f 4f       	sbci	r23, 0xFF	; 255
@@ -1776,14 +1243,11 @@ void writeUserToEEPROM(user_remote *user, u8 userId) {
      984:	c8 01       	movw	r24, r16
      986:	40 96       	adiw	r24, 0x10	; 16
      988:	0e 94 ca 02 	call	0x594	; 0x594 <EEPROM_write_block>
-	startAddress+=9;
-	EEPROM_write(startAddress,user->id);
      98c:	f8 01       	movw	r30, r16
      98e:	61 8d       	ldd	r22, Z+25	; 0x19
      990:	ce 01       	movw	r24, r28
      992:	49 96       	adiw	r24, 0x19	; 25
      994:	0e 94 bb 02 	call	0x576	; 0x576 <EEPROM_write>
-}
      998:	df 91       	pop	r29
      99a:	cf 91       	pop	r28
      99c:	1f 91       	pop	r17
@@ -1791,27 +1255,21 @@ void writeUserToEEPROM(user_remote *user, u8 userId) {
      9a0:	08 95       	ret
 
 000009a2 <readUserFromEEPROM>:
-
-void readUserFromEEPROM(user_remote *user, u8 userId) {
      9a2:	0f 93       	push	r16
      9a4:	1f 93       	push	r17
      9a6:	cf 93       	push	r28
      9a8:	df 93       	push	r29
      9aa:	8c 01       	movw	r16, r24
-	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + (userId * 26);
      9ac:	8a e1       	ldi	r24, 0x1A	; 26
      9ae:	68 9f       	mul	r22, r24
      9b0:	e0 01       	movw	r28, r0
      9b2:	11 24       	eor	r1, r1
      9b4:	cf 5f       	subi	r28, 0xFF	; 255
      9b6:	dd 4f       	sbci	r29, 0xFD	; 253
-	EEPROM_read_block(user->uname, startAddress, 16);
      9b8:	40 e1       	ldi	r20, 0x10	; 16
      9ba:	be 01       	movw	r22, r28
      9bc:	c8 01       	movw	r24, r16
      9be:	0e 94 e9 02 	call	0x5d2	; 0x5d2 <EEPROM_read_block>
-	startAddress+=16;
-	EEPROM_read_block(user->password, startAddress, 9);
      9c2:	be 01       	movw	r22, r28
      9c4:	60 5f       	subi	r22, 0xF0	; 240
      9c6:	7f 4f       	sbci	r23, 0xFF	; 255
@@ -1819,14 +1277,11 @@ void readUserFromEEPROM(user_remote *user, u8 userId) {
      9ca:	c8 01       	movw	r24, r16
      9cc:	40 96       	adiw	r24, 0x10	; 16
      9ce:	0e 94 e9 02 	call	0x5d2	; 0x5d2 <EEPROM_read_block>
-	startAddress+=9;
-	user->id = EEPROM_read(startAddress);
      9d2:	ce 01       	movw	r24, r28
      9d4:	49 96       	adiw	r24, 0x19	; 25
      9d6:	0e 94 c3 02 	call	0x586	; 0x586 <EEPROM_read>
      9da:	f8 01       	movw	r30, r16
      9dc:	81 8f       	std	Z+25, r24	; 0x19
-}
      9de:	df 91       	pop	r29
      9e0:	cf 91       	pop	r28
      9e2:	1f 91       	pop	r17
@@ -1834,10 +1289,6 @@ void readUserFromEEPROM(user_remote *user, u8 userId) {
      9e6:	08 95       	ret
 
 000009e8 <addUserToEEPROM_remote>:
-
-
-u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
-{
      9e8:	ef 92       	push	r14
      9ea:	ff 92       	push	r15
      9ec:	0f 93       	push	r16
@@ -1845,54 +1296,37 @@ u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
      9f0:	cf 93       	push	r28
      9f2:	7c 01       	movw	r14, r24
      9f4:	8b 01       	movw	r16, r22
-	userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
      9f6:	80 e0       	ldi	r24, 0x00	; 0
      9f8:	90 e0       	ldi	r25, 0x00	; 0
      9fa:	0e 94 c3 02 	call	0x586	; 0x586 <EEPROM_read>
      9fe:	c8 2f       	mov	r28, r24
      a00:	80 93 16 03 	sts	0x0316, r24	; 0x800316 <userCount>
-
-	if (userCount < 10) {  // Assuming a maximum of 10 users
      a04:	8a 30       	cpi	r24, 0x0A	; 10
      a06:	f0 f4       	brcc	.+60     	; 0xa44 <addUserToEEPROM_remote+0x5c>
-		strcpy(remoteUsers->uname, username);
      a08:	b7 01       	movw	r22, r14
      a0a:	8b e1       	ldi	r24, 0x1B	; 27
      a0c:	93 e0       	ldi	r25, 0x03	; 3
      a0e:	0e 94 d6 07 	call	0xfac	; 0xfac <strcpy>
-		strcpy(remoteUsers->password, password);
      a12:	b8 01       	movw	r22, r16
      a14:	8b e2       	ldi	r24, 0x2B	; 43
      a16:	93 e0       	ldi	r25, 0x03	; 3
      a18:	0e 94 d6 07 	call	0xfac	; 0xfac <strcpy>
-		remoteUsers->id = userCount + 1;
      a1c:	81 e0       	ldi	r24, 0x01	; 1
      a1e:	8c 0f       	add	r24, r28
      a20:	80 93 34 03 	sts	0x0334, r24	; 0x800334 <remoteUsers+0x19>
-
-		writeUserToEEPROM(&remoteUsers,userCount);
      a24:	6c 2f       	mov	r22, r28
      a26:	8b e1       	ldi	r24, 0x1B	; 27
      a28:	93 e0       	ldi	r25, 0x03	; 3
      a2a:	0e 94 ae 04 	call	0x95c	; 0x95c <writeUserToEEPROM>
-
-		userCount++;
      a2e:	60 91 16 03 	lds	r22, 0x0316	; 0x800316 <userCount>
      a32:	6f 5f       	subi	r22, 0xFF	; 255
      a34:	60 93 16 03 	sts	0x0316, r22	; 0x800316 <userCount>
-		EEPROM_write(EEPROM_USER_COUNT_ADDR, userCount);
      a38:	80 e0       	ldi	r24, 0x00	; 0
      a3a:	90 e0       	ldi	r25, 0x00	; 0
      a3c:	0e 94 bb 02 	call	0x576	; 0x576 <EEPROM_write>
-		return REGISTRATION_SUCCESS;
      a40:	80 e0       	ldi	r24, 0x00	; 0
      a42:	01 c0       	rjmp	.+2      	; 0xa46 <addUserToEEPROM_remote+0x5e>
-		} else {
-		// Handle error: User array is full
-		return ERROR_USER_ARRAY_FULL;
      a44:	81 e0       	ldi	r24, 0x01	; 1
-	}
-}
      a46:	cf 91       	pop	r28
      a48:	1f 91       	pop	r17
      a4a:	0f 91       	pop	r16
@@ -1901,87 +1335,48 @@ u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
      a50:	08 95       	ret
 
 00000a52 <getUserFromEEPROM_remote>:
-
-void getUserFromEEPROM_remote(u8 id, user_remote* users)
-{
-	if (id >= 0 && id <= 9) {  // Assuming a maximum of 10 users
      a52:	8a 30       	cpi	r24, 0x0A	; 10
      a54:	28 f4       	brcc	.+10     	; 0xa60 <getUserFromEEPROM_remote+0xe>
      a56:	9b 01       	movw	r18, r22
      a58:	68 2f       	mov	r22, r24
-		readUserFromEEPROM(users,id);
      a5a:	c9 01       	movw	r24, r18
      a5c:	0e 94 d1 04 	call	0x9a2	; 0x9a2 <readUserFromEEPROM>
      a60:	08 95       	ret
 
 00000a62 <remoteDB_init>:
-user_remote remoteUsers[DB_MAX_SIZE];
-boolean login_flag_remote = FALSE;
-u8 userCount = 0;
-
-void remoteDB_init()
-{
      a62:	cf 93       	push	r28
-	if (EEPROM_read(EEPROM_USER_COUNT_ADDR) == 0xFF)
      a64:	80 e0       	ldi	r24, 0x00	; 0
      a66:	90 e0       	ldi	r25, 0x00	; 0
      a68:	0e 94 c3 02 	call	0x586	; 0x586 <EEPROM_read>
      a6c:	8f 3f       	cpi	r24, 0xFF	; 255
      a6e:	39 f4       	brne	.+14     	; 0xa7e <remoteDB_init+0x1c>
-	{
-		EEPROM_write(EEPROM_USER_COUNT_ADDR, userCount);
      a70:	60 91 16 03 	lds	r22, 0x0316	; 0x800316 <userCount>
      a74:	80 e0       	ldi	r24, 0x00	; 0
      a76:	90 e0       	ldi	r25, 0x00	; 0
      a78:	0e 94 bb 02 	call	0x576	; 0x576 <EEPROM_write>
      a7c:	13 c0       	rjmp	.+38     	; 0xaa4 <remoteDB_init+0x42>
-	}
-	else
-	{
-		userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
      a7e:	80 e0       	ldi	r24, 0x00	; 0
      a80:	90 e0       	ldi	r25, 0x00	; 0
      a82:	0e 94 c3 02 	call	0x586	; 0x586 <EEPROM_read>
      a86:	80 93 16 03 	sts	0x0316, r24	; 0x800316 <userCount>
-		for (u8 i = 0; i < userCount; i++) {
      a8a:	88 23       	and	r24, r24
      a8c:	59 f0       	breq	.+22     	; 0xaa4 <remoteDB_init+0x42>
      a8e:	c0 e0       	ldi	r28, 0x00	; 0
-			getUserFromEEPROM_remote(i, &remoteUsers);
      a90:	6b e1       	ldi	r22, 0x1B	; 27
      a92:	73 e0       	ldi	r23, 0x03	; 3
      a94:	8c 2f       	mov	r24, r28
      a96:	0e 94 29 05 	call	0xa52	; 0xa52 <getUserFromEEPROM_remote>
-		EEPROM_write(EEPROM_USER_COUNT_ADDR, userCount);
-	}
-	else
-	{
-		userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
-		for (u8 i = 0; i < userCount; i++) {
      a9a:	cf 5f       	subi	r28, 0xFF	; 255
      a9c:	80 91 16 03 	lds	r24, 0x0316	; 0x800316 <userCount>
      aa0:	c8 17       	cp	r28, r24
      aa2:	b0 f3       	brcs	.-20     	; 0xa90 <remoteDB_init+0x2e>
-			getUserFromEEPROM_remote(i, &remoteUsers);
-			
-		}
-		
-	}
-	uart_init(BAUD_RATE_9600);
      aa4:	87 e6       	ldi	r24, 0x67	; 103
      aa6:	90 e0       	ldi	r25, 0x00	; 0
      aa8:	0e 94 d9 03 	call	0x7b2	; 0x7b2 <uart_init>
-}
      aac:	cf 91       	pop	r28
      aae:	08 95       	ret
 
 00000ab0 <displayAllUsersOnRemote>:
-			//EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
-		//}
-	//}
-//}
-
-void displayAllUsersOnRemote() {
      ab0:	bf 92       	push	r11
      ab2:	cf 92       	push	r12
      ab4:	df 92       	push	r13
@@ -1999,18 +1394,13 @@ void displayAllUsersOnRemote() {
      acc:	de bf       	out	0x3e, r29	; 62
      ace:	0f be       	out	0x3f, r0	; 63
      ad0:	cd bf       	out	0x3d, r28	; 61
-	uart_sendString("Displaying all users:\n");
      ad2:	81 e7       	ldi	r24, 0x71	; 113
      ad4:	90 e0       	ldi	r25, 0x00	; 0
      ad6:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-
-	for (u8 i = 0; i < userCount; i++) {
      ada:	80 91 16 03 	lds	r24, 0x0316	; 0x800316 <userCount>
      ade:	88 23       	and	r24, r24
      ae0:	71 f1       	breq	.+92     	; 0xb3e <displayAllUsersOnRemote+0x8e>
      ae2:	10 e0       	ldi	r17, 0x00	; 0
-		char displayText[50];
-		snprintf(displayText, sizeof(displayText), "Remote: User: %s, ID: %d\n", remoteUsers[i].uname, remoteUsers[i].id);
      ae4:	0f 2e       	mov	r0, r31
      ae6:	fa e1       	ldi	r31, 0x1A	; 26
      ae8:	bf 2e       	mov	r11, r31
@@ -2042,15 +1432,8 @@ void displayAllUsersOnRemote() {
      b1c:	ff 92       	push	r15
      b1e:	ef 92       	push	r14
      b20:	0e 94 ec 07 	call	0xfd8	; 0xfd8 <snprintf>
-		uart_sendString(displayText);
      b24:	c7 01       	movw	r24, r14
      b26:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-//}
-
-void displayAllUsersOnRemote() {
-	uart_sendString("Displaying all users:\n");
-
-	for (u8 i = 0; i < userCount; i++) {
      b2a:	1f 5f       	subi	r17, 0xFF	; 255
      b2c:	0f b6       	in	r0, 0x3f	; 63
      b2e:	f8 94       	cli
@@ -2060,11 +1443,6 @@ void displayAllUsersOnRemote() {
      b36:	80 91 16 03 	lds	r24, 0x0316	; 0x800316 <userCount>
      b3a:	18 17       	cp	r17, r24
      b3c:	08 f3       	brcs	.-62     	; 0xb00 <displayAllUsersOnRemote+0x50>
-		char displayText[50];
-		snprintf(displayText, sizeof(displayText), "Remote: User: %s, ID: %d\n", remoteUsers[i].uname, remoteUsers[i].id);
-		uart_sendString(displayText);
-	}
-}
      b3e:	e2 96       	adiw	r28, 0x32	; 50
      b40:	0f b6       	in	r0, 0x3f	; 63
      b42:	f8 94       	cli
@@ -2083,10 +1461,6 @@ void displayAllUsersOnRemote() {
      b5c:	08 95       	ret
 
 00000b5e <selectUserAndLogin_remote>:
-
-
-u8 selectUserAndLogin_remote()
-{
      b5e:	ef 92       	push	r14
      b60:	ff 92       	push	r15
      b62:	1f 93       	push	r17
@@ -2100,25 +1474,15 @@ u8 selectUserAndLogin_remote()
      b72:	de bf       	out	0x3e, r29	; 62
      b74:	0f be       	out	0x3f, r0	; 63
      b76:	cd bf       	out	0x3d, r28	; 61
-	u8 selectedID;
-	uart_sendString("Enter User ID:");
      b78:	82 ea       	ldi	r24, 0xA2	; 162
      b7a:	90 e0       	ldi	r25, 0x00	; 0
      b7c:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-
-	selectedID = uart_receiveByte()-'0';
      b80:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <uart_receiveByte>
      b84:	10 ed       	ldi	r17, 0xD0	; 208
      b86:	18 0f       	add	r17, r24
-
-	if (selectedID >= 1 && selectedID <= 10)
      b88:	81 53       	subi	r24, 0x31	; 49
      b8a:	8a 30       	cpi	r24, 0x0A	; 10
      b8c:	48 f5       	brcc	.+82     	; 0xbe0 <selectUserAndLogin_remote+0x82>
-	{  // Assuming a maximum of 10 users
-		
-		char enteredPassword[9];
-		uart_sendString(remoteUsers[selectedID-1].password);
      b8e:	21 2f       	mov	r18, r17
      b90:	30 e0       	ldi	r19, 0x00	; 0
      b92:	21 50       	subi	r18, 0x01	; 1
@@ -2135,47 +1499,28 @@ u8 selectUserAndLogin_remote()
      ba8:	79 01       	movw	r14, r18
      baa:	c9 01       	movw	r24, r18
      bac:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		getPassword_remote(enteredPassword);
      bb0:	ce 01       	movw	r24, r28
      bb2:	01 96       	adiw	r24, 0x01	; 1
      bb4:	0e 94 9d 04 	call	0x93a	; 0x93a <getPassword_remote>
-		
-		if (strcmp(enteredPassword, remoteUsers[selectedID-1].password) == 0)
      bb8:	b7 01       	movw	r22, r14
      bba:	ce 01       	movw	r24, r28
      bbc:	01 96       	adiw	r24, 0x01	; 1
      bbe:	0e 94 cd 07 	call	0xf9a	; 0xf9a <strcmp>
      bc2:	89 2b       	or	r24, r25
      bc4:	41 f4       	brne	.+16     	; 0xbd6 <selectUserAndLogin_remote+0x78>
-		{
-			uart_sendString("Login Successful\n");
      bc6:	81 eb       	ldi	r24, 0xB1	; 177
      bc8:	90 e0       	ldi	r25, 0x00	; 0
      bca:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-			
-			login_flag_remote = TRUE;
      bce:	81 e0       	ldi	r24, 0x01	; 1
      bd0:	80 93 17 03 	sts	0x0317, r24	; 0x800317 <login_flag_remote>
      bd4:	09 c0       	rjmp	.+18     	; 0xbe8 <selectUserAndLogin_remote+0x8a>
-		}
-		else
-		{
-			uart_sendString("Error: Incorrect Password\n");
      bd6:	83 ec       	ldi	r24, 0xC3	; 195
      bd8:	90 e0       	ldi	r25, 0x00	; 0
      bda:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
      bde:	04 c0       	rjmp	.+8      	; 0xbe8 <selectUserAndLogin_remote+0x8a>
-		}
-	}
-	else
-	{
-		uart_sendString("Error: Invalid User Order\n");
      be0:	8e ed       	ldi	r24, 0xDE	; 222
      be2:	90 e0       	ldi	r25, 0x00	; 0
      be4:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	}
-	return selectedID;
-}
      be8:	81 2f       	mov	r24, r17
      bea:	29 96       	adiw	r28, 0x09	; 9
      bec:	0f b6       	in	r0, 0x3f	; 63
@@ -2191,32 +1536,15 @@ u8 selectUserAndLogin_remote()
      c00:	08 95       	ret
 
 00000c02 <loginAck_remote>:
-
-boolean loginAck_remote()
-{
-	boolean result = login_flag_remote;
      c02:	80 91 17 03 	lds	r24, 0x0317	; 0x800317 <login_flag_remote>
-	login_flag_remote = FALSE;  // Clear the flag after checking
      c06:	10 92 17 03 	sts	0x0317, r1	; 0x800317 <login_flag_remote>
-	return result;
-}
      c0a:	08 95       	ret
 
 00000c0c <logout_remote>:
-
-void logout_remote()
-{
-	login_flag_remote = FALSE;
      c0c:	10 92 17 03 	sts	0x0317, r1	; 0x800317 <login_flag_remote>
      c10:	08 95       	ret
 
 00000c12 <remote_admin_register>:
-void lamp_menu(void);
-void AC_menu(void);
-void remote_menu_Service(void);
-
-void remote_admin_register()
-{
      c12:	cf 93       	push	r28
      c14:	df 93       	push	r29
      c16:	cd b7       	in	r28, 0x3d	; 61
@@ -2227,76 +1555,45 @@ void remote_admin_register()
      c20:	de bf       	out	0x3e, r29	; 62
      c22:	0f be       	out	0x3f, r0	; 63
      c24:	cd bf       	out	0x3d, r28	; 61
-	static u8 hasRun;
-	if (EEPROM_read(EEPROM_USER_COUNT_ADDR)>0)
      c26:	80 e0       	ldi	r24, 0x00	; 0
      c28:	90 e0       	ldi	r25, 0x00	; 0
      c2a:	0e 94 c3 02 	call	0x586	; 0x586 <EEPROM_read>
      c2e:	18 16       	cp	r1, r24
      c30:	19 06       	cpc	r1, r25
      c32:	4c f1       	brlt	.+82     	; 0xc86 <remote_admin_register+0x74>
-	{return;}
-	
-		//remoteDB_init();
-
-		uart_sendString("Register as an admin\n");
      c34:	89 ef       	ldi	r24, 0xF9	; 249
      c36:	90 e0       	ldi	r25, 0x00	; 0
      c38:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		uart_sendString("Enter username: ");
      c3c:	8f e0       	ldi	r24, 0x0F	; 15
      c3e:	91 e0       	ldi	r25, 0x01	; 1
      c40:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		u8 username[16];
-		uart_receiveString(&username);
      c44:	ce 01       	movw	r24, r28
      c46:	01 96       	adiw	r24, 0x01	; 1
      c48:	0e 94 f7 03 	call	0x7ee	; 0x7ee <uart_receiveString>
-		u8 password[9];
-		getPassword_remote(&password);  // Get password from user
      c4c:	ce 01       	movw	r24, r28
      c4e:	41 96       	adiw	r24, 0x11	; 17
      c50:	0e 94 9d 04 	call	0x93a	; 0x93a <getPassword_remote>
-		u8 registrationResult = addUserToEEPROM_remote(&username,&password);
      c54:	be 01       	movw	r22, r28
      c56:	6f 5e       	subi	r22, 0xEF	; 239
      c58:	7f 4f       	sbci	r23, 0xFF	; 255
      c5a:	ce 01       	movw	r24, r28
      c5c:	01 96       	adiw	r24, 0x01	; 1
      c5e:	0e 94 f4 04 	call	0x9e8	; 0x9e8 <addUserToEEPROM_remote>
-		if (registrationResult == REGISTRATION_SUCCESS)
      c62:	81 11       	cpse	r24, r1
      c64:	05 c0       	rjmp	.+10     	; 0xc70 <remote_admin_register+0x5e>
-		{
-			// Registration successful
-			uart_sendString("Registration successful\n");
      c66:	80 e2       	ldi	r24, 0x20	; 32
      c68:	91 e0       	ldi	r25, 0x01	; 1
      c6a:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
      c6e:	0b c0       	rjmp	.+22     	; 0xc86 <remote_admin_register+0x74>
-		}
-		else if (registrationResult == ERROR_USER_ARRAY_FULL)
      c70:	81 30       	cpi	r24, 0x01	; 1
      c72:	29 f4       	brne	.+10     	; 0xc7e <remote_admin_register+0x6c>
-		{
-			// User array is full
-			uart_sendString("Error: User array is full\n");
      c74:	89 e3       	ldi	r24, 0x39	; 57
      c76:	91 e0       	ldi	r25, 0x01	; 1
      c78:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
      c7c:	04 c0       	rjmp	.+8      	; 0xc86 <remote_admin_register+0x74>
-		}
-		else
-		{
-			// Other error occurred during EEPROM write
-			uart_sendString("Error: EEPROM write failed\n");
      c7e:	84 e5       	ldi	r24, 0x54	; 84
      c80:	91 e0       	ldi	r25, 0x01	; 1
      c82:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		}
-		hasRun = 1;
-	
-}
      c86:	69 96       	adiw	r28, 0x19	; 25
      c88:	0f b6       	in	r0, 0x3f	; 63
      c8a:	f8 94       	cli
@@ -2308,9 +1605,6 @@ void remote_admin_register()
      c96:	08 95       	ret
 
 00000c98 <registerUserRemote>:
-
-void registerUserRemote()
-{
      c98:	cf 93       	push	r28
      c9a:	df 93       	push	r29
      c9c:	cd b7       	in	r28, 0x3d	; 61
@@ -2321,63 +1615,39 @@ void registerUserRemote()
      ca6:	de bf       	out	0x3e, r29	; 62
      ca8:	0f be       	out	0x3f, r0	; 63
      caa:	cd bf       	out	0x3d, r28	; 61
-	u8 registrationResult = ERROR_USER_ARRAY_FULL;
-	uart_sendString("Register a new user\n");
      cac:	80 e7       	ldi	r24, 0x70	; 112
      cae:	91 e0       	ldi	r25, 0x01	; 1
      cb0:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("Enter username: ");
      cb4:	8f e0       	ldi	r24, 0x0F	; 15
      cb6:	91 e0       	ldi	r25, 0x01	; 1
      cb8:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	u8 username[16];
-	uart_receiveString(&username);
      cbc:	ce 01       	movw	r24, r28
      cbe:	01 96       	adiw	r24, 0x01	; 1
      cc0:	0e 94 f7 03 	call	0x7ee	; 0x7ee <uart_receiveString>
-	u8 password[9];
-	getPassword_remote(&password);  // Get password from user
      cc4:	ce 01       	movw	r24, r28
      cc6:	41 96       	adiw	r24, 0x11	; 17
      cc8:	0e 94 9d 04 	call	0x93a	; 0x93a <getPassword_remote>
-	registrationResult = addUserToEEPROM_remote(&username,&password);
      ccc:	be 01       	movw	r22, r28
      cce:	6f 5e       	subi	r22, 0xEF	; 239
      cd0:	7f 4f       	sbci	r23, 0xFF	; 255
      cd2:	ce 01       	movw	r24, r28
      cd4:	01 96       	adiw	r24, 0x01	; 1
      cd6:	0e 94 f4 04 	call	0x9e8	; 0x9e8 <addUserToEEPROM_remote>
-	if (registrationResult == REGISTRATION_SUCCESS)
      cda:	81 11       	cpse	r24, r1
      cdc:	05 c0       	rjmp	.+10     	; 0xce8 <registerUserRemote+0x50>
-	{
-		// Registration successful
-		uart_sendString("Registration successful\n");
      cde:	80 e2       	ldi	r24, 0x20	; 32
      ce0:	91 e0       	ldi	r25, 0x01	; 1
      ce2:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
      ce6:	0b c0       	rjmp	.+22     	; 0xcfe <registerUserRemote+0x66>
-	}
-	else if (registrationResult == ERROR_USER_ARRAY_FULL)
      ce8:	81 30       	cpi	r24, 0x01	; 1
      cea:	29 f4       	brne	.+10     	; 0xcf6 <registerUserRemote+0x5e>
-	{
-		// User array is full
-		uart_sendString("Error: User array is full\n");
      cec:	89 e3       	ldi	r24, 0x39	; 57
      cee:	91 e0       	ldi	r25, 0x01	; 1
      cf0:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
      cf4:	04 c0       	rjmp	.+8      	; 0xcfe <registerUserRemote+0x66>
-	}
-	else
-	{
-		// Other error occurred during EEPROM write
-		uart_sendString("Error: EEPROM write failed\n");
      cf6:	84 e5       	ldi	r24, 0x54	; 84
      cf8:	91 e0       	ldi	r25, 0x01	; 1
      cfa:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	}
-}
      cfe:	69 96       	adiw	r28, 0x19	; 25
      d00:	0f b6       	in	r0, 0x3f	; 63
      d02:	f8 94       	cli
@@ -2389,9 +1659,6 @@ void registerUserRemote()
      d0e:	08 95       	ret
 
 00000d10 <registerUserLocal>:
-
-void registerUserLocal()
-{
      d10:	cf 93       	push	r28
      d12:	df 93       	push	r29
      d14:	cd b7       	in	r28, 0x3d	; 61
@@ -2402,62 +1669,39 @@ void registerUserLocal()
      d1e:	de bf       	out	0x3e, r29	; 62
      d20:	0f be       	out	0x3f, r0	; 63
      d22:	cd bf       	out	0x3d, r28	; 61
-	uart_sendString("Register a new user\n");
      d24:	80 e7       	ldi	r24, 0x70	; 112
      d26:	91 e0       	ldi	r25, 0x01	; 1
      d28:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("Enter username: ");
      d2c:	8f e0       	ldi	r24, 0x0F	; 15
      d2e:	91 e0       	ldi	r25, 0x01	; 1
      d30:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	u8 username[16];
-	uart_receiveString(&username);
      d34:	ce 01       	movw	r24, r28
      d36:	01 96       	adiw	r24, 0x01	; 1
      d38:	0e 94 f7 03 	call	0x7ee	; 0x7ee <uart_receiveString>
-	u8 password[9];
-	getPassword_remote(&password);  // Get password from user
      d3c:	ce 01       	movw	r24, r28
      d3e:	41 96       	adiw	r24, 0x11	; 17
      d40:	0e 94 9d 04 	call	0x93a	; 0x93a <getPassword_remote>
-	u8 registrationResult = addUserToEEPROM_local(&username,&password);
      d44:	be 01       	movw	r22, r28
      d46:	6f 5e       	subi	r22, 0xEF	; 239
      d48:	7f 4f       	sbci	r23, 0xFF	; 255
      d4a:	ce 01       	movw	r24, r28
      d4c:	01 96       	adiw	r24, 0x01	; 1
      d4e:	0e 94 46 04 	call	0x88c	; 0x88c <addUserToEEPROM_local>
-	if (registrationResult == REGISTRATION_SUCCESS)
      d52:	81 11       	cpse	r24, r1
      d54:	05 c0       	rjmp	.+10     	; 0xd60 <registerUserLocal+0x50>
-	{
-		// Registration successful
-		uart_sendString("Registration successful\n");
      d56:	80 e2       	ldi	r24, 0x20	; 32
      d58:	91 e0       	ldi	r25, 0x01	; 1
      d5a:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
      d5e:	0b c0       	rjmp	.+22     	; 0xd76 <registerUserLocal+0x66>
-	}
-	else if (registrationResult == ERROR_USER_ARRAY_FULL)
      d60:	81 30       	cpi	r24, 0x01	; 1
      d62:	29 f4       	brne	.+10     	; 0xd6e <registerUserLocal+0x5e>
-	{
-		// User array is full
-		uart_sendString("Error: User array is full\n");
      d64:	89 e3       	ldi	r24, 0x39	; 57
      d66:	91 e0       	ldi	r25, 0x01	; 1
      d68:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
      d6c:	04 c0       	rjmp	.+8      	; 0xd76 <registerUserLocal+0x66>
-	}
-	else
-	{
-		// Other error occurred during EEPROM write
-		uart_sendString("Error: EEPROM write failed\n");
      d6e:	84 e5       	ldi	r24, 0x54	; 84
      d70:	91 e0       	ldi	r25, 0x01	; 1
      d72:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	}
-}
      d76:	69 96       	adiw	r28, 0x19	; 25
      d78:	0f b6       	in	r0, 0x3f	; 63
      d7a:	f8 94       	cli
@@ -2469,46 +1713,31 @@ void registerUserLocal()
      d86:	08 95       	ret
 
 00000d88 <lamp_menu>:
-	}
-}
-
-void lamp_menu()
-{
-	uart_sendString("Lamp Menu\n");
      d88:	85 e8       	ldi	r24, 0x85	; 133
      d8a:	91 e0       	ldi	r25, 0x01	; 1
      d8c:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("Choose lamp number you want to turn on/off: \n");
      d90:	80 e9       	ldi	r24, 0x90	; 144
      d92:	91 e0       	ldi	r25, 0x01	; 1
      d94:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("1. Lamp1\n");
      d98:	8e eb       	ldi	r24, 0xBE	; 190
      d9a:	91 e0       	ldi	r25, 0x01	; 1
      d9c:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("2. Lamp2\n");
      da0:	88 ec       	ldi	r24, 0xC8	; 200
      da2:	91 e0       	ldi	r25, 0x01	; 1
      da4:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("3. Lamp3\n");
      da8:	82 ed       	ldi	r24, 0xD2	; 210
      daa:	91 e0       	ldi	r25, 0x01	; 1
      dac:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("4. Lamp4\n");
      db0:	8c ed       	ldi	r24, 0xDC	; 220
      db2:	91 e0       	ldi	r25, 0x01	; 1
      db4:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("5. Lamp5\n");
      db8:	86 ee       	ldi	r24, 0xE6	; 230
      dba:	91 e0       	ldi	r25, 0x01	; 1
      dbc:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("6. Dimmer\n");
      dc0:	80 ef       	ldi	r24, 0xF0	; 240
      dc2:	91 e0       	ldi	r25, 0x01	; 1
      dc4:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	u8 lamp_choice = uart_receiveByte();
      dc8:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <uart_receiveByte>
-	switch (lamp_choice)
      dcc:	83 30       	cpi	r24, 0x03	; 3
      dce:	a1 f0       	breq	.+40     	; 0xdf8 <lamp_menu+0x70>
      dd0:	28 f4       	brcc	.+10     	; 0xddc <lamp_menu+0x54>
@@ -2523,193 +1752,98 @@ void lamp_menu()
      de2:	86 30       	cpi	r24, 0x06	; 6
      de4:	a9 f0       	breq	.+42     	; 0xe10 <lamp_menu+0x88>
      de6:	17 c0       	rjmp	.+46     	; 0xe16 <lamp_menu+0x8e>
-	{
-		case 1:
-			// Lamp1 ON/OFF (Toggle LED1 Status)
-			lamp_toggle(LAMP1_ID);
      de8:	81 e0       	ldi	r24, 0x01	; 1
      dea:	0e 94 5d 00 	call	0xba	; 0xba <lamp_toggle>
-		break;
      dee:	08 95       	ret
-		case 2:
-			// LED2 ON/OFF (Toggle LED2 Status)
-			lamp_toggle(LAMP2_ID);
      df0:	82 e0       	ldi	r24, 0x02	; 2
      df2:	0e 94 5d 00 	call	0xba	; 0xba <lamp_toggle>
-		break;
      df6:	08 95       	ret
-		case 3:
-			// LED3 ON/OFF (Toggle LED3 Status)
-			lamp_toggle(LAMP3_ID);
      df8:	83 e0       	ldi	r24, 0x03	; 3
      dfa:	0e 94 5d 00 	call	0xba	; 0xba <lamp_toggle>
-		break;
      dfe:	08 95       	ret
-		case 4:
-			// LED4 ON/OFF (Toggle LED4 Status)
-			lamp_toggle(LAMP4_ID);
      e00:	84 e0       	ldi	r24, 0x04	; 4
      e02:	0e 94 5d 00 	call	0xba	; 0xba <lamp_toggle>
-		break;
      e06:	08 95       	ret
-		case 5:
-			// LED5 ON/OFF (Toggle LED5 Status)
-			lamp_toggle(LAMP5_ID);
      e08:	85 e0       	ldi	r24, 0x05	; 5
      e0a:	0e 94 5d 00 	call	0xba	; 0xba <lamp_toggle>
-		break;
      e0e:	08 95       	ret
-		case 6:
-			// DimmerLED ON/OFF (Toggle DimmerLED Status)
-			Lamp_Service_Dim_Toggle();
      e10:	0e 94 3f 04 	call	0x87e	; 0x87e <Lamp_Service_Dim_Toggle>
-		break;
      e14:	08 95       	ret
-		default:
-			uart_sendString("Invalid choice. Please try again.\n");
      e16:	8b ef       	ldi	r24, 0xFB	; 251
      e18:	91 e0       	ldi	r25, 0x01	; 1
      e1a:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
      e1e:	08 95       	ret
 
 00000e20 <AC_menu>:
-	}
-}
-
-void AC_menu()
-{
-	uart_sendString("AC Menu");
      e20:	89 e2       	ldi	r24, 0x29	; 41
      e22:	92 e0       	ldi	r25, 0x02	; 2
      e24:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	AC ac_struct = airConditioner_Status();
      e28:	0e 94 1f 04 	call	0x83e	; 0x83e <airConditioner_Status>
-	uart_sendString(ac_struct.AC_Status ? "[ON]" : "[OFF]");
      e2c:	61 11       	cpse	r22, r1
      e2e:	1a c0       	rjmp	.+52     	; 0xe64 <AC_menu+0x44>
      e30:	0e c0       	rjmp	.+28     	; 0xe4e <AC_menu+0x2e>
-	uart_sendString("Press (T) to turn ");
-	uart_sendString(ac_struct.AC_Status ? "[OFF]" : "[ON]");
      e32:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	u8 key = uart_receiveByte();
      e36:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <uart_receiveByte>
-	if (key == 'T')
      e3a:	84 35       	cpi	r24, 0x54	; 84
      e3c:	19 f4       	brne	.+6      	; 0xe44 <AC_menu+0x24>
-	{
-		airConditioner_Toggle();
      e3e:	0e 94 18 04 	call	0x830	; 0x830 <airConditioner_Toggle>
      e42:	08 95       	ret
-	}
-	else
-	{
-		uart_sendString("Wrong Input");
      e44:	81 e3       	ldi	r24, 0x31	; 49
      e46:	92 e0       	ldi	r25, 0x02	; 2
      e48:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	}
-}
      e4c:	08 95       	ret
-
-void AC_menu()
-{
-	uart_sendString("AC Menu");
-	AC ac_struct = airConditioner_Status();
-	uart_sendString(ac_struct.AC_Status ? "[ON]" : "[OFF]");
      e4e:	8e e1       	ldi	r24, 0x1E	; 30
      e50:	92 e0       	ldi	r25, 0x02	; 2
      e52:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("Press (T) to turn ");
      e56:	8d e3       	ldi	r24, 0x3D	; 61
      e58:	92 e0       	ldi	r25, 0x02	; 2
      e5a:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString(ac_struct.AC_Status ? "[OFF]" : "[ON]");
      e5e:	84 e2       	ldi	r24, 0x24	; 36
      e60:	92 e0       	ldi	r25, 0x02	; 2
      e62:	e7 cf       	rjmp	.-50     	; 0xe32 <AC_menu+0x12>
-
-void AC_menu()
-{
-	uart_sendString("AC Menu");
-	AC ac_struct = airConditioner_Status();
-	uart_sendString(ac_struct.AC_Status ? "[ON]" : "[OFF]");
      e64:	84 e2       	ldi	r24, 0x24	; 36
      e66:	92 e0       	ldi	r25, 0x02	; 2
      e68:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString("Press (T) to turn ");
      e6c:	8d e3       	ldi	r24, 0x3D	; 61
      e6e:	92 e0       	ldi	r25, 0x02	; 2
      e70:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	uart_sendString(ac_struct.AC_Status ? "[OFF]" : "[ON]");
      e74:	8e e1       	ldi	r24, 0x1E	; 30
      e76:	92 e0       	ldi	r25, 0x02	; 2
      e78:	dc cf       	rjmp	.-72     	; 0xe32 <AC_menu+0x12>
 
 00000e7a <remote_Menu_User>:
-}
-
-void remote_Menu_User()
-{
-	while (1) {
-		uart_sendString("User Menu:\n");
      e7a:	80 e5       	ldi	r24, 0x50	; 80
      e7c:	92 e0       	ldi	r25, 0x02	; 2
      e7e:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		uart_sendString("1. Lamps\n");
      e82:	8c e5       	ldi	r24, 0x5C	; 92
      e84:	92 e0       	ldi	r25, 0x02	; 2
      e86:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		uart_sendString("2. AC\n");
      e8a:	86 e6       	ldi	r24, 0x66	; 102
      e8c:	92 e0       	ldi	r25, 0x02	; 2
      e8e:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		uart_sendString("3. Logout\n");
      e92:	8d e6       	ldi	r24, 0x6D	; 109
      e94:	92 e0       	ldi	r25, 0x02	; 2
      e96:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-
-		u8 userChoice = uart_receiveByte();
      e9a:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <uart_receiveByte>
-
-		switch (userChoice) {
      e9e:	82 33       	cpi	r24, 0x32	; 50
      ea0:	39 f0       	breq	.+14     	; 0xeb0 <remote_Menu_User+0x36>
      ea2:	83 33       	cpi	r24, 0x33	; 51
      ea4:	41 f0       	breq	.+16     	; 0xeb6 <remote_Menu_User+0x3c>
      ea6:	81 33       	cpi	r24, 0x31	; 49
      ea8:	59 f4       	brne	.+22     	; 0xec0 <remote_Menu_User+0x46>
-			case '1':
-			lamp_menu();
      eaa:	0e 94 c4 06 	call	0xd88	; 0xd88 <lamp_menu>
-			break;
      eae:	e5 cf       	rjmp	.-54     	; 0xe7a <remote_Menu_User>
-			case '2':
-			AC_menu();
      eb0:	0e 94 10 07 	call	0xe20	; 0xe20 <AC_menu>
-			break;
      eb4:	e2 cf       	rjmp	.-60     	; 0xe7a <remote_Menu_User>
-			case '3':
-			logout_remote();
      eb6:	0e 94 06 06 	call	0xc0c	; 0xc0c <logout_remote>
-			remote_login_menu();
      eba:	0e 94 65 07 	call	0xeca	; 0xeca <remote_login_menu>
-			return;
      ebe:	08 95       	ret
-			default:
-			uart_sendString("Invalid choice. Please try again.\n");
      ec0:	8b ef       	ldi	r24, 0xFB	; 251
      ec2:	91 e0       	ldi	r25, 0x01	; 1
      ec4:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-			continue;
      ec8:	d8 cf       	rjmp	.-80     	; 0xe7a <remote_Menu_User>
 
 00000eca <remote_login_menu>:
-		uart_sendString("Error: EEPROM write failed\n");
-	}
-}
-
-void remote_login_menu()
-{
      eca:	cf 93       	push	r28
      ecc:	df 93       	push	r29
      ece:	cd b7       	in	r28, 0x3d	; 61
@@ -2720,43 +1854,23 @@ void remote_login_menu()
      ed8:	de bf       	out	0x3e, r29	; 62
      eda:	0f be       	out	0x3f, r0	; 63
      edc:	cd bf       	out	0x3d, r28	; 61
-	user_remote registeredUsers;
-	displayAllUsersOnRemote();
      ede:	0e 94 58 05 	call	0xab0	; 0xab0 <displayAllUsersOnRemote>
-	u8 id = selectUserAndLogin_remote();
      ee2:	0e 94 af 05 	call	0xb5e	; 0xb5e <selectUserAndLogin_remote>
-	getUserFromEEPROM_remote(id,&registeredUsers);
      ee6:	be 01       	movw	r22, r28
      ee8:	6f 5f       	subi	r22, 0xFF	; 255
      eea:	7f 4f       	sbci	r23, 0xFF	; 255
      eec:	0e 94 29 05 	call	0xa52	; 0xa52 <getUserFromEEPROM_remote>
-	if (registeredUsers.id == 1 && loginAck_remote())
      ef0:	8a 8d       	ldd	r24, Y+26	; 0x1a
      ef2:	81 30       	cpi	r24, 0x01	; 1
      ef4:	39 f4       	brne	.+14     	; 0xf04 <remote_login_menu+0x3a>
      ef6:	0e 94 01 06 	call	0xc02	; 0xc02 <loginAck_remote>
      efa:	88 23       	and	r24, r24
      efc:	19 f0       	breq	.+6      	; 0xf04 <remote_login_menu+0x3a>
-	{
-		remote_Menu_Admin();
      efe:	0e 94 90 07 	call	0xf20	; 0xf20 <remote_Menu_Admin>
      f02:	05 c0       	rjmp	.+10     	; 0xf0e <remote_login_menu+0x44>
-	}
-	else
-	{
-		//login
-		if (loginAck_remote())
      f04:	0e 94 01 06 	call	0xc02	; 0xc02 <loginAck_remote>
      f08:	81 11       	cpse	r24, r1
-		{
-			remote_Menu_User();
      f0a:	0e 94 3d 07 	call	0xe7a	; 0xe7a <remote_Menu_User>
-		}
-		else{
-			//do nothing
-		}
-	}
-}
      f0e:	6a 96       	adiw	r28, 0x1a	; 26
      f10:	0f b6       	in	r0, 0x3f	; 63
      f12:	f8 94       	cli
@@ -2768,36 +1882,22 @@ void remote_login_menu()
      f1e:	08 95       	ret
 
 00000f20 <remote_Menu_Admin>:
-}
-
-void remote_Menu_Admin()
-{
-	while (1) {
-		uart_sendString("Admin Menu:\n");
      f20:	88 e7       	ldi	r24, 0x78	; 120
      f22:	92 e0       	ldi	r25, 0x02	; 2
      f24:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		uart_sendString("1. Register User (Remote)\n");
      f28:	85 e8       	ldi	r24, 0x85	; 133
      f2a:	92 e0       	ldi	r25, 0x02	; 2
      f2c:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		uart_sendString("2. Register User (Local)\n");
      f30:	80 ea       	ldi	r24, 0xA0	; 160
      f32:	92 e0       	ldi	r25, 0x02	; 2
      f34:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		uart_sendString("3. Control Door (Open/Close)\n");
      f38:	8a eb       	ldi	r24, 0xBA	; 186
      f3a:	92 e0       	ldi	r25, 0x02	; 2
      f3c:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-		uart_sendString("4. Logout\n");
      f40:	88 ed       	ldi	r24, 0xD8	; 216
      f42:	92 e0       	ldi	r25, 0x02	; 2
      f44:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-
-		u8 adminChoice = uart_receiveByte();
      f48:	0e 94 f3 03 	call	0x7e6	; 0x7e6 <uart_receiveByte>
-
-		switch (adminChoice) {
      f4c:	82 33       	cpi	r24, 0x32	; 50
      f4e:	61 f0       	breq	.+24     	; 0xf68 <remote_Menu_Admin+0x48>
      f50:	18 f4       	brcc	.+6      	; 0xf58 <remote_Menu_Admin+0x38>
@@ -2809,49 +1909,25 @@ void remote_Menu_Admin()
      f5c:	84 33       	cpi	r24, 0x34	; 52
      f5e:	51 f0       	breq	.+20     	; 0xf74 <remote_Menu_Admin+0x54>
      f60:	0e c0       	rjmp	.+28     	; 0xf7e <remote_Menu_Admin+0x5e>
-			case '1':
-				registerUserRemote();
      f62:	0e 94 4c 06 	call	0xc98	; 0xc98 <registerUserRemote>
-			break;
      f66:	dc cf       	rjmp	.-72     	; 0xf20 <remote_Menu_Admin>
-			case '2':
-				registerUserLocal();
      f68:	0e 94 88 06 	call	0xd10	; 0xd10 <registerUserLocal>
-			break;
      f6c:	d9 cf       	rjmp	.-78     	; 0xf20 <remote_Menu_Admin>
-			case '3':
-				doorToggle();
      f6e:	0e 94 35 04 	call	0x86a	; 0x86a <doorToggle>
-			break;
      f72:	d6 cf       	rjmp	.-84     	; 0xf20 <remote_Menu_Admin>
-			case '4':
-				logout_remote();
      f74:	0e 94 06 06 	call	0xc0c	; 0xc0c <logout_remote>
-				remote_login_menu();
      f78:	0e 94 65 07 	call	0xeca	; 0xeca <remote_login_menu>
-			return;
      f7c:	08 95       	ret
-			default:
-				uart_sendString("Invalid choice. Please try again.\n");
      f7e:	8b ef       	ldi	r24, 0xFB	; 251
      f80:	91 e0       	ldi	r25, 0x01	; 1
      f82:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-			continue;
      f86:	cc cf       	rjmp	.-104    	; 0xf20 <remote_Menu_Admin>
 
 00000f88 <remote_menu_Service>:
-	}
-}
-
-void remote_menu_Service(void)
-{
-	uart_sendString("System is starting in remote mode\n");
      f88:	83 ee       	ldi	r24, 0xE3	; 227
      f8a:	92 e0       	ldi	r25, 0x02	; 2
      f8c:	0e 94 e4 03 	call	0x7c8	; 0x7c8 <uart_sendString>
-	remote_admin_register();
      f90:	0e 94 09 06 	call	0xc12	; 0xc12 <remote_admin_register>
-	remote_login_menu();
      f94:	0e 94 65 07 	call	0xeca	; 0xeca <remote_login_menu>
      f98:	08 95       	ret
 

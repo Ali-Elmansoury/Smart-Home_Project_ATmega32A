@@ -1,6 +1,7 @@
 #include "timer1.h"
 #include "bit_math.h"
 #include <stdio.h>
+#include <avr/io.h>
 #include <avr/interrupt.h>
 
 void (*timer1OvClbkPtr)(void)= NULL;
@@ -60,10 +61,10 @@ void pwm1_init(u8 modeA, u8 modeB, u8 freq)
 
 void pwm1_setTopValue(u8 topValue)
 {
-	TIMER1_ICR1_REG = topValue;
+	ICR1 = topValue;
 }
 
 void pwm1_setDutyCycle(u8 dutyCycle)
 {
-	TIMER1_OCR1A_REG = dutyCycle;
+	OCR1A = dutyCycle;
 }
