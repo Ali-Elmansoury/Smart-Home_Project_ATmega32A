@@ -28,7 +28,8 @@ void remoteDB_init()
 	{
 		userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
 		for (u8 i = 0; i < userCount; i++) {
-			getUserFromEEPROM_remote(i, remoteUsers);
+			getUserFromEEPROM_remote(i, &remoteUsers);
+			
 		}
 		
 	}
@@ -49,15 +50,19 @@ void getPassword_remote(u8* password)
 void writeUserToEEPROM(user_remote *user, u8 userId) {
 	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + (userId * 26);
 	EEPROM_write_block(user->uname, startAddress, 16);
-	EEPROM_write_block(user->password, (startAddress+16), 9);
-	EEPROM_write((startAddress+16+9),user->id);
+	startAddress+=16;
+	EEPROM_write_block(user->password,startAddress, 9);
+	startAddress+=9;
+	EEPROM_write(startAddress,user->id);
 }
 
 void readUserFromEEPROM(user_remote *user, u8 userId) {
 	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + (userId * 26);
 	EEPROM_read_block(user->uname, startAddress, 16);
-	EEPROM_read_block(user->password, (startAddress+16), 9);
-	user->id = EEPROM_read((startAddress+16+9));
+	startAddress+=16;
+	EEPROM_read_block(user->password, startAddress, 9);
+	startAddress+=9;
+	user->id = EEPROM_read(startAddress);
 }
 
 
