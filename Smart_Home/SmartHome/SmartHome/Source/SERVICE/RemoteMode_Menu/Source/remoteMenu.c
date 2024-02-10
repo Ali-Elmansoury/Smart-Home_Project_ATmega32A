@@ -144,7 +144,7 @@ void remote_Menu_User()
 		uart_sendString("2. AC\n");
 		uart_sendString("3. Logout\n");
 
-		u8 userChoice = uart_receiveByte();
+		u8 userChoice = uart_receiveByte() - '0';
 
 		switch (userChoice) {
 			case '1':
@@ -173,7 +173,7 @@ void remote_Menu_Admin()
 		uart_sendString("3. Control Door (Open/Close)\n");
 		uart_sendString("4. Logout\n");
 
-		u8 adminChoice = uart_receiveByte();
+		u8 adminChoice = uart_receiveByte() - '0';
 
 		switch (adminChoice) {
 			case '1':
@@ -206,7 +206,7 @@ void lamp_menu()
 	uart_sendString("4. Lamp4\n");
 	uart_sendString("5. Lamp5\n");
 	uart_sendString("6. Dimmer\n");
-	u8 lamp_choice = uart_receiveByte();
+	u8 lamp_choice = uart_receiveByte() - '0';
 	switch (lamp_choice)
 	{
 		case 1:
