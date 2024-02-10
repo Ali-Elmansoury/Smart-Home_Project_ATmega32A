@@ -14,6 +14,7 @@
 #include "door.h"
 #include "localDB.h"
 #include "remoteDB.h"
+#include "eeprom.h"
 
 // Function prototypes
 void remote_admin_register(void);
@@ -28,16 +29,15 @@ void remote_menu_Service(void);
 
 void remote_admin_register()
 {
-	static u8 hasRun;
 	if (EEPROM_read(EEPROM_USER_COUNT_ADDR)>0)
 	{return;}
-	
-		//remoteDB_init();
-
+	else
+	{
 		uart_sendString("Register as an admin\n");
 		uart_sendString("Enter username: ");
 		u8 username[16];
 		uart_receiveString(&username);
+		uart_sendString("\n");
 		u8 password[9];
 		getPassword_remote(&password);  // Get password from user
 		u8 registrationResult = addUserToEEPROM_remote(&username,&password);
@@ -56,8 +56,7 @@ void remote_admin_register()
 			// Other error occurred during EEPROM write
 			uart_sendString("Error: EEPROM write failed\n");
 		}
-		hasRun = 1;
-	
+	}
 }
 
 void registerUserRemote()
@@ -115,11 +114,10 @@ void registerUserLocal()
 
 void remote_login_menu()
 {
-	user_remote registeredUsers;
+	user_remote user;
 	displayAllUsersOnRemote();
 	u8 id = selectUserAndLogin_remote();
-	getUserFromEEPROM_remote(id,&registeredUsers);
-	if (registeredUsers.id == 1 && loginAck_remote())
+	if (id == 1 && loginAck_remote())
 	{
 		remote_Menu_Admin();
 	}
@@ -144,7 +142,7 @@ void remote_Menu_User()
 		uart_sendString("2. AC\n");
 		uart_sendString("3. Logout\n");
 
-		u8 userChoice = uart_receiveByte() - '0';
+		u8 userChoice = uart_receiveByte();
 
 		switch (userChoice) {
 			case '1':
@@ -173,7 +171,7 @@ void remote_Menu_Admin()
 		uart_sendString("3. Control Door (Open/Close)\n");
 		uart_sendString("4. Logout\n");
 
-		u8 adminChoice = uart_receiveByte() - '0';
+		u8 adminChoice = uart_receiveByte();
 
 		switch (adminChoice) {
 			case '1':

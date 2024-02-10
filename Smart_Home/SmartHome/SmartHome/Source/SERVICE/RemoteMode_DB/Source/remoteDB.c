@@ -68,12 +68,11 @@ void readUserFromEEPROM(user_remote *user, u8 userId) {
 
 u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 {
-	userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
 
 	if (userCount < 10) {  // Assuming a maximum of 10 users
-		strcpy(remoteUsers->uname, username);
-		strcpy(remoteUsers->password, password);
-		remoteUsers->id = userCount + 1;
+		strcpy(&remoteUsers[userCount].uname, username);
+		strcpy(&remoteUsers[userCount].password, password);
+		remoteUsers[userCount].id = userCount + 1;
 
 		writeUserToEEPROM(&remoteUsers,userCount);
 
@@ -130,12 +129,13 @@ u8 selectUserAndLogin_remote()
 	uart_sendString("Enter User ID:");
 
 	selectedID = uart_receiveByte()-'0';
-
+	
+	uart_sendString("\n");
+	
 	if (selectedID >= 1 && selectedID <= 10)
 	{  // Assuming a maximum of 10 users
 		
 		char enteredPassword[9];
-		uart_sendString(remoteUsers[selectedID-1].password);
 		getPassword_remote(enteredPassword);
 		
 		if (strcmp(enteredPassword, remoteUsers[selectedID-1].password) == 0)
