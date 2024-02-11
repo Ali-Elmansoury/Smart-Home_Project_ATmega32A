@@ -136,61 +136,65 @@ void remote_login_menu()
 
 void remote_Menu_User()
 {
-	while (1) {
-		uart_sendString("User Menu:\n");
-		uart_sendString("1. Lamps\n");
-		uart_sendString("2. AC\n");
-		uart_sendString("3. Logout\n");
+	uart_sendString("User Menu:\n");
+	uart_sendString("1. Lamps\n");
+	uart_sendString("2. AC\n");
+	uart_sendString("3. Logout\n");
 
-		u8 userChoice = uart_receiveByte();
+	u8 userChoice = uart_receiveByte();
 
-		switch (userChoice) {
-			case '1':
+	switch (userChoice) {
+		case '1':
 			lamp_menu();
-			break;
-			case '2':
+		break;
+		case '2':
 			AC_menu();
-			break;
-			case '3':
+		break;
+		case '3':
 			logout_remote();
 			remote_login_menu();
-			return;
-			default:
+		return;
+		default:
 			uart_sendString("Invalid choice. Please try again.\n");
-			continue;
-		}
+		continue;
 	}
 }
 
 void remote_Menu_Admin()
 {
-	while (1) {
-		uart_sendString("Admin Menu:\n");
-		uart_sendString("1. Register User (Remote)\n");
-		uart_sendString("2. Register User (Local)\n");
-		uart_sendString("3. Control Door (Open/Close)\n");
-		uart_sendString("4. Logout\n");
+	uart_sendString("Admin Menu:\n");
+	uart_sendString("1. Register User (Remote)\n");
+	uart_sendString("2. Register User (Local)\n");
+	uart_sendString("3. Lamps\n");
+	uart_sendString("4. AC\n");
+	uart_sendString("5. Control Door (Open/Close)\n");
+	uart_sendString("6. Logout\n");
 
-		u8 adminChoice = uart_receiveByte();
+	u8 adminChoice = uart_receiveByte();
 
-		switch (adminChoice) {
-			case '1':
-				registerUserRemote();
-			break;
-			case '2':
-				registerUserLocal();
-			break;
-			case '3':
-				doorToggle();
-			break;
-			case '4':
-				logout_remote();
-				remote_login_menu();
-			return;
-			default:
-				uart_sendString("Invalid choice. Please try again.\n");
-			continue;
-		}
+	switch (adminChoice) {
+		case '1':
+			registerUserRemote();
+		break;
+		case '2':
+			registerUserLocal();
+		break;
+		case '3':
+			lamp_menu();
+		break;
+		case '4':
+			AC_menu();
+		break;
+		case '5':
+			doorToggle();
+		break;
+		case '6':
+			logout_remote();
+			remote_login_menu();
+		return;
+		default:
+			uart_sendString("Invalid choice. Please try again.\n");
+		continue;
 	}
 }
 
