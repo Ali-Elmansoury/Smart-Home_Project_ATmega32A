@@ -17,6 +17,9 @@
 #include "adc.h"
 #include "dio.h"
 #include "uart.h"
+#include "remoteDB.h"
+#include "lamp.h"
+
 int main(void)
 {
 	airConditioner_init();

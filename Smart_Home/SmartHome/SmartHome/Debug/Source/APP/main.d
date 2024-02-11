@@ -13,7 +13,9 @@ Source/APP/main.d Source/APP/main.o: ../Source/APP/main.c \
  ../Source/MCAL/DIO/Include/dio.h ../Source/MCAL/DIO/Include/dio_reg.h \
  ../Source/MCAL/ADC/Include/adc.h ../Source/MCAL/ADC/Include/adc_reg.h \
  ../Source/MCAL/UART/Include/uart.h \
- ../Source/MCAL/UART/Include/uart_reg.h
+ ../Source/MCAL/UART/Include/uart_reg.h \
+ ../Source/SERVICE/RemoteMode_DB/Include/remoteDB.h \
+ ../Source/HAL/Lamp/Include/lamp.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
@@ -52,3 +54,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../Source/MCAL/UART/Include/uart.h:
 
 ../Source/MCAL/UART/Include/uart_reg.h:
+
+../Source/SERVICE/RemoteMode_DB/Include/remoteDB.h:
+
+../Source/HAL/Lamp/Include/lamp.h:

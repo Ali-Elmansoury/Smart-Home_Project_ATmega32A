@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 000005b8  00000000  00000000  00001dc4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00004583  00000000  00000000  0000237c  2**0
+  6 .debug_info   00004564  00000000  00000000  0000237c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000019ac  00000000  00000000  000068ff  2**0
+  7 .debug_abbrev 00001994  00000000  00000000  000068e0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000026e6  00000000  00000000  000082ab  2**0
+  8 .debug_line   00002741  00000000  00000000  00008274  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000d1c  00000000  00000000  0000a994  2**2
+  9 .debug_frame  00000d1c  00000000  00000000  0000a9b8  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001262  00000000  00000000  0000b6b0  2**0
+ 10 .debug_str    00001203  00000000  00000000  0000b6d4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00002344  00000000  00000000  0000c912  2**0
+ 11 .debug_loc    00002344  00000000  00000000  0000c8d7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000490  00000000  00000000  0000ec56  2**0
+ 12 .debug_ranges 00000490  00000000  00000000  0000ec1b  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -96,9 +96,9 @@ Disassembly of section .text:
       8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000092 <main>:
-#include "adc.h"
-#include "dio.h"
-#include "uart.h"
+#include "remoteDB.h"
+#include "lamp.h"
+
 int main(void)
 {
 	airConditioner_init();
@@ -1405,6 +1405,12 @@ ISR(TIMER0_COMP_vect)
      778:	18 95       	reti
 
 0000077a <__vector_9>:
+	TIMER1_TCCR1B_REG |= freq;
+}
+
+void pwm1_setTopValue(u8 topValue)
+{
+	ICR1 = topValue;
      77a:	1f 92       	push	r1
      77c:	0f 92       	push	r0
      77e:	0f b6       	in	r0, 0x3f	; 63
@@ -1446,6 +1452,11 @@ ISR(TIMER0_COMP_vect)
      7ca:	18 95       	reti
 
 000007cc <pwm1_setDutyCycle>:
+}
+
+void pwm1_setDutyCycle(u8 dutyCycle)
+{
+	OCR1A = dutyCycle;
      7cc:	90 e0       	ldi	r25, 0x00	; 0
      7ce:	9b bd       	out	0x2b, r25	; 43
      7d0:	8a bd       	out	0x2a, r24	; 42
