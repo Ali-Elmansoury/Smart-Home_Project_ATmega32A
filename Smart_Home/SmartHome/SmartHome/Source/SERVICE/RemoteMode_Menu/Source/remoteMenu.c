@@ -156,7 +156,7 @@ void remote_Menu_User()
 		return;
 		default:
 			uart_sendString("Invalid choice. Please try again.\n");
-		continue;
+		break;
 	}
 }
 
@@ -194,7 +194,7 @@ void remote_Menu_Admin()
 		return;
 		default:
 			uart_sendString("Invalid choice. Please try again.\n");
-		continue;
+		break;
 	}
 }
 
