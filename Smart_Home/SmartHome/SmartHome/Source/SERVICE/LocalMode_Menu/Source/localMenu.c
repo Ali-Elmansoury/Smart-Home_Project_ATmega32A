@@ -10,6 +10,8 @@
 #include "stdio.h"
 #include "timer2.h"
 #include "gie.h"
+#include <avr/interrupt.h>
+
 
 u8 number_of_active_devices = 0;
 boolean local_idle = FALSE;
@@ -414,6 +416,7 @@ void local_menu_Idle_timer()
 	}
 }
 
+
 void local_menu_init()
 {
 	gie_enableAllInterrupts();
@@ -422,4 +425,6 @@ void local_menu_init()
 	timer2_setOvCallBack(&local_menu_Idle_timer);
 	timer2_enableOvInterrupt();
 	timer2_start(TIMER2_F_CPU_DIV_64);
+	
+	
 }
