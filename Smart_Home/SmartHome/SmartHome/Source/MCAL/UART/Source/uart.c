@@ -48,7 +48,9 @@ void uart_sendString(u8 *str)
 
 u8 uart_receiveByte(void)
 {
-	return rx_data;
+	u8 temp = rx_data;
+	rx_data = 255;
+	return temp;
 }
 
 ISR(USART_RXC_vect)
@@ -69,10 +71,18 @@ void uart_receiveString(u8 *receivedStr)
 {
 	u8 i = 0;
 	receivedStr[i] = uart_receiveByte();
-	while(receivedStr[i] != '#')
+	if (receivedStr[i] == 255)
 	{
-		i++;
-		receivedStr[i] = uart_receiveByte();
+		return 255;
 	}
-	receivedStr[i] = '\0';
+	else
+	{
+		while(receivedStr[i] != '#')
+		{
+			i++;
+			receivedStr[i] = uart_receiveByte();
+		}
+		receivedStr[i] = '\0';
+	}
+	
 }
