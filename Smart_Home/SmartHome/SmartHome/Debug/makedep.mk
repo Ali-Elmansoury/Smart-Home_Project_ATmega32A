@@ -36,6 +36,8 @@ Source\MCAL\DIO\Source\dio.c
 
 Source\MCAL\EEPROM\Source\eeprom.c
 
+Source\MCAL\EXT_INT\Source\ext_int.c
+
 Source\MCAL\GIE\Source\gie.c
 
 Source\MCAL\Timer0\Source\timer0.c
