@@ -23,4 +23,6 @@
 #define UDR_EMPTY_FLAG				(5)
 #define UDR_RECEIVE_COMPLETE_FLAG	(7)
 
+#define RX_COMPLETE_INTERRUPT_ENABLE_BIT_NOT		(7)
+
 #endif /* UART_REG_H_ */

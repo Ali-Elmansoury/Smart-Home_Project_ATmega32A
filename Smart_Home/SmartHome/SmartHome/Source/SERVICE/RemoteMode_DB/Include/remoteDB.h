@@ -36,7 +36,7 @@ typedef struct remoteDB
 /*Function to add a new user and store in EEPROM*/
 u8 addUserToEEPROM_remote(const u8 *username, const u8* password);
 /*Function to delete a user from EEPROM by id number*/
-void deleteUserFromEEPROM_remote(u8 id);
+//void deleteUserFromEEPROM_remote(u8 id);
 /*Function to select a user by order number and verify the password*/
 u8 selectUserAndLogin_remote();
 /*Function to retrieve a user from EEPROM by order number*/

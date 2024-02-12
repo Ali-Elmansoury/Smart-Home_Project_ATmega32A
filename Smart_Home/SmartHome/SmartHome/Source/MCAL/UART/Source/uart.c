@@ -7,6 +7,9 @@
 
 #include "uart.h"
 #include "bit_math.h"
+#include "avr/interrupt.h"
+
+volatile u8 rx_data;
 
 void uart_init(u16 baud)
 {
@@ -18,7 +21,10 @@ void uart_init(u16 baud)
 	SET_BIT(UART_UCSRB_REG,TX_ENABLE_BIT_NO);
 	SET_BIT(UART_UCSRB_REG,RX_ENABLE_BIT_NO);
 	
-	/*Set data size=8, parity=even, stop=2*/
+	/*Enable RXCIE Receive Complete Interrupt Enable*/
+	SET_BIT(UART_UCSRB_REG,RX_COMPLETE_INTERRUPT_ENABLE_BIT_NOT);
+	
+	/*Set data size=8, parity=off, stop=1*/
 	UART_UCSRC_REG = URSEL_SET|DATA_8BIT|PARITY_OFF|STOP_BIT1;
 }
 
@@ -42,11 +48,12 @@ void uart_sendString(u8 *str)
 
 u8 uart_receiveByte(void)
 {
-	/*Wait until byte is received in UDR*/
-	while(CHECK_BIT(UART_UCSRA_REG,UDR_RECEIVE_COMPLETE_FLAG)==0);
-	
-	/*Return the received byte*/
-	return UART_UDR_REG;
+	return rx_data;
+}
+
+ISR(USART_RXC_vect)
+{
+	rx_data = UDR;
 }
 
 // void uart_receiveString(u8 *receivedStr)

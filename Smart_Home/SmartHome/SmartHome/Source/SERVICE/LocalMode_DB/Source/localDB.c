@@ -16,6 +16,24 @@
 
 user_local localUsers[DB_MAX_SIZE];
 boolean login_flag_local = FALSE;
+u8 userCount_local = 0;
+
+void localDB_init()
+{
+	if (EEPROM_read(EEPROM_USER_COUNT_ADDR_LOCAL) == 0xFF)
+	{
+		EEPROM_write(EEPROM_USER_COUNT_ADDR_LOCAL, userCount_local);
+	}
+	else
+	{
+		userCount_local = EEPROM_read(EEPROM_USER_COUNT_ADDR_LOCAL);
+		for (u8 i = 0; i < userCount_local; i++) {
+			getUserFromEEPROM_local(i, &localUsers);
+			
+		}
+		
+	}
+}
 
 // Function to get an 8-digit password from the user securely
 void getPassword_local(u8* password, u8 maxLength)
@@ -69,27 +87,35 @@ void getPassword_local(u8* password, u8 maxLength)
 	password[index] = '\0';  // Null-terminate the password
 }
 
+void writeUserToEEPROM_local(user_local *user, u8 userId) {
+	u16 startAddress = EEPROM_USER_DATA_ADDR_LOCAL + (userId * 26);
+	EEPROM_write_block(user->uname, startAddress, 16);
+	startAddress+=16;
+	EEPROM_write_block(user->password,startAddress, 9);
+	startAddress+=9;
+	EEPROM_write(startAddress,user->id);
+}
+
+void readUserFromEEPROM_local(user_local *user, u8 userId) {
+	u16 startAddress = EEPROM_USER_DATA_ADDR_LOCAL + (userId * 26);
+	EEPROM_read_block(user->uname, startAddress, 16);
+	startAddress+=16;
+	EEPROM_read_block(user->password, startAddress, 9);
+	startAddress+=9;
+	user->id = EEPROM_read(startAddress);
+}
+
 u8 addUserToEEPROM_local(const u8 *username, const u8* password)
 {
-	EEPROM_write(EEPROM_USER_COUNT_ADDR_LOCAL,0);
-	u8 userCount;
-	EEPROM_read_block(&userCount, (const void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
+	if (userCount_local < 10) {  // Assuming a maximum of 10 users
+		strcpy(&localUsers[userCount_local].uname, username);
+		strcpy(&localUsers[userCount_local].password, password);
+		localUsers[userCount_local].id = userCount_local + 1;
 
-	if (userCount < 10) {  // Assuming a maximum of 10 users
-		user_local newUser;  // Temporary variable to store the new user data
+		writeUserToEEPROM_local(&localUsers,userCount_local);
 
-		// Populate the new user data
-		strncpy(newUser.uname, username, sizeof(newUser.uname) - 1);
-		strncpy(newUser.password, password, sizeof(newUser.password) - 1);
-		newUser.id = userCount + 1;
-
-		// Write the new user data to EEPROM
-		EEPROM_write_block(&newUser, (void*)(EEPROM_USER_DATA_ADDR_LOCAL + userCount * sizeof(user_local)), sizeof(user_local));
-
-		// Update the user count
-		userCount++;
-		EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_LOCAL, sizeof(userCount));
-
+		userCount_local++;
+		EEPROM_write(EEPROM_USER_COUNT_ADDR_LOCAL, userCount_local);
 		return REGISTRATION_SUCCESS;
 		} else {
 		// Handle error: User array is full
@@ -98,13 +124,10 @@ u8 addUserToEEPROM_local(const u8 *username, const u8* password)
 }
 
 
-boolean getUserFromEEPROM_local(u8 id, user_local* user)
+void getUserFromEEPROM_local(u8 id, user_local* user)
 {
-	if (id >= 1 && id <= 10) {  // Assuming a maximum of 10 users
-		EEPROM_read_block(user, (const void*)(EEPROM_USER_DATA_ADDR_LOCAL + (id - 1) * sizeof(user_local)), sizeof(user_local));
-		return TRUE;  // Successful retrieval
-		} else {
-		return FALSE;  // Invalid user ID
+	if (id >= 0 && id <= 9) {  // Assuming a maximum of 10 users
+		readUserFromEEPROM_local(user,id);
 	}
 }
 
@@ -132,15 +155,10 @@ boolean getUserFromEEPROM_local(u8 id, user_local* user)
 void displayUsersOnLCD(u8 startIndex, u8 endIndex)
 {
 	lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
-	for (u8 i = startIndex; i < endIndex && i < 10; ++i) {  // Assuming a maximum of 10 users
-		user_local currentUser;
-		if (getUserFromEEPROM_local(i + 1, &currentUser)) {
-			char displayText[50];
-			snprintf(displayText, sizeof(displayText), "User: %s, ID: %d", currentUser.uname, currentUser.id);
-			lcd_displayStr(displayText);
-			} else {
-			lcd_displayStr("Invalid User ID");
-		}
+	for (u8 i = startIndex; i < endIndex && i < userCount_local; i++) {  // Assuming a maximum of 10 users
+		char displayText[50];
+		snprintf(displayText, sizeof(displayText), "User: %s, ID: %d", localUsers[i].uname, localUsers[i].id);
+		lcd_displayStr(displayText);
 	}
 }
 
@@ -182,27 +200,19 @@ void selectUserAndLogin_local()
 
 	if (selectedID >= 1 && selectedID <= 10)
 	{  // Assuming a maximum of 10 users
-		user_local currentUser;  // Temporary variable to store user data
-		if (getUserFromEEPROM_local(selectedID, &currentUser))
+		char enteredPassword[9];
+		lcd_displayStr("Enter Password:");
+
+		getPassword_local(enteredPassword,9);
+
+		if (strcmp(enteredPassword, localUsers[selectedID-1].password) == 0)
 		{
-			char enteredPassword[20];
-			lcd_displayStr("Enter Password:");
-
-			getPassword_local(enteredPassword,9);
-
-			if (strcmp(enteredPassword, currentUser.password) == 0)
-			{
-				lcd_displayStr("Login Successful");
-				login_flag_local = TRUE;
-			}
-			else
-			{
-				lcd_displayStr("Error: Incorrect Password");
-			}
+			lcd_displayStr("Login Successful");
+			login_flag_local = TRUE;
 		}
 		else
 		{
-			lcd_displayStr("Error: Invalid User Order");
+			lcd_displayStr("Error: Incorrect Password");
 		}
 	}
 	else
