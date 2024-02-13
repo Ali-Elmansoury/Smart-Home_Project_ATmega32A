@@ -83,18 +83,10 @@ void uart_receiveString(u8 *receivedStr)
 {
 	u8 i = 0;
 	receivedStr[i] = uart_receiveByte();
-	if (receivedStr[i] == 255)
+	while(receivedStr[i] != '#')
 	{
-		return 255;
+		i++;
+		receivedStr[i] = uart_receiveByte();
 	}
-	else
-	{
-		while(receivedStr[i] != '#')
-		{
-			i++;
-			receivedStr[i] = uart_receiveByte();
-		}
-		receivedStr[i] = '\0';
-	}
-	
+	receivedStr[i] = '\0';
 }

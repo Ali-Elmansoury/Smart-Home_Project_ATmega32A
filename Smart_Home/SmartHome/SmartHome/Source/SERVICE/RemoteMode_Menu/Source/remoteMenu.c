@@ -114,7 +114,6 @@ void registerUserLocal()
 
 void remote_login_menu()
 {
-	user_remote user;
 	displayAllUsersOnRemote();
 	u8 id = selectUserAndLogin_remote();
 	if (id == 1 && loginAck_remote())
