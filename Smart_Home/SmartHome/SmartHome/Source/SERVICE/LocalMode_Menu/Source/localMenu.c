@@ -481,10 +481,10 @@ void local_menu_Idle_timer()
 {
 	secondCounter++;
 	timer2_setPreLoad(6); // 16ms 
-	if (secondCounter == 312)
+	if (secondCounter == 624)
 	{
 		lamp_toggle(LAMP1_ID);
-		//your desired function to be run every 5 secs
+		//your desired function to be run every 10 secs
 		secondCounter=0;
 		local_idle=TRUE;
 	}
