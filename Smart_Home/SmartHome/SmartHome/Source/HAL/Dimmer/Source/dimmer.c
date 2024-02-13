@@ -12,7 +12,7 @@
 
 void dimmer_init(void)
 {
-	pwm0_init(TIMER0_NON_INVERTED_PWM_FAST, PWM_F_62_5KHZ);
+	pwm0_init(TIMER0_NON_INVERTED_PWM_FAST, PWM_F_61HZ);
 	POT_init();
 	dio_setPinDirection(PORTB_ID,PIN3_ID,OUTPUT);
 }

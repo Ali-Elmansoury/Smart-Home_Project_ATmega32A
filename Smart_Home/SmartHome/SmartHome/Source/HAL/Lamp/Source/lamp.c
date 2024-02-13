@@ -8,9 +8,7 @@
 #include "relay.h"
 #include "lamp.h"
 
-boolean lamp_state[5]={FALSE};
-
-void lamp_init_state();
+boolean lamp_state[5]={FALSE,FALSE,FALSE,FALSE,FALSE};
 
 void lamp_init(void)
 {
@@ -20,11 +18,11 @@ void lamp_init(void)
 void lamp_toggle(u8 id)
 {
 	relay_toggle(id);
-	lamp_state[id] ^= TRUE;
+	lamp_state[(id-1)] ^= TRUE;
 }
 
 boolean lamp_Getstate(u8 id)
 {
-	return lamp_state[id];
+	return lamp_state[(id-1)];
 }
 

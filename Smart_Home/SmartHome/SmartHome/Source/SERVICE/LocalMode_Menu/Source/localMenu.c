@@ -2,7 +2,7 @@
 #include "lcd.h"
 #include "ac.h"
 #include "localMenu.h"
-#include "keypad.h"
+#include "mm74c922.h"
 #include "lamp.h"
 #include "Lamp_Dim_Service.h"
 #include "localDB.h"
@@ -24,12 +24,12 @@ void local_Menu_Slector_Display(const u8 *menu_selector_position)
 {
     switch (*menu_selector_position)
     {
-    case 0:
-        lcd_goTo(0, 0);
+    case row0:
+        lcd_goTo(row0, 0);
         lcd_displayChar('>');
         break;
-    case 1:
-        lcd_goTo(1, 0);
+    case row1:
+        lcd_goTo(row1, 0);
         lcd_displayChar('>');
         break;
     default:
@@ -65,42 +65,42 @@ void local_Menu_LED_Display(const u8 *menu_position)
     case 0:
 		
         lcd_displayStr("Lamp1 ");
-		lcd_displayStr(lamp_Getstate(LAMP1_ID) ? "[ON]" : "[OFF]");
+		lcd_displayStr(lamp_Getstate(LAMP1_ID) ? "[ON] " : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Lamp2 ");
-		lcd_displayStr(lamp_Getstate(LAMP2_ID) ? "[ON]" : "[OFF]");
+		lcd_displayStr(lamp_Getstate(LAMP2_ID) ? "[ON] " : "[OFF]");
         break;
     case 1:
         lcd_displayStr("Lamp2 ");
-		lcd_displayStr(lamp_Getstate(LAMP2_ID) ? "[ON]" : "[OFF]");
+		lcd_displayStr(lamp_Getstate(LAMP2_ID) ? "[ON] " : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Lamp3 ");
-		lcd_displayStr(lamp_Getstate(LAMP3_ID) ? "[ON]" : "[OFF]");
+		lcd_displayStr(lamp_Getstate(LAMP3_ID) ? "[ON] " : "[OFF]");
         break;
     case 2:
         lcd_displayStr("Lamp3 ");
-		lcd_displayStr(lamp_Getstate(LAMP3_ID) ? "[ON]" : "[OFF]");
+		lcd_displayStr(lamp_Getstate(LAMP3_ID) ? "[ON] " : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Lamp4 ");
-		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON]" : "[OFF]");
+		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON] " : "[OFF]");
         break;
     case 3:
         lcd_displayStr("Lamp4 ");
-		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON]" : "[OFF]");
+		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON] " : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Lamp5 ");
-		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON]" : "[OFF]");
+		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON] " : "[OFF]");
         break;
     case 4:
         lcd_displayStr("Lamp5 ");
-		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON]" : "[OFF]");
+		lcd_displayStr(lamp_Getstate(LAMP4_ID) ? "[ON] " : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("DimLamp ");
-		lcd_displayStr(Lamp_Service_Dim_state() ? "[ON]" : "[OFF]");
+		lcd_displayStr(Lamp_Service_Dim_state() ? "[ON] " : "[OFF]");
         break;
     case 5:
 		lcd_displayStr("DimLamp ");
-        lcd_displayStr(Lamp_Service_Dim_state() ? "[ON]" : "[OFF]");
+        lcd_displayStr(Lamp_Service_Dim_state() ? "[ON] " : "[OFF]");
         lcd_goTo(1, 1);
         lcd_displayStr("Return");
         break;    
@@ -136,18 +136,64 @@ void local_Menu_AC_Display(const u8 *menu_position, const AC *AC_Status)
 
 void local_Menu_Move_Selector(int direction, u8 *menu_selector_position, u8 *menu_position, u8 max_menu_position)
 {
-    if (direction == MOVE_UP && *menu_position > 0)
-    {
-        (*menu_position)--;
-    }
-    else if (direction == MOVE_DOWN && *menu_position < max_menu_position)
-    {
-        (*menu_position)++;
-    }
-    else
-    {
-        *menu_position = direction == MOVE_UP ? max_menu_position : 0;
-    }
+	switch(*menu_selector_position)
+	{
+		case 0:
+		{
+			switch(direction)
+			{
+				case MOVE_UP:
+				{
+					if (*menu_position > 0)
+					{
+						(*menu_position)--;
+					}
+					else
+					{
+						*menu_position = max_menu_position;
+						(*menu_selector_position)=row1;
+					}
+					break;
+				}
+				case MOVE_DOWN:
+				{
+					(*menu_selector_position)=row1;
+					break;
+				}
+			}
+			break;
+		}
+		case 1:
+		{
+			switch(direction)
+			{
+				case MOVE_UP:
+				{
+					(*menu_selector_position)=row0;
+					break;
+				}
+				case MOVE_DOWN:
+				{
+					if (*menu_position < max_menu_position)
+					{
+						(*menu_position)++;
+					}
+					else
+					{
+						(*menu_position) = 0;
+						(*menu_selector_position)=row0;
+					}
+					break;
+				}
+			}
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+	
 }
 
 void local_Menu(u8 *current_menu)
@@ -156,22 +202,29 @@ void local_Menu(u8 *current_menu)
     static u8 menu_selector_position = 0;
     static u8 max_menu_position = 1;
 	
-	u8 menu_key = keypad_readKey();
+	u8 menu_key = MM74C922_GetKey();
 	
-	if (menu_key != NULL)
+	if (menu_key != NO_DATA)
 	{
 		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
-		local_Menu_Display(&menu_position);
-		local_Menu_Slector_Display(&menu_selector_position);
 	}
+		
+	local_Menu_Display(&menu_position);
+	local_Menu_Slector_Display(&menu_selector_position);
     
     switch (menu_key)
     {
     case KEY_A:
         local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+		local_Menu_Display(&menu_position);
+		local_Menu_Slector_Display(&menu_selector_position);
         break;
     case KEY_B:
         local_Menu_Move_Selector(MOVE_DOWN,&menu_selector_position, &menu_position, max_menu_position);
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+		local_Menu_Display(&menu_position);
+		local_Menu_Slector_Display(&menu_selector_position);
         break;
     case KEY_D:
     switch (menu_position+menu_selector_position)
@@ -210,21 +263,26 @@ void local_Menu_AC(u8 *current_menu)
 		default:
 			break;
 	}
-	
-    if (menu_key != NULL)
-    {
-		AC_CFG = airConditioner_Status();
-	    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
-	    local_Menu_AC_Display(&menu_position, &AC_CFG);
-	    local_Menu_Slector_Display(&menu_selector_position);
-    }
+	if (menu_key != NO_DATA && v_adj_flag == FALSE)
+	{
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+	}
+	AC_CFG = airConditioner_Status();
+	local_Menu_AC_Display(&menu_position, &AC_CFG);
+	local_Menu_Slector_Display(&menu_selector_position);
     switch (menu_key)
     {
     case KEY_A:
         local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+		local_Menu_AC_Display(&menu_position, &AC_CFG);
+		local_Menu_Slector_Display(&menu_selector_position);
         break;
     case KEY_B:
         local_Menu_Move_Selector(MOVE_DOWN,&menu_selector_position, &menu_position, max_menu_position);
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+		local_Menu_AC_Display(&menu_position, &AC_CFG);
+		local_Menu_Slector_Display(&menu_selector_position);
         break;
     case KEY_C:
         switch (menu_position+menu_selector_position)
@@ -253,7 +311,6 @@ void local_Menu_AC(u8 *current_menu)
 				{airConditioner_Set_Config(&AC_CFG);}
 			else{/* do nothing */;}
 			break;
-            break;
         case AC_RETURN:
             // Return
             *current_menu = LOCAL_MENU;
@@ -291,21 +348,27 @@ void local_Menu_LED(u8 *current_menu)
 	
     u8 menu_key = keypad_readKey();
 	
-    if (menu_key != NULL)
+    if (menu_key != NO_DATA)
     {
 	    lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
-	    local_Menu_Display(&menu_position);
-	    local_Menu_Slector_Display(&menu_selector_position);
     }
+	    local_Menu_LED_Display(&menu_position);
+	    local_Menu_Slector_Display(&menu_selector_position);
     switch (menu_key)
     {
-    case 'A':
+    case KEY_A:
         local_Menu_Move_Selector(MOVE_UP,&menu_selector_position, &menu_position, max_menu_position);
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+		local_Menu_LED_Display(&menu_position);
+		local_Menu_Slector_Display(&menu_selector_position);
         break;
-    case 'B':
+    case KEY_B:
         local_Menu_Move_Selector(MOVE_DOWN,&menu_selector_position, &menu_position, max_menu_position);
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+		local_Menu_LED_Display(&menu_position);
+		local_Menu_Slector_Display(&menu_selector_position);
         break;
-    case 'C':
+    case KEY_C:
         switch (menu_position+menu_selector_position)
         {
         case 0:
@@ -355,9 +418,8 @@ void local_Menu_value_adj(u8 *value, u8 *v_adj_flag)
         (*value)--;
         break;
     case KEY_C:
-        *v_adj_flag = FALSE;
+        (*v_adj_flag) = FALSE;
         break;
-    
     default:
         break;
     }
@@ -367,32 +429,35 @@ void local_menu_Service()
 {
 	static u8 current_menu = LOCAL_MENU;
 	//check if login & not in idle mode
-	if(/*loginAck_local() &&*/ local_idle == FALSE)
-	{
-		switch(current_menu)
-		{
-			case LOCAL_MENU:
-				local_Menu(&current_menu);
-				break;
-			case AC_MENU:
-				local_Menu_AC(&current_menu);
-				break;
-			case LED_MENU:
-				local_Menu_LED(&current_menu);
-				break;
-			default:
-				lcd_displayStr("ERROR");
-				break;
-		}
-	}
-	else if(local_idle || loginAck_remote())
-	{
-		local_menu_Idle();
-	}
-	else
-	{
-		scrollUsersOnLCD();
-	}
+// 	if(loginAck_local() && local_idle == FALSE)
+// 	{
+// 		switch(current_menu)
+// 		{
+// 			case LOCAL_MENU:
+// 				local_Menu(&current_menu);
+// 				break;
+// 			case AC_MENU:
+// 				local_Menu_AC(&current_menu);
+// 				break;
+// 			case LED_MENU:
+// 				local_Menu_LED(&current_menu);
+// 				break;
+// 			default:
+// 				lcd_displayStr("ERROR");
+// 				break;
+// 		}
+// 	}
+// 	else if(local_idle || loginAck_remote())
+// 	{
+// 		local_menu_Idle();
+// 	}
+// 	else
+// 	{
+// 		scrollUsersOnLCD();
+// 	}
+	current_menu = AC_MENU;
+	local_Menu_AC(&current_menu);
+	
 }
 
 void local_menu_Idle()
@@ -426,5 +491,5 @@ void local_menu_init()
 	timer2_enableOvInterrupt();
 	timer2_start(TIMER2_F_CPU_DIV_64);
 	
-	
+	MM74C922_Init(PORTB_ID,PIN4_ID,PIN7_ID);
 }
