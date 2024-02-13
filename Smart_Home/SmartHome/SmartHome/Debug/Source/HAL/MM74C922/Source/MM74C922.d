@@ -12,7 +12,8 @@ Source/HAL/MM74C922/Source/MM74C922.d \
  ../Source/MCAL/EXT_INT/Include/ext_int.h \
  ../Source/MCAL/EXT_INT/Include/ext_int_reg.h \
  ../Source/HAL/MM74C922/Include/MM74C922_Cfg_Priv.h \
- ../Source/MCAL/GIE/Include/gie.h ../Source/MCAL/GIE/Include/gie_reg.h
+ ../Source/MCAL/GIE/Include/gie.h ../Source/MCAL/GIE/Include/gie_reg.h \
+ ../Source/SERVICE/LocalMode_Menu/Include/localMenu.h
 
 ../Source/HAL/MM74C922/Include/MM74C922.h:
 
@@ -43,3 +44,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../Source/MCAL/GIE/Include/gie.h:
 
 ../Source/MCAL/GIE/Include/gie_reg.h:
+
+../Source/SERVICE/LocalMode_Menu/Include/localMenu.h:

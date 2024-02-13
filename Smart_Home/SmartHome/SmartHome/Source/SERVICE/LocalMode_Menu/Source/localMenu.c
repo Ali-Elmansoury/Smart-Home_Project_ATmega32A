@@ -10,13 +10,13 @@
 #include "stdio.h"
 #include "timer2.h"
 #include "gie.h"
-#include <avr/interrupt.h>
 
 
 u8 number_of_active_devices = 0;
 boolean local_idle = FALSE;
+volatile u16 secondCounter=0;
 
-void local_Menu_value_adj(u8 *value, u8 *v_adj_flag);
+void local_Menu_AC_value_adj(u8 *value, u8 *v_adj_flag);
 void local_Menu_AC_Set_Temp(u8 temp, u8 AC_TEMP_MENU);
 void local_menu_Idle();
 
@@ -122,7 +122,16 @@ void local_Menu_AC_Display(const u8 *menu_position, const AC *AC_Status)
         lcd_displayNums(AC_Status->AC_Run_Temperature_threshold);
         lcd_displayChar('C');
         break;
-    case 1:
+	case 1:
+		lcd_displayStr("Run Temp:");
+		lcd_displayNums(AC_Status->AC_Run_Temperature_threshold);
+		lcd_displayChar('C');
+		lcd_goTo(1, 1);
+		lcd_displayStr("Stop Temp:");
+		lcd_displayNums(AC_Status->AC_Stop_Temperature_threshold);
+		lcd_displayChar('C');
+		break;
+    case 2:
         lcd_displayStr("Stop Temp:");
         lcd_displayNums(AC_Status->AC_Stop_Temperature_threshold);
         lcd_displayChar('C');
@@ -226,14 +235,16 @@ void local_Menu(u8 *current_menu)
 		local_Menu_Display(&menu_position);
 		local_Menu_Slector_Display(&menu_selector_position);
         break;
-    case KEY_D:
+    case KEY_C:
     switch (menu_position+menu_selector_position)
     {
     case LED_MENU:
         *current_menu = LED_MENU;   // Select LED Menu
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
         break;
     case AC_MENU:
         *current_menu = AC_MENU;    // Select AC Menu
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
         break;
     case 2:
         logout_local();
@@ -250,7 +261,7 @@ void local_Menu_AC(u8 *current_menu)
 {
     static u8 menu_position = 0;
     static u8 menu_selector_position = 0;
-    static u8 max_menu_position = 1;
+    static u8 max_menu_position = 2;
 	
 	static u8 menu_key = 0;
 	static boolean v_adj_flag = FALSE;
@@ -258,7 +269,7 @@ void local_Menu_AC(u8 *current_menu)
 	switch (v_adj_flag)
 	{
 		case FALSE:
-			menu_key = keypad_readKey();
+			menu_key = MM74C922_GetKey();
 			break;
 		default:
 			break;
@@ -294,26 +305,25 @@ void local_Menu_AC(u8 *current_menu)
         case AC_RUN_TEMP:
             // AC1 Run Temp
 			v_adj_flag=TRUE;
-			local_Menu_value_adj(&AC_CFG.AC_Run_Temperature_threshold,&v_adj_flag);
+			local_Menu_AC_value_adj(&AC_CFG.AC_Run_Temperature_threshold,&v_adj_flag);
 			AC_CFG.AC_Run_Temperature_threshold = AC_CFG.AC_Run_Temperature_threshold > 32 ? 32 : AC_CFG.AC_Run_Temperature_threshold;
 			AC_CFG.AC_Run_Temperature_threshold = AC_CFG.AC_Run_Temperature_threshold < AC_CFG.AC_Stop_Temperature_threshold ? AC_CFG.AC_Stop_Temperature_threshold : AC_CFG.AC_Run_Temperature_threshold;
-			if (v_adj_flag == FALSE)
-				{airConditioner_Set_Config(&AC_CFG);}
-			else{/* do nothing */;}
+			airConditioner_Set_Config(&AC_CFG);
             break;
         case AC_STOP_TEMP:
             // AC1 Stop Temp
 			v_adj_flag=TRUE;
-			local_Menu_value_adj(&AC_CFG.AC_Stop_Temperature_threshold,&v_adj_flag);
+			local_Menu_AC_value_adj(&AC_CFG.AC_Stop_Temperature_threshold,&v_adj_flag);
 			AC_CFG.AC_Stop_Temperature_threshold = AC_CFG.AC_Stop_Temperature_threshold < 18 ? 18 : AC_CFG.AC_Stop_Temperature_threshold;
 			AC_CFG.AC_Stop_Temperature_threshold = AC_CFG.AC_Stop_Temperature_threshold > AC_CFG.AC_Run_Temperature_threshold ? AC_CFG.AC_Run_Temperature_threshold : AC_CFG.AC_Stop_Temperature_threshold;
-			if (v_adj_flag == FALSE)
-				{airConditioner_Set_Config(&AC_CFG);}
-			else{/* do nothing */;}
+			airConditioner_Set_Config(&AC_CFG);
+			
 			break;
         case AC_RETURN:
             // Return
             *current_menu = LOCAL_MENU;
+			lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+			menu_position = 0;
             break;
         default:
             break;
@@ -346,7 +356,7 @@ void local_Menu_LED(u8 *current_menu)
     static u8 menu_selector_position = 0;
     static u8 max_menu_position = 5;
 	
-    u8 menu_key = keypad_readKey();
+    u8 menu_key = MM74C922_GetKey();
 	
     if (menu_key != NO_DATA)
     {
@@ -398,6 +408,8 @@ void local_Menu_LED(u8 *current_menu)
         case 6:
             // Return
             *current_menu = LOCAL_MENU;
+			lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+			menu_position = 0;
             break;
         default:
             break;
@@ -407,9 +419,9 @@ void local_Menu_LED(u8 *current_menu)
     }
 }
 
-void local_Menu_value_adj(u8 *value, u8 *v_adj_flag)
+void local_Menu_AC_value_adj(u8 *value, u8 *v_adj_flag)
 {
-    switch (keypad_readKey())
+    switch (MM74C922_GetKey())
     {
     case KEY_A:
         (*value)++;
@@ -429,35 +441,32 @@ void local_menu_Service()
 {
 	static u8 current_menu = LOCAL_MENU;
 	//check if login & not in idle mode
-// 	if(loginAck_local() && local_idle == FALSE)
-// 	{
-// 		switch(current_menu)
-// 		{
-// 			case LOCAL_MENU:
-// 				local_Menu(&current_menu);
-// 				break;
-// 			case AC_MENU:
-// 				local_Menu_AC(&current_menu);
-// 				break;
-// 			case LED_MENU:
-// 				local_Menu_LED(&current_menu);
-// 				break;
-// 			default:
-// 				lcd_displayStr("ERROR");
-// 				break;
-// 		}
-// 	}
-// 	else if(local_idle || loginAck_remote())
-// 	{
-// 		local_menu_Idle();
-// 	}
+	if(/*loginAck_local() &&*/ local_idle == FALSE)
+	{
+		switch(current_menu)
+		{
+			case LOCAL_MENU:
+				local_Menu(&current_menu);
+				break;
+			case AC_MENU:
+				local_Menu_AC(&current_menu);
+				break;
+			case LED_MENU:
+				local_Menu_LED(&current_menu);
+				break;
+			default:
+				lcd_displayStr("ERROR");
+				break;
+		}
+	}
+	else if(local_idle /*|| loginAck_remote()*/)
+	{
+		local_menu_Idle();
+	}
 // 	else
 // 	{
 // 		scrollUsersOnLCD();
 // 	}
-	current_menu = AC_MENU;
-	local_Menu_AC(&current_menu);
-	
 }
 
 void local_menu_Idle()
@@ -470,18 +479,22 @@ void local_menu_Idle()
 
 void local_menu_Idle_timer()
 {
-	static u8 secondCounter;
 	secondCounter++;
 	timer2_setPreLoad(6); // 16ms 
 	if (secondCounter == 312)
 	{
+		lamp_toggle(LAMP1_ID);
 		//your desired function to be run every 5 secs
 		secondCounter=0;
 		local_idle=TRUE;
 	}
 }
 
-
+void local_menu_Idle_Reset()
+{
+	local_idle=FALSE;
+	secondCounter=0;
+}
 void local_menu_init()
 {
 	gie_enableAllInterrupts();
@@ -489,7 +502,7 @@ void local_menu_init()
 	timer2_setPreLoad(6);
 	timer2_setOvCallBack(&local_menu_Idle_timer);
 	timer2_enableOvInterrupt();
-	timer2_start(TIMER2_F_CPU_DIV_64);
+	timer2_start(TIMER2_F_CPU_DIV_1024);
 	
 	MM74C922_Init(PORTB_ID,PIN4_ID,PIN7_ID);
 }

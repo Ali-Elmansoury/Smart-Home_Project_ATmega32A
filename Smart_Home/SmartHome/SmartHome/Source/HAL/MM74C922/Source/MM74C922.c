@@ -5,6 +5,7 @@
 #include "ext_int.h"
 #include "MM74C922_Cfg_Priv.h"
 #include "gie.h"
+#include "localMenu.h"
 
 volatile u8 Last_key = NO_DATA;
 
@@ -23,6 +24,7 @@ void MM74C922_Init()
 	extINT_setSenseControl(EXT_INT0_ID,FALLING_EDGE);
 	extINT_enable(EXT_INT0_ID);
 	gie_enableAllInterrupts();
+	
 }
 
 void MM74C922_Decode()
@@ -33,6 +35,7 @@ void MM74C922_Decode()
         temp |= (dio_readChannel(PORT_ID, PIN_S_ID + i) << i);
     }
     Last_key = Table[temp];
+	local_menu_Idle_Reset();
 }
 
 u8 MM74C922_GetKey(void)

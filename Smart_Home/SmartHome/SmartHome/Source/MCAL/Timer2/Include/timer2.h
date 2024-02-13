@@ -28,11 +28,11 @@
 #define TIMER2_NO_CLOCK								(0b00000000)
 #define TIMER2_F_CPU								(0b00000001)
 #define TIMER2_F_CPU_DIV_8							(0b00000010)
-#define TIMER2_F_CPU_DIV_64							(0b00000011)
-#define TIMER2_F_CPU_DIV_256						(0b00000100)
-#define TIMER2_F_CPU_DIV_1024						(0b00000101)
-#define TIMER2_COUNTER_FAILING						(0b00000110)
-#define TIMER2_COUNTER_RISING						(0b00000111)
+#define TIMER2_F_CPU_DIV_32							(0b00000011)
+#define TIMER2_F_CPU_DIV_64							(0b00000100)
+#define TIMER2_F_CPU_DIV_128						(0b00000101)
+#define TIMER2_F_CPU_DIV_256						(0b00000110)
+#define TIMER2_F_CPU_DIV_1024						(0b00000111)
 
 /*Fast PWM frequencies*/
 #define PWM_F_62_5KHZ								(0b00000001)
