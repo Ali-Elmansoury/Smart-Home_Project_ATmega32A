@@ -10,6 +10,7 @@
 #include "avr/interrupt.h"
 
 volatile u8 rx_data;
+volatile boolean new_rx_data = FALSE;
 
 void uart_init(u16 baud)
 {
@@ -48,14 +49,25 @@ void uart_sendString(u8 *str)
 
 u8 uart_receiveByte(void)
 {
-	u8 temp = rx_data;
-	rx_data = 255;
-	return temp;
+	if (new_rx_data) {
+		new_rx_data = FALSE;
+		return rx_data;
+	}
+	else
+	{
+		return 255;
+	}
+	//u8 temp = rx_data;
+	//rx_data = 255;
+	//return temp;
 }
 
 ISR(USART_RXC_vect)
 {
-	rx_data = UDR;
+	if (rx_data != UDR) { // Check for difference
+		rx_data = UDR;
+		new_rx_data = TRUE; // Set flag to indicate new data
+	}
 }
 
 // void uart_receiveString(u8 *receivedStr)

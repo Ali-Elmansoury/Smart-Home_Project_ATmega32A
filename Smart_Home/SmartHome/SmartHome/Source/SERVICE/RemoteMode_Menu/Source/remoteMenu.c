@@ -136,108 +136,131 @@ void remote_login_menu()
 
 void remote_Menu_User()
 {
-	uart_sendString("User Menu:\n");
-	uart_sendString("1. Lamps\n");
-	uart_sendString("2. AC\n");
-	uart_sendString("3. Logout\n");
-
+	static u8 Display_user_menu = TRUE;
+	if (Display_user_menu)
+	{
+		uart_sendString("User Menu:\n");
+		uart_sendString("1. Lamps\n");
+		uart_sendString("2. AC\n");
+		uart_sendString("3. Logout\n");
+		Display_user_menu = FALSE;
+	}
 	u8 userChoice = uart_receiveByte();
-
-	switch (userChoice) {
-		case '1':
+	if (userChoice!=255)
+	{
+		switch (userChoice) {
+			case '1':
 			lamp_menu();
-		break;
-		case '2':
+			break;
+			case '2':
 			AC_menu();
-		break;
-		case '3':
+			break;
+			case '3':
 			logout_remote();
 			remote_login_menu();
-		return;
-		default:
+			return;
+			default:
 			uart_sendString("Invalid choice. Please try again.\n");
-		break;
+			break;
+		}
+		Display_user_menu=TRUE;
 	}
 }
 
 void remote_Menu_Admin()
 {
-	uart_sendString("Admin Menu:\n");
-	uart_sendString("1. Register User (Remote)\n");
-	uart_sendString("2. Register User (Local)\n");
-	uart_sendString("3. Lamps\n");
-	uart_sendString("4. AC\n");
-	uart_sendString("5. Control Door (Open/Close)\n");
-	uart_sendString("6. Logout\n");
-
+	static u8 Display_admin_menu = TRUE;
+	if (Display_admin_menu)
+	{
+		uart_sendString("Admin Menu:\n");
+		uart_sendString("1. Register User (Remote)\n");
+		uart_sendString("2. Register User (Local)\n");
+		uart_sendString("3. Lamps\n");
+		uart_sendString("4. AC\n");
+		uart_sendString("5. Control Door (Open/Close)\n");
+		uart_sendString("6. Logout\n");
+		Display_admin_menu = FALSE;
+	}
 	u8 adminChoice = uart_receiveByte();
-
-	switch (adminChoice) {
-		case '1':
+	if (adminChoice!=255)
+	{
+		switch (adminChoice) {
+			case '1':
 			registerUserRemote();
-		break;
-		case '2':
+			break;
+			case '2':
 			registerUserLocal();
-		break;
-		case '3':
+			break;
+			case '3':
 			lamp_menu();
-		break;
-		case '4':
+			break;
+			case '4':
 			AC_menu();
-		break;
-		case '5':
+			break;
+			case '5':
 			doorToggle();
-		break;
-		case '6':
+			break;
+			case '6':
 			logout_remote();
 			remote_login_menu();
-		return;
-		default:
+			return;
+			default:
 			uart_sendString("Invalid choice. Please try again.\n");
-		break;
+			break;
+		}
+		Display_admin_menu = TRUE;
 	}
 }
 
 void lamp_menu()
 {
-	uart_sendString("Lamp Menu\n");
-	uart_sendString("Choose lamp number you want to turn on/off: \n");
-	uart_sendString("1. Lamp1\n");
-	uart_sendString("2. Lamp2\n");
-	uart_sendString("3. Lamp3\n");
-	uart_sendString("4. Lamp4\n");
-	uart_sendString("5. Lamp5\n");
-	uart_sendString("6. Dimmer\n");
-	u8 lamp_choice = uart_receiveByte() - '0';
-	switch (lamp_choice)
+	static u8 Display_lamp_menu = TRUE;
+	if (Display_lamp_menu)
 	{
-		case 1:
+		uart_sendString("Lamp Menu\n");
+		uart_sendString("Choose lamp number you want to turn on/off: \n");
+		uart_sendString("1. Lamp1\n");
+		uart_sendString("2. Lamp2\n");
+		uart_sendString("3. Lamp3\n");
+		uart_sendString("4. Lamp4\n");
+		uart_sendString("5. Lamp5\n");
+		uart_sendString("6. Dimmer\n");
+		Display_lamp_menu = FALSE;
+	}
+	u8 lamp_choice = uart_receiveByte() - '0';
+	if (lamp_choice!=255)
+	{
+		switch (lamp_choice)
+		{
+			case 1:
 			// Lamp1 ON/OFF (Toggle LED1 Status)
 			lamp_toggle(LAMP1_ID);
-		break;
-		case 2:
+			break;
+			case 2:
 			// LED2 ON/OFF (Toggle LED2 Status)
 			lamp_toggle(LAMP2_ID);
-		break;
-		case 3:
+			break;
+			case 3:
 			// LED3 ON/OFF (Toggle LED3 Status)
 			lamp_toggle(LAMP3_ID);
-		break;
-		case 4:
+			break;
+			case 4:
 			// LED4 ON/OFF (Toggle LED4 Status)
 			lamp_toggle(LAMP4_ID);
-		break;
-		case 5:
+			break;
+			case 5:
 			// LED5 ON/OFF (Toggle LED5 Status)
 			lamp_toggle(LAMP5_ID);
-		break;
-		case 6:
+			break;
+			case 6:
 			// DimmerLED ON/OFF (Toggle DimmerLED Status)
 			Lamp_Service_Dim_Toggle();
-		break;
-		default:
+			break;
+			default:
 			uart_sendString("Invalid choice. Please try again.\n");
-		break;		
+			break;
+		}
+		Display_lamp_menu = TRUE;
 	}
 }
 
