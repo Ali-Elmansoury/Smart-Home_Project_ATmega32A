@@ -66,7 +66,7 @@ u8 uart_receiveByte(void)
 
 ISR(USART_RXC_vect)
 {
-		rx_data = UDR;
+		rx_data = UART_UDR_REG;
 		new_rx_data = TRUE; // Set flag to indicate new data
 }
 
