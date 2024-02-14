@@ -128,12 +128,13 @@ u8 selectUserAndLogin_remote()
     u8 selectedID;
     uart_sendString("Enter User ID:");
 
-    selectedID = uart_receiveByte() - '0';
+    selectedID = uart_receiveByte();
 
     uart_sendString("\n");
 
     if (selectedID != 255) // Check if the received byte is not 255
     {
+		selectedID -= '0';
         if (selectedID >= 1 && selectedID <= 10)
         { // Assuming a maximum of 10 users
 
