@@ -8,6 +8,7 @@
 #include "uart.h"
 #include "bit_math.h"
 #include "avr/interrupt.h"
+#include "gie.h"
 
 volatile u8 rx_data;
 volatile boolean new_rx_data = FALSE;
@@ -27,6 +28,7 @@ void uart_init(u16 baud)
 	
 	/*Set data size=8, parity=off, stop=1*/
 	UART_UCSRC_REG = URSEL_SET|DATA_8BIT|PARITY_OFF|STOP_BIT1;
+	gie_enableAllInterrupts();
 }
 
 void uart_sendByte(u8 byte)
@@ -64,10 +66,8 @@ u8 uart_receiveByte(void)
 
 ISR(USART_RXC_vect)
 {
-	if (rx_data != UDR) { // Check for difference
 		rx_data = UDR;
 		new_rx_data = TRUE; // Set flag to indicate new data
-	}
 }
 
 // void uart_receiveString(u8 *receivedStr)
@@ -81,12 +81,16 @@ ISR(USART_RXC_vect)
 // }
 void uart_receiveString(u8 *receivedStr)
 {
-	u8 i = 0;
-	receivedStr[i] = uart_receiveByte();
-	while(receivedStr[i] != '#')
+	u8 i = 0, RX_Byte=255;
+	RX_Byte = uart_receiveByte();
+	while(RX_Byte != '#')
 	{
-		i++;
-		receivedStr[i] = uart_receiveByte();
+		if (RX_Byte != 255)
+		{
+			receivedStr[i] = RX_Byte;
+			i++;
+		}
+		RX_Byte = uart_receiveByte();
 	}
 	receivedStr[i] = '\0';
 }
