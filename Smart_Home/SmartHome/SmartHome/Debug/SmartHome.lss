@@ -5,29 +5,29 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .text         000014e6  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         000002ba  00800060  000014e6  0000157a  2**0
+  1 .data         000002b8  00800060  000014e6  0000157a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000226  0080031a  0080031a  00001834  2**0
+  2 .bss          00000226  00800318  00800318  00001832  2**0
                   ALLOC
-  3 .comment      0000005c  00000000  00000000  00001834  2**0
+  3 .comment      0000005c  00000000  00000000  00001832  2**0
                   CONTENTS, READONLY
   4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00001890  2**2
                   CONTENTS, READONLY
   5 .debug_aranges 00000570  00000000  00000000  000018cc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00003cec  00000000  00000000  00001e3c  2**0
+  6 .debug_info   00003ce1  00000000  00000000  00001e3c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001742  00000000  00000000  00005b28  2**0
+  7 .debug_abbrev 00001742  00000000  00000000  00005b1d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000257f  00000000  00000000  0000726a  2**0
+  8 .debug_line   0000251d  00000000  00000000  0000725f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000d70  00000000  00000000  000097ec  2**2
+  9 .debug_frame  00000d70  00000000  00000000  0000977c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000012ba  00000000  00000000  0000a55c  2**0
+ 10 .debug_str    000012b2  00000000  00000000  0000a4ec  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00002441  00000000  00000000  0000b816  2**0
+ 11 .debug_loc    00002441  00000000  00000000  0000b79e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000450  00000000  00000000  0000dc57  2**0
+ 12 .debug_ranges 00000450  00000000  00000000  0000dbdf  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -72,13 +72,13 @@ Disassembly of section .text:
       6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
       6c:	05 90       	lpm	r0, Z+
       6e:	0d 92       	st	X+, r0
-      70:	aa 31       	cpi	r26, 0x1A	; 26
+      70:	a8 31       	cpi	r26, 0x18	; 24
       72:	b1 07       	cpc	r27, r17
       74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
 
 00000076 <__do_clear_bss>:
       76:	25 e0       	ldi	r18, 0x05	; 5
-      78:	aa e1       	ldi	r26, 0x1A	; 26
+      78:	a8 e1       	ldi	r26, 0x18	; 24
       7a:	b3 e0       	ldi	r27, 0x03	; 3
       7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
@@ -86,7 +86,7 @@ Disassembly of section .text:
       7e:	1d 92       	st	X+, r1
 
 00000080 <.do_clear_bss_start>:
-      80:	a0 34       	cpi	r26, 0x40	; 64
+      80:	ae 33       	cpi	r26, 0x3E	; 62
       82:	b2 07       	cpc	r27, r18
       84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
       86:	0e 94 49 00 	call	0x92	; 0x92 <main>
@@ -148,7 +148,7 @@ int main(void)
       c8:	0e 94 8a 00 	call	0x114	; 0x114 <relay_toggle>
       cc:	ec 2f       	mov	r30, r28
       ce:	f0 e0       	ldi	r31, 0x00	; 0
-      d0:	e7 5e       	subi	r30, 0xE7	; 231
+      d0:	e9 5e       	subi	r30, 0xE9	; 233
       d2:	fc 4f       	sbci	r31, 0xFC	; 252
       d4:	90 81       	ld	r25, Z
       d6:	81 e0       	ldi	r24, 0x01	; 1
@@ -512,8 +512,8 @@ int main(void)
      396:	bf 93       	push	r27
      398:	ef 93       	push	r30
      39a:	ff 93       	push	r31
-     39c:	e0 91 23 03 	lds	r30, 0x0323	; 0x800323 <int0ClbkPtr>
-     3a0:	f0 91 24 03 	lds	r31, 0x0324	; 0x800324 <int0ClbkPtr+0x1>
+     39c:	e0 91 21 03 	lds	r30, 0x0321	; 0x800321 <int0ClbkPtr>
+     3a0:	f0 91 22 03 	lds	r31, 0x0322	; 0x800322 <int0ClbkPtr+0x1>
      3a4:	30 97       	sbiw	r30, 0x00	; 0
      3a6:	09 f0       	breq	.+2      	; 0x3aa <__vector_1+0x30>
      3a8:	09 95       	icall
@@ -553,8 +553,8 @@ int main(void)
      3e8:	bf 93       	push	r27
      3ea:	ef 93       	push	r30
      3ec:	ff 93       	push	r31
-     3ee:	e0 91 21 03 	lds	r30, 0x0321	; 0x800321 <int1ClbkPtr>
-     3f2:	f0 91 22 03 	lds	r31, 0x0322	; 0x800322 <int1ClbkPtr+0x1>
+     3ee:	e0 91 1f 03 	lds	r30, 0x031F	; 0x80031f <int1ClbkPtr>
+     3f2:	f0 91 20 03 	lds	r31, 0x0320	; 0x800320 <int1ClbkPtr+0x1>
      3f6:	30 97       	sbiw	r30, 0x00	; 0
      3f8:	09 f0       	breq	.+2      	; 0x3fc <__vector_2+0x30>
      3fa:	09 95       	icall
@@ -594,8 +594,8 @@ int main(void)
      43a:	bf 93       	push	r27
      43c:	ef 93       	push	r30
      43e:	ff 93       	push	r31
-     440:	e0 91 1f 03 	lds	r30, 0x031F	; 0x80031f <int2ClbkPtr>
-     444:	f0 91 20 03 	lds	r31, 0x0320	; 0x800320 <int2ClbkPtr+0x1>
+     440:	e0 91 1d 03 	lds	r30, 0x031D	; 0x80031d <int2ClbkPtr>
+     444:	f0 91 1e 03 	lds	r31, 0x031E	; 0x80031e <int2ClbkPtr+0x1>
      448:	30 97       	sbiw	r30, 0x00	; 0
      44a:	09 f0       	breq	.+2      	; 0x44e <__vector_3+0x30>
      44c:	09 95       	icall
@@ -641,8 +641,8 @@ int main(void)
      494:	bf 93       	push	r27
      496:	ef 93       	push	r30
      498:	ff 93       	push	r31
-     49a:	e0 91 27 03 	lds	r30, 0x0327	; 0x800327 <timer0OvClbkPtr>
-     49e:	f0 91 28 03 	lds	r31, 0x0328	; 0x800328 <timer0OvClbkPtr+0x1>
+     49a:	e0 91 25 03 	lds	r30, 0x0325	; 0x800325 <timer0OvClbkPtr>
+     49e:	f0 91 26 03 	lds	r31, 0x0326	; 0x800326 <timer0OvClbkPtr+0x1>
      4a2:	30 97       	sbiw	r30, 0x00	; 0
      4a4:	09 f0       	breq	.+2      	; 0x4a8 <__vector_11+0x30>
      4a6:	09 95       	icall
@@ -682,8 +682,8 @@ int main(void)
      4e6:	bf 93       	push	r27
      4e8:	ef 93       	push	r30
      4ea:	ff 93       	push	r31
-     4ec:	e0 91 25 03 	lds	r30, 0x0325	; 0x800325 <timer0CTCClbkPtr>
-     4f0:	f0 91 26 03 	lds	r31, 0x0326	; 0x800326 <timer0CTCClbkPtr+0x1>
+     4ec:	e0 91 23 03 	lds	r30, 0x0323	; 0x800323 <timer0CTCClbkPtr>
+     4f0:	f0 91 24 03 	lds	r31, 0x0324	; 0x800324 <timer0CTCClbkPtr+0x1>
      4f4:	30 97       	sbiw	r30, 0x00	; 0
      4f6:	09 f0       	breq	.+2      	; 0x4fa <__vector_10+0x30>
      4f8:	09 95       	icall
@@ -723,8 +723,8 @@ int main(void)
      538:	bf 93       	push	r27
      53a:	ef 93       	push	r30
      53c:	ff 93       	push	r31
-     53e:	e0 91 29 03 	lds	r30, 0x0329	; 0x800329 <timer1OvClbkPtr>
-     542:	f0 91 2a 03 	lds	r31, 0x032A	; 0x80032a <timer1OvClbkPtr+0x1>
+     53e:	e0 91 27 03 	lds	r30, 0x0327	; 0x800327 <timer1OvClbkPtr>
+     542:	f0 91 28 03 	lds	r31, 0x0328	; 0x800328 <timer1OvClbkPtr+0x1>
      546:	30 97       	sbiw	r30, 0x00	; 0
      548:	09 f0       	breq	.+2      	; 0x54c <__vector_9+0x30>
      54a:	09 95       	icall
@@ -788,8 +788,8 @@ int main(void)
      5ae:	bf 93       	push	r27
      5b0:	ef 93       	push	r30
      5b2:	ff 93       	push	r31
-     5b4:	e0 91 2d 03 	lds	r30, 0x032D	; 0x80032d <timer2OvClbkPtr>
-     5b8:	f0 91 2e 03 	lds	r31, 0x032E	; 0x80032e <timer2OvClbkPtr+0x1>
+     5b4:	e0 91 2b 03 	lds	r30, 0x032B	; 0x80032b <timer2OvClbkPtr>
+     5b8:	f0 91 2c 03 	lds	r31, 0x032C	; 0x80032c <timer2OvClbkPtr+0x1>
      5bc:	30 97       	sbiw	r30, 0x00	; 0
      5be:	09 f0       	breq	.+2      	; 0x5c2 <__vector_5+0x30>
      5c0:	09 95       	icall
@@ -829,8 +829,8 @@ int main(void)
      600:	bf 93       	push	r27
      602:	ef 93       	push	r30
      604:	ff 93       	push	r31
-     606:	e0 91 2b 03 	lds	r30, 0x032B	; 0x80032b <timer2CTCClbkPtr>
-     60a:	f0 91 2c 03 	lds	r31, 0x032C	; 0x80032c <timer2CTCClbkPtr+0x1>
+     606:	e0 91 29 03 	lds	r30, 0x0329	; 0x800329 <timer2CTCClbkPtr>
+     60a:	f0 91 2a 03 	lds	r31, 0x032A	; 0x80032a <timer2CTCClbkPtr+0x1>
      60e:	30 97       	sbiw	r30, 0x00	; 0
      610:	09 f0       	breq	.+2      	; 0x614 <__vector_4+0x30>
      612:	09 95       	icall
@@ -935,13 +935,13 @@ void uart_sendString(u8 *str)
 u8 uart_receiveByte(void)
 {
 	if (new_rx_data) {
-     670:	80 91 2f 03 	lds	r24, 0x032F	; 0x80032f <new_rx_data>
+     670:	80 91 2d 03 	lds	r24, 0x032D	; 0x80032d <new_rx_data>
      674:	88 23       	and	r24, r24
      676:	29 f0       	breq	.+10     	; 0x682 <uart_receiveByte+0x12>
 		new_rx_data = FALSE;
-     678:	10 92 2f 03 	sts	0x032F, r1	; 0x80032f <new_rx_data>
+     678:	10 92 2d 03 	sts	0x032D, r1	; 0x80032d <new_rx_data>
 		return rx_data;
-     67c:	80 91 34 03 	lds	r24, 0x0334	; 0x800334 <rx_data>
+     67c:	80 91 32 03 	lds	r24, 0x0332	; 0x800332 <rx_data>
      680:	08 95       	ret
 	}
 	else
@@ -965,12 +965,12 @@ ISR(USART_RXC_vect)
      68c:	0f 92       	push	r0
      68e:	11 24       	eor	r1, r1
      690:	8f 93       	push	r24
-		rx_data = UDR;
+	rx_data = UART_UDR_REG;
      692:	8c b1       	in	r24, 0x0c	; 12
-     694:	80 93 34 03 	sts	0x0334, r24	; 0x800334 <rx_data>
-		new_rx_data = TRUE; // Set flag to indicate new data
+     694:	80 93 32 03 	sts	0x0332, r24	; 0x800332 <rx_data>
+	new_rx_data = TRUE; // Set flag to indicate new data
      698:	81 e0       	ldi	r24, 0x01	; 1
-     69a:	80 93 2f 03 	sts	0x032F, r24	; 0x80032f <new_rx_data>
+     69a:	80 93 2d 03 	sts	0x032D, r24	; 0x80032d <new_rx_data>
 }
      69e:	8f 91       	pop	r24
      6a0:	0f 90       	pop	r0
@@ -1002,13 +1002,13 @@ void uart_receiveString(u8 *receivedStr)
      6bc:	8f 3f       	cpi	r24, 0xFF	; 255
      6be:	29 f0       	breq	.+10     	; 0x6ca <uart_receiveString+0x20>
 		{
-			i++;
-     6c0:	cf 5f       	subi	r28, 0xFF	; 255
 			receivedStr[i] = RX_Byte;
-     6c2:	f8 01       	movw	r30, r16
-     6c4:	ec 0f       	add	r30, r28
-     6c6:	f1 1d       	adc	r31, r1
-     6c8:	80 83       	st	Z, r24
+     6c0:	f8 01       	movw	r30, r16
+     6c2:	ec 0f       	add	r30, r28
+     6c4:	f1 1d       	adc	r31, r1
+     6c6:	80 83       	st	Z, r24
+			i++;
+     6c8:	cf 5f       	subi	r28, 0xFF	; 255
 		}
 		RX_Byte = uart_receiveByte();
      6ca:	0e 94 38 03 	call	0x670	; 0x670 <uart_receiveByte>
@@ -1028,8 +1028,8 @@ void uart_receiveString(u8 *receivedStr)
 {
 	u8 i = 0, RX_Byte=255;
      6d4:	c0 e0       	ldi	r28, 0x00	; 0
-			i++;
 			receivedStr[i] = RX_Byte;
+			i++;
 		}
 		RX_Byte = uart_receiveByte();
 	}
@@ -1044,7 +1044,7 @@ void uart_receiveString(u8 *receivedStr)
      6e4:	08 95       	ret
 
 000006e6 <airConditioner_Toggle>:
-     6e6:	e5 e3       	ldi	r30, 0x35	; 53
+     6e6:	e3 e3       	ldi	r30, 0x33	; 51
      6e8:	f3 e0       	ldi	r31, 0x03	; 3
      6ea:	90 81       	ld	r25, Z
      6ec:	81 e0       	ldi	r24, 0x01	; 1
@@ -1053,9 +1053,9 @@ void uart_receiveString(u8 *receivedStr)
      6f2:	08 95       	ret
 
 000006f4 <airConditioner_Status>:
-     6f4:	60 91 35 03 	lds	r22, 0x0335	; 0x800335 <AC_CFG>
-     6f8:	70 91 36 03 	lds	r23, 0x0336	; 0x800336 <AC_CFG+0x1>
-     6fc:	80 91 37 03 	lds	r24, 0x0337	; 0x800337 <AC_CFG+0x2>
+     6f4:	60 91 33 03 	lds	r22, 0x0333	; 0x800333 <AC_CFG>
+     6f8:	70 91 34 03 	lds	r23, 0x0334	; 0x800334 <AC_CFG+0x1>
+     6fc:	80 91 35 03 	lds	r24, 0x0335	; 0x800335 <AC_CFG+0x2>
      700:	08 95       	ret
 
 00000702 <doorService_init>:
@@ -1090,18 +1090,18 @@ void uart_receiveString(u8 *receivedStr)
      738:	92 e0       	ldi	r25, 0x02	; 2
      73a:	0e 94 c4 00 	call	0x188	; 0x188 <servo_setAngleDegree>
      73e:	81 e0       	ldi	r24, 0x01	; 1
-     740:	80 93 30 03 	sts	0x0330, r24	; 0x800330 <doorState>
+     740:	80 93 2e 03 	sts	0x032E, r24	; 0x80032e <doorState>
      744:	08 95       	ret
 
 00000746 <doorClose>:
      746:	8e e5       	ldi	r24, 0x5E	; 94
      748:	91 e0       	ldi	r25, 0x01	; 1
      74a:	0e 94 c4 00 	call	0x188	; 0x188 <servo_setAngleDegree>
-     74e:	10 92 30 03 	sts	0x0330, r1	; 0x800330 <doorState>
+     74e:	10 92 2e 03 	sts	0x032E, r1	; 0x80032e <doorState>
      752:	08 95       	ret
 
 00000754 <doorToggle>:
-     754:	80 91 30 03 	lds	r24, 0x0330	; 0x800330 <doorState>
+     754:	80 91 2e 03 	lds	r24, 0x032E	; 0x80032e <doorState>
      758:	81 11       	cpse	r24, r1
      75a:	03 c0       	rjmp	.+6      	; 0x762 <doorToggle+0xe>
      75c:	0e 94 9b 03 	call	0x736	; 0x736 <doorOpen>
@@ -1158,7 +1158,7 @@ void uart_receiveString(u8 *receivedStr)
      7c4:	0f 93       	push	r16
      7c6:	1f 93       	push	r17
      7c8:	cf 93       	push	r28
-     7ca:	c0 91 31 03 	lds	r28, 0x0331	; 0x800331 <userCount_local>
+     7ca:	c0 91 2f 03 	lds	r28, 0x032F	; 0x80032f <userCount_local>
      7ce:	ca 30       	cpi	r28, 0x0A	; 10
      7d0:	38 f5       	brcc	.+78     	; 0x820 <__DATA_REGION_LENGTH__+0x20>
      7d2:	6b 01       	movw	r12, r22
@@ -1168,14 +1168,14 @@ void uart_receiveString(u8 *receivedStr)
      7da:	80 01       	movw	r16, r0
      7dc:	11 24       	eor	r1, r1
      7de:	f8 01       	movw	r30, r16
-     7e0:	e8 5c       	subi	r30, 0xC8	; 200
+     7e0:	ea 5c       	subi	r30, 0xCA	; 202
      7e2:	fc 4f       	sbci	r31, 0xFC	; 252
      7e4:	7f 01       	movw	r14, r30
      7e6:	cf 01       	movw	r24, r30
      7e8:	0e 94 72 07 	call	0xee4	; 0xee4 <strcpy>
      7ec:	b6 01       	movw	r22, r12
      7ee:	c8 01       	movw	r24, r16
-     7f0:	88 5b       	subi	r24, 0xB8	; 184
+     7f0:	8a 5b       	subi	r24, 0xBA	; 186
      7f2:	9c 4f       	sbci	r25, 0xFC	; 252
      7f4:	0e 94 72 07 	call	0xee4	; 0xee4 <strcpy>
      7f8:	81 e0       	ldi	r24, 0x01	; 1
@@ -1183,12 +1183,12 @@ void uart_receiveString(u8 *receivedStr)
      7fc:	f7 01       	movw	r30, r14
      7fe:	81 8f       	std	Z+25, r24	; 0x19
      800:	6c 2f       	mov	r22, r28
-     802:	88 e3       	ldi	r24, 0x38	; 56
+     802:	86 e3       	ldi	r24, 0x36	; 54
      804:	93 e0       	ldi	r25, 0x03	; 3
      806:	0e 94 bb 03 	call	0x776	; 0x776 <writeUserToEEPROM_local>
-     80a:	60 91 31 03 	lds	r22, 0x0331	; 0x800331 <userCount_local>
+     80a:	60 91 2f 03 	lds	r22, 0x032F	; 0x80032f <userCount_local>
      80e:	6f 5f       	subi	r22, 0xFF	; 255
-     810:	60 93 31 03 	sts	0x0331, r22	; 0x800331 <userCount_local>
+     810:	60 93 2f 03 	sts	0x032F, r22	; 0x80032f <userCount_local>
      814:	8f e0       	ldi	r24, 0x0F	; 15
      816:	90 e0       	ldi	r25, 0x00	; 0
      818:	0e 94 70 01 	call	0x2e0	; 0x2e0 <EEPROM_write>
@@ -1205,37 +1205,56 @@ void uart_receiveString(u8 *receivedStr)
      830:	08 95       	ret
 
 00000832 <getPassword_remote>:
+	uart_init(BAUD_RATE_9600);
+}
+
+// Function to get an 8-digit password from the user securely
+void getPassword_remote(u8* password)
+{
      832:	cf 93       	push	r28
      834:	df 93       	push	r29
      836:	ec 01       	movw	r28, r24
+	uart_sendString("Enter Password:");
      838:	84 e6       	ldi	r24, 0x64	; 100
      83a:	90 e0       	ldi	r25, 0x00	; 0
      83c:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
+
+	// Simulate getting user input for the password
+	uart_receiveString(password);
      840:	ce 01       	movw	r24, r28
      842:	0e 94 55 03 	call	0x6aa	; 0x6aa <uart_receiveString>
-     846:	8f eb       	ldi	r24, 0xBF	; 191
+
+	uart_sendString("\n");  // Move to the next line after password entry
+     846:	8c eb       	ldi	r24, 0xBC	; 188
      848:	91 e0       	ldi	r25, 0x01	; 1
      84a:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
+}
      84e:	df 91       	pop	r29
      850:	cf 91       	pop	r28
      852:	08 95       	ret
 
 00000854 <writeUserToEEPROM>:
+
+void writeUserToEEPROM(user_remote *user, u8 userId) {
      854:	0f 93       	push	r16
      856:	1f 93       	push	r17
      858:	cf 93       	push	r28
      85a:	df 93       	push	r29
      85c:	8c 01       	movw	r16, r24
+	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + (userId * 26);
      85e:	8a e1       	ldi	r24, 0x1A	; 26
      860:	68 9f       	mul	r22, r24
      862:	e0 01       	movw	r28, r0
      864:	11 24       	eor	r1, r1
      866:	cf 5f       	subi	r28, 0xFF	; 255
      868:	dd 4f       	sbci	r29, 0xFD	; 253
+	EEPROM_write_block(user->uname, startAddress, 16);
      86a:	40 e1       	ldi	r20, 0x10	; 16
      86c:	be 01       	movw	r22, r28
      86e:	c8 01       	movw	r24, r16
      870:	0e 94 7f 01 	call	0x2fe	; 0x2fe <EEPROM_write_block>
+	startAddress+=16;
+	EEPROM_write_block(user->password,startAddress, 9);
      874:	be 01       	movw	r22, r28
      876:	60 5f       	subi	r22, 0xF0	; 240
      878:	7f 4f       	sbci	r23, 0xFF	; 255
@@ -1243,11 +1262,14 @@ void uart_receiveString(u8 *receivedStr)
      87c:	c8 01       	movw	r24, r16
      87e:	40 96       	adiw	r24, 0x10	; 16
      880:	0e 94 7f 01 	call	0x2fe	; 0x2fe <EEPROM_write_block>
+	startAddress+=9;
+	EEPROM_write(startAddress,user->id);
      884:	f8 01       	movw	r30, r16
      886:	61 8d       	ldd	r22, Z+25	; 0x19
      888:	ce 01       	movw	r24, r28
      88a:	49 96       	adiw	r24, 0x19	; 25
      88c:	0e 94 70 01 	call	0x2e0	; 0x2e0 <EEPROM_write>
+}
      890:	df 91       	pop	r29
      892:	cf 91       	pop	r28
      894:	1f 91       	pop	r17
@@ -1255,21 +1277,27 @@ void uart_receiveString(u8 *receivedStr)
      898:	08 95       	ret
 
 0000089a <readUserFromEEPROM>:
+
+void readUserFromEEPROM(user_remote *user, u8 userId) {
      89a:	0f 93       	push	r16
      89c:	1f 93       	push	r17
      89e:	cf 93       	push	r28
      8a0:	df 93       	push	r29
      8a2:	8c 01       	movw	r16, r24
+	u16 startAddress = EEPROM_USER_DATA_ADDR_REMOTE + (userId * 26);
      8a4:	8a e1       	ldi	r24, 0x1A	; 26
      8a6:	68 9f       	mul	r22, r24
      8a8:	e0 01       	movw	r28, r0
      8aa:	11 24       	eor	r1, r1
      8ac:	cf 5f       	subi	r28, 0xFF	; 255
      8ae:	dd 4f       	sbci	r29, 0xFD	; 253
+	EEPROM_read_block(user->uname, startAddress, 16);
      8b0:	40 e1       	ldi	r20, 0x10	; 16
      8b2:	be 01       	movw	r22, r28
      8b4:	c8 01       	movw	r24, r16
      8b6:	0e 94 9e 01 	call	0x33c	; 0x33c <EEPROM_read_block>
+	startAddress+=16;
+	EEPROM_read_block(user->password, startAddress, 9);
      8ba:	be 01       	movw	r22, r28
      8bc:	60 5f       	subi	r22, 0xF0	; 240
      8be:	7f 4f       	sbci	r23, 0xFF	; 255
@@ -1277,11 +1305,14 @@ void uart_receiveString(u8 *receivedStr)
      8c2:	c8 01       	movw	r24, r16
      8c4:	40 96       	adiw	r24, 0x10	; 16
      8c6:	0e 94 9e 01 	call	0x33c	; 0x33c <EEPROM_read_block>
+	startAddress+=9;
+	user->id = EEPROM_read(startAddress);
      8ca:	ce 01       	movw	r24, r28
      8cc:	49 96       	adiw	r24, 0x19	; 25
      8ce:	0e 94 78 01 	call	0x2f0	; 0x2f0 <EEPROM_read>
      8d2:	f8 01       	movw	r30, r16
      8d4:	81 8f       	std	Z+25, r24	; 0x19
+}
      8d6:	df 91       	pop	r29
      8d8:	cf 91       	pop	r28
      8da:	1f 91       	pop	r17
@@ -1289,6 +1320,10 @@ void uart_receiveString(u8 *receivedStr)
      8de:	08 95       	ret
 
 000008e0 <addUserToEEPROM_remote>:
+
+
+u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
+{
      8e0:	cf 92       	push	r12
      8e2:	df 92       	push	r13
      8e4:	ef 92       	push	r14
@@ -1296,43 +1331,59 @@ void uart_receiveString(u8 *receivedStr)
      8e8:	0f 93       	push	r16
      8ea:	1f 93       	push	r17
      8ec:	cf 93       	push	r28
-     8ee:	c0 91 32 03 	lds	r28, 0x0332	; 0x800332 <userCount>
+
+	if (userCount < 10) {  // Assuming a maximum of 10 users
+     8ee:	c0 91 30 03 	lds	r28, 0x0330	; 0x800330 <userCount>
      8f2:	ca 30       	cpi	r28, 0x0A	; 10
      8f4:	38 f5       	brcc	.+78     	; 0x944 <addUserToEEPROM_remote+0x64>
      8f6:	6b 01       	movw	r12, r22
      8f8:	bc 01       	movw	r22, r24
+		strcpy(&remoteUsers[userCount].uname, username);
      8fa:	8a e1       	ldi	r24, 0x1A	; 26
      8fc:	c8 9f       	mul	r28, r24
      8fe:	80 01       	movw	r16, r0
      900:	11 24       	eor	r1, r1
      902:	f8 01       	movw	r30, r16
-     904:	e4 5c       	subi	r30, 0xC4	; 196
+     904:	e6 5c       	subi	r30, 0xC6	; 198
      906:	fb 4f       	sbci	r31, 0xFB	; 251
      908:	7f 01       	movw	r14, r30
      90a:	cf 01       	movw	r24, r30
      90c:	0e 94 72 07 	call	0xee4	; 0xee4 <strcpy>
+		strcpy(&remoteUsers[userCount].password, password);
      910:	b6 01       	movw	r22, r12
      912:	c8 01       	movw	r24, r16
-     914:	84 5b       	subi	r24, 0xB4	; 180
+     914:	86 5b       	subi	r24, 0xB6	; 182
      916:	9b 4f       	sbci	r25, 0xFB	; 251
      918:	0e 94 72 07 	call	0xee4	; 0xee4 <strcpy>
+		remoteUsers[userCount].id = userCount + 1;
      91c:	81 e0       	ldi	r24, 0x01	; 1
      91e:	8c 0f       	add	r24, r28
      920:	f7 01       	movw	r30, r14
      922:	81 8f       	std	Z+25, r24	; 0x19
+
+		writeUserToEEPROM(&remoteUsers,userCount);
      924:	6c 2f       	mov	r22, r28
-     926:	8c e3       	ldi	r24, 0x3C	; 60
+     926:	8a e3       	ldi	r24, 0x3A	; 58
      928:	94 e0       	ldi	r25, 0x04	; 4
      92a:	0e 94 2a 04 	call	0x854	; 0x854 <writeUserToEEPROM>
-     92e:	60 91 32 03 	lds	r22, 0x0332	; 0x800332 <userCount>
+
+		userCount++;
+     92e:	60 91 30 03 	lds	r22, 0x0330	; 0x800330 <userCount>
      932:	6f 5f       	subi	r22, 0xFF	; 255
-     934:	60 93 32 03 	sts	0x0332, r22	; 0x800332 <userCount>
+     934:	60 93 30 03 	sts	0x0330, r22	; 0x800330 <userCount>
+		EEPROM_write(EEPROM_USER_COUNT_ADDR, userCount);
      938:	80 e0       	ldi	r24, 0x00	; 0
      93a:	90 e0       	ldi	r25, 0x00	; 0
      93c:	0e 94 70 01 	call	0x2e0	; 0x2e0 <EEPROM_write>
+		return REGISTRATION_SUCCESS;
      940:	80 e0       	ldi	r24, 0x00	; 0
      942:	01 c0       	rjmp	.+2      	; 0x946 <addUserToEEPROM_remote+0x66>
+		} else {
+		// Handle error: User array is full
+		return ERROR_USER_ARRAY_FULL;
      944:	81 e0       	ldi	r24, 0x01	; 1
+	}
+}
      946:	cf 91       	pop	r28
      948:	1f 91       	pop	r17
      94a:	0f 91       	pop	r16
@@ -1343,48 +1394,87 @@ void uart_receiveString(u8 *receivedStr)
      954:	08 95       	ret
 
 00000956 <getUserFromEEPROM_remote>:
+
+void getUserFromEEPROM_remote(u8 id, user_remote* users)
+{
+	if (id >= 0 && id <= 9) {  // Assuming a maximum of 10 users
      956:	8a 30       	cpi	r24, 0x0A	; 10
      958:	28 f4       	brcc	.+10     	; 0x964 <getUserFromEEPROM_remote+0xe>
      95a:	9b 01       	movw	r18, r22
      95c:	68 2f       	mov	r22, r24
+		readUserFromEEPROM(users,id);
      95e:	c9 01       	movw	r24, r18
      960:	0e 94 4d 04 	call	0x89a	; 0x89a <readUserFromEEPROM>
      964:	08 95       	ret
 
 00000966 <remoteDB_init>:
+user_remote remoteUsers[DB_MAX_SIZE];
+boolean login_flag_remote = FALSE;
+u8 userCount = 0;
+
+void remoteDB_init()
+{
      966:	cf 93       	push	r28
+	if (EEPROM_read(EEPROM_USER_COUNT_ADDR) == 0xFF)
      968:	80 e0       	ldi	r24, 0x00	; 0
      96a:	90 e0       	ldi	r25, 0x00	; 0
      96c:	0e 94 78 01 	call	0x2f0	; 0x2f0 <EEPROM_read>
      970:	8f 3f       	cpi	r24, 0xFF	; 255
      972:	39 f4       	brne	.+14     	; 0x982 <remoteDB_init+0x1c>
-     974:	60 91 32 03 	lds	r22, 0x0332	; 0x800332 <userCount>
+	{
+		EEPROM_write(EEPROM_USER_COUNT_ADDR, userCount);
+     974:	60 91 30 03 	lds	r22, 0x0330	; 0x800330 <userCount>
      978:	80 e0       	ldi	r24, 0x00	; 0
      97a:	90 e0       	ldi	r25, 0x00	; 0
      97c:	0e 94 70 01 	call	0x2e0	; 0x2e0 <EEPROM_write>
      980:	13 c0       	rjmp	.+38     	; 0x9a8 <remoteDB_init+0x42>
+	}
+	else
+	{
+		userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
      982:	80 e0       	ldi	r24, 0x00	; 0
      984:	90 e0       	ldi	r25, 0x00	; 0
      986:	0e 94 78 01 	call	0x2f0	; 0x2f0 <EEPROM_read>
-     98a:	80 93 32 03 	sts	0x0332, r24	; 0x800332 <userCount>
+     98a:	80 93 30 03 	sts	0x0330, r24	; 0x800330 <userCount>
+		for (u8 i = 0; i < userCount; i++) {
      98e:	88 23       	and	r24, r24
      990:	59 f0       	breq	.+22     	; 0x9a8 <remoteDB_init+0x42>
      992:	c0 e0       	ldi	r28, 0x00	; 0
-     994:	6c e3       	ldi	r22, 0x3C	; 60
+			getUserFromEEPROM_remote(i, &remoteUsers);
+     994:	6a e3       	ldi	r22, 0x3A	; 58
      996:	74 e0       	ldi	r23, 0x04	; 4
      998:	8c 2f       	mov	r24, r28
      99a:	0e 94 ab 04 	call	0x956	; 0x956 <getUserFromEEPROM_remote>
+		EEPROM_write(EEPROM_USER_COUNT_ADDR, userCount);
+	}
+	else
+	{
+		userCount = EEPROM_read(EEPROM_USER_COUNT_ADDR);
+		for (u8 i = 0; i < userCount; i++) {
      99e:	cf 5f       	subi	r28, 0xFF	; 255
-     9a0:	80 91 32 03 	lds	r24, 0x0332	; 0x800332 <userCount>
+     9a0:	80 91 30 03 	lds	r24, 0x0330	; 0x800330 <userCount>
      9a4:	c8 17       	cp	r28, r24
      9a6:	b0 f3       	brcs	.-20     	; 0x994 <remoteDB_init+0x2e>
+			getUserFromEEPROM_remote(i, &remoteUsers);
+			
+		}
+		
+	}
+	uart_init(BAUD_RATE_9600);
      9a8:	87 e6       	ldi	r24, 0x67	; 103
      9aa:	90 e0       	ldi	r25, 0x00	; 0
      9ac:	0e 94 1b 03 	call	0x636	; 0x636 <uart_init>
+}
      9b0:	cf 91       	pop	r28
      9b2:	08 95       	ret
 
 000009b4 <displayAllUsersOnRemote>:
+			//EEPROM_write_block(&userCount, (void*)EEPROM_USER_COUNT_ADDR_REMOTE, sizeof(userCount));
+		//}
+	//}
+//}
+
+void displayAllUsersOnRemote() {
      9b4:	bf 92       	push	r11
      9b6:	cf 92       	push	r12
      9b8:	df 92       	push	r13
@@ -1402,13 +1492,18 @@ void uart_receiveString(u8 *receivedStr)
      9d0:	de bf       	out	0x3e, r29	; 62
      9d2:	0f be       	out	0x3f, r0	; 63
      9d4:	cd bf       	out	0x3d, r28	; 61
+	uart_sendString("Displaying all users:\n");
      9d6:	84 e7       	ldi	r24, 0x74	; 116
      9d8:	90 e0       	ldi	r25, 0x00	; 0
      9da:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     9de:	80 91 32 03 	lds	r24, 0x0332	; 0x800332 <userCount>
+
+	for (u8 i = 0; i < userCount; i++) {
+     9de:	80 91 30 03 	lds	r24, 0x0330	; 0x800330 <userCount>
      9e2:	88 23       	and	r24, r24
      9e4:	71 f1       	breq	.+92     	; 0xa42 <displayAllUsersOnRemote+0x8e>
      9e6:	10 e0       	ldi	r17, 0x00	; 0
+		char displayText[50];
+		snprintf(displayText, sizeof(displayText), "Remote: User: %s, ID: %d\n", remoteUsers[i].uname, remoteUsers[i].id);
      9e8:	0f 2e       	mov	r0, r31
      9ea:	fa e1       	ldi	r31, 0x1A	; 26
      9ec:	bf 2e       	mov	r11, r31
@@ -1426,7 +1521,7 @@ void uart_receiveString(u8 *receivedStr)
      a04:	b1 9e       	mul	r11, r17
      a06:	f0 01       	movw	r30, r0
      a08:	11 24       	eor	r1, r1
-     a0a:	e4 5c       	subi	r30, 0xC4	; 196
+     a0a:	e6 5c       	subi	r30, 0xC6	; 198
      a0c:	fb 4f       	sbci	r31, 0xFB	; 251
      a0e:	81 8d       	ldd	r24, Z+25	; 0x19
      a10:	1f 92       	push	r1
@@ -1440,17 +1535,29 @@ void uart_receiveString(u8 *receivedStr)
      a20:	ff 92       	push	r15
      a22:	ef 92       	push	r14
      a24:	0e 94 79 07 	call	0xef2	; 0xef2 <snprintf>
+		uart_sendString(displayText);
      a28:	c7 01       	movw	r24, r14
      a2a:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
+//}
+
+void displayAllUsersOnRemote() {
+	uart_sendString("Displaying all users:\n");
+
+	for (u8 i = 0; i < userCount; i++) {
      a2e:	1f 5f       	subi	r17, 0xFF	; 255
      a30:	0f b6       	in	r0, 0x3f	; 63
      a32:	f8 94       	cli
      a34:	de bf       	out	0x3e, r29	; 62
      a36:	0f be       	out	0x3f, r0	; 63
      a38:	cd bf       	out	0x3d, r28	; 61
-     a3a:	80 91 32 03 	lds	r24, 0x0332	; 0x800332 <userCount>
+     a3a:	80 91 30 03 	lds	r24, 0x0330	; 0x800330 <userCount>
      a3e:	18 17       	cp	r17, r24
      a40:	08 f3       	brcs	.-62     	; 0xa04 <displayAllUsersOnRemote+0x50>
+		char displayText[50];
+		snprintf(displayText, sizeof(displayText), "Remote: User: %s, ID: %d\n", remoteUsers[i].uname, remoteUsers[i].id);
+		uart_sendString(displayText);
+	}
+}
      a42:	e2 96       	adiw	r28, 0x32	; 50
      a44:	0f b6       	in	r0, 0x3f	; 63
      a46:	f8 94       	cli
@@ -1469,6 +1576,10 @@ void uart_receiveString(u8 *receivedStr)
      a60:	08 95       	ret
 
 00000a62 <selectUserAndLogin_remote>:
+
+
+u8 selectUserAndLogin_remote()
+{
      a62:	0f 93       	push	r16
      a64:	1f 93       	push	r17
      a66:	cf 93       	push	r28
@@ -1481,22 +1592,36 @@ void uart_receiveString(u8 *receivedStr)
      a74:	de bf       	out	0x3e, r29	; 62
      a76:	0f be       	out	0x3f, r0	; 63
      a78:	cd bf       	out	0x3d, r28	; 61
+	u8 selectedID;
+	uart_sendString("Enter User ID:");
      a7a:	85 ea       	ldi	r24, 0xA5	; 165
      a7c:	90 e0       	ldi	r25, 0x00	; 0
      a7e:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
+
+	selectedID = uart_receiveByte()-'0';
      a82:	0e 94 38 03 	call	0x670	; 0x670 <uart_receiveByte>
      a86:	18 2f       	mov	r17, r24
      a88:	00 ed       	ldi	r16, 0xD0	; 208
      a8a:	08 0f       	add	r16, r24
-     a8c:	8f eb       	ldi	r24, 0xBF	; 191
+	
+	uart_sendString("\n");
+     a8c:	8c eb       	ldi	r24, 0xBC	; 188
      a8e:	91 e0       	ldi	r25, 0x01	; 1
      a90:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
+	
+	if (selectedID >= 1 && selectedID <= 10)
      a94:	11 53       	subi	r17, 0x31	; 49
      a96:	1a 30       	cpi	r17, 0x0A	; 10
      a98:	10 f5       	brcc	.+68     	; 0xade <selectUserAndLogin_remote+0x7c>
+	{  // Assuming a maximum of 10 users
+		
+		char enteredPassword[9];
+		getPassword_remote(enteredPassword);
      a9a:	ce 01       	movw	r24, r28
      a9c:	01 96       	adiw	r24, 0x01	; 1
      a9e:	0e 94 19 04 	call	0x832	; 0x832 <getPassword_remote>
+		
+		if (strcmp(enteredPassword, remoteUsers[selectedID-1].password) == 0)
      aa2:	80 2f       	mov	r24, r16
      aa4:	90 e0       	ldi	r25, 0x00	; 0
      aa6:	01 97       	sbiw	r24, 0x01	; 1
@@ -1506,26 +1631,42 @@ void uart_receiveString(u8 *receivedStr)
      aae:	29 9f       	mul	r18, r25
      ab0:	70 0d       	add	r23, r0
      ab2:	11 24       	eor	r1, r1
-     ab4:	64 5b       	subi	r22, 0xB4	; 180
+     ab4:	66 5b       	subi	r22, 0xB6	; 182
      ab6:	7b 4f       	sbci	r23, 0xFB	; 251
      ab8:	ce 01       	movw	r24, r28
      aba:	01 96       	adiw	r24, 0x01	; 1
      abc:	0e 94 69 07 	call	0xed2	; 0xed2 <strcmp>
      ac0:	89 2b       	or	r24, r25
      ac2:	41 f4       	brne	.+16     	; 0xad4 <selectUserAndLogin_remote+0x72>
+		{
+			uart_sendString("Login Successful\n");
      ac4:	84 eb       	ldi	r24, 0xB4	; 180
      ac6:	90 e0       	ldi	r25, 0x00	; 0
      ac8:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
+			
+			login_flag_remote = TRUE;
      acc:	81 e0       	ldi	r24, 0x01	; 1
-     ace:	80 93 33 03 	sts	0x0333, r24	; 0x800333 <login_flag_remote>
+     ace:	80 93 31 03 	sts	0x0331, r24	; 0x800331 <login_flag_remote>
      ad2:	09 c0       	rjmp	.+18     	; 0xae6 <selectUserAndLogin_remote+0x84>
+		}
+		else
+		{
+			uart_sendString("Error: Incorrect Password\n");
      ad4:	86 ec       	ldi	r24, 0xC6	; 198
      ad6:	90 e0       	ldi	r25, 0x00	; 0
      ad8:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      adc:	04 c0       	rjmp	.+8      	; 0xae6 <selectUserAndLogin_remote+0x84>
+		}
+	}
+	else
+	{
+		uart_sendString("Error: Invalid User ID\n");
      ade:	81 ee       	ldi	r24, 0xE1	; 225
      ae0:	90 e0       	ldi	r25, 0x00	; 0
      ae2:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
+	}
+	return selectedID;
+}
      ae6:	80 2f       	mov	r24, r16
      ae8:	29 96       	adiw	r28, 0x09	; 9
      aea:	0f b6       	in	r0, 0x3f	; 63
@@ -1540,12 +1681,23 @@ void uart_receiveString(u8 *receivedStr)
      afc:	08 95       	ret
 
 00000afe <loginAck_remote>:
-     afe:	80 91 33 03 	lds	r24, 0x0333	; 0x800333 <login_flag_remote>
-     b02:	10 92 33 03 	sts	0x0333, r1	; 0x800333 <login_flag_remote>
+
+boolean loginAck_remote()
+{
+	boolean result = login_flag_remote;
+     afe:	80 91 31 03 	lds	r24, 0x0331	; 0x800331 <login_flag_remote>
+	login_flag_remote = FALSE;  // Clear the flag after checking
+     b02:	10 92 31 03 	sts	0x0331, r1	; 0x800331 <login_flag_remote>
+	return result;
+}
      b06:	08 95       	ret
 
 00000b08 <logout_remote>:
-     b08:	10 92 33 03 	sts	0x0333, r1	; 0x800333 <login_flag_remote>
+
+void logout_remote()
+{
+	login_flag_remote = FALSE;
+     b08:	10 92 31 03 	sts	0x0331, r1	; 0x800331 <login_flag_remote>
      b0c:	08 95       	ret
 
 00000b0e <remote_admin_register>:
@@ -1564,16 +1716,16 @@ void uart_receiveString(u8 *receivedStr)
      b26:	0e 94 78 01 	call	0x2f0	; 0x2f0 <EEPROM_read>
      b2a:	81 11       	cpse	r24, r1
      b2c:	2d c0       	rjmp	.+90     	; 0xb88 <remote_admin_register+0x7a>
-     b2e:	8c ef       	ldi	r24, 0xFC	; 252
+     b2e:	89 ef       	ldi	r24, 0xF9	; 249
      b30:	90 e0       	ldi	r25, 0x00	; 0
      b32:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     b36:	82 e1       	ldi	r24, 0x12	; 18
+     b36:	8f e0       	ldi	r24, 0x0F	; 15
      b38:	91 e0       	ldi	r25, 0x01	; 1
      b3a:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      b3e:	ce 01       	movw	r24, r28
      b40:	01 96       	adiw	r24, 0x01	; 1
      b42:	0e 94 55 03 	call	0x6aa	; 0x6aa <uart_receiveString>
-     b46:	8f eb       	ldi	r24, 0xBF	; 191
+     b46:	8c eb       	ldi	r24, 0xBC	; 188
      b48:	91 e0       	ldi	r25, 0x01	; 1
      b4a:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      b4e:	ce 01       	movw	r24, r28
@@ -1587,17 +1739,17 @@ void uart_receiveString(u8 *receivedStr)
      b60:	0e 94 70 04 	call	0x8e0	; 0x8e0 <addUserToEEPROM_remote>
      b64:	81 11       	cpse	r24, r1
      b66:	05 c0       	rjmp	.+10     	; 0xb72 <remote_admin_register+0x64>
-     b68:	83 e2       	ldi	r24, 0x23	; 35
+     b68:	80 e2       	ldi	r24, 0x20	; 32
      b6a:	91 e0       	ldi	r25, 0x01	; 1
      b6c:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      b70:	0b c0       	rjmp	.+22     	; 0xb88 <remote_admin_register+0x7a>
      b72:	81 30       	cpi	r24, 0x01	; 1
      b74:	29 f4       	brne	.+10     	; 0xb80 <remote_admin_register+0x72>
-     b76:	8c e3       	ldi	r24, 0x3C	; 60
+     b76:	89 e3       	ldi	r24, 0x39	; 57
      b78:	91 e0       	ldi	r25, 0x01	; 1
      b7a:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      b7e:	04 c0       	rjmp	.+8      	; 0xb88 <remote_admin_register+0x7a>
-     b80:	87 e5       	ldi	r24, 0x57	; 87
+     b80:	84 e5       	ldi	r24, 0x54	; 84
      b82:	91 e0       	ldi	r25, 0x01	; 1
      b84:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      b88:	69 96       	adiw	r28, 0x19	; 25
@@ -1621,10 +1773,10 @@ void uart_receiveString(u8 *receivedStr)
      ba8:	de bf       	out	0x3e, r29	; 62
      baa:	0f be       	out	0x3f, r0	; 63
      bac:	cd bf       	out	0x3d, r28	; 61
-     bae:	83 e7       	ldi	r24, 0x73	; 115
+     bae:	80 e7       	ldi	r24, 0x70	; 112
      bb0:	91 e0       	ldi	r25, 0x01	; 1
      bb2:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     bb6:	82 e1       	ldi	r24, 0x12	; 18
+     bb6:	8f e0       	ldi	r24, 0x0F	; 15
      bb8:	91 e0       	ldi	r25, 0x01	; 1
      bba:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      bbe:	ce 01       	movw	r24, r28
@@ -1641,17 +1793,17 @@ void uart_receiveString(u8 *receivedStr)
      bd8:	0e 94 70 04 	call	0x8e0	; 0x8e0 <addUserToEEPROM_remote>
      bdc:	81 11       	cpse	r24, r1
      bde:	05 c0       	rjmp	.+10     	; 0xbea <registerUserRemote+0x50>
-     be0:	83 e2       	ldi	r24, 0x23	; 35
+     be0:	80 e2       	ldi	r24, 0x20	; 32
      be2:	91 e0       	ldi	r25, 0x01	; 1
      be4:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      be8:	0b c0       	rjmp	.+22     	; 0xc00 <registerUserRemote+0x66>
      bea:	81 30       	cpi	r24, 0x01	; 1
      bec:	29 f4       	brne	.+10     	; 0xbf8 <registerUserRemote+0x5e>
-     bee:	8c e3       	ldi	r24, 0x3C	; 60
+     bee:	89 e3       	ldi	r24, 0x39	; 57
      bf0:	91 e0       	ldi	r25, 0x01	; 1
      bf2:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      bf6:	04 c0       	rjmp	.+8      	; 0xc00 <registerUserRemote+0x66>
-     bf8:	87 e5       	ldi	r24, 0x57	; 87
+     bf8:	84 e5       	ldi	r24, 0x54	; 84
      bfa:	91 e0       	ldi	r25, 0x01	; 1
      bfc:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      c00:	69 96       	adiw	r28, 0x19	; 25
@@ -1675,10 +1827,10 @@ void uart_receiveString(u8 *receivedStr)
      c20:	de bf       	out	0x3e, r29	; 62
      c22:	0f be       	out	0x3f, r0	; 63
      c24:	cd bf       	out	0x3d, r28	; 61
-     c26:	83 e7       	ldi	r24, 0x73	; 115
+     c26:	80 e7       	ldi	r24, 0x70	; 112
      c28:	91 e0       	ldi	r25, 0x01	; 1
      c2a:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     c2e:	82 e1       	ldi	r24, 0x12	; 18
+     c2e:	8f e0       	ldi	r24, 0x0F	; 15
      c30:	91 e0       	ldi	r25, 0x01	; 1
      c32:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      c36:	ce 01       	movw	r24, r28
@@ -1695,17 +1847,17 @@ void uart_receiveString(u8 *receivedStr)
      c50:	0e 94 de 03 	call	0x7bc	; 0x7bc <addUserToEEPROM_local>
      c54:	81 11       	cpse	r24, r1
      c56:	05 c0       	rjmp	.+10     	; 0xc62 <registerUserLocal+0x50>
-     c58:	83 e2       	ldi	r24, 0x23	; 35
+     c58:	80 e2       	ldi	r24, 0x20	; 32
      c5a:	91 e0       	ldi	r25, 0x01	; 1
      c5c:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      c60:	0b c0       	rjmp	.+22     	; 0xc78 <registerUserLocal+0x66>
      c62:	81 30       	cpi	r24, 0x01	; 1
      c64:	29 f4       	brne	.+10     	; 0xc70 <registerUserLocal+0x5e>
-     c66:	8c e3       	ldi	r24, 0x3C	; 60
+     c66:	89 e3       	ldi	r24, 0x39	; 57
      c68:	91 e0       	ldi	r25, 0x01	; 1
      c6a:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      c6e:	04 c0       	rjmp	.+8      	; 0xc78 <registerUserLocal+0x66>
-     c70:	87 e5       	ldi	r24, 0x57	; 87
+     c70:	84 e5       	ldi	r24, 0x54	; 84
      c72:	91 e0       	ldi	r25, 0x01	; 1
      c74:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      c78:	69 96       	adiw	r28, 0x19	; 25
@@ -1722,28 +1874,28 @@ void uart_receiveString(u8 *receivedStr)
      c8a:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <Display_lamp_menu.1733>
      c8e:	88 23       	and	r24, r24
      c90:	11 f1       	breq	.+68     	; 0xcd6 <lamp_menu+0x4c>
-     c92:	88 e8       	ldi	r24, 0x88	; 136
+     c92:	85 e8       	ldi	r24, 0x85	; 133
      c94:	91 e0       	ldi	r25, 0x01	; 1
      c96:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     c9a:	83 e9       	ldi	r24, 0x93	; 147
+     c9a:	80 e9       	ldi	r24, 0x90	; 144
      c9c:	91 e0       	ldi	r25, 0x01	; 1
      c9e:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     ca2:	81 ec       	ldi	r24, 0xC1	; 193
+     ca2:	8e eb       	ldi	r24, 0xBE	; 190
      ca4:	91 e0       	ldi	r25, 0x01	; 1
      ca6:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     caa:	8b ec       	ldi	r24, 0xCB	; 203
+     caa:	88 ec       	ldi	r24, 0xC8	; 200
      cac:	91 e0       	ldi	r25, 0x01	; 1
      cae:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     cb2:	85 ed       	ldi	r24, 0xD5	; 213
+     cb2:	82 ed       	ldi	r24, 0xD2	; 210
      cb4:	91 e0       	ldi	r25, 0x01	; 1
      cb6:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     cba:	8f ed       	ldi	r24, 0xDF	; 223
+     cba:	8c ed       	ldi	r24, 0xDC	; 220
      cbc:	91 e0       	ldi	r25, 0x01	; 1
      cbe:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     cc2:	89 ee       	ldi	r24, 0xE9	; 233
+     cc2:	86 ee       	ldi	r24, 0xE6	; 230
      cc4:	91 e0       	ldi	r25, 0x01	; 1
      cc6:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     cca:	83 ef       	ldi	r24, 0xF3	; 243
+     cca:	80 ef       	ldi	r24, 0xF0	; 240
      ccc:	91 e0       	ldi	r25, 0x01	; 1
      cce:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      cd2:	10 92 61 00 	sts	0x0061, r1	; 0x800061 <Display_lamp_menu.1733>
@@ -1782,7 +1934,7 @@ void uart_receiveString(u8 *receivedStr)
      d22:	07 c0       	rjmp	.+14     	; 0xd32 <lamp_menu+0xa8>
      d24:	0e 94 b4 03 	call	0x768	; 0x768 <Lamp_Service_Dim_Toggle>
      d28:	04 c0       	rjmp	.+8      	; 0xd32 <lamp_menu+0xa8>
-     d2a:	8e ef       	ldi	r24, 0xFE	; 254
+     d2a:	8b ef       	ldi	r24, 0xFB	; 251
      d2c:	91 e0       	ldi	r25, 0x01	; 1
      d2e:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      d32:	81 e0       	ldi	r24, 0x01	; 1
@@ -1790,7 +1942,7 @@ void uart_receiveString(u8 *receivedStr)
      d38:	08 95       	ret
 
 00000d3a <AC_menu>:
-     d3a:	8c e2       	ldi	r24, 0x2C	; 44
+     d3a:	89 e2       	ldi	r24, 0x29	; 41
      d3c:	92 e0       	ldi	r25, 0x02	; 2
      d3e:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      d42:	0e 94 7a 03 	call	0x6f4	; 0x6f4 <airConditioner_Status>
@@ -1803,26 +1955,26 @@ void uart_receiveString(u8 *receivedStr)
      d56:	19 f4       	brne	.+6      	; 0xd5e <AC_menu+0x24>
      d58:	0e 94 73 03 	call	0x6e6	; 0x6e6 <airConditioner_Toggle>
      d5c:	08 95       	ret
-     d5e:	84 e3       	ldi	r24, 0x34	; 52
+     d5e:	81 e3       	ldi	r24, 0x31	; 49
      d60:	92 e0       	ldi	r25, 0x02	; 2
      d62:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      d66:	08 95       	ret
-     d68:	81 e2       	ldi	r24, 0x21	; 33
+     d68:	8e e1       	ldi	r24, 0x1E	; 30
      d6a:	92 e0       	ldi	r25, 0x02	; 2
      d6c:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     d70:	80 e4       	ldi	r24, 0x40	; 64
+     d70:	8d e3       	ldi	r24, 0x3D	; 61
      d72:	92 e0       	ldi	r25, 0x02	; 2
      d74:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     d78:	87 e2       	ldi	r24, 0x27	; 39
+     d78:	84 e2       	ldi	r24, 0x24	; 36
      d7a:	92 e0       	ldi	r25, 0x02	; 2
      d7c:	e7 cf       	rjmp	.-50     	; 0xd4c <AC_menu+0x12>
-     d7e:	87 e2       	ldi	r24, 0x27	; 39
+     d7e:	84 e2       	ldi	r24, 0x24	; 36
      d80:	92 e0       	ldi	r25, 0x02	; 2
      d82:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     d86:	80 e4       	ldi	r24, 0x40	; 64
+     d86:	8d e3       	ldi	r24, 0x3D	; 61
      d88:	92 e0       	ldi	r25, 0x02	; 2
      d8a:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     d8e:	81 e2       	ldi	r24, 0x21	; 33
+     d8e:	8e e1       	ldi	r24, 0x1E	; 30
      d90:	92 e0       	ldi	r25, 0x02	; 2
      d92:	dc cf       	rjmp	.-72     	; 0xd4c <AC_menu+0x12>
 
@@ -1830,16 +1982,16 @@ void uart_receiveString(u8 *receivedStr)
      d94:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <Display_user_menu.1712>
      d98:	88 23       	and	r24, r24
      d9a:	91 f0       	breq	.+36     	; 0xdc0 <remote_Menu_User+0x2c>
-     d9c:	83 e5       	ldi	r24, 0x53	; 83
+     d9c:	80 e5       	ldi	r24, 0x50	; 80
      d9e:	92 e0       	ldi	r25, 0x02	; 2
      da0:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     da4:	8f e5       	ldi	r24, 0x5F	; 95
+     da4:	8c e5       	ldi	r24, 0x5C	; 92
      da6:	92 e0       	ldi	r25, 0x02	; 2
      da8:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     dac:	89 e6       	ldi	r24, 0x69	; 105
+     dac:	86 e6       	ldi	r24, 0x66	; 102
      dae:	92 e0       	ldi	r25, 0x02	; 2
      db0:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     db4:	80 e7       	ldi	r24, 0x70	; 112
+     db4:	8d e6       	ldi	r24, 0x6D	; 109
      db6:	92 e0       	ldi	r25, 0x02	; 2
      db8:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      dbc:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <Display_user_menu.1712>
@@ -1859,7 +2011,7 @@ void uart_receiveString(u8 *receivedStr)
      de0:	0e 94 84 05 	call	0xb08	; 0xb08 <logout_remote>
      de4:	0e 94 fd 06 	call	0xdfa	; 0xdfa <remote_login_menu>
      de8:	08 95       	ret
-     dea:	8e ef       	ldi	r24, 0xFE	; 254
+     dea:	8b ef       	ldi	r24, 0xFB	; 251
      dec:	91 e0       	ldi	r25, 0x01	; 1
      dee:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      df2:	81 e0       	ldi	r24, 0x01	; 1
@@ -1885,25 +2037,25 @@ void uart_receiveString(u8 *receivedStr)
      e20:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <Display_admin_menu.1721>
      e24:	88 23       	and	r24, r24
      e26:	f1 f0       	breq	.+60     	; 0xe64 <remote_Menu_Admin+0x44>
-     e28:	8b e7       	ldi	r24, 0x7B	; 123
+     e28:	88 e7       	ldi	r24, 0x78	; 120
      e2a:	92 e0       	ldi	r25, 0x02	; 2
      e2c:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     e30:	88 e8       	ldi	r24, 0x88	; 136
+     e30:	85 e8       	ldi	r24, 0x85	; 133
      e32:	92 e0       	ldi	r25, 0x02	; 2
      e34:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     e38:	83 ea       	ldi	r24, 0xA3	; 163
+     e38:	80 ea       	ldi	r24, 0xA0	; 160
      e3a:	92 e0       	ldi	r25, 0x02	; 2
      e3c:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     e40:	8d eb       	ldi	r24, 0xBD	; 189
+     e40:	8a eb       	ldi	r24, 0xBA	; 186
      e42:	92 e0       	ldi	r25, 0x02	; 2
      e44:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     e48:	87 ec       	ldi	r24, 0xC7	; 199
+     e48:	84 ec       	ldi	r24, 0xC4	; 196
      e4a:	92 e0       	ldi	r25, 0x02	; 2
      e4c:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     e50:	8e ec       	ldi	r24, 0xCE	; 206
+     e50:	8b ec       	ldi	r24, 0xCB	; 203
      e52:	92 e0       	ldi	r25, 0x02	; 2
      e54:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
-     e58:	8c ee       	ldi	r24, 0xEC	; 236
+     e58:	89 ee       	ldi	r24, 0xE9	; 233
      e5a:	92 e0       	ldi	r25, 0x02	; 2
      e5c:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      e60:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <Display_admin_menu.1721>
@@ -1937,7 +2089,7 @@ void uart_receiveString(u8 *receivedStr)
      ea6:	0e 94 84 05 	call	0xb08	; 0xb08 <logout_remote>
      eaa:	0e 94 fd 06 	call	0xdfa	; 0xdfa <remote_login_menu>
      eae:	08 95       	ret
-     eb0:	8e ef       	ldi	r24, 0xFE	; 254
+     eb0:	8b ef       	ldi	r24, 0xFB	; 251
      eb2:	91 e0       	ldi	r25, 0x01	; 1
      eb4:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      eb8:	81 e0       	ldi	r24, 0x01	; 1
@@ -1945,7 +2097,7 @@ void uart_receiveString(u8 *receivedStr)
      ebe:	08 95       	ret
 
 00000ec0 <remote_menu_Service>:
-     ec0:	87 ef       	ldi	r24, 0xF7	; 247
+     ec0:	84 ef       	ldi	r24, 0xF4	; 244
      ec2:	92 e0       	ldi	r25, 0x02	; 2
      ec4:	0e 94 29 03 	call	0x652	; 0x652 <uart_sendString>
      ec8:	0e 94 87 05 	call	0xb0e	; 0xb0e <remote_admin_register>
