@@ -151,7 +151,7 @@ u8 selectUserAndLogin_remote()
 	}
 	else
 	{
-		uart_sendString("Error: Invalid User Order\n");
+		uart_sendString("Error: Invalid User ID\n");
 	}
 	return selectedID;
 }
