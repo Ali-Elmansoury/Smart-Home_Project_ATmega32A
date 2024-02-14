@@ -85,12 +85,8 @@ void uart_receiveString(u8 *receivedStr)
 	RX_Byte = uart_receiveByte();
 	while(RX_Byte != '#')
 	{
-		if (RX_Byte != 255)
-		{
-			receivedStr[i] = RX_Byte;
-			i++;
-		}
-		RX_Byte = uart_receiveByte();
+		i++;
+		receivedStr[i] = uart_receiveByte();
 	}
 	receivedStr[i] = '\0';
 }
