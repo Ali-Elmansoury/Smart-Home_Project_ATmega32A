@@ -159,7 +159,6 @@ u8 selectUserAndLogin_remote()
     else
     {
         uart_sendString("Received byte is 255. Ending function.\n");
-        // You may want to handle this situation appropriately, e.g., return an error code or perform other actions.
     }
 
     return selectedID;
