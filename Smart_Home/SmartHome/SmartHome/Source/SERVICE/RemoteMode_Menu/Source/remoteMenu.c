@@ -114,11 +114,17 @@ void registerUserLocal()
 
 void remote_login_menu()
 {
-	displayAllUsersOnRemote();
+	static u8 Display_Flag = TRUE;
+	if (Display_Flag)
+	{
+		displayAllUsersOnRemote();
+		Display_Flag = FALSE;
+	}
 	u8 id = selectUserAndLogin_remote();
 	if (id == 1 && loginAck_remote())
 	{
 		remote_Menu_Admin();
+		Display_Flag = TRUE;
 	}
 	else
 	{
@@ -126,6 +132,7 @@ void remote_login_menu()
 		if (loginAck_remote())
 		{
 			remote_Menu_User();
+			Display_Flag = TRUE;
 		}
 		else{
 			//do nothing
@@ -283,7 +290,7 @@ void AC_menu()
 
 void remote_menu_Service(void)
 {
-	uart_sendString("System is starting in remote mode\n");
+// 	uart_sendString("System is starting in remote mode\n");
 	remote_admin_register();
 	remote_login_menu();
 }

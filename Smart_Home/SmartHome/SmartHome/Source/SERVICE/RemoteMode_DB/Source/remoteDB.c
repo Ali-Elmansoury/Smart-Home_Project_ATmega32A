@@ -126,14 +126,19 @@ void displayAllUsersOnRemote() {
 u8 selectUserAndLogin_remote()
 {
     u8 selectedID;
-    uart_sendString("Enter User ID:");
-
+	static u8 Display_Flag = TRUE;
+	if (Display_Flag)
+	{
+		uart_sendString("Enter User ID:");
+		Display_Flag = FALSE;
+	}
     selectedID = uart_receiveByte();
 
-    uart_sendString("\n");
+    
 
     if (selectedID != 255) // Check if the received byte is not 255
     {
+		uart_sendString("\n");
 		selectedID -= '0';
         if (selectedID >= 1 && selectedID <= 10)
         { // Assuming a maximum of 10 users
@@ -157,11 +162,6 @@ u8 selectUserAndLogin_remote()
             uart_sendString("Error: Invalid User ID\n");
         }
     }
-    else
-    {
-        uart_sendString("Received byte is 255. Ending function.\n");
-    }
-
     return selectedID;
 }
 
