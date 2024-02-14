@@ -64,8 +64,8 @@ u8 uart_receiveByte(void)
 
 ISR(USART_RXC_vect)
 {
-	if (rx_data != UDR) { // Check for difference
-		rx_data = UDR;
+	if (rx_data != UART_UDR_REG) { // Check for difference
+		rx_data = UART_UDR_REG;
 		new_rx_data = TRUE; // Set flag to indicate new data
 	}
 }
@@ -85,8 +85,16 @@ void uart_receiveString(u8 *receivedStr)
 	receivedStr[i] = uart_receiveByte();
 	while(receivedStr[i] != '#')
 	{
-		i++;
-		receivedStr[i] = uart_receiveByte();
+		if (new_rx_data)
+		{
+			new_rx_data = FALSE;
+			i++;
+			receivedStr[i] = uart_receiveByte();
+		}
+		else
+		{
+			break;
+		}
 	}
 	receivedStr[i] = '\0';
 }
