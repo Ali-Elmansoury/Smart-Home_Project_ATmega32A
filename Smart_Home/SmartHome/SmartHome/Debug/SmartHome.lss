@@ -1002,13 +1002,13 @@ void uart_receiveString(u8 *receivedStr)
      6bc:	8f 3f       	cpi	r24, 0xFF	; 255
      6be:	29 f0       	breq	.+10     	; 0x6ca <uart_receiveString+0x20>
 		{
-			receivedStr[i] = RX_Byte;
-     6c0:	f8 01       	movw	r30, r16
-     6c2:	ec 0f       	add	r30, r28
-     6c4:	f1 1d       	adc	r31, r1
-     6c6:	80 83       	st	Z, r24
 			i++;
-     6c8:	cf 5f       	subi	r28, 0xFF	; 255
+     6c0:	cf 5f       	subi	r28, 0xFF	; 255
+			receivedStr[i] = RX_Byte;
+     6c2:	f8 01       	movw	r30, r16
+     6c4:	ec 0f       	add	r30, r28
+     6c6:	f1 1d       	adc	r31, r1
+     6c8:	80 83       	st	Z, r24
 		}
 		RX_Byte = uart_receiveByte();
      6ca:	0e 94 38 03 	call	0x670	; 0x670 <uart_receiveByte>
@@ -1028,8 +1028,8 @@ void uart_receiveString(u8 *receivedStr)
 {
 	u8 i = 0, RX_Byte=255;
      6d4:	c0 e0       	ldi	r28, 0x00	; 0
-			receivedStr[i] = RX_Byte;
 			i++;
+			receivedStr[i] = RX_Byte;
 		}
 		RX_Byte = uart_receiveByte();
 	}
