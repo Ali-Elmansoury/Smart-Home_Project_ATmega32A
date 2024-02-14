@@ -125,36 +125,46 @@ void displayAllUsersOnRemote() {
 
 u8 selectUserAndLogin_remote()
 {
-	u8 selectedID;
-	uart_sendString("Enter User ID:");
+    u8 selectedID;
+    uart_sendString("Enter User ID:");
 
-	selectedID = uart_receiveByte()-'0';
-	
-	uart_sendString("\n");
-	
-	if (selectedID >= 1 && selectedID <= 10)
-	{  // Assuming a maximum of 10 users
-		
-		char enteredPassword[9];
-		getPassword_remote(enteredPassword);
-		
-		if (strcmp(enteredPassword, remoteUsers[selectedID-1].password) == 0)
-		{
-			uart_sendString("Login Successful\n");
-			
-			login_flag_remote = TRUE;
-		}
-		else
-		{
-			uart_sendString("Error: Incorrect Password\n");
-		}
-	}
-	else
-	{
-		uart_sendString("Error: Invalid User ID\n");
-	}
-	return selectedID;
+    selectedID = uart_receiveByte() - '0';
+
+    uart_sendString("\n");
+
+    if (selectedID != 255) // Check if the received byte is not 255
+    {
+        if (selectedID >= 1 && selectedID <= 10)
+        { // Assuming a maximum of 10 users
+
+            char enteredPassword[9];
+            getPassword_remote(enteredPassword);
+
+            if (strcmp(enteredPassword, remoteUsers[selectedID - 1].password) == 0)
+            {
+                uart_sendString("Login Successful\n");
+
+                login_flag_remote = TRUE;
+            }
+            else
+            {
+                uart_sendString("Error: Incorrect Password\n");
+            }
+        }
+        else
+        {
+            uart_sendString("Error: Invalid User ID\n");
+        }
+    }
+    else
+    {
+        uart_sendString("Received byte is 255. Ending function.\n");
+        // You may want to handle this situation appropriately, e.g., return an error code or perform other actions.
+    }
+
+    return selectedID;
 }
+
 
 boolean loginAck_remote()
 {
