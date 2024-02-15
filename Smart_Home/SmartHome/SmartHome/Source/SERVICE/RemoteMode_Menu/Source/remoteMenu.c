@@ -16,6 +16,12 @@
 #include "remoteDB.h"
 #include "eeprom.h"
 
+//Global Variables
+boolean Get_Choice = TRUE,
+		users_Dispaly = TRUE,
+		Display_user_menu = TRUE,
+		Display_admin_menu = TRUE;
+
 // Function prototypes
 void remote_admin_register(void);
 void registerUserRemote(void);
@@ -59,7 +65,7 @@ void remote_admin_register()
 	}
 }
 
-void registerUserRemote()
+void registerUserRemote(void)
 {
 	u8 registrationResult = ERROR_USER_ARRAY_FULL;
 	uart_sendString("Register a new user\n");
@@ -84,6 +90,9 @@ void registerUserRemote()
 		// Other error occurred during EEPROM write
 		uart_sendString("Error: EEPROM write failed\n");
 	}
+	Get_Choice = TRUE;
+	Display_user_menu = TRUE;
+	Display_admin_menu = TRUE;
 }
 
 void registerUserLocal()
@@ -110,39 +119,44 @@ void registerUserLocal()
 		// Other error occurred during EEPROM write
 		uart_sendString("Error: EEPROM write failed\n");
 	}
+	Get_Choice = TRUE;
+	Display_user_menu = TRUE;
+	Display_admin_menu = TRUE;
 }
 
 void remote_login_menu()
 {
-	static u8 Display_Flag = TRUE;
-	if (Display_Flag)
+	static u8 id = 0;
+	if (users_Dispaly && loginAck_remote()!=TRUE)
 	{
 		displayAllUsersOnRemote();
-		Display_Flag = FALSE;
+		users_Dispaly = FALSE;
 	}
-	u8 id = selectUserAndLogin_remote();
-	if (id == 1 && loginAck_remote())
+	switch(loginAck_remote())
 	{
-		remote_Menu_Admin();
-		Display_Flag = TRUE;
-	}
-	else
-	{
-		//login
-		if (loginAck_remote())
-		{
-			remote_Menu_User();
-			Display_Flag = TRUE;
-		}
-		else{
-			//do nothing
-		}
+		case FALSE:
+			id = selectUserAndLogin_remote();
+			break;
+		case TRUE:
+			switch(id)
+			{
+				case 1:
+					remote_Menu_Admin();
+					break;
+				default:
+					remote_Menu_User();
+					break;
+			}
+			break;
+		default:
+			break;
 	}
 }
 
 void remote_Menu_User()
 {
-	static u8 Display_user_menu = TRUE;
+	static u8 userChoice;
+	
 	if (Display_user_menu)
 	{
 		uart_sendString("User Menu:\n");
@@ -151,9 +165,13 @@ void remote_Menu_User()
 		uart_sendString("3. Logout\n");
 		Display_user_menu = FALSE;
 	}
-	u8 userChoice = uart_receiveByte();
+	if (Get_Choice)
+	{
+		 userChoice = uart_receiveByte();
+	}
 	if (userChoice!=255)
 	{
+		Get_Choice = FALSE;
 		switch (userChoice) {
 			case '1':
 			lamp_menu();
@@ -163,19 +181,20 @@ void remote_Menu_User()
 			break;
 			case '3':
 			logout_remote();
-			remote_login_menu();
-			return;
+			Get_Choice = TRUE;
+			users_Dispaly = TRUE;
+			Display_user_menu = TRUE; 
 			default:
 			uart_sendString("Invalid choice. Please try again.\n");
+			Get_Choice = TRUE;
 			break;
 		}
-		Display_user_menu=TRUE;
 	}
 }
 
-void remote_Menu_Admin()
+void remote_Menu_Admin(void)
 {
-	static u8 Display_admin_menu = TRUE;
+	static u8 adminChoice;
 	if (Display_admin_menu)
 	{
 		uart_sendString("Admin Menu:\n");
@@ -187,9 +206,14 @@ void remote_Menu_Admin()
 		uart_sendString("6. Logout\n");
 		Display_admin_menu = FALSE;
 	}
-	u8 adminChoice = uart_receiveByte();
+	if (Get_Choice)
+	{
+		adminChoice = uart_receiveByte();
+	}
+	
 	if (adminChoice!=255)
 	{
+		Get_Choice = FALSE;
 		switch (adminChoice) {
 			case '1':
 			registerUserRemote();
@@ -208,17 +232,19 @@ void remote_Menu_Admin()
 			break;
 			case '6':
 			logout_remote();
-			remote_login_menu();
-			return;
+			users_Dispaly = TRUE;
+			Get_Choice = TRUE;
+			Display_admin_menu = TRUE;
+			break;
 			default:
 			uart_sendString("Invalid choice. Please try again.\n");
+			Get_Choice = TRUE;
 			break;
 		}
-		Display_admin_menu = TRUE;
 	}
 }
 
-void lamp_menu()
+void lamp_menu(void)
 {
 	static u8 Display_lamp_menu = TRUE;
 	if (Display_lamp_menu)
@@ -231,67 +257,93 @@ void lamp_menu()
 		uart_sendString("4. Lamp4\n");
 		uart_sendString("5. Lamp5\n");
 		uart_sendString("6. Dimmer\n");
+		uart_sendString("7. Return\n");
 		Display_lamp_menu = FALSE;
 	}
-	u8 lamp_choice = uart_receiveByte() - '0';
+	u8 lamp_choice = uart_receiveByte();
 	if (lamp_choice!=255)
 	{
+		lamp_choice -= '0'; 
 		switch (lamp_choice)
 		{
 			case 1:
-			// Lamp1 ON/OFF (Toggle LED1 Status)
-			lamp_toggle(LAMP1_ID);
-			break;
+				// Lamp1 ON/OFF (Toggle LED1 Status)
+				lamp_toggle(LAMP1_ID);
+				break;
 			case 2:
-			// LED2 ON/OFF (Toggle LED2 Status)
-			lamp_toggle(LAMP2_ID);
-			break;
+				// LED2 ON/OFF (Toggle LED2 Status)
+				lamp_toggle(LAMP2_ID);
+				break;
 			case 3:
-			// LED3 ON/OFF (Toggle LED3 Status)
-			lamp_toggle(LAMP3_ID);
-			break;
+				// LED3 ON/OFF (Toggle LED3 Status)
+				lamp_toggle(LAMP3_ID);
+				break;
 			case 4:
-			// LED4 ON/OFF (Toggle LED4 Status)
-			lamp_toggle(LAMP4_ID);
-			break;
+				// LED4 ON/OFF (Toggle LED4 Status)
+				lamp_toggle(LAMP4_ID);
+				break;
 			case 5:
-			// LED5 ON/OFF (Toggle LED5 Status)
-			lamp_toggle(LAMP5_ID);
-			break;
+				// LED5 ON/OFF (Toggle LED5 Status)
+				lamp_toggle(LAMP5_ID);
+				break;
 			case 6:
-			// DimmerLED ON/OFF (Toggle DimmerLED Status)
-			Lamp_Service_Dim_Toggle();
-			break;
+				// DimmerLED ON/OFF (Toggle DimmerLED Status)
+				Lamp_Service_Dim_Toggle();
+				break;
+			case 7:
+				Get_Choice = TRUE;
+				Display_user_menu = TRUE;
+				Display_admin_menu = TRUE;
+				break;
 			default:
-			uart_sendString("Invalid choice. Please try again.\n");
-			break;
+				uart_sendString("Invalid choice. Please try again.\n");
+				break;
 		}
 		Display_lamp_menu = TRUE;
 	}
 }
 
-void AC_menu()
+void AC_menu(void)
 {
-	uart_sendString("AC Menu");
-	AC ac_struct = airConditioner_Status();
-	uart_sendString(ac_struct.AC_Status ? "[ON]" : "[OFF]");
-	uart_sendString("Press (T) to turn ");
-	uart_sendString(ac_struct.AC_Status ? "[OFF]" : "[ON]");
-	u8 key = uart_receiveByte();
-	if (key == 'T')
+	static u8 Display_AC_menu = TRUE;
+	if (Display_AC_menu)
 	{
-		airConditioner_Toggle();
+		uart_sendString("AC Menu");
+		AC ac_struct = airConditioner_Status();
+		uart_sendString(ac_struct.AC_Status ? "[ON]" : "[OFF]");
+		uart_sendString("Press (T) to turn ");
+		uart_sendString(ac_struct.AC_Status ? "[OFF]" : "[ON]");
+		uart_sendString("Press (E) to Exit\n");
+		Display_AC_menu=FALSE;
 	}
-	else
+	
+	u8 AC_choice = uart_receiveByte();
+	if (AC_choice!=255)
 	{
-		uart_sendString("Wrong Input");
+		switch(AC_choice)
+		{
+			case 'T':
+			airConditioner_Toggle();
+			break;
+			case 'E':
+			Get_Choice = TRUE;
+			Display_user_menu = TRUE;
+			Display_admin_menu = TRUE;
+			break;
+			default:
+			uart_sendString("Wrong Input");
+			break;
+		}
 	}
+
 }
 
 void remote_menu_Service(void)
 {
 // 	uart_sendString("System is starting in remote mode\n");
-	remote_admin_register();
 	remote_login_menu();
 }
-
+void remote_menu_init()
+{
+	remote_admin_register();
+}

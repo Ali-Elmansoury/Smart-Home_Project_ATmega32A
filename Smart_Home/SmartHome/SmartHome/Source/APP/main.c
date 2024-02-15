@@ -23,23 +23,23 @@
 
 int main(void)
 {
-	//lcd_init();
-	//airConditioner_init();
+	lcd_init();
+	airConditioner_init();
 	doorService_init();
-	//lamp_Dim_service_init();
-	//local_menu_init();
+	lamp_Dim_service_init();
+	local_menu_init();
 	uart_init(BAUD_RATE_9600);
 	remoteDB_init();
-	//localDB_init();
+	localDB_init();
 	lamp_init();
-	
+	remote_menu_init();
     /* Replace with your application code */
     while (1) 
     {
 		_delay_ms(20);
-		//airConditioner_service();
-		//lamp_Dim_service();
-		//local_menu_Service();
+		airConditioner_service();
+		lamp_Dim_service();
+		local_menu_Service();
 		remote_menu_Service();
 		
     }

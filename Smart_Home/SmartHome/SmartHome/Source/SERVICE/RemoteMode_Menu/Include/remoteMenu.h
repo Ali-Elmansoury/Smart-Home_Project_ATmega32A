@@ -20,4 +20,6 @@
 
 void remote_menu_Service(void);
 
+void remote_menu_init(void);
+
 #endif /* REMOTEMENU_H_ */

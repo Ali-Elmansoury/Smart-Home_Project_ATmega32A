@@ -441,7 +441,7 @@ void local_menu_Service()
 {
 	static u8 current_menu = LOCAL_MENU;
 	//check if login & not in idle mode
-	if(/*loginAck_local() &&*/ local_idle == FALSE)
+	if(loginAck_local() && local_idle == FALSE)
 	{
 		switch(current_menu)
 		{
@@ -459,7 +459,7 @@ void local_menu_Service()
 				break;
 		}
 	}
-	else if(local_idle /*|| loginAck_remote()*/)
+	else if(local_idle || loginAck_remote())
 	{
 		local_menu_Idle();
 	}
