@@ -20,7 +20,7 @@
 #define ERROR_EEPROM_WRITE			(2)
 
 // EEPROM addresses for storing user data
-#define EEPROM_USER_COUNT_ADDR_LOCAL					(0x0F)
+#define EEPROM_USER_COUNT_ADDR_LOCAL					(0x12C)
 #define EEPROM_USER_DATA_ADDR_START_LOCAL				(0x01)
 #define EEPROM_USER_DATA_ADDR_LOCAL			(EEPROM_USER_DATA_ADDR_START_LOCAL)
 
@@ -42,7 +42,7 @@ u8 addUserToEEPROM_local(const u8 *username, const u8* password);
 /*Function to select a user by order number and verify the password*/
 void selectUserAndLogin_local();
 /*Function to retrieve a user from EEPROM by order number*/
-void getUserFromEEPROM_local(u8 id, user_local* users);
+//void getUserFromEEPROM_local(u8 id, user_local* users);
 /*Function to display users on LCD with scrolling*/
 void displayUsersOnLCD(u8 startIndex, u8 endIndex);
 /*Function to handle scrolling through users*/

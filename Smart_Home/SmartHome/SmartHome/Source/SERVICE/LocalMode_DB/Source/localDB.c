@@ -28,7 +28,7 @@ void localDB_init()
 	{
 		userCount_local = EEPROM_read(EEPROM_USER_COUNT_ADDR_LOCAL);
 		for (u8 i = 0; i < userCount_local; i++) {
-			getUserFromEEPROM_local(i, &localUsers);
+			readUserFromEEPROM_local(&localUsers[i], i);
 			
 		}
 		
@@ -87,8 +87,8 @@ void getPassword_local(u8* password, u8 maxLength)
 	password[index] = '\0';  // Null-terminate the password
 }
 
-void writeUserToEEPROM_local(user_local *user, u8 userId) {
-	u16 startAddress = EEPROM_USER_DATA_ADDR_LOCAL + (userId * 26);
+void writeUserToEEPROM_local(user_local *user) {
+	u16 startAddress = EEPROM_USER_DATA_ADDR_LOCAL + (userCount_local * 26);
 	EEPROM_write_block(user->uname, startAddress, 16);
 	startAddress+=16;
 	EEPROM_write_block(user->password,startAddress, 9);
@@ -112,7 +112,7 @@ u8 addUserToEEPROM_local(const u8 *username, const u8* password)
 		strcpy(&localUsers[userCount_local].password, password);
 		localUsers[userCount_local].id = userCount_local + 1;
 
-		writeUserToEEPROM_local(&localUsers,userCount_local);
+		writeUserToEEPROM_local(&localUsers[userCount_local]);
 
 		userCount_local++;
 		EEPROM_write(EEPROM_USER_COUNT_ADDR_LOCAL, userCount_local);
@@ -124,12 +124,12 @@ u8 addUserToEEPROM_local(const u8 *username, const u8* password)
 }
 
 
-void getUserFromEEPROM_local(u8 id, user_local* user)
-{
-	if (id >= 0 && id <= 9) {  // Assuming a maximum of 10 users
-		readUserFromEEPROM_local(user,id);
-	}
-}
+// void getUserFromEEPROM_local(u8 id, user_local* user)
+// {
+// 	if (id >= 0 && id <= 9) {  // Assuming a maximum of 10 users
+// 		readUserFromEEPROM_local(user,id);
+// 	}
+// }
 
 
 //void deleteUserFromEEPROM_local(u8 id)
@@ -159,8 +159,9 @@ void displayUsersOnLCD(u8 startIndex, u8 endIndex)
 		char displayText[50];
 		snprintf(displayText, sizeof(displayText), "User: %s,ID: %d", localUsers[i].uname, localUsers[i].id);
 		lcd_displayStr(displayText);
+		lcd_goTo(1,0);
+		_delay_ms(1000);
 	}
-	lcd_goTo(1,0);
 }
 
 
@@ -197,7 +198,7 @@ void selectUserAndLogin_local()
 	u8 selectedID;
 	lcd_displayStr("Enter User ID:");
 
-	selectedID = keypad_readKey();
+	selectedID = MM74C922_GetKey();
 
 	if (selectedID >= 1 && selectedID <= 10)
 	{  // Assuming a maximum of 10 users
@@ -232,25 +233,36 @@ void scrollUsersOnLCD()
 
 	u8 key = MM74C922_GetKey();  // Assume keypad_readKey() returns the pressed key
 
-	if (key == 'A') {  // Scroll up
-		if (startIndex >= 2) {
-			startIndex -= 2;
-			endIndex -= 2;
-		}
-		} else if (key == 'B') {  // Scroll down
-		if (endIndex < 11) {  // Assuming a maximum of 10 users
-			startIndex += 2;
-			endIndex += 2;
-			if (endIndex == 10)
+	if (key != 'D')
+	{
+		if (key == 'A')
+		{  // Scroll up
+			if (startIndex >= 2)
 			{
-				return;
+				startIndex -= 2;
+				endIndex -= 2;
+			}
+		}
+		else if (key == 'B')
+		{  // Scroll down
+			if (endIndex < 11)
+			{  // Assuming a maximum of 10 users
+				startIndex += 2;
+				endIndex += 2;
+				if (endIndex == 10)
+				{
+					return;
+				}
 			}
 		}
 	}
-	// Add a delay to avoid rapid scrolling due to continuous key press
-	_delay_ms(200);
-
-	selectUserAndLogin_local();
+	else
+	{
+		// Add a delay to avoid rapid scrolling due to continuous key press
+		_delay_ms(200);
+		selectUserAndLogin_local();
+	}
+	
 }
 
 boolean loginAck_local()

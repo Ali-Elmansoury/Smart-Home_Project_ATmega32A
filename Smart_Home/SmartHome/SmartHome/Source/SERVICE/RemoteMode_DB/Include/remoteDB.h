@@ -40,7 +40,7 @@ u8 addUserToEEPROM_remote(const u8 *username, const u8* password);
 /*Function to select a user by order number and verify the password*/
 u8 selectUserAndLogin_remote();
 /*Function to retrieve a user from EEPROM by order number*/
-void getUserFromEEPROM_remote(u8 id, user_remote* users);
+//void getUserFromEEPROM_remote(u8 id, user_remote* users);
 /*Function to display users on Terminal*/
 void displayAllUsersOnRemote();
 /*Login acknowledgment*/

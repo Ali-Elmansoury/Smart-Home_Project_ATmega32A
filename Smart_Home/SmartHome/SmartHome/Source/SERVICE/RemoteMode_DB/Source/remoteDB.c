@@ -87,12 +87,12 @@ u8 addUserToEEPROM_remote(const u8 *username, const u8* password)
 	}
 }
 
-void getUserFromEEPROM_remote(u8 id, user_remote* users)
-{
-	if (id >= 0 && id <= 9) {  // Assuming a maximum of 10 users
-		readUserFromEEPROM(users, id);
-	}
-}
+// void getUserFromEEPROM_remote(u8 id, user_remote* users)
+// {
+// 	if (id >= 0 && id <= 9) {  // Assuming a maximum of 10 users
+// 		readUserFromEEPROM(users, id);
+// 	}
+// }
 
 //void deleteUserFromEEPROM_remote(u8 id)
 //{
@@ -119,7 +119,7 @@ void displayAllUsersOnRemote() {
 
 	for (u8 i = 0; i < userCount; i++) {
 		char displayText[50];
-		snprintf(displayText, sizeof(displayText), "Remote: User: %s, %s, ID: %d\n", remoteUsers[i].uname,remoteUsers[i].password, remoteUsers[i].id);
+		snprintf(displayText, sizeof(displayText), "Remote: User: %s, ID: %d\n", remoteUsers[i].uname, remoteUsers[i].id);
 		uart_sendString(displayText);
 	}
 }

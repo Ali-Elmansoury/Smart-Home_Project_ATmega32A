@@ -23,13 +23,13 @@ void doorService_init()
 
 void doorOpen()
 {
-	servo_setAngleDegree(SERVO_ANGLE_90_DEGREE);
+	servo_setAngleDegree(1900);
 	//doorState = DOOR_OPENED;
 }
 
 void doorClose()
 {
-	servo_setAngleDegree(SERVO_ANGLE_0_DEGREE);
+	servo_setAngleDegree(950);
 	//doorState = DOOR_CLOSED;
 }
 
