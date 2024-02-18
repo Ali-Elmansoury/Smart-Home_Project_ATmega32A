@@ -463,10 +463,10 @@ void local_menu_Service()
 	{
 		local_menu_Idle();
 	}
-// 	else
-// 	{
-// 		scrollUsersOnLCD();
-// 	}
+ 	else
+ 	{
+ 		scrollUsersOnLCD();
+ 	}
 }
 
 void local_menu_Idle()

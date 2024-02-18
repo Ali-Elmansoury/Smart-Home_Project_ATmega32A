@@ -7,8 +7,14 @@
 
 #include "door.h"
 #include "servo.h"
+#include "uart.h"
 
-u8 doorState = DOOR_CLOSED;
+//u8 doorState = DOOR_CLOSED;
+
+//Global Variables
+boolean get_Choice = TRUE,
+		Display_door_menu = TRUE;
+	
 
 void doorService_init()
 {
@@ -18,25 +24,54 @@ void doorService_init()
 void doorOpen()
 {
 	servo_setAngleDegree(SERVO_ANGLE_90_DEGREE);
-	doorState = DOOR_OPENED;
+	//doorState = DOOR_OPENED;
 }
 
 void doorClose()
 {
 	servo_setAngleDegree(SERVO_ANGLE_0_DEGREE);
-	doorState = DOOR_CLOSED;
+	//doorState = DOOR_CLOSED;
 }
 
-void doorToggle()
-{
-	if (doorState == DOOR_CLOSED) {
-		doorOpen();
-		} else {
-		doorClose();
-	}
-}
+// void doorToggle()
+// {
+// 	if (doorState == DOOR_CLOSED) {
+// 		doorOpen();
+// 		} else {
+// 		doorClose();
+// 	}
+// }
 
 void doorService()
 {
-	doorToggle();
+	static u8 choice;
+	if (Display_door_menu)
+	{
+		uart_sendString("\nPress 'o' to open the door, 'c' to close the door, 'b' to go back: \n");
+		Display_door_menu = FALSE;
+	}
+	if (get_Choice)
+	{
+		choice = uart_receiveByte();
+	}
+	if (choice != 255)
+	{
+		get_Choice = FALSE;
+		switch (choice) {
+			case 'o':
+			doorOpen();
+			get_Choice = TRUE;
+			break;
+			case 'c':
+			doorClose();
+			get_Choice = TRUE;
+			break;
+			case 'b':
+			return;
+			default:
+			uart_sendString("Invalid choice.\n");
+			get_Choice = TRUE;
+			break;
+		}
+	}
 }

@@ -45,7 +45,7 @@ void getPassword_local(u8* password, u8 maxLength)
 	// Simulate getting user input for the password
 	while (index < maxLength - 1)
 	{
-		u8 key = keypad_readKey();
+		u8 key = MM74C922_GetKey();
 
 		// Check for Enter key
 		if (key == 'D')
@@ -157,9 +157,10 @@ void displayUsersOnLCD(u8 startIndex, u8 endIndex)
 	lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
 	for (u8 i = startIndex; i < endIndex && i < userCount_local; i++) {  // Assuming a maximum of 10 users
 		char displayText[50];
-		snprintf(displayText, sizeof(displayText), "User: %s, ID: %d", localUsers[i].uname, localUsers[i].id);
+		snprintf(displayText, sizeof(displayText), "User: %s,ID: %d", localUsers[i].uname, localUsers[i].id);
 		lcd_displayStr(displayText);
 	}
+	lcd_goTo(1,0);
 }
 
 
@@ -227,29 +228,27 @@ void scrollUsersOnLCD()
 	u8 startIndex = 0;
 	u8 endIndex = 2;  // Display two users at a time
 
-	while (1) {
-		displayUsersOnLCD(startIndex, endIndex);
+	displayUsersOnLCD(startIndex, endIndex);
 
-		char key = keypad_readKey();  // Assume keypad_readKey() returns the pressed key
+	u8 key = MM74C922_GetKey();  // Assume keypad_readKey() returns the pressed key
 
-		if (key == 'A') {  // Scroll up
-			if (startIndex >= 2) {
-				startIndex -= 2;
-				endIndex -= 2;
-			}
-			} else if (key == 'B') {  // Scroll down
-			if (endIndex < 11) {  // Assuming a maximum of 10 users
-				startIndex += 2;
-				endIndex += 2;
-				if (endIndex == 10)
-				{
-					break;
-				}
+	if (key == 'A') {  // Scroll up
+		if (startIndex >= 2) {
+			startIndex -= 2;
+			endIndex -= 2;
+		}
+		} else if (key == 'B') {  // Scroll down
+		if (endIndex < 11) {  // Assuming a maximum of 10 users
+			startIndex += 2;
+			endIndex += 2;
+			if (endIndex == 10)
+			{
+				return;
 			}
 		}
-		// Add a delay to avoid rapid scrolling due to continuous key press
-		_delay_ms(200);
 	}
+	// Add a delay to avoid rapid scrolling due to continuous key press
+	_delay_ms(200);
 
 	selectUserAndLogin_local();
 }

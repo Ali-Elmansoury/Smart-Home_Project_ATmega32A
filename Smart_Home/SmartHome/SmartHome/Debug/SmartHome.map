@@ -87,7 +87,7 @@ Discarded input sections
                 0x00000000       0x30 Source/HAL/Buzzer/Source/buzzer.o
  .debug_ranges  0x00000000       0x20 Source/HAL/Buzzer/Source/buzzer.o
  .debug_line    0x00000000       0xa8 Source/HAL/Buzzer/Source/buzzer.o
- .debug_str     0x00000000      0x1d4 Source/HAL/Buzzer/Source/buzzer.o
+ .debug_str     0x00000000      0x1d7 Source/HAL/Buzzer/Source/buzzer.o
  .comment       0x00000000       0x31 Source/HAL/Buzzer/Source/buzzer.o
  .debug_frame   0x00000000       0x44 Source/HAL/Buzzer/Source/buzzer.o
  .text          0x00000000        0x0 Source/HAL/DC_Motor/Source/dc.o
@@ -101,17 +101,6 @@ Discarded input sections
  .bss           0x00000000        0x0 Source/HAL/Keypad/Source/keypad.o
  .text.keypad_init
                 0x00000000       0x10 Source/HAL/Keypad/Source/keypad.o
- .text.keypad_readKey
-                0x00000000        0x4 Source/HAL/Keypad/Source/keypad.o
- .debug_info    0x00000000       0xff Source/HAL/Keypad/Source/keypad.o
- .debug_abbrev  0x00000000       0xad Source/HAL/Keypad/Source/keypad.o
- .debug_aranges
-                0x00000000       0x28 Source/HAL/Keypad/Source/keypad.o
- .debug_ranges  0x00000000       0x18 Source/HAL/Keypad/Source/keypad.o
- .debug_line    0x00000000       0xb8 Source/HAL/Keypad/Source/keypad.o
- .debug_str     0x00000000      0x1c7 Source/HAL/Keypad/Source/keypad.o
- .comment       0x00000000       0x31 Source/HAL/Keypad/Source/keypad.o
- .debug_frame   0x00000000       0x34 Source/HAL/Keypad/Source/keypad.o
  .text          0x00000000        0x0 Source/HAL/L293D/Source/l293d.o
  .data          0x00000000        0x0 Source/HAL/L293D/Source/l293d.o
  .bss           0x00000000        0x0 Source/HAL/L293D/Source/l293d.o
@@ -128,7 +117,7 @@ Discarded input sections
                 0x00000000       0x30 Source/HAL/L293D/Source/l293d.o
  .debug_ranges  0x00000000       0x20 Source/HAL/L293D/Source/l293d.o
  .debug_line    0x00000000      0x160 Source/HAL/L293D/Source/l293d.o
- .debug_str     0x00000000      0x211 Source/HAL/L293D/Source/l293d.o
+ .debug_str     0x00000000      0x214 Source/HAL/L293D/Source/l293d.o
  .comment       0x00000000       0x31 Source/HAL/L293D/Source/l293d.o
  .debug_frame   0x00000000       0x44 Source/HAL/L293D/Source/l293d.o
  .text          0x00000000        0x0 Source/HAL/Lamp/Source/lamp.o
@@ -149,7 +138,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 Source/HAL/LCD/Source/lcd_cfg.o
  .debug_line    0x00000000       0x5d Source/HAL/LCD/Source/lcd_cfg.o
- .debug_str     0x00000000      0x1a0 Source/HAL/LCD/Source/lcd_cfg.o
+ .debug_str     0x00000000      0x1a3 Source/HAL/LCD/Source/lcd_cfg.o
  .comment       0x00000000       0x31 Source/HAL/LCD/Source/lcd_cfg.o
  .text          0x00000000        0x0 Source/HAL/LM35/Source/lm35.o
  .data          0x00000000        0x0 Source/HAL/LM35/Source/lm35.o
@@ -263,24 +252,12 @@ Discarded input sections
  .text          0x00000000        0x0 Source/SERVICE/Door/Source/door.o
  .data          0x00000000        0x0 Source/SERVICE/Door/Source/door.o
  .bss           0x00000000        0x0 Source/SERVICE/Door/Source/door.o
- .text.doorService
-                0x00000000        0x4 Source/SERVICE/Door/Source/door.o
  .text          0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .data          0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .bss           0x00000000        0x0 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .text          0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .data          0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .bss           0x00000000        0x0 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .rodata.str1.1
-                0x00000000       0x86 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.getPassword_local
-                0x00000000       0xba Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.displayUsersOnLCD
-                0x00000000       0xaa Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.selectUserAndLogin_local
-                0x00000000       0x92 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .text.scrollUsersOnLCD
-                0x00000000       0x4e Source/SERVICE/LocalMode_DB/Source/localDB.o
  .text          0x00000000        0x0 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .data          0x00000000        0x0 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss           0x00000000        0x0 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
@@ -606,7 +583,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x26f6
+.text           0x00000000     0x2954
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
                 0x00000000                __vector_default
@@ -704,140 +681,143 @@ END GROUP
  .text.dimmer_turnOff
                 0x00000162        0x6 Source/HAL/Dimmer/Source/dimmer.o
                 0x00000162                dimmer_turnOff
+ .text.keypad_readKey
+                0x00000168        0x4 Source/HAL/Keypad/Source/keypad.o
+                0x00000168                keypad_readKey
  .text.lamp_init
-                0x00000168        0x4 Source/HAL/Lamp/Source/lamp.o
-                0x00000168                lamp_init
+                0x0000016c        0x4 Source/HAL/Lamp/Source/lamp.o
+                0x0000016c                lamp_init
  .text.lamp_toggle
-                0x0000016c       0x1c Source/HAL/Lamp/Source/lamp.o
-                0x0000016c                lamp_toggle
+                0x00000170       0x1c Source/HAL/Lamp/Source/lamp.o
+                0x00000170                lamp_toggle
  .text.lamp_Getstate
-                0x00000188        0xc Source/HAL/Lamp/Source/lamp.o
-                0x00000188                lamp_Getstate
+                0x0000018c        0xc Source/HAL/Lamp/Source/lamp.o
+                0x0000018c                lamp_Getstate
  .text.enablePulse
-                0x00000194       0x3a Source/HAL/LCD/Source/lcd.o
+                0x00000198       0x3a Source/HAL/LCD/Source/lcd.o
  .text.lcd_sendCommand
-                0x000001ce       0x88 Source/HAL/LCD/Source/lcd.o
-                0x000001ce                lcd_sendCommand
+                0x000001d2       0x88 Source/HAL/LCD/Source/lcd.o
+                0x000001d2                lcd_sendCommand
  .text.lcd_writeData
-                0x00000256       0x88 Source/HAL/LCD/Source/lcd.o
-                0x00000256                lcd_writeData
+                0x0000025a       0x88 Source/HAL/LCD/Source/lcd.o
+                0x0000025a                lcd_writeData
  .text.lcd_init
-                0x000002de       0xc2 Source/HAL/LCD/Source/lcd.o
-                0x000002de                lcd_init
+                0x000002e2       0xc2 Source/HAL/LCD/Source/lcd.o
+                0x000002e2                lcd_init
  .text.lcd_goTo
-                0x000003a0       0x16 Source/HAL/LCD/Source/lcd.o
-                0x000003a0                lcd_goTo
+                0x000003a4       0x16 Source/HAL/LCD/Source/lcd.o
+                0x000003a4                lcd_goTo
  .text.lcd_displayChar
-                0x000003b6        0x4 Source/HAL/LCD/Source/lcd.o
-                0x000003b6                lcd_displayChar
+                0x000003ba        0x4 Source/HAL/LCD/Source/lcd.o
+                0x000003ba                lcd_displayChar
  .text.lcd_displayStr
-                0x000003ba       0x26 Source/HAL/LCD/Source/lcd.o
-                0x000003ba                lcd_displayStr
+                0x000003be       0x26 Source/HAL/LCD/Source/lcd.o
+                0x000003be                lcd_displayStr
  .text.lcd_displayNums
-                0x000003e0       0x5a Source/HAL/LCD/Source/lcd.o
-                0x000003e0                lcd_displayNums
+                0x000003e4       0x5a Source/HAL/LCD/Source/lcd.o
+                0x000003e4                lcd_displayNums
  .text.LM35_init
-                0x0000043a        0x4 Source/HAL/LM35/Source/lm35.o
-                0x0000043a                LM35_init
+                0x0000043e        0x4 Source/HAL/LM35/Source/lm35.o
+                0x0000043e                LM35_init
  .text.LM35_read
-                0x0000043e       0x30 Source/HAL/LM35/Source/lm35.o
-                0x0000043e                LM35_read
+                0x00000442       0x30 Source/HAL/LM35/Source/lm35.o
+                0x00000442                LM35_read
  .text.MM74C922_Decode
-                0x0000046e       0x44 Source/HAL/MM74C922/Source/MM74C922.o
-                0x0000046e                MM74C922_Decode
+                0x00000472       0x44 Source/HAL/MM74C922/Source/MM74C922.o
+                0x00000472                MM74C922_Decode
  .text.MM74C922_Init
-                0x000004b2       0x32 Source/HAL/MM74C922/Source/MM74C922.o
-                0x000004b2                MM74C922_Init
+                0x000004b6       0x32 Source/HAL/MM74C922/Source/MM74C922.o
+                0x000004b6                MM74C922_Init
  .text.MM74C922_GetKey
-                0x000004e4        0xc Source/HAL/MM74C922/Source/MM74C922.o
-                0x000004e4                MM74C922_GetKey
+                0x000004e8        0xc Source/HAL/MM74C922/Source/MM74C922.o
+                0x000004e8                MM74C922_GetKey
  .text.POT_init
-                0x000004f0        0x4 Source/HAL/POT/Source/pot.o
-                0x000004f0                POT_init
+                0x000004f4        0x4 Source/HAL/POT/Source/pot.o
+                0x000004f4                POT_init
  .text.POT_read
-                0x000004f4        0x6 Source/HAL/POT/Source/pot.o
-                0x000004f4                POT_read
+                0x000004f8        0x6 Source/HAL/POT/Source/pot.o
+                0x000004f8                POT_read
  .text.relay_init
-                0x000004fa       0x32 Source/HAL/Relay/Source/relay.o
-                0x000004fa                relay_init
+                0x000004fe       0x32 Source/HAL/Relay/Source/relay.o
+                0x000004fe                relay_init
  .text.relay_toggle
-                0x0000052c       0x32 Source/HAL/Relay/Source/relay.o
-                0x0000052c                relay_toggle
+                0x00000530       0x32 Source/HAL/Relay/Source/relay.o
+                0x00000530                relay_toggle
  .text.servo_init
-                0x0000055e       0x26 Source/HAL/Servo/Source/servo.o
-                0x0000055e                servo_init
+                0x00000562       0x26 Source/HAL/Servo/Source/servo.o
+                0x00000562                servo_init
  .text.servo_setAngleDegree
-                0x00000584        0x4 Source/HAL/Servo/Source/servo.o
-                0x00000584                servo_setAngleDegree
+                0x00000588        0x4 Source/HAL/Servo/Source/servo.o
+                0x00000588                servo_setAngleDegree
  .text.adc_init
-                0x00000588        0xc Source/MCAL/ADC/Source/adc.o
-                0x00000588                adc_init
+                0x0000058c        0xc Source/MCAL/ADC/Source/adc.o
+                0x0000058c                adc_init
  .text.adc_read
-                0x00000594       0x1a Source/MCAL/ADC/Source/adc.o
-                0x00000594                adc_read
+                0x00000598       0x1a Source/MCAL/ADC/Source/adc.o
+                0x00000598                adc_read
  .text.dio_setPinDirection
-                0x000005ae       0xd2 Source/MCAL/DIO/Source/dio.o
-                0x000005ae                dio_setPinDirection
+                0x000005b2       0xd2 Source/MCAL/DIO/Source/dio.o
+                0x000005b2                dio_setPinDirection
  .text.dio_writeChannel
-                0x00000680       0xd2 Source/MCAL/DIO/Source/dio.o
-                0x00000680                dio_writeChannel
+                0x00000684       0xd2 Source/MCAL/DIO/Source/dio.o
+                0x00000684                dio_writeChannel
  .text.dio_toggleChannel
-                0x00000752       0x60 Source/MCAL/DIO/Source/dio.o
-                0x00000752                dio_toggleChannel
+                0x00000756       0x60 Source/MCAL/DIO/Source/dio.o
+                0x00000756                dio_toggleChannel
  .text.dio_readChannel
-                0x000007b2       0x30 Source/MCAL/DIO/Source/dio.o
-                0x000007b2                dio_readChannel
+                0x000007b6       0x30 Source/MCAL/DIO/Source/dio.o
+                0x000007b6                dio_readChannel
  .text.EEPROM_write
-                0x000007e2       0x10 Source/MCAL/EEPROM/Source/eeprom.o
-                0x000007e2                EEPROM_write
+                0x000007e6       0x10 Source/MCAL/EEPROM/Source/eeprom.o
+                0x000007e6                EEPROM_write
  .text.EEPROM_read
-                0x000007f2        0xe Source/MCAL/EEPROM/Source/eeprom.o
-                0x000007f2                EEPROM_read
+                0x000007f6        0xe Source/MCAL/EEPROM/Source/eeprom.o
+                0x000007f6                EEPROM_read
  .text.EEPROM_write_block
-                0x00000800       0x3a Source/MCAL/EEPROM/Source/eeprom.o
-                0x00000800                EEPROM_write_block
+                0x00000804       0x3a Source/MCAL/EEPROM/Source/eeprom.o
+                0x00000804                EEPROM_write_block
  .text.EEPROM_read_block
-                0x0000083a       0x3a Source/MCAL/EEPROM/Source/eeprom.o
-                0x0000083a                EEPROM_read_block
+                0x0000083e       0x3a Source/MCAL/EEPROM/Source/eeprom.o
+                0x0000083e                EEPROM_read_block
  .text.extINT_enable
-                0x00000874       0x20 Source/MCAL/EXT_INT/Source/ext_int.o
-                0x00000874                extINT_enable
+                0x00000878       0x20 Source/MCAL/EXT_INT/Source/ext_int.o
+                0x00000878                extINT_enable
  .text.extINT_setSenseControl
-                0x00000894       0x8c Source/MCAL/EXT_INT/Source/ext_int.o
-                0x00000894                extINT_setSenseControl
+                0x00000898       0x8c Source/MCAL/EXT_INT/Source/ext_int.o
+                0x00000898                extINT_setSenseControl
  .text.extINT_setCallBack
-                0x00000920       0x2a Source/MCAL/EXT_INT/Source/ext_int.o
-                0x00000920                extINT_setCallBack
+                0x00000924       0x2a Source/MCAL/EXT_INT/Source/ext_int.o
+                0x00000924                extINT_setCallBack
  .text.__vector_1
-                0x0000094a       0x52 Source/MCAL/EXT_INT/Source/ext_int.o
-                0x0000094a                __vector_1
+                0x0000094e       0x52 Source/MCAL/EXT_INT/Source/ext_int.o
+                0x0000094e                __vector_1
  .text.__vector_2
-                0x0000099c       0x52 Source/MCAL/EXT_INT/Source/ext_int.o
-                0x0000099c                __vector_2
+                0x000009a0       0x52 Source/MCAL/EXT_INT/Source/ext_int.o
+                0x000009a0                __vector_2
  .text.__vector_3
-                0x000009ee       0x52 Source/MCAL/EXT_INT/Source/ext_int.o
-                0x000009ee                __vector_3
+                0x000009f2       0x52 Source/MCAL/EXT_INT/Source/ext_int.o
+                0x000009f2                __vector_3
  .text.gie_enableAllInterrupts
-                0x00000a40        0x8 Source/MCAL/GIE/Source/gie.o
-                0x00000a40                gie_enableAllInterrupts
+                0x00000a44        0x8 Source/MCAL/GIE/Source/gie.o
+                0x00000a44                gie_enableAllInterrupts
  .text.__vector_11
-                0x00000a48       0x52 Source/MCAL/Timer0/Source/timer0.o
-                0x00000a48                __vector_11
+                0x00000a4c       0x52 Source/MCAL/Timer0/Source/timer0.o
+                0x00000a4c                __vector_11
  .text.__vector_10
-                0x00000a9a       0x52 Source/MCAL/Timer0/Source/timer0.o
-                0x00000a9a                __vector_10
+                0x00000a9e       0x52 Source/MCAL/Timer0/Source/timer0.o
+                0x00000a9e                __vector_10
  .text.pwm0_init
-                0x00000aec        0xe Source/MCAL/Timer0/Source/timer0.o
-                0x00000aec                pwm0_init
+                0x00000af0        0xe Source/MCAL/Timer0/Source/timer0.o
+                0x00000af0                pwm0_init
  .text.pwm0_setDutyCycle
-                0x00000afa       0x2c Source/MCAL/Timer0/Source/timer0.o
-                0x00000afa                pwm0_setDutyCycle
+                0x00000afe       0x2c Source/MCAL/Timer0/Source/timer0.o
+                0x00000afe                pwm0_setDutyCycle
  .text.__vector_9
-                0x00000b26       0x52 Source/MCAL/Timer1/Source/timer1.o
-                0x00000b26                __vector_9
+                0x00000b2a       0x52 Source/MCAL/Timer1/Source/timer1.o
+                0x00000b2a                __vector_9
  .text.pwm1_init
-                0x00000b78       0x14 Source/MCAL/Timer1/Source/timer1.o
-                0x00000b78                pwm1_init
+                0x00000b7c       0x10 Source/MCAL/Timer1/Source/timer1.o
+                0x00000b7c                pwm1_init
  .text.pwm1_setTopValue
                 0x00000b8c        0x8 Source/MCAL/Timer1/Source/timer1.o
                 0x00000b8c                pwm1_setTopValue
@@ -902,229 +882,241 @@ END GROUP
                 0x00000d78       0x2c Source/SERVICE/Door/Source/door.o
                 0x00000d78                doorService_init
  .text.doorOpen
-                0x00000da4       0x10 Source/SERVICE/Door/Source/door.o
+                0x00000da4        0x8 Source/SERVICE/Door/Source/door.o
                 0x00000da4                doorOpen
  .text.doorClose
-                0x00000db4        0xe Source/SERVICE/Door/Source/door.o
-                0x00000db4                doorClose
- .text.doorToggle
-                0x00000dc2       0x10 Source/SERVICE/Door/Source/door.o
-                0x00000dc2                doorToggle
+                0x00000dac        0x8 Source/SERVICE/Door/Source/door.o
+                0x00000dac                doorClose
+ .text.doorService
+                0x00000db4       0x5a Source/SERVICE/Door/Source/door.o
+                0x00000db4                doorService
  .text.lamp_Dim_service_init
-                0x00000dd2        0x4 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                0x00000dd2                lamp_Dim_service_init
+                0x00000e0e        0x4 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000e0e                lamp_Dim_service_init
  .text.lamp_Dim_service
-                0x00000dd6       0x16 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                0x00000dd6                lamp_Dim_service
+                0x00000e12       0x16 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000e12                lamp_Dim_service
  .text.Lamp_Service_Dim_Toggle
-                0x00000dec        0xe Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                0x00000dec                Lamp_Service_Dim_Toggle
+                0x00000e28        0xe Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000e28                Lamp_Service_Dim_Toggle
  .text.Lamp_Service_Dim_state
-                0x00000dfa        0x6 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                0x00000dfa                Lamp_Service_Dim_state
+                0x00000e36        0x6 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000e36                Lamp_Service_Dim_state
+ .text.getPassword_local
+                0x00000e3c       0xba Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000e3c                getPassword_local
  .text.writeUserToEEPROM_local
-                0x00000e00       0x44 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000e00                writeUserToEEPROM_local
+                0x00000ef6       0x44 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000ef6                writeUserToEEPROM_local
  .text.readUserFromEEPROM_local
-                0x00000e44       0x46 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000e44                readUserFromEEPROM_local
+                0x00000f3a       0x46 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000f3a                readUserFromEEPROM_local
  .text.addUserToEEPROM_local
-                0x00000e8a       0x76 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000e8a                addUserToEEPROM_local
+                0x00000f80       0x76 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000f80                addUserToEEPROM_local
  .text.getUserFromEEPROM_local
-                0x00000f00       0x10 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000f00                getUserFromEEPROM_local
+                0x00000ff6       0x10 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000ff6                getUserFromEEPROM_local
  .text.localDB_init
-                0x00000f10       0x44 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000f10                localDB_init
+                0x00001006       0x44 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00001006                localDB_init
+ .text.displayUsersOnLCD
+                0x0000104a       0xb2 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x0000104a                displayUsersOnLCD
+ .text.selectUserAndLogin_local
+                0x000010fc       0x92 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x000010fc                selectUserAndLogin_local
+ .text.scrollUsersOnLCD
+                0x0000118e       0x22 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x0000118e                scrollUsersOnLCD
  .text.loginAck_local
-                0x00000f54        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000f54                loginAck_local
+                0x000011b0        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x000011b0                loginAck_local
  .text.logout_local
-                0x00000f5a        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000f5a                logout_local
+                0x000011b6        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x000011b6                logout_local
  .text.local_menu_Idle_timer
-                0x00000f60       0x3c Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00000f60                local_menu_Idle_timer
+                0x000011bc       0x3c Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000011bc                local_menu_Idle_timer
  .text.local_Menu_Slector_Display
-                0x00000f9c       0x22 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00000f9c                local_Menu_Slector_Display
+                0x000011f8       0x22 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000011f8                local_Menu_Slector_Display
  .text.local_Menu_Display
-                0x00000fbe       0x50 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00000fbe                local_Menu_Display
+                0x0000121a       0x50 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0000121a                local_Menu_Display
  .text.local_Menu_LED_Display
-                0x0000100e      0x17e Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x0000100e                local_Menu_LED_Display
+                0x0000126a      0x17e Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0000126a                local_Menu_LED_Display
  .text.local_Menu_AC_Display
-                0x0000118c       0xc8 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x0000118c                local_Menu_AC_Display
+                0x000013e8       0xc8 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000013e8                local_Menu_AC_Display
  .text.local_Menu_Move_Selector
-                0x00001254       0x48 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001254                local_Menu_Move_Selector
+                0x000014b0       0x48 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000014b0                local_Menu_Move_Selector
  .text.local_Menu
-                0x0000129c       0xbc Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x0000129c                local_Menu
+                0x000014f8       0xbc Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000014f8                local_Menu
  .text.local_Menu_LED
-                0x00001358       0xce Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001358                local_Menu_LED
+                0x000015b4       0xce Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000015b4                local_Menu_LED
  .text.local_Menu_AC_value_adj
-                0x00001426       0x38 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001426                local_Menu_AC_value_adj
+                0x00001682       0x38 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001682                local_Menu_AC_value_adj
  .text.local_Menu_AC
-                0x0000145e      0x148 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x0000145e                local_Menu_AC
+                0x000016ba      0x148 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000016ba                local_Menu_AC
  .text.local_menu_Idle
-                0x000015a6       0x20 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x000015a6                local_menu_Idle
+                0x00001802       0x20 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001802                local_menu_Idle
  .text.local_menu_Service
-                0x000015c6       0x4e Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x000015c6                local_menu_Service
+                0x00001822       0x50 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001822                local_menu_Service
  .text.local_menu_Idle_Reset
-                0x00001614        0xe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001614                local_menu_Idle_Reset
+                0x00001872        0xe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001872                local_menu_Idle_Reset
  .text.local_menu_init
-                0x00001622       0x32 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001622                local_menu_init
+                0x00001880       0x32 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001880                local_menu_init
  .text.getPassword_remote
-                0x00001654       0x20 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001654                getPassword_remote
+                0x000018b2       0x20 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x000018b2                getPassword_remote
  .text.writeUserToEEPROM
-                0x00001674       0x48 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001674                writeUserToEEPROM
+                0x000018d2       0x48 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x000018d2                writeUserToEEPROM
  .text.readUserFromEEPROM
-                0x000016bc       0x46 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x000016bc                readUserFromEEPROM
+                0x0000191a       0x46 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x0000191a                readUserFromEEPROM
  .text.remoteDB_init
-                0x00001702       0x56 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001702                remoteDB_init
+                0x00001960       0x56 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001960                remoteDB_init
  .text.addUserToEEPROM_remote
-                0x00001758       0x6e Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001758                addUserToEEPROM_remote
+                0x000019b6       0x6e Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x000019b6                addUserToEEPROM_remote
  .text.displayAllUsersOnRemote
-                0x000017c6       0xaa Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x000017c6                displayAllUsersOnRemote
+                0x00001a24       0xaa Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001a24                displayAllUsersOnRemote
  .text.selectUserAndLogin_remote
-                0x00001870       0xb0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001870                selectUserAndLogin_remote
+                0x00001ace       0xb0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001ace                selectUserAndLogin_remote
  .text.loginAck_remote
-                0x00001920        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001920                loginAck_remote
+                0x00001b7e        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001b7e                loginAck_remote
  .text.logout_remote
-                0x00001926        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001926                logout_remote
+                0x00001b84        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001b84                logout_remote
  .text.remote_admin_register
-                0x0000192c       0x84 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x0000192c                remote_admin_register
+                0x00001b8a       0x84 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001b8a                remote_admin_register
  .text.registerUserRemote
-                0x000019b0       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x000019b0                registerUserRemote
+                0x00001c0e       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001c0e                registerUserRemote
  .text.registerUserLocal
-                0x00001a2e       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001a2e                registerUserLocal
+                0x00001c8c       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001c8c                registerUserLocal
  .text.lamp_menu
-                0x00001aac       0xb4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001aac                lamp_menu
- .text.AC_menu  0x00001b60       0x84 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001b60                AC_menu
+                0x00001d0a       0xb4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001d0a                lamp_menu
+ .text.AC_menu  0x00001dbe       0x84 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001dbe                AC_menu
  .text.remote_Menu_User
-                0x00001be4       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001be4                remote_Menu_User
+                0x00001e42       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001e42                remote_Menu_User
  .text.remote_Menu_Admin
-                0x00001c62       0xb0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001c62                remote_Menu_Admin
+                0x00001ec0       0xb0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001ec0                remote_Menu_Admin
  .text.remote_login_menu
-                0x00001d12       0x40 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001d12                remote_login_menu
+                0x00001f70       0x40 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001f70                remote_login_menu
  .text.remote_menu_Service
-                0x00001d52        0x4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001d52                remote_menu_Service
+                0x00001fb0        0x4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001fb0                remote_menu_Service
  .text.remote_menu_init
-                0x00001d56        0x4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001d56                remote_menu_init
+                0x00001fb4        0x4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001fb4                remote_menu_init
  .text.avr-libc.fplib
-                0x00001d5a        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                0x00001d5a                __divsf3
+                0x00001fb8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x00001fb8                __divsf3
  .text.avr-libc.fplib
-                0x00001d62       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
-                0x00001d82                __divsf3x
-                0x00001d88                __divsf3_pse
+                0x00001fc0       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x00001fe0                __divsf3x
+                0x00001fe6                __divsf3_pse
  .text.avr-libc.fplib
-                0x00001e3e       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x00001e3e                __fixunssfsi
+                0x0000209c       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x0000209c                __fixunssfsi
  .text.avr-libc.fplib
-                0x00001e9c       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x00001e9c                __floatunsisf
-                0x00001ea0                __floatsisf
+                0x000020fa       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x000020fa                __floatunsisf
+                0x000020fe                __floatsisf
  .text.avr-libc.fplib
-                0x00001f16        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x00001f16                __fp_inf
+                0x00002174        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x00002174                __fp_inf
  .text.avr-libc.fplib
-                0x00001f22        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x00001f22                __fp_nan
+                0x00002180        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x00002180                __fp_nan
  .text.avr-libc.fplib
-                0x00001f28        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x00001f28                __fp_pscA
+                0x00002186        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x00002186                __fp_pscA
  .text.avr-libc.fplib
-                0x00001f36        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x00001f36                __fp_pscB
+                0x00002194        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x00002194                __fp_pscB
  .text.avr-libc.fplib
-                0x00001f44       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x00001f44                __fp_round
+                0x000021a2       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x000021a2                __fp_round
  .text.avr-libc.fplib
-                0x00001f66       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x00001f66                __fp_split3
-                0x00001f76                __fp_splitA
+                0x000021c4       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x000021c4                __fp_split3
+                0x000021d4                __fp_splitA
  .text.avr-libc.fplib
-                0x00001faa        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00001faa                __fp_zero
-                0x00001fac                __fp_szero
+                0x00002208        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x00002208                __fp_zero
+                0x0000220a                __fp_szero
  .text.avr-libc.fplib
-                0x00001fb8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x00001fb8                __mulsf3
+                0x00002216        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x00002216                __mulsf3
  .text.avr-libc.fplib
-                0x00001fc0       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x00001fde                __mulsf3x
-                0x00001fe4                __mulsf3_pse
- .text.libgcc   0x00002092        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x00002092                __tablejump2__
+                0x0000221e       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x0000223c                __mulsf3x
+                0x00002242                __mulsf3_pse
+ .text.libgcc   0x000022f0        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x000022f0                __tablejump2__
  .text.avr-libc
-                0x0000209e       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
-                0x0000209e                strcmp
+                0x000022fc       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                0x000022fc                strcmp
  .text.avr-libc
-                0x000020b0        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcpy.o)
-                0x000020b0                strcpy
+                0x0000230e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                0x0000230e                strcpy
  .text.avr-libc
-                0x000020be       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
-                0x000020be                snprintf
+                0x0000231c       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
+                0x0000231c                snprintf
  .text.avr-libc
-                0x0000211e       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x0000211e                sprintf
+                0x0000237c       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x0000237c                sprintf
  .text.avr-libc
-                0x00002162      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x00002162                vfprintf
+                0x000023c0      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x000023c0                vfprintf
  .text.avr-libc
-                0x00002524       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x00002524                strnlen_P
+                0x00002782       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00002782                strnlen_P
  .text.avr-libc
-                0x0000253a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x0000253a                strnlen
+                0x00002798       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00002798                strnlen
  .text.avr-libc
-                0x00002550       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00002550                fputc
+                0x000027ae       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x000027ae                fputc
  .text.avr-libc
-                0x000025c8       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x000025c8                __ultoa_invert
+                0x00002826       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00002826                __ultoa_invert
  .text.libgcc.prologue
-                0x00002684       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x00002684                __prologue_saves__
+                0x000028e2       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x000028e2                __prologue_saves__
  .text.libgcc.prologue
-                0x000026bc       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x000026bc                __epilogue_restores__
-                0x000026f2                . = ALIGN (0x2)
+                0x0000291a       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x0000291a                __epilogue_restores__
+                0x00002950                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000026f2        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000026f2                _exit
-                0x000026f2                exit
+ .fini9         0x00002950        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00002950                _exit
+                0x00002950                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1143,159 +1135,169 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000026f2        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00002950        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000026f6                _etext = .
+                0x00002954                _etext = .
 
-.data           0x00800060      0x356 load address 0x000026f6
+.data           0x00800060      0x412 load address 0x00002954
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  .data.Last_key
                 0x00800060        0x1 Source/HAL/MM74C922/Source/MM74C922.o
                 0x00800060                Last_key
+ .data.Display_door_menu
+                0x00800061        0x1 Source/SERVICE/Door/Source/door.o
+                0x00800061                Display_door_menu
+ .data.get_Choice
+                0x00800062        0x1 Source/SERVICE/Door/Source/door.o
+                0x00800062                get_Choice
  .data.Dim_Service_state
-                0x00800061        0x1 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                0x00800061                Dim_Service_state
+                0x00800063        0x1 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00800063                Dim_Service_state
  .data.current_menu.2095
-                0x00800062        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00800064        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .data.Display_Flag.2187
-                0x00800063        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00800065        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .data.Display_AC_menu.1761
-                0x00800064        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .data.Display_lamp_menu.1747
-                0x00800065        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .data.Display_admin_menu
                 0x00800066        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00800066                Display_admin_menu
- .data.Display_user_menu
+ .data.Display_lamp_menu.1747
                 0x00800067        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00800067                Display_user_menu
- .data.users_Dispaly
+ .data.Display_admin_menu
                 0x00800068        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00800068                users_Dispaly
- .data.Get_Choice
+                0x00800068                Display_admin_menu
+ .data.Display_user_menu
                 0x00800069        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00800069                Get_Choice
+                0x00800069                Display_user_menu
+ .data.users_Dispaly
+                0x0080006a        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x0080006a                users_Dispaly
+ .data.Get_Choice
+                0x0080006b        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x0080006b                Get_Choice
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x0080006a        0x3 Source/HAL/LCD/Source/lcd.o
- .rodata.Table  0x0080006d       0x10 Source/HAL/MM74C922/Source/MM74C922.o
+                0x0080006c        0x0 Source/HAL/LCD/Source/lcd.o
+                                  0x3 (size before relaxing)
+ .rodata.Table  0x0080006c       0x10 Source/HAL/MM74C922/Source/MM74C922.o
  .rodata.str1.1
-                0x0080007d       0x91 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0080007c       0x57 Source/SERVICE/Door/Source/door.o
  .rodata.str1.1
-                0x0080010e       0x99 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x008000d3       0x85 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .rodata.str1.1
+                0x00800158       0x91 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .rodata.str1.1
+                0x008001e9       0x7a Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
                                  0x9b (size before relaxing)
  .rodata.str1.1
-                0x008001a7      0x20e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00800263      0x20e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
                                 0x21b (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x008003b6                . = ALIGN (0x2)
- *fill*         0x008003b5        0x1 
-                0x008003b6                _edata = .
-                0x008003b6                PROVIDE (__data_end, .)
+                0x00800472                . = ALIGN (0x2)
+ *fill*         0x00800471        0x1 
+                0x00800472                _edata = .
+                0x00800472                PROVIDE (__data_end, .)
 
-.bss            0x008003b6      0x239
-                0x008003b6                PROVIDE (__bss_start, .)
+.bss            0x00800472      0x239
+                0x00800472                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.lamp_state
-                0x008003b6        0x5 Source/HAL/Lamp/Source/lamp.o
-                0x008003b6                lamp_state
+                0x00800472        0x5 Source/HAL/Lamp/Source/lamp.o
+                0x00800472                lamp_state
  .bss.int2ClbkPtr
-                0x008003bb        0x2 Source/MCAL/EXT_INT/Source/ext_int.o
-                0x008003bb                int2ClbkPtr
+                0x00800477        0x2 Source/MCAL/EXT_INT/Source/ext_int.o
+                0x00800477                int2ClbkPtr
  .bss.int1ClbkPtr
-                0x008003bd        0x2 Source/MCAL/EXT_INT/Source/ext_int.o
-                0x008003bd                int1ClbkPtr
+                0x00800479        0x2 Source/MCAL/EXT_INT/Source/ext_int.o
+                0x00800479                int1ClbkPtr
  .bss.int0ClbkPtr
-                0x008003bf        0x2 Source/MCAL/EXT_INT/Source/ext_int.o
-                0x008003bf                int0ClbkPtr
+                0x0080047b        0x2 Source/MCAL/EXT_INT/Source/ext_int.o
+                0x0080047b                int0ClbkPtr
  .bss.timer0CTCClbkPtr
-                0x008003c1        0x2 Source/MCAL/Timer0/Source/timer0.o
-                0x008003c1                timer0CTCClbkPtr
+                0x0080047d        0x2 Source/MCAL/Timer0/Source/timer0.o
+                0x0080047d                timer0CTCClbkPtr
  .bss.timer0OvClbkPtr
-                0x008003c3        0x2 Source/MCAL/Timer0/Source/timer0.o
-                0x008003c3                timer0OvClbkPtr
+                0x0080047f        0x2 Source/MCAL/Timer0/Source/timer0.o
+                0x0080047f                timer0OvClbkPtr
  .bss.timer1OvClbkPtr
-                0x008003c5        0x2 Source/MCAL/Timer1/Source/timer1.o
-                0x008003c5                timer1OvClbkPtr
+                0x00800481        0x2 Source/MCAL/Timer1/Source/timer1.o
+                0x00800481                timer1OvClbkPtr
  .bss.timer2CTCClbkPtr
-                0x008003c7        0x2 Source/MCAL/Timer2/Source/timer2.o
-                0x008003c7                timer2CTCClbkPtr
+                0x00800483        0x2 Source/MCAL/Timer2/Source/timer2.o
+                0x00800483                timer2CTCClbkPtr
  .bss.timer2OvClbkPtr
-                0x008003c9        0x2 Source/MCAL/Timer2/Source/timer2.o
-                0x008003c9                timer2OvClbkPtr
+                0x00800485        0x2 Source/MCAL/Timer2/Source/timer2.o
+                0x00800485                timer2OvClbkPtr
  .bss.new_rx_data
-                0x008003cb        0x1 Source/MCAL/UART/Source/uart.o
-                0x008003cb                new_rx_data
- .bss.doorState
-                0x008003cc        0x1 Source/SERVICE/Door/Source/door.o
-                0x008003cc                doorState
+                0x00800487        0x1 Source/MCAL/UART/Source/uart.o
+                0x00800487                new_rx_data
+ .bss.choice.1654
+                0x00800488        0x1 Source/SERVICE/Door/Source/door.o
  .bss.userCount_local
-                0x008003cd        0x1 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x008003cd                userCount_local
+                0x00800489        0x1 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00800489                userCount_local
  .bss.login_flag_local
-                0x008003ce        0x1 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x008003ce                login_flag_local
+                0x0080048a        0x1 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x0080048a                login_flag_local
  .bss.menu_selector_position.2067
-                0x008003cf        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0080048b        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.menu_position.2066
-                0x008003d0        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0080048c        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.menu_selector_position.2035
-                0x008003d1        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0080048d        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.menu_position.2034
-                0x008003d2        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0080048e        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.AC_CFG.2039
-                0x008003d3        0x3 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0080048f        0x3 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.menu_key.2037
-                0x008003d6        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00800492        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.v_adj_flag.2038
-                0x008003d7        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00800493        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.menu_selector_position.2018
-                0x008003d8        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00800494        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.menu_position.2017
-                0x008003d9        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00800495        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .bss.secondCounter
-                0x008003da        0x2 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x008003da                secondCounter
+                0x00800496        0x2 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00800496                secondCounter
  .bss.local_idle
-                0x008003dc        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x008003dc                local_idle
+                0x00800498        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00800498                local_idle
  .bss.number_of_active_devices
-                0x008003dd        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x008003dd                number_of_active_devices
+                0x00800499        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00800499                number_of_active_devices
  .bss.userCount
-                0x008003de        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x008003de                userCount
+                0x0080049a        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x0080049a                userCount
  .bss.login_flag_remote
-                0x008003df        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x008003df                login_flag_remote
+                0x0080049b        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x0080049b                login_flag_remote
  .bss.adminChoice.1735
-                0x008003e0        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x0080049c        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .bss.userChoice.1726
-                0x008003e1        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .bss.id.1716   0x008003e2        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x0080049d        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .bss.id.1716   0x0080049e        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  *(COMMON)
- COMMON         0x008003e3        0x1 Source/MCAL/UART/Source/uart.o
-                0x008003e3                rx_data
- COMMON         0x008003e4        0x3 Source/SERVICE/AC/Source/ac.o
-                0x008003e4                AC_CFG
- COMMON         0x008003e7      0x104 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x008003e7                localUsers
- COMMON         0x008004eb      0x104 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x008004eb                remoteUsers
-                0x008005ef                PROVIDE (__bss_end, .)
-                0x000026f6                __data_load_start = LOADADDR (.data)
-                0x00002a4c                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x0080049f        0x1 Source/MCAL/UART/Source/uart.o
+                0x0080049f                rx_data
+ COMMON         0x008004a0        0x3 Source/SERVICE/AC/Source/ac.o
+                0x008004a0                AC_CFG
+ COMMON         0x008004a3      0x104 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x008004a3                localUsers
+ COMMON         0x008005a7      0x104 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x008005a7                remoteUsers
+                0x008006ab                PROVIDE (__bss_end, .)
+                0x00002954                __data_load_start = LOADADDR (.data)
+                0x00002d66                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008005ef        0x0
+.noinit         0x008006ab        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008005ef                _end = .
+                0x008006ab                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -1341,6 +1343,7 @@ END GROUP
                                  0x31 (size before relaxing)
  .comment       0x00000030       0x31 Source/HAL/DC_Motor/Source/dc.o
  .comment       0x00000030       0x31 Source/HAL/Dimmer/Source/dimmer.o
+ .comment       0x00000030       0x31 Source/HAL/Keypad/Source/keypad.o
  .comment       0x00000030       0x31 Source/HAL/Lamp/Source/lamp.o
  .comment       0x00000030       0x31 Source/HAL/LCD/Source/lcd.o
  .comment       0x00000030       0x31 Source/HAL/LM35/Source/lm35.o
@@ -1390,7 +1393,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x760
+.debug_aranges  0x00000000      0x780
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x20 Source/APP/main.o
@@ -1399,231 +1402,239 @@ END GROUP
  .debug_aranges
                 0x00000050       0x30 Source/HAL/Dimmer/Source/dimmer.o
  .debug_aranges
-                0x00000080       0x30 Source/HAL/Lamp/Source/lamp.o
+                0x00000080       0x28 Source/HAL/Keypad/Source/keypad.o
  .debug_aranges
-                0x000000b0       0x60 Source/HAL/LCD/Source/lcd.o
+                0x000000a8       0x30 Source/HAL/Lamp/Source/lamp.o
  .debug_aranges
-                0x00000110       0x28 Source/HAL/LM35/Source/lm35.o
+                0x000000d8       0x60 Source/HAL/LCD/Source/lcd.o
  .debug_aranges
-                0x00000138       0x30 Source/HAL/MM74C922/Source/MM74C922.o
+                0x00000138       0x28 Source/HAL/LM35/Source/lm35.o
  .debug_aranges
-                0x00000168       0x28 Source/HAL/POT/Source/pot.o
+                0x00000160       0x30 Source/HAL/MM74C922/Source/MM74C922.o
  .debug_aranges
-                0x00000190       0x28 Source/HAL/Relay/Source/relay.o
+                0x00000190       0x28 Source/HAL/POT/Source/pot.o
  .debug_aranges
-                0x000001b8       0x28 Source/HAL/Servo/Source/servo.o
+                0x000001b8       0x28 Source/HAL/Relay/Source/relay.o
  .debug_aranges
-                0x000001e0       0x28 Source/MCAL/ADC/Source/adc.o
+                0x000001e0       0x28 Source/HAL/Servo/Source/servo.o
  .debug_aranges
-                0x00000208       0x40 Source/MCAL/DIO/Source/dio.o
+                0x00000208       0x28 Source/MCAL/ADC/Source/adc.o
  .debug_aranges
-                0x00000248       0x38 Source/MCAL/EEPROM/Source/eeprom.o
+                0x00000230       0x40 Source/MCAL/DIO/Source/dio.o
  .debug_aranges
-                0x00000280       0x50 Source/MCAL/EXT_INT/Source/ext_int.o
+                0x00000270       0x38 Source/MCAL/EEPROM/Source/eeprom.o
  .debug_aranges
-                0x000002d0       0x28 Source/MCAL/GIE/Source/gie.o
+                0x000002a8       0x50 Source/MCAL/EXT_INT/Source/ext_int.o
  .debug_aranges
-                0x000002f8       0x88 Source/MCAL/Timer0/Source/timer0.o
+                0x000002f8       0x28 Source/MCAL/GIE/Source/gie.o
  .debug_aranges
-                0x00000380       0x70 Source/MCAL/Timer1/Source/timer1.o
+                0x00000320       0x88 Source/MCAL/Timer0/Source/timer0.o
  .debug_aranges
-                0x000003f0       0x88 Source/MCAL/Timer2/Source/timer2.o
+                0x000003a8       0x70 Source/MCAL/Timer1/Source/timer1.o
  .debug_aranges
-                0x00000478       0x48 Source/MCAL/UART/Source/uart.o
+                0x00000418       0x88 Source/MCAL/Timer2/Source/timer2.o
  .debug_aranges
-                0x000004c0       0x58 Source/SERVICE/AC/Source/ac.o
+                0x000004a0       0x48 Source/MCAL/UART/Source/uart.o
  .debug_aranges
-                0x00000518       0x40 Source/SERVICE/Door/Source/door.o
+                0x000004e8       0x58 Source/SERVICE/AC/Source/ac.o
  .debug_aranges
-                0x00000558       0x38 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000540       0x38 Source/SERVICE/Door/Source/door.o
  .debug_aranges
-                0x00000590       0x70 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000578       0x38 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .debug_aranges
-                0x00000600       0x90 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000005b0       0x70 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .debug_aranges
-                0x00000690       0x68 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00000620       0x90 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_aranges
-                0x000006f8       0x68 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x000006b0       0x68 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_aranges
+                0x00000718       0x68 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x5d01
+.debug_info     0x00000000     0x5ea9
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_info    0x000004e6      0x266 Source/APP/main.o
  .debug_info    0x0000074c      0x11b Source/HAL/DC_Motor/Source/dc.o
  .debug_info    0x00000867      0x17f Source/HAL/Dimmer/Source/dimmer.o
- .debug_info    0x000009e6      0x15e Source/HAL/Lamp/Source/lamp.o
- .debug_info    0x00000b44      0x96b Source/HAL/LCD/Source/lcd.o
- .debug_info    0x000014af      0x119 Source/HAL/LM35/Source/lm35.o
- .debug_info    0x000015c8      0x262 Source/HAL/MM74C922/Source/MM74C922.o
- .debug_info    0x0000182a       0xe7 Source/HAL/POT/Source/pot.o
- .debug_info    0x00001911      0x168 Source/HAL/Relay/Source/relay.o
- .debug_info    0x00001a79      0x1ba Source/HAL/Servo/Source/servo.o
- .debug_info    0x00001c33       0xb7 Source/MCAL/ADC/Source/adc.o
- .debug_info    0x00001cea      0x1a8 Source/MCAL/DIO/Source/dio.o
- .debug_info    0x00001e92      0x1e0 Source/MCAL/EEPROM/Source/eeprom.o
- .debug_info    0x00002072      0x1d4 Source/MCAL/EXT_INT/Source/ext_int.o
- .debug_info    0x00002246       0x98 Source/MCAL/GIE/Source/gie.o
- .debug_info    0x000022de      0x297 Source/MCAL/Timer0/Source/timer0.o
- .debug_info    0x00002575      0x25a Source/MCAL/Timer1/Source/timer1.o
- .debug_info    0x000027cf      0x297 Source/MCAL/Timer2/Source/timer2.o
- .debug_info    0x00002a66      0x20f Source/MCAL/UART/Source/uart.o
- .debug_info    0x00002c75      0x2b4 Source/SERVICE/AC/Source/ac.o
- .debug_info    0x00002f29      0x19b Source/SERVICE/Door/Source/door.o
- .debug_info    0x000030c4      0x13f Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_info    0x00003203      0x929 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_info    0x00003b2c      0xfbe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_info    0x00004aea      0x758 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_info    0x00005242      0xabf Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_info    0x000009e6       0xff Source/HAL/Keypad/Source/keypad.o
+ .debug_info    0x00000ae5      0x15e Source/HAL/Lamp/Source/lamp.o
+ .debug_info    0x00000c43      0x96b Source/HAL/LCD/Source/lcd.o
+ .debug_info    0x000015ae      0x119 Source/HAL/LM35/Source/lm35.o
+ .debug_info    0x000016c7      0x262 Source/HAL/MM74C922/Source/MM74C922.o
+ .debug_info    0x00001929       0xe7 Source/HAL/POT/Source/pot.o
+ .debug_info    0x00001a10      0x168 Source/HAL/Relay/Source/relay.o
+ .debug_info    0x00001b78      0x1ba Source/HAL/Servo/Source/servo.o
+ .debug_info    0x00001d32       0xb7 Source/MCAL/ADC/Source/adc.o
+ .debug_info    0x00001de9      0x1a8 Source/MCAL/DIO/Source/dio.o
+ .debug_info    0x00001f91      0x1e0 Source/MCAL/EEPROM/Source/eeprom.o
+ .debug_info    0x00002171      0x1d4 Source/MCAL/EXT_INT/Source/ext_int.o
+ .debug_info    0x00002345       0x98 Source/MCAL/GIE/Source/gie.o
+ .debug_info    0x000023dd      0x297 Source/MCAL/Timer0/Source/timer0.o
+ .debug_info    0x00002674      0x25a Source/MCAL/Timer1/Source/timer1.o
+ .debug_info    0x000028ce      0x297 Source/MCAL/Timer2/Source/timer2.o
+ .debug_info    0x00002b65      0x20f Source/MCAL/UART/Source/uart.o
+ .debug_info    0x00002d74      0x2b4 Source/SERVICE/AC/Source/ac.o
+ .debug_info    0x00003028      0x215 Source/SERVICE/Door/Source/door.o
+ .debug_info    0x0000323d      0x13f Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_info    0x0000337c      0x941 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_info    0x00003cbd      0xfd5 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_info    0x00004c92      0x758 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_info    0x000053ea      0xabf Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
 
-.debug_abbrev   0x00000000     0x2104
+.debug_abbrev   0x00000000     0x2231
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_abbrev  0x000004a3       0xf6 Source/APP/main.o
  .debug_abbrev  0x00000599       0x67 Source/HAL/DC_Motor/Source/dc.o
  .debug_abbrev  0x00000600       0xc3 Source/HAL/Dimmer/Source/dimmer.o
- .debug_abbrev  0x000006c3      0x10c Source/HAL/Lamp/Source/lamp.o
- .debug_abbrev  0x000007cf      0x223 Source/HAL/LCD/Source/lcd.o
- .debug_abbrev  0x000009f2       0xaa Source/HAL/LM35/Source/lm35.o
- .debug_abbrev  0x00000a9c      0x11a Source/HAL/MM74C922/Source/MM74C922.o
- .debug_abbrev  0x00000bb6       0xad Source/HAL/POT/Source/pot.o
- .debug_abbrev  0x00000c63       0x90 Source/HAL/Relay/Source/relay.o
- .debug_abbrev  0x00000cf3       0xb8 Source/HAL/Servo/Source/servo.o
- .debug_abbrev  0x00000dab       0x6f Source/MCAL/ADC/Source/adc.o
- .debug_abbrev  0x00000e1a       0xa9 Source/MCAL/DIO/Source/dio.o
- .debug_abbrev  0x00000ec3      0x10a Source/MCAL/EEPROM/Source/eeprom.o
- .debug_abbrev  0x00000fcd       0xaa Source/MCAL/EXT_INT/Source/ext_int.o
- .debug_abbrev  0x00001077       0x46 Source/MCAL/GIE/Source/gie.o
- .debug_abbrev  0x000010bd       0xeb Source/MCAL/Timer0/Source/timer0.o
- .debug_abbrev  0x000011a8       0xde Source/MCAL/Timer1/Source/timer1.o
- .debug_abbrev  0x00001286       0xeb Source/MCAL/Timer2/Source/timer2.o
- .debug_abbrev  0x00001371      0x15b Source/MCAL/UART/Source/uart.o
- .debug_abbrev  0x000014cc      0x17d Source/SERVICE/AC/Source/ac.o
- .debug_abbrev  0x00001649       0xa6 Source/SERVICE/Door/Source/door.o
- .debug_abbrev  0x000016ef       0xbd Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_abbrev  0x000017ac      0x298 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_abbrev  0x00001a44      0x280 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_abbrev  0x00001cc4      0x23a Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_abbrev  0x00001efe      0x206 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_abbrev  0x000006c3       0xad Source/HAL/Keypad/Source/keypad.o
+ .debug_abbrev  0x00000770      0x10c Source/HAL/Lamp/Source/lamp.o
+ .debug_abbrev  0x0000087c      0x223 Source/HAL/LCD/Source/lcd.o
+ .debug_abbrev  0x00000a9f       0xaa Source/HAL/LM35/Source/lm35.o
+ .debug_abbrev  0x00000b49      0x11a Source/HAL/MM74C922/Source/MM74C922.o
+ .debug_abbrev  0x00000c63       0xad Source/HAL/POT/Source/pot.o
+ .debug_abbrev  0x00000d10       0x90 Source/HAL/Relay/Source/relay.o
+ .debug_abbrev  0x00000da0       0xb8 Source/HAL/Servo/Source/servo.o
+ .debug_abbrev  0x00000e58       0x6f Source/MCAL/ADC/Source/adc.o
+ .debug_abbrev  0x00000ec7       0xa9 Source/MCAL/DIO/Source/dio.o
+ .debug_abbrev  0x00000f70      0x10a Source/MCAL/EEPROM/Source/eeprom.o
+ .debug_abbrev  0x0000107a       0xaa Source/MCAL/EXT_INT/Source/ext_int.o
+ .debug_abbrev  0x00001124       0x46 Source/MCAL/GIE/Source/gie.o
+ .debug_abbrev  0x0000116a       0xeb Source/MCAL/Timer0/Source/timer0.o
+ .debug_abbrev  0x00001255       0xde Source/MCAL/Timer1/Source/timer1.o
+ .debug_abbrev  0x00001333       0xeb Source/MCAL/Timer2/Source/timer2.o
+ .debug_abbrev  0x0000141e      0x15b Source/MCAL/UART/Source/uart.o
+ .debug_abbrev  0x00001579      0x17d Source/SERVICE/AC/Source/ac.o
+ .debug_abbrev  0x000016f6       0xf2 Source/SERVICE/Door/Source/door.o
+ .debug_abbrev  0x000017e8       0xbd Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_abbrev  0x000018a5      0x2cc Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_abbrev  0x00001b71      0x280 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_abbrev  0x00001df1      0x23a Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_abbrev  0x0000202b      0x206 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
 
-.debug_line     0x00000000     0x3898
+.debug_line     0x00000000     0x3970
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_line    0x00000116      0x34f Source/APP/main.o
  .debug_line    0x00000465       0xa6 Source/HAL/DC_Motor/Source/dc.o
  .debug_line    0x0000050b      0x12a Source/HAL/Dimmer/Source/dimmer.o
- .debug_line    0x00000635       0xd6 Source/HAL/Lamp/Source/lamp.o
- .debug_line    0x0000070b      0x3b8 Source/HAL/LCD/Source/lcd.o
- .debug_line    0x00000ac3       0xb7 Source/HAL/LM35/Source/lm35.o
- .debug_line    0x00000b7a      0x1bb Source/HAL/MM74C922/Source/MM74C922.o
- .debug_line    0x00000d35       0xa9 Source/HAL/POT/Source/pot.o
- .debug_line    0x00000dde       0xe3 Source/HAL/Relay/Source/relay.o
- .debug_line    0x00000ec1       0xef Source/HAL/Servo/Source/servo.o
- .debug_line    0x00000fb0       0xba Source/MCAL/ADC/Source/adc.o
- .debug_line    0x0000106a      0x210 Source/MCAL/DIO/Source/dio.o
- .debug_line    0x0000127a      0x182 Source/MCAL/EEPROM/Source/eeprom.o
- .debug_line    0x000013fc      0x1f6 Source/MCAL/EXT_INT/Source/ext_int.o
- .debug_line    0x000015f2       0x86 Source/MCAL/GIE/Source/gie.o
- .debug_line    0x00001678      0x1b8 Source/MCAL/Timer0/Source/timer0.o
- .debug_line    0x00001830      0x1d3 Source/MCAL/Timer1/Source/timer1.o
- .debug_line    0x00001a03      0x1b8 Source/MCAL/Timer2/Source/timer2.o
- .debug_line    0x00001bbb      0x194 Source/MCAL/UART/Source/uart.o
- .debug_line    0x00001d4f      0x1c0 Source/SERVICE/AC/Source/ac.o
- .debug_line    0x00001f0f      0x112 Source/SERVICE/Door/Source/door.o
- .debug_line    0x00002021       0xfb Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_line    0x0000211c      0x50f Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_line    0x0000262b      0x89b Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_line    0x00002ec6      0x3ad Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_line    0x00003273      0x625 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_line    0x00000635       0xb8 Source/HAL/Keypad/Source/keypad.o
+ .debug_line    0x000006ed       0xd6 Source/HAL/Lamp/Source/lamp.o
+ .debug_line    0x000007c3      0x3b8 Source/HAL/LCD/Source/lcd.o
+ .debug_line    0x00000b7b       0xb7 Source/HAL/LM35/Source/lm35.o
+ .debug_line    0x00000c32      0x1bb Source/HAL/MM74C922/Source/MM74C922.o
+ .debug_line    0x00000ded       0xa9 Source/HAL/POT/Source/pot.o
+ .debug_line    0x00000e96       0xe3 Source/HAL/Relay/Source/relay.o
+ .debug_line    0x00000f79       0xef Source/HAL/Servo/Source/servo.o
+ .debug_line    0x00001068       0xba Source/MCAL/ADC/Source/adc.o
+ .debug_line    0x00001122      0x210 Source/MCAL/DIO/Source/dio.o
+ .debug_line    0x00001332      0x182 Source/MCAL/EEPROM/Source/eeprom.o
+ .debug_line    0x000014b4      0x1f6 Source/MCAL/EXT_INT/Source/ext_int.o
+ .debug_line    0x000016aa       0x86 Source/MCAL/GIE/Source/gie.o
+ .debug_line    0x00001730      0x1b8 Source/MCAL/Timer0/Source/timer0.o
+ .debug_line    0x000018e8      0x1ce Source/MCAL/Timer1/Source/timer1.o
+ .debug_line    0x00001ab6      0x1b8 Source/MCAL/Timer2/Source/timer2.o
+ .debug_line    0x00001c6e      0x194 Source/MCAL/UART/Source/uart.o
+ .debug_line    0x00001e02      0x1c0 Source/SERVICE/AC/Source/ac.o
+ .debug_line    0x00001fc2      0x14c Source/SERVICE/Door/Source/door.o
+ .debug_line    0x0000210e       0xfb Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_line    0x00002209      0x4fa Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_line    0x00002703      0x89b Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_line    0x00002f9e      0x3ad Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_line    0x0000334b      0x625 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
 
-.debug_frame    0x00000000     0x1190
+.debug_frame    0x00000000     0x11a8
  *(.debug_frame)
  .debug_frame   0x00000000       0x24 Source/APP/main.o
  .debug_frame   0x00000024       0x44 Source/HAL/DC_Motor/Source/dc.o
  .debug_frame   0x00000068       0x44 Source/HAL/Dimmer/Source/dimmer.o
- .debug_frame   0x000000ac       0x4c Source/HAL/Lamp/Source/lamp.o
- .debug_frame   0x000000f8       0xfc Source/HAL/LCD/Source/lcd.o
- .debug_frame   0x000001f4       0x34 Source/HAL/LM35/Source/lm35.o
- .debug_frame   0x00000228       0x5c Source/HAL/MM74C922/Source/MM74C922.o
- .debug_frame   0x00000284       0x34 Source/HAL/POT/Source/pot.o
- .debug_frame   0x000002b8       0x34 Source/HAL/Relay/Source/relay.o
- .debug_frame   0x000002ec       0x48 Source/HAL/Servo/Source/servo.o
- .debug_frame   0x00000334       0x34 Source/MCAL/ADC/Source/adc.o
- .debug_frame   0x00000368       0x64 Source/MCAL/DIO/Source/dio.o
- .debug_frame   0x000003cc       0x94 Source/MCAL/EEPROM/Source/eeprom.o
- .debug_frame   0x00000460      0x15c Source/MCAL/EXT_INT/Source/ext_int.o
- .debug_frame   0x000005bc       0x34 Source/MCAL/GIE/Source/gie.o
- .debug_frame   0x000005f0      0x194 Source/MCAL/Timer0/Source/timer0.o
- .debug_frame   0x00000784      0x10c Source/MCAL/Timer1/Source/timer1.o
- .debug_frame   0x00000890      0x194 Source/MCAL/Timer2/Source/timer2.o
- .debug_frame   0x00000a24       0xa0 Source/MCAL/UART/Source/uart.o
- .debug_frame   0x00000ac4       0x94 Source/SERVICE/AC/Source/ac.o
- .debug_frame   0x00000b58       0x78 Source/SERVICE/Door/Source/door.o
- .debug_frame   0x00000bd0       0x54 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_frame   0x00000c24      0x198 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_frame   0x00000dbc      0x180 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_frame   0x00000f3c      0x168 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_frame   0x000010a4       0xec Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_frame   0x000000ac       0x34 Source/HAL/Keypad/Source/keypad.o
+ .debug_frame   0x000000e0       0x4c Source/HAL/Lamp/Source/lamp.o
+ .debug_frame   0x0000012c       0xfc Source/HAL/LCD/Source/lcd.o
+ .debug_frame   0x00000228       0x34 Source/HAL/LM35/Source/lm35.o
+ .debug_frame   0x0000025c       0x5c Source/HAL/MM74C922/Source/MM74C922.o
+ .debug_frame   0x000002b8       0x34 Source/HAL/POT/Source/pot.o
+ .debug_frame   0x000002ec       0x34 Source/HAL/Relay/Source/relay.o
+ .debug_frame   0x00000320       0x48 Source/HAL/Servo/Source/servo.o
+ .debug_frame   0x00000368       0x34 Source/MCAL/ADC/Source/adc.o
+ .debug_frame   0x0000039c       0x64 Source/MCAL/DIO/Source/dio.o
+ .debug_frame   0x00000400       0x94 Source/MCAL/EEPROM/Source/eeprom.o
+ .debug_frame   0x00000494      0x15c Source/MCAL/EXT_INT/Source/ext_int.o
+ .debug_frame   0x000005f0       0x34 Source/MCAL/GIE/Source/gie.o
+ .debug_frame   0x00000624      0x194 Source/MCAL/Timer0/Source/timer0.o
+ .debug_frame   0x000007b8      0x10c Source/MCAL/Timer1/Source/timer1.o
+ .debug_frame   0x000008c4      0x194 Source/MCAL/Timer2/Source/timer2.o
+ .debug_frame   0x00000a58       0xa0 Source/MCAL/UART/Source/uart.o
+ .debug_frame   0x00000af8       0x94 Source/SERVICE/AC/Source/ac.o
+ .debug_frame   0x00000b8c       0x68 Source/SERVICE/Door/Source/door.o
+ .debug_frame   0x00000bf4       0x54 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_frame   0x00000c48      0x18c Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_frame   0x00000dd4      0x180 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_frame   0x00000f54      0x168 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_frame   0x000010bc       0xec Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
 
-.debug_str      0x00000000     0x167e
+.debug_str      0x00000000     0x16ba
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
- .debug_str     0x00000196      0x2b1 Source/APP/main.o
-                                0x2e5 (size before relaxing)
- .debug_str     0x00000447       0x6c Source/HAL/DC_Motor/Source/dc.o
-                                0x1d5 (size before relaxing)
- .debug_str     0x000004b3       0x8a Source/HAL/Dimmer/Source/dimmer.o
-                                0x214 (size before relaxing)
- .debug_str     0x0000053d       0x71 Source/HAL/Lamp/Source/lamp.o
-                                0x1ed (size before relaxing)
- .debug_str     0x000005ae       0xc8 Source/HAL/LCD/Source/lcd.o
+ .debug_str     0x00000196      0x2b4 Source/APP/main.o
                                 0x2e8 (size before relaxing)
- .debug_str     0x00000676       0x5d Source/HAL/LM35/Source/lm35.o
-                                0x1d3 (size before relaxing)
- .debug_str     0x000006d3       0xe1 Source/HAL/MM74C922/Source/MM74C922.o
-                                0x29e (size before relaxing)
- .debug_str     0x000007b4       0x1f Source/HAL/POT/Source/pot.o
-                                0x1b4 (size before relaxing)
- .debug_str     0x000007d3       0x35 Source/HAL/Relay/Source/relay.o
+ .debug_str     0x0000044a       0x6c Source/HAL/DC_Motor/Source/dc.o
+                                0x1d8 (size before relaxing)
+ .debug_str     0x000004b6       0x8a Source/HAL/Dimmer/Source/dimmer.o
+                                0x217 (size before relaxing)
+ .debug_str     0x00000540       0x5e Source/HAL/Keypad/Source/keypad.o
                                 0x1ca (size before relaxing)
- .debug_str     0x00000808       0xa8 Source/HAL/Servo/Source/servo.o
-                                0x225 (size before relaxing)
- .debug_str     0x000008b0       0x2a Source/MCAL/ADC/Source/adc.o
-                                0x1a5 (size before relaxing)
- .debug_str     0x000008da       0x3f Source/MCAL/DIO/Source/dio.o
-                                0x206 (size before relaxing)
- .debug_str     0x00000919       0x98 Source/MCAL/EEPROM/Source/eeprom.o
-                                0x238 (size before relaxing)
- .debug_str     0x000009b1       0x9a Source/MCAL/EXT_INT/Source/ext_int.o
-                                0x272 (size before relaxing)
- .debug_str     0x00000a4b       0x39 Source/MCAL/GIE/Source/gie.o
-                                0x1ba (size before relaxing)
- .debug_str     0x00000a84      0x149 Source/MCAL/Timer0/Source/timer0.o
-                                0x30f (size before relaxing)
- .debug_str     0x00000bcd       0xd1 Source/MCAL/Timer1/Source/timer1.o
-                                0x2d5 (size before relaxing)
- .debug_str     0x00000c9e      0x14e Source/MCAL/Timer2/Source/timer2.o
-                                0x30d (size before relaxing)
- .debug_str     0x00000dec       0x95 Source/MCAL/UART/Source/uart.o
-                                0x272 (size before relaxing)
- .debug_str     0x00000e81      0x111 Source/SERVICE/AC/Source/ac.o
-                                0x2f0 (size before relaxing)
- .debug_str     0x00000f92       0x59 Source/SERVICE/Door/Source/door.o
-                                0x1f3 (size before relaxing)
- .debug_str     0x00000feb       0x75 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                                0x247 (size before relaxing)
- .debug_str     0x00001060      0x1da Source/SERVICE/LocalMode_DB/Source/localDB.o
-                                0x444 (size before relaxing)
- .debug_str     0x0000123a      0x1ca Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                                0x5ae (size before relaxing)
- .debug_str     0x00001404      0x12a Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                                0x3e8 (size before relaxing)
- .debug_str     0x0000152e      0x150 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                                0x48e (size before relaxing)
+ .debug_str     0x0000059e       0x71 Source/HAL/Lamp/Source/lamp.o
+                                0x1f0 (size before relaxing)
+ .debug_str     0x0000060f       0xc8 Source/HAL/LCD/Source/lcd.o
+                                0x2eb (size before relaxing)
+ .debug_str     0x000006d7       0x5d Source/HAL/LM35/Source/lm35.o
+                                0x1d6 (size before relaxing)
+ .debug_str     0x00000734       0xc3 Source/HAL/MM74C922/Source/MM74C922.o
+                                0x2a1 (size before relaxing)
+ .debug_str     0x000007f7       0x1f Source/HAL/POT/Source/pot.o
+                                0x1b7 (size before relaxing)
+ .debug_str     0x00000816       0x35 Source/HAL/Relay/Source/relay.o
+                                0x1cd (size before relaxing)
+ .debug_str     0x0000084b       0xa8 Source/HAL/Servo/Source/servo.o
+                                0x228 (size before relaxing)
+ .debug_str     0x000008f3       0x2a Source/MCAL/ADC/Source/adc.o
+                                0x1a8 (size before relaxing)
+ .debug_str     0x0000091d       0x3f Source/MCAL/DIO/Source/dio.o
+                                0x209 (size before relaxing)
+ .debug_str     0x0000095c       0x98 Source/MCAL/EEPROM/Source/eeprom.o
+                                0x23b (size before relaxing)
+ .debug_str     0x000009f4       0x9a Source/MCAL/EXT_INT/Source/ext_int.o
+                                0x275 (size before relaxing)
+ .debug_str     0x00000a8e       0x39 Source/MCAL/GIE/Source/gie.o
+                                0x1bd (size before relaxing)
+ .debug_str     0x00000ac7      0x149 Source/MCAL/Timer0/Source/timer0.o
+                                0x312 (size before relaxing)
+ .debug_str     0x00000c10       0xd1 Source/MCAL/Timer1/Source/timer1.o
+                                0x2d8 (size before relaxing)
+ .debug_str     0x00000ce1      0x14e Source/MCAL/Timer2/Source/timer2.o
+                                0x310 (size before relaxing)
+ .debug_str     0x00000e2f       0x95 Source/MCAL/UART/Source/uart.o
+                                0x275 (size before relaxing)
+ .debug_str     0x00000ec4      0x111 Source/SERVICE/AC/Source/ac.o
+                                0x2f3 (size before relaxing)
+ .debug_str     0x00000fd5       0x61 Source/SERVICE/Door/Source/door.o
+                                0x239 (size before relaxing)
+ .debug_str     0x00001036       0x75 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                                0x24a (size before relaxing)
+ .debug_str     0x000010ab      0x1cb Source/SERVICE/LocalMode_DB/Source/localDB.o
+                                0x460 (size before relaxing)
+ .debug_str     0x00001276      0x1ca Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                                0x5c2 (size before relaxing)
+ .debug_str     0x00001440      0x12a Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                                0x3eb (size before relaxing)
+ .debug_str     0x0000156a      0x150 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                                0x492 (size before relaxing)
 
-.debug_loc      0x00000000     0x318b
+.debug_loc      0x00000000     0x3100
  *(.debug_loc)
  .debug_loc     0x00000000       0x48 Source/APP/main.o
  .debug_loc     0x00000048       0x46 Source/HAL/Dimmer/Source/dimmer.o
@@ -1643,10 +1654,10 @@ END GROUP
  .debug_loc     0x0000183a      0x19f Source/MCAL/UART/Source/uart.o
  .debug_loc     0x000019d9       0x52 Source/SERVICE/AC/Source/ac.o
  .debug_loc     0x00001a2b       0x49 Source/SERVICE/Door/Source/door.o
- .debug_loc     0x00001a74      0x7cb Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_loc     0x0000223f      0x75a Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_loc     0x00002999      0x5a2 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_loc     0x00002f3b      0x250 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_loc     0x00001a74      0x740 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_loc     0x000021b4      0x75a Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_loc     0x0000290e      0x5a2 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_loc     0x00002eb0      0x250 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1666,34 +1677,35 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x5f0
+.debug_ranges   0x00000000      0x600
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x10 Source/APP/main.o
  .debug_ranges  0x00000010       0x20 Source/HAL/DC_Motor/Source/dc.o
  .debug_ranges  0x00000030       0x20 Source/HAL/Dimmer/Source/dimmer.o
- .debug_ranges  0x00000050       0x20 Source/HAL/Lamp/Source/lamp.o
- .debug_ranges  0x00000070       0x50 Source/HAL/LCD/Source/lcd.o
- .debug_ranges  0x000000c0       0x18 Source/HAL/LM35/Source/lm35.o
- .debug_ranges  0x000000d8       0x20 Source/HAL/MM74C922/Source/MM74C922.o
- .debug_ranges  0x000000f8       0x18 Source/HAL/POT/Source/pot.o
- .debug_ranges  0x00000110       0x18 Source/HAL/Relay/Source/relay.o
- .debug_ranges  0x00000128       0x18 Source/HAL/Servo/Source/servo.o
- .debug_ranges  0x00000140       0x18 Source/MCAL/ADC/Source/adc.o
- .debug_ranges  0x00000158       0x30 Source/MCAL/DIO/Source/dio.o
- .debug_ranges  0x00000188       0x28 Source/MCAL/EEPROM/Source/eeprom.o
- .debug_ranges  0x000001b0       0x40 Source/MCAL/EXT_INT/Source/ext_int.o
- .debug_ranges  0x000001f0       0x18 Source/MCAL/GIE/Source/gie.o
- .debug_ranges  0x00000208       0x78 Source/MCAL/Timer0/Source/timer0.o
- .debug_ranges  0x00000280       0x60 Source/MCAL/Timer1/Source/timer1.o
- .debug_ranges  0x000002e0       0x78 Source/MCAL/Timer2/Source/timer2.o
- .debug_ranges  0x00000358       0x38 Source/MCAL/UART/Source/uart.o
- .debug_ranges  0x00000390       0x48 Source/SERVICE/AC/Source/ac.o
- .debug_ranges  0x000003d8       0x30 Source/SERVICE/Door/Source/door.o
- .debug_ranges  0x00000408       0x28 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_ranges  0x00000430       0x78 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_ranges  0x000004a8       0x80 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_ranges  0x00000528       0x70 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_ranges  0x00000598       0x58 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_ranges  0x00000050       0x18 Source/HAL/Keypad/Source/keypad.o
+ .debug_ranges  0x00000068       0x20 Source/HAL/Lamp/Source/lamp.o
+ .debug_ranges  0x00000088       0x50 Source/HAL/LCD/Source/lcd.o
+ .debug_ranges  0x000000d8       0x18 Source/HAL/LM35/Source/lm35.o
+ .debug_ranges  0x000000f0       0x20 Source/HAL/MM74C922/Source/MM74C922.o
+ .debug_ranges  0x00000110       0x18 Source/HAL/POT/Source/pot.o
+ .debug_ranges  0x00000128       0x18 Source/HAL/Relay/Source/relay.o
+ .debug_ranges  0x00000140       0x18 Source/HAL/Servo/Source/servo.o
+ .debug_ranges  0x00000158       0x18 Source/MCAL/ADC/Source/adc.o
+ .debug_ranges  0x00000170       0x30 Source/MCAL/DIO/Source/dio.o
+ .debug_ranges  0x000001a0       0x28 Source/MCAL/EEPROM/Source/eeprom.o
+ .debug_ranges  0x000001c8       0x40 Source/MCAL/EXT_INT/Source/ext_int.o
+ .debug_ranges  0x00000208       0x18 Source/MCAL/GIE/Source/gie.o
+ .debug_ranges  0x00000220       0x78 Source/MCAL/Timer0/Source/timer0.o
+ .debug_ranges  0x00000298       0x60 Source/MCAL/Timer1/Source/timer1.o
+ .debug_ranges  0x000002f8       0x78 Source/MCAL/Timer2/Source/timer2.o
+ .debug_ranges  0x00000370       0x38 Source/MCAL/UART/Source/uart.o
+ .debug_ranges  0x000003a8       0x48 Source/SERVICE/AC/Source/ac.o
+ .debug_ranges  0x000003f0       0x28 Source/SERVICE/Door/Source/door.o
+ .debug_ranges  0x00000418       0x28 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_ranges  0x00000440       0x78 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_ranges  0x000004b8       0x80 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_ranges  0x00000538       0x70 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_ranges  0x000005a8       0x58 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
 
 .debug_macro
  *(.debug_macro)

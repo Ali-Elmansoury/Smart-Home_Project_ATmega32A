@@ -54,9 +54,12 @@ void pwm1_init(u8 modeA, u8 modeB, u8 freq)
 {
 	/*Set mode*/
 	TIMER1_TCCR1A_REG |= modeA;
-	TIMER1_TCCR1B_REG |= modeB;
-	/*Set frequency*/
-	TIMER1_TCCR1B_REG |= freq;
+	/*Set mode & freq*/
+	TIMER1_TCCR1B_REG |= (modeB | freq);
+	
+// 	TIMER1_TCCR1B_REG |= modeB;
+// 	/*Set frequency*/
+// 	TIMER1_TCCR1B_REG |= freq;
 }
 
 void pwm1_setTopValue(u8 topValue)

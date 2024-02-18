@@ -228,7 +228,7 @@ void remote_Menu_Admin(void)
 			AC_menu();
 			break;
 			case '5':
-			doorToggle();
+			doorService();
 			break;
 			case '6':
 			logout_remote();
