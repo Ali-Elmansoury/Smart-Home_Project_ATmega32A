@@ -472,7 +472,7 @@ void local_menu_Service()
 void local_menu_Idle()
 {
 	lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
-	lcd_displayStr("active devices:");
+	lcd_displayStr("Active Devices:");
 	lcd_goTo(1,7);
 	lcd_displayNums(number_of_active_devices);
 }

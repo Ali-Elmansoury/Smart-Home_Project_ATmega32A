@@ -18,6 +18,19 @@ user_local localUsers[DB_MAX_SIZE];
 boolean login_flag_local = FALSE;
 u8 userCount_local = 0;
 
+void localDB_init();
+void getPassword_local(u8* password, u8 maxLength);
+void writeUserToEEPROM_local(user_local *user);
+void readUserFromEEPROM_local(user_local *user, u8 userId);
+u8 addUserToEEPROM_local(const u8 *username, const u8* password);
+void displayUsersOnLCD(u8 startIndex, u8 endIndex);
+void selectUserAndLogin_local();
+void scrollUsersOnLCD();
+boolean loginAck_local();
+void logout_local();
+
+
+
 void localDB_init()
 {
 	if (EEPROM_read(EEPROM_USER_COUNT_ADDR_LOCAL) == 0xFF)
@@ -232,6 +245,8 @@ void scrollUsersOnLCD()
 	displayUsersOnLCD(startIndex, endIndex);
 
 	u8 key = MM74C922_GetKey();  // Assume keypad_readKey() returns the pressed key
+	
+	_delay_ms(200);
 
 	if (key != 'D')
 	{
