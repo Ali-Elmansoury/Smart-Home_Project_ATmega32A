@@ -168,12 +168,14 @@ u8 addUserToEEPROM_local(const u8 *username, const u8* password)
 void displayUsersOnLCD(u8 startIndex, u8 endIndex)
 {
 	lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+	if (userCount_local == 0)
+	{lcd_displayStr("No Local Users");
+	}
 	for (u8 i = startIndex; i < endIndex && i < userCount_local; i++) {  // Assuming a maximum of 10 users
 		char displayText[50];
 		snprintf(displayText, sizeof(displayText), "User: %s,ID: %d", localUsers[i].uname, localUsers[i].id);
 		lcd_displayStr(displayText);
 		lcd_goTo(1,0);
-		_delay_ms(1000);
 	}
 }
 
@@ -239,27 +241,29 @@ void selectUserAndLogin_local()
 
 void scrollUsersOnLCD()
 {
-	u8 startIndex = 0;
-	u8 endIndex = 2;  // Display two users at a time
-
-	displayUsersOnLCD(startIndex, endIndex);
-
-	u8 key = MM74C922_GetKey();  // Assume keypad_readKey() returns the pressed key
-	
-	_delay_ms(200);
-
-	if (key != 'D')
+	static u8 startIndex = 0;
+	static u8 endIndex = 2;  // Display two users at a time
+	static u8 key = 1;
+	static login = FALSE;
+	if (key != NO_DATA)
 	{
-		if (key == 'A')
-		{  // Scroll up
+		displayUsersOnLCD(startIndex, endIndex);
+	}
+	if (!login)
+	{
+		key = MM74C922_GetKey();
+	}
+	
+	switch(key)
+	{
+		case KEY_A:
 			if (startIndex >= 2)
 			{
 				startIndex -= 2;
 				endIndex -= 2;
 			}
-		}
-		else if (key == 'B')
-		{  // Scroll down
+			break;
+		case KEY_B:
 			if (endIndex < 11)
 			{  // Assuming a maximum of 10 users
 				startIndex += 2;
@@ -269,15 +273,15 @@ void scrollUsersOnLCD()
 					return;
 				}
 			}
-		}
-	}
-	else
-	{
-		// Add a delay to avoid rapid scrolling due to continuous key press
-		_delay_ms(200);
-		selectUserAndLogin_local();
-	}
-	
+			break;
+		case KEY_C:
+			selectUserAndLogin_local();
+			login = TRUE;
+			break;
+		default:
+			break;
+			
+	}	
 }
 
 boolean loginAck_local()

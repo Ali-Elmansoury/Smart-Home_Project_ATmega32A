@@ -504,5 +504,7 @@ void local_menu_init()
 	timer2_enableOvInterrupt();
 	timer2_start(TIMER2_F_CPU_DIV_1024);
 	
+	lcd_init();
+	
 	MM74C922_Init(PORTB_ID,PIN4_ID,PIN7_ID);
 }
