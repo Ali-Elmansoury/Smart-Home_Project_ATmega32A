@@ -16,7 +16,8 @@ Source/APP/main.d Source/APP/main.o: ../Source/APP/main.c \
  ../Source/MCAL/UART/Include/uart_reg.h \
  ../Source/SERVICE/RemoteMode_DB/Include/remoteDB.h \
  ../Source/SERVICE/LocalMode_DB/Include/localDB.h \
- ../Source/HAL/Lamp/Include/lamp.h
+ ../Source/HAL/Lamp/Include/lamp.h ../Source/HAL/Buzzer/Include/buzzer.h \
+ ../Source/SERVICE/Stop/Include/Stop.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
@@ -61,3 +62,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../Source/SERVICE/LocalMode_DB/Include/localDB.h:
 
 ../Source/HAL/Lamp/Include/lamp.h:
+
+../Source/HAL/Buzzer/Include/buzzer.h:
+
+../Source/SERVICE/Stop/Include/Stop.h:

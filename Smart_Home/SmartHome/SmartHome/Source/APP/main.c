@@ -20,6 +20,8 @@
 #include "remoteDB.h"
 #include "localDB.h"
 #include "lamp.h"
+#include "buzzer.h"
+#include "Stop.h"
 
 int main(void)
 {
@@ -33,14 +35,23 @@ int main(void)
 	localDB_init();
 	lamp_init();
 	remote_menu_init();
+	buzzer_init();
     /* Replace with your application code */
     while (1) 
     {
+		switch(System_Stop())
+		{
+			case TRUE:
+				buzzer_on();
+				break;
+			default:
+				local_menu_Service();
+				remote_menu_Service();
+				break;
+		}
 		_delay_ms(20);
 		airConditioner_service();
 		lamp_Dim_service();
-		local_menu_Service();
-		remote_menu_Service();
 		
     }
 }

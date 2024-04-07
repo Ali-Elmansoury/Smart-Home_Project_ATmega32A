@@ -127,6 +127,7 @@
       <Value>../Source/SERVICE/RemoteMode_Menu/Include</Value>
       <Value>../Source/SERVICE/Door/Include</Value>
       <Value>../Source/MCAL/EXT_INT/Include</Value>
+      <Value>../Source/SERVICE/Stop/Include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -365,6 +366,12 @@
     <Compile Include="Source\SERVICE\RemoteMode_Menu\Source\remoteMenu.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Source\SERVICE\Stop\Include\Stop.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\Stop\Source\Stop.c">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source" />
@@ -451,12 +458,15 @@
     <Folder Include="Source\SERVICE\LocalMode_Menu\Include\" />
     <Folder Include="Source\SERVICE\LocalMode_Menu\Source\" />
     <Folder Include="Source\SERVICE\Door" />
+    <Folder Include="Source\SERVICE\Stop" />
     <Folder Include="Source\SERVICE\RemoteMode_DB" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Include" />
     <Folder Include="Source\SERVICE\RemoteMode_DB\Source" />
     <Folder Include="Source\SERVICE\RemoteMode_Menu\" />
     <Folder Include="Source\SERVICE\RemoteMode_Menu\Include\" />
     <Folder Include="Source\SERVICE\RemoteMode_Menu\Source\" />
+    <Folder Include="Source\SERVICE\Stop\Include" />
+    <Folder Include="Source\SERVICE\Stop\Source" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

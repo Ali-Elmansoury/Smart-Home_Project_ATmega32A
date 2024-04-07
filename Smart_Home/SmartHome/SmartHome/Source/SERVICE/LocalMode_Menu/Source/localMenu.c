@@ -462,6 +462,7 @@ void local_menu_Service()
 	else if(local_idle || loginAck_remote())
 	{
 		local_menu_Idle();
+		logout_local();
 	}
  	else
  	{
@@ -483,7 +484,6 @@ void local_menu_Idle_timer()
 	timer2_setPreLoad(6); // 16ms 
 	if (secondCounter == 624)
 	{
-		lamp_toggle(LAMP1_ID);
 		//your desired function to be run every 10 secs
 		secondCounter=0;
 		local_idle=TRUE;

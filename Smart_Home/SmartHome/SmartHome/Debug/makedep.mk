@@ -62,3 +62,5 @@ Source\SERVICE\RemoteMode_DB\Source\remoteDB.c
 
 Source\SERVICE\RemoteMode_Menu\Source\remoteMenu.c
 
+Source\SERVICE\Stop\Source\Stop.c
+

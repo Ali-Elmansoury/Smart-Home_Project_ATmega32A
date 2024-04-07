@@ -10,15 +10,10 @@
 
 void buzzer_init(void)
 {
-	dio_setPinDirection(PORTC_ID,PIN7_ID,OUTPUT);
+	dio_setPinDirection(PORTB_ID,PIN2_ID,OUTPUT);
 }
 
 void buzzer_on(void)
 {
-	dio_writeChannel(PORTC_ID,PIN7_ID,HIGH);
-}
-
-void buzzer_off(void)
-{
-	dio_writeChannel(PORTC_ID,PIN7_ID,LOW);
+	dio_writeChannel(PORTB_ID,PIN2_ID,HIGH);
 }

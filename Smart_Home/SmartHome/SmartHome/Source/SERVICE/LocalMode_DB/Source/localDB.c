@@ -13,6 +13,7 @@
 #include "keypad.h"
 #include "eeprom.h"
 #include "string.h"
+#include "Stop.h"
 
 user_local localUsers[DB_MAX_SIZE];
 boolean login_flag_local = FALSE;
@@ -66,6 +67,7 @@ void getPassword_local(u8* password, u8 maxLength)
 			// Check if the password is exactly 8 digits
 			if (index == 8)
 			{
+				lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
 				break;
 			}
 			else
@@ -80,18 +82,19 @@ void getPassword_local(u8* password, u8 maxLength)
 				continue;
 			}
 		}
-		else if (key == 'C')
+		else if (key == 'C' && index > 0)
 		{  // Backspace
-			if (index > 0)
-			{
-				index--;
-				password[index] = '\0';
-				lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);  // Clear the LCD
-				lcd_displayStr("Enter Password:");
-			}
+			index--;
+			password[index] = '\0';
+			lcd_goTo(1,index);
+			lcd_displayChar(' ');
+			lcd_goTo(1,index);
 		}
-		else if (key >= '0' && key <= '9')
+		else if (key >= 0 && key <= 9)
 		{  // Numeric keys
+			key += '0';
+			lcd_goTo(1,index);
+			lcd_displayChar('*');
 			password[index] = key;
 			index++;
 		}
@@ -173,7 +176,7 @@ void displayUsersOnLCD(u8 startIndex, u8 endIndex)
 	}
 	for (u8 i = startIndex; i < endIndex && i < userCount_local; i++) {  // Assuming a maximum of 10 users
 		char displayText[50];
-		snprintf(displayText, sizeof(displayText), "User: %s,ID: %d", localUsers[i].uname, localUsers[i].id);
+		snprintf(displayText, sizeof(displayText), "%s,ID: %d", localUsers[i].uname, localUsers[i].id);
 		lcd_displayStr(displayText);
 		lcd_goTo(1,0);
 	}
@@ -210,27 +213,60 @@ void displayUsersOnLCD(u8 startIndex, u8 endIndex)
 
 void selectUserAndLogin_local()
 {
-	u8 selectedID;
-	lcd_displayStr("Enter User ID:");
+	static boolean Show_Display_ID = TRUE;
+	static u8 selectedID = NO_DATA;
+	static u8 Try = 0;
+	if (Show_Display_ID)
+	{
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+		lcd_displayStr("Enter User ID:");
+		Show_Display_ID = FALSE;
+	}
 
 	selectedID = MM74C922_GetKey();
 
 	if (selectedID >= 1 && selectedID <= 10)
 	{  // Assuming a maximum of 10 users
 		char enteredPassword[9];
-		lcd_displayStr("Enter Password:");
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
 
 		getPassword_local(enteredPassword,9);
 
 		if (strcmp(enteredPassword, localUsers[selectedID-1].password) == 0)
 		{
+			lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
 			lcd_displayStr("Login Successful");
 			login_flag_local = TRUE;
+			selectedID = NO_DATA;
+			Show_Display_ID = TRUE;
+			_delay_ms(1000);
+			lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
 		}
 		else
 		{
-			lcd_displayStr("Error: Incorrect Password");
+			lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+			lcd_displayStr("Error: Incorrect");
+			Try++;
+			lcd_goTo(1,3);
+			lcd_displayStr("Password");
+			if (Try==3)
+			{
+				Set_System_Stop();
+				lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+				lcd_displayStr("<<Error>>");
+				lcd_goTo(1,0);
+				lcd_displayStr("<System  Halted>");
+				return;
+			}
+			_delay_ms(1000);
+			lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
+			selectedID = NO_DATA;
+			Show_Display_ID = TRUE;
 		}
+	}
+	else if (selectedID == NO_DATA)
+	{
+		return;
 	}
 	else
 	{
@@ -243,11 +279,14 @@ void scrollUsersOnLCD()
 {
 	static u8 startIndex = 0;
 	static u8 endIndex = 2;  // Display two users at a time
-	static u8 key = 1;
-	static login = FALSE;
-	if (key != NO_DATA)
+	static u8 key = NO_DATA;
+	static boolean login = FALSE;
+	static boolean Show_Data = TRUE;
+	if (Show_Data)
 	{
+		lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
 		displayUsersOnLCD(startIndex, endIndex);
+		Show_Data = FALSE;
 	}
 	if (!login)
 	{
@@ -261,6 +300,7 @@ void scrollUsersOnLCD()
 			{
 				startIndex -= 2;
 				endIndex -= 2;
+				Show_Data = TRUE;
 			}
 			break;
 		case KEY_B:
@@ -268,15 +308,21 @@ void scrollUsersOnLCD()
 			{  // Assuming a maximum of 10 users
 				startIndex += 2;
 				endIndex += 2;
+				Show_Data = TRUE;
 				if (endIndex == 10)
 				{
-					return;
+					break;
 				}
 			}
 			break;
 		case KEY_C:
 			selectUserAndLogin_local();
 			login = TRUE;
+			startIndex = 0;
+			endIndex = 2;
+			if (login_flag_local)
+			{Show_Data = TRUE;
+			 login = FALSE;}
 			break;
 		default:
 			break;

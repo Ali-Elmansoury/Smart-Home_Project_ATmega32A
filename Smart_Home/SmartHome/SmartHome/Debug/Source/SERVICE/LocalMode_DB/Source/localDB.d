@@ -17,7 +17,8 @@ Source/SERVICE/LocalMode_DB/Source/localDB.d \
  ../Source/HAL/MM74C922/Include/MM74C922.h \
  ../Source/MCAL/EEPROM/Include/eeprom.h \
  ../Source/MCAL/EEPROM/Include/eeprom_reg.h ../Source/LIB/sfr.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
+ ../Source/SERVICE/Stop/Include/Stop.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -58,3 +59,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../Source/LIB/sfr.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
+
+../Source/SERVICE/Stop/Include/Stop.h:
