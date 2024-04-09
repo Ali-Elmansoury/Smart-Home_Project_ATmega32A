@@ -42,6 +42,11 @@ AC airConditioner_Status(void)
 	return AC_CFG;
 }
 
+boolean airConditioner_State(void)
+{
+	return AC_CFG.AC_Status;
+}
+
 void airConditioner_service(void){
 	u8 current_temperature = 0;
 	switch (AC_CFG.AC_Status)

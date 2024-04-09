@@ -13,8 +13,8 @@
 
 
 u8 number_of_active_devices = 0;
-boolean local_idle = FALSE;
-volatile u16 secondCounter=0;
+boolean local_idle = FALSE , local_idle_Show_display = FALSE;
+volatile u16 Idle_timerCounter=0, Idle_timer_displayCounter;
 
 void local_Menu_AC_value_adj(u8 *value, u8 *v_adj_flag);
 void local_Menu_AC_Set_Temp(u8 temp, u8 AC_TEMP_MENU);
@@ -471,29 +471,44 @@ void local_menu_Service()
 }
 
 void local_menu_Idle()
-{
+{	if(!local_idle_Show_display)
+	{return;}
+	local_idle_Show_display=FALSE;
 	lcd_sendCommand(LCD_CMD_CLEAR_DISPLAY);
 	lcd_displayStr("Active Devices:");
 	lcd_goTo(1,7);
+	number_of_active_devices=0;
+	for (u8 i=1;i<6;i++)
+	{
+		number_of_active_devices += lamp_Getstate(i);
+	}
+	number_of_active_devices += Lamp_Service_Dim_state() + airConditioner_State();
 	lcd_displayNums(number_of_active_devices);
 }
 
 void local_menu_Idle_timer()
 {
-	secondCounter++;
+	Idle_timerCounter++;
+	Idle_timer_displayCounter++;
 	timer2_setPreLoad(6); // 16ms 
-	if (secondCounter == 624)
+	if (Idle_timerCounter == 624)
 	{
 		//your desired function to be run every 10 secs
-		secondCounter=0;
+		Idle_timerCounter=0;
 		local_idle=TRUE;
+		
+	}
+	if (Idle_timer_displayCounter==156)
+	{
+		Idle_timer_displayCounter=0;
+		local_idle_Show_display=TRUE;
 	}
 }
 
 void local_menu_Idle_Reset()
 {
 	local_idle=FALSE;
-	secondCounter=0;
+	Idle_timerCounter=0;
 }
 void local_menu_init()
 {

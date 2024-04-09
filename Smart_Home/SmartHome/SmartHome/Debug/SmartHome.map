@@ -61,6 +61,8 @@ Allocating common symbols
 Common symbol       size              file
 
 localUsers          0x104             Source/SERVICE/LocalMode_DB/Source/localDB.o
+Idle_timer_displayCounter
+                    0x2               Source/SERVICE/LocalMode_Menu/Source/localMenu.o
 remoteUsers         0x104             Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
 rx_data             0x1               Source/MCAL/UART/Source/uart.o
 AC_CFG              0x3               Source/SERVICE/AC/Source/ac.o
@@ -581,7 +583,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x2ad2
+.text           0x00000000     0x2b48
  *(.vectors)
  .vectors       0x00000000       0x54 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
                 0x00000000                __vector_default
@@ -876,251 +878,254 @@ END GROUP
  .text.airConditioner_Status
                 0x00000d62        0xe Source/SERVICE/AC/Source/ac.o
                 0x00000d62                airConditioner_Status
+ .text.airConditioner_State
+                0x00000d70        0x6 Source/SERVICE/AC/Source/ac.o
+                0x00000d70                airConditioner_State
  .text.airConditioner_service
-                0x00000d70       0x2a Source/SERVICE/AC/Source/ac.o
-                0x00000d70                airConditioner_service
+                0x00000d76       0x2a Source/SERVICE/AC/Source/ac.o
+                0x00000d76                airConditioner_service
  .text.doorService_init
-                0x00000d9a       0x2c Source/SERVICE/Door/Source/door.o
-                0x00000d9a                doorService_init
+                0x00000da0       0x2c Source/SERVICE/Door/Source/door.o
+                0x00000da0                doorService_init
  .text.doorOpen
-                0x00000dc6        0x8 Source/SERVICE/Door/Source/door.o
-                0x00000dc6                doorOpen
+                0x00000dcc        0x8 Source/SERVICE/Door/Source/door.o
+                0x00000dcc                doorOpen
  .text.doorClose
-                0x00000dce        0x8 Source/SERVICE/Door/Source/door.o
-                0x00000dce                doorClose
+                0x00000dd4        0x8 Source/SERVICE/Door/Source/door.o
+                0x00000dd4                doorClose
  .text.doorService
-                0x00000dd6       0x5a Source/SERVICE/Door/Source/door.o
-                0x00000dd6                doorService
+                0x00000ddc       0x5a Source/SERVICE/Door/Source/door.o
+                0x00000ddc                doorService
  .text.lamp_Dim_service_init
-                0x00000e30        0x4 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                0x00000e30                lamp_Dim_service_init
+                0x00000e36        0x4 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000e36                lamp_Dim_service_init
  .text.lamp_Dim_service
-                0x00000e34       0x16 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                0x00000e34                lamp_Dim_service
+                0x00000e3a       0x16 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000e3a                lamp_Dim_service
  .text.Lamp_Service_Dim_Toggle
-                0x00000e4a        0xe Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                0x00000e4a                Lamp_Service_Dim_Toggle
+                0x00000e50        0xe Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000e50                Lamp_Service_Dim_Toggle
  .text.Lamp_Service_Dim_state
-                0x00000e58        0x6 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
-                0x00000e58                Lamp_Service_Dim_state
+                0x00000e5e        0x6 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000e5e                Lamp_Service_Dim_state
  .text.getPassword_local
-                0x00000e5e       0xde Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000e5e                getPassword_local
+                0x00000e64       0xde Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000e64                getPassword_local
  .text.writeUserToEEPROM_local
-                0x00000f3c       0x48 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000f3c                writeUserToEEPROM_local
+                0x00000f42       0x48 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000f42                writeUserToEEPROM_local
  .text.readUserFromEEPROM_local
-                0x00000f84       0x46 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000f84                readUserFromEEPROM_local
+                0x00000f8a       0x46 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000f8a                readUserFromEEPROM_local
  .text.localDB_init
-                0x00000fca       0x52 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00000fca                localDB_init
+                0x00000fd0       0x52 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00000fd0                localDB_init
  .text.addUserToEEPROM_local
-                0x0000101c       0x6e Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x0000101c                addUserToEEPROM_local
+                0x00001022       0x6e Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00001022                addUserToEEPROM_local
  .text.displayUsersOnLCD
-                0x0000108a       0xc2 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x0000108a                displayUsersOnLCD
+                0x00001090       0xc2 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00001090                displayUsersOnLCD
  .text.selectUserAndLogin_local
-                0x0000114c      0x140 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x0000114c                selectUserAndLogin_local
+                0x00001152      0x140 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00001152                selectUserAndLogin_local
  .text.scrollUsersOnLCD
-                0x0000128c       0x9a Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x0000128c                scrollUsersOnLCD
+                0x00001292       0x9a Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00001292                scrollUsersOnLCD
  .text.loginAck_local
-                0x00001326        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x00001326                loginAck_local
- .text.logout_local
                 0x0000132c        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x0000132c                logout_local
+                0x0000132c                loginAck_local
+ .text.logout_local
+                0x00001332        0x6 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x00001332                logout_local
  .text.local_menu_Idle_timer
-                0x00001332       0x36 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001332                local_menu_Idle_timer
+                0x00001338       0x64 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001338                local_menu_Idle_timer
  .text.local_Menu_Slector_Display
-                0x00001368       0x22 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001368                local_Menu_Slector_Display
+                0x0000139c       0x22 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0000139c                local_Menu_Slector_Display
  .text.local_Menu_Display
-                0x0000138a       0x50 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x0000138a                local_Menu_Display
+                0x000013be       0x50 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000013be                local_Menu_Display
  .text.local_Menu_LED_Display
-                0x000013da      0x17e Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x000013da                local_Menu_LED_Display
+                0x0000140e      0x17e Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0000140e                local_Menu_LED_Display
  .text.local_Menu_AC_Display
-                0x00001558       0xc8 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001558                local_Menu_AC_Display
+                0x0000158c       0xc8 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0000158c                local_Menu_AC_Display
  .text.local_Menu_Move_Selector
-                0x00001620       0x48 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001620                local_Menu_Move_Selector
+                0x00001654       0x48 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001654                local_Menu_Move_Selector
  .text.local_Menu
-                0x00001668       0xbc Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001668                local_Menu
+                0x0000169c       0xbc Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0000169c                local_Menu
  .text.local_Menu_LED
-                0x00001724       0xce Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001724                local_Menu_LED
+                0x00001758       0xce Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001758                local_Menu_LED
  .text.local_Menu_AC_value_adj
-                0x000017f2       0x38 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x000017f2                local_Menu_AC_value_adj
+                0x00001826       0x38 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001826                local_Menu_AC_value_adj
  .text.local_Menu_AC
-                0x0000182a      0x148 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x0000182a                local_Menu_AC
+                0x0000185e      0x148 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x0000185e                local_Menu_AC
  .text.local_menu_Idle
-                0x00001972       0x20 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001972                local_menu_Idle
+                0x000019a6       0x62 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x000019a6                local_menu_Idle
  .text.local_menu_Service
-                0x00001992       0x56 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x00001992                local_menu_Service
+                0x00001a08       0x56 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001a08                local_menu_Service
  .text.local_menu_Idle_Reset
-                0x000019e8        0xe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x000019e8                local_menu_Idle_Reset
+                0x00001a5e        0xe Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001a5e                local_menu_Idle_Reset
  .text.local_menu_init
-                0x000019f6       0x36 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x000019f6                local_menu_init
+                0x00001a6c       0x36 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00001a6c                local_menu_init
  .text.getPassword_remote
-                0x00001a2c       0x20 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001a2c                getPassword_remote
+                0x00001aa2       0x20 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001aa2                getPassword_remote
  .text.writeUserToEEPROM
-                0x00001a4c       0x48 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001a4c                writeUserToEEPROM
+                0x00001ac2       0x48 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001ac2                writeUserToEEPROM
  .text.readUserFromEEPROM
-                0x00001a94       0x46 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001a94                readUserFromEEPROM
+                0x00001b0a       0x46 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001b0a                readUserFromEEPROM
  .text.remoteDB_init
-                0x00001ada       0x56 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001ada                remoteDB_init
+                0x00001b50       0x56 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001b50                remoteDB_init
  .text.addUserToEEPROM_remote
-                0x00001b30       0x6e Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001b30                addUserToEEPROM_remote
+                0x00001ba6       0x6e Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001ba6                addUserToEEPROM_remote
  .text.displayAllUsersOnRemote
-                0x00001b9e       0xa0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001b9e                displayAllUsersOnRemote
+                0x00001c14       0xa0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001c14                displayAllUsersOnRemote
  .text.selectUserAndLogin_remote
-                0x00001c3e       0xb0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001c3e                selectUserAndLogin_remote
+                0x00001cb4       0xb0 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001cb4                selectUserAndLogin_remote
  .text.loginAck_remote
-                0x00001cee        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001cee                loginAck_remote
+                0x00001d64        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001d64                loginAck_remote
  .text.logout_remote
-                0x00001cf4        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x00001cf4                logout_remote
+                0x00001d6a        0x6 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x00001d6a                logout_remote
  .text.remote_admin_register
-                0x00001cfa       0x84 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001cfa                remote_admin_register
+                0x00001d70       0x84 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001d70                remote_admin_register
  .text.registerUserRemote
-                0x00001d7e       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001d7e                registerUserRemote
+                0x00001df4       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001df4                registerUserRemote
  .text.registerUserLocal
-                0x00001dfc       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001dfc                registerUserLocal
+                0x00001e72       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001e72                registerUserLocal
  .text.lamp_menu
-                0x00001e7a       0xb4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001e7a                lamp_menu
- .text.AC_menu  0x00001f2e       0x84 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001f2e                AC_menu
+                0x00001ef0       0xb4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001ef0                lamp_menu
+ .text.AC_menu  0x00001fa4       0x84 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00001fa4                AC_menu
  .text.remote_Menu_User
-                0x00001fb2       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00001fb2                remote_Menu_User
+                0x00002028       0x7e Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00002028                remote_Menu_User
  .text.remote_Menu_Admin
-                0x00002030       0xb0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00002030                remote_Menu_Admin
+                0x000020a6       0xb0 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x000020a6                remote_Menu_Admin
  .text.remote_login_menu
-                0x000020e0       0x40 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x000020e0                remote_login_menu
+                0x00002156       0x40 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00002156                remote_login_menu
  .text.remote_menu_Service
-                0x00002120        0x4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00002120                remote_menu_Service
+                0x00002196        0x4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00002196                remote_menu_Service
  .text.remote_menu_init
-                0x00002124        0x4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
-                0x00002124                remote_menu_init
+                0x0000219a        0x4 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x0000219a                remote_menu_init
  .text.System_Stop
-                0x00002128        0x6 Source/SERVICE/Stop/Source/Stop.o
-                0x00002128                System_Stop
+                0x0000219e        0x6 Source/SERVICE/Stop/Source/Stop.o
+                0x0000219e                System_Stop
  .text.Set_System_Stop
-                0x0000212e        0x8 Source/SERVICE/Stop/Source/Stop.o
-                0x0000212e                Set_System_Stop
+                0x000021a4        0x8 Source/SERVICE/Stop/Source/Stop.o
+                0x000021a4                Set_System_Stop
  .text.avr-libc.fplib
-                0x00002136        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                0x00002136                __divsf3
+                0x000021ac        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x000021ac                __divsf3
  .text.avr-libc.fplib
-                0x0000213e       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
-                0x0000215e                __divsf3x
-                0x00002164                __divsf3_pse
+                0x000021b4       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x000021d4                __divsf3x
+                0x000021da                __divsf3_pse
  .text.avr-libc.fplib
-                0x0000221a       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x0000221a                __fixunssfsi
+                0x00002290       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x00002290                __fixunssfsi
  .text.avr-libc.fplib
-                0x00002278       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x00002278                __floatunsisf
-                0x0000227c                __floatsisf
+                0x000022ee       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x000022ee                __floatunsisf
+                0x000022f2                __floatsisf
  .text.avr-libc.fplib
-                0x000022f2        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x000022f2                __fp_inf
+                0x00002368        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x00002368                __fp_inf
  .text.avr-libc.fplib
-                0x000022fe        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x000022fe                __fp_nan
+                0x00002374        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x00002374                __fp_nan
  .text.avr-libc.fplib
-                0x00002304        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x00002304                __fp_pscA
+                0x0000237a        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x0000237a                __fp_pscA
  .text.avr-libc.fplib
-                0x00002312        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x00002312                __fp_pscB
+                0x00002388        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x00002388                __fp_pscB
  .text.avr-libc.fplib
-                0x00002320       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x00002320                __fp_round
+                0x00002396       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x00002396                __fp_round
  .text.avr-libc.fplib
-                0x00002342       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x00002342                __fp_split3
-                0x00002352                __fp_splitA
+                0x000023b8       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x000023b8                __fp_split3
+                0x000023c8                __fp_splitA
  .text.avr-libc.fplib
-                0x00002386        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00002386                __fp_zero
-                0x00002388                __fp_szero
+                0x000023fc        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x000023fc                __fp_zero
+                0x000023fe                __fp_szero
  .text.avr-libc.fplib
-                0x00002394        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x00002394                __mulsf3
+                0x0000240a        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x0000240a                __mulsf3
  .text.avr-libc.fplib
-                0x0000239c       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x000023ba                __mulsf3x
-                0x000023c0                __mulsf3_pse
- .text.libgcc   0x0000246e        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x0000246e                __tablejump2__
+                0x00002412       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x00002430                __mulsf3x
+                0x00002436                __mulsf3_pse
+ .text.libgcc   0x000024e4        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x000024e4                __tablejump2__
  .text.avr-libc
-                0x0000247a       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
-                0x0000247a                strcmp
+                0x000024f0       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                0x000024f0                strcmp
  .text.avr-libc
-                0x0000248c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcpy.o)
-                0x0000248c                strcpy
+                0x00002502        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcpy.o)
+                0x00002502                strcpy
  .text.avr-libc
-                0x0000249a       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
-                0x0000249a                snprintf
+                0x00002510       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(snprintf.o)
+                0x00002510                snprintf
  .text.avr-libc
-                0x000024fa       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x000024fa                sprintf
+                0x00002570       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x00002570                sprintf
  .text.avr-libc
-                0x0000253e      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x0000253e                vfprintf
+                0x000025b4      0x3c2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x000025b4                vfprintf
  .text.avr-libc
-                0x00002900       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x00002900                strnlen_P
+                0x00002976       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00002976                strnlen_P
  .text.avr-libc
-                0x00002916       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x00002916                strnlen
+                0x0000298c       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x0000298c                strnlen
  .text.avr-libc
-                0x0000292c       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x0000292c                fputc
+                0x000029a2       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x000029a2                fputc
  .text.avr-libc
-                0x000029a4       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x000029a4                __ultoa_invert
+                0x00002a1a       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00002a1a                __ultoa_invert
  .text.libgcc.prologue
-                0x00002a60       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
-                0x00002a60                __prologue_saves__
+                0x00002ad6       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_prologue.o)
+                0x00002ad6                __prologue_saves__
  .text.libgcc.prologue
-                0x00002a98       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
-                0x00002a98                __epilogue_restores__
-                0x00002ace                . = ALIGN (0x2)
+                0x00002b0e       0x36 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_epilogue.o)
+                0x00002b0e                __epilogue_restores__
+                0x00002b44                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00002ace        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00002ace                _exit
-                0x00002ace                exit
+ .fini9         0x00002b44        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00002b44                _exit
+                0x00002b44                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -1139,11 +1144,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00002ace        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00002b44        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00002ad2                _etext = .
+                0x00002b48                _etext = .
 
-.data           0x00800060      0x42e load address 0x00002ad2
+.data           0x00800060      0x42e load address 0x00002b48
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -1169,13 +1174,13 @@ END GROUP
                 0x00800067        0x1 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .data.Show_Display_ID.2204
                 0x00800068        0x1 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .data.current_menu.2089
+ .data.current_menu.2093
                 0x00800069        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .data.Display_Flag.2180
                 0x0080006a        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .data.Display_AC_menu.1755
+ .data.Display_AC_menu.1757
                 0x0080006b        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .data.Display_lamp_menu.1741
+ .data.Display_lamp_menu.1743
                 0x0080006c        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .data.Display_admin_menu
                 0x0080006d        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
@@ -1215,7 +1220,7 @@ END GROUP
                 0x0080048e                _edata = .
                 0x0080048e                PROVIDE (__data_end, .)
 
-.bss            0x0080048e      0x23d
+.bss            0x0080048e      0x240
                 0x0080048e                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
@@ -1262,65 +1267,70 @@ END GROUP
  .bss.login_flag_local
                 0x008004a9        0x1 Source/SERVICE/LocalMode_DB/Source/localDB.o
                 0x008004a9                login_flag_local
- .bss.menu_selector_position.2061
+ .bss.menu_selector_position.2065
                 0x008004aa        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.2060
+ .bss.menu_position.2064
                 0x008004ab        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.2029
+ .bss.menu_selector_position.2033
                 0x008004ac        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.2028
+ .bss.menu_position.2032
                 0x008004ad        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.AC_CFG.2033
+ .bss.AC_CFG.2037
                 0x008004ae        0x3 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_key.2031
+ .bss.menu_key.2035
                 0x008004b1        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.v_adj_flag.2032
+ .bss.v_adj_flag.2036
                 0x008004b2        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_selector_position.2012
+ .bss.menu_selector_position.2016
                 0x008004b3        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.menu_position.2011
+ .bss.menu_position.2015
                 0x008004b4        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .bss.secondCounter
+ .bss.Idle_timerCounter
                 0x008004b5        0x2 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x008004b5                secondCounter
- .bss.local_idle
+                0x008004b5                Idle_timerCounter
+ .bss.local_idle_Show_display
                 0x008004b7        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x008004b7                local_idle
- .bss.number_of_active_devices
+                0x008004b7                local_idle_Show_display
+ .bss.local_idle
                 0x008004b8        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                0x008004b8                number_of_active_devices
+                0x008004b8                local_idle
+ .bss.number_of_active_devices
+                0x008004b9        0x1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x008004b9                number_of_active_devices
  .bss.userCount
-                0x008004b9        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x008004b9                userCount
- .bss.login_flag_remote
                 0x008004ba        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x008004ba                login_flag_remote
- .bss.adminChoice.1729
-                0x008004bb        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .bss.userChoice.1720
+                0x008004ba                userCount
+ .bss.login_flag_remote
+                0x008004bb        0x1 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x008004bb                login_flag_remote
+ .bss.adminChoice.1731
                 0x008004bc        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .bss.id.1710   0x008004bd        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .bss.userChoice.1722
+                0x008004bd        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .bss.id.1712   0x008004be        0x1 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .bss.System_Stop_Status
-                0x008004be        0x1 Source/SERVICE/Stop/Source/Stop.o
-                0x008004be                System_Stop_Status
+                0x008004bf        0x1 Source/SERVICE/Stop/Source/Stop.o
+                0x008004bf                System_Stop_Status
  *(COMMON)
- COMMON         0x008004bf        0x1 Source/MCAL/UART/Source/uart.o
-                0x008004bf                rx_data
- COMMON         0x008004c0        0x3 Source/SERVICE/AC/Source/ac.o
-                0x008004c0                AC_CFG
- COMMON         0x008004c3      0x104 Source/SERVICE/LocalMode_DB/Source/localDB.o
-                0x008004c3                localUsers
- COMMON         0x008005c7      0x104 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
-                0x008005c7                remoteUsers
-                0x008006cb                PROVIDE (__bss_end, .)
-                0x00002ad2                __data_load_start = LOADADDR (.data)
-                0x00002f00                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008004c0        0x1 Source/MCAL/UART/Source/uart.o
+                0x008004c0                rx_data
+ COMMON         0x008004c1        0x3 Source/SERVICE/AC/Source/ac.o
+                0x008004c1                AC_CFG
+ COMMON         0x008004c4      0x104 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x008004c4                localUsers
+ COMMON         0x008005c8        0x2 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x008005c8                Idle_timer_displayCounter
+ COMMON         0x008005ca      0x104 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x008005ca                remoteUsers
+                0x008006ce                PROVIDE (__bss_end, .)
+                0x00002b48                __data_load_start = LOADADDR (.data)
+                0x00002f76                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008006cb        0x0
+.noinit         0x008006ce        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008006cb                _end = .
+                0x008006ce                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -1417,7 +1427,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x798
+.debug_aranges  0x00000000      0x7a0
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x20 Source/APP/main.o
@@ -1460,26 +1470,26 @@ END GROUP
  .debug_aranges
                 0x000004a0       0x48 Source/MCAL/UART/Source/uart.o
  .debug_aranges
-                0x000004e8       0x58 Source/SERVICE/AC/Source/ac.o
+                0x000004e8       0x60 Source/SERVICE/AC/Source/ac.o
  .debug_aranges
-                0x00000540       0x38 Source/SERVICE/Door/Source/door.o
+                0x00000548       0x38 Source/SERVICE/Door/Source/door.o
  .debug_aranges
-                0x00000578       0x38 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+                0x00000580       0x38 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .debug_aranges
-                0x000005b0       0x68 Source/SERVICE/LocalMode_DB/Source/localDB.o
+                0x000005b8       0x68 Source/SERVICE/LocalMode_DB/Source/localDB.o
  .debug_aranges
-                0x00000618       0x90 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                0x00000620       0x90 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
  .debug_aranges
-                0x000006a8       0x60 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+                0x000006b0       0x60 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
  .debug_aranges
-                0x00000708       0x68 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+                0x00000710       0x68 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
  .debug_aranges
-                0x00000770       0x28 Source/SERVICE/Stop/Source/Stop.o
+                0x00000778       0x28 Source/SERVICE/Stop/Source/Stop.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x6144
+.debug_info     0x00000000     0x61df
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_info    0x000004e6      0x2c1 Source/APP/main.o
@@ -1502,16 +1512,16 @@ END GROUP
  .debug_info    0x000026b6      0x25a Source/MCAL/Timer1/Source/timer1.o
  .debug_info    0x00002910      0x297 Source/MCAL/Timer2/Source/timer2.o
  .debug_info    0x00002ba7      0x20f Source/MCAL/UART/Source/uart.o
- .debug_info    0x00002db6      0x2b4 Source/SERVICE/AC/Source/ac.o
- .debug_info    0x0000306a      0x215 Source/SERVICE/Door/Source/door.o
- .debug_info    0x0000327f      0x13f Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_info    0x000033be      0xb24 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_info    0x00003ee2      0xfdb Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_info    0x00004ebd      0x702 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_info    0x000055bf      0xabf Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .debug_info    0x0000607e       0xc6 Source/SERVICE/Stop/Source/Stop.o
+ .debug_info    0x00002db6      0x2ce Source/SERVICE/AC/Source/ac.o
+ .debug_info    0x00003084      0x215 Source/SERVICE/Door/Source/door.o
+ .debug_info    0x00003299      0x13f Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_info    0x000033d8      0xb24 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_info    0x00003efc     0x105c Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_info    0x00004f58      0x702 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_info    0x0000565a      0xabf Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_info    0x00006119       0xc6 Source/SERVICE/Stop/Source/Stop.o
 
-.debug_abbrev   0x00000000     0x2279
+.debug_abbrev   0x00000000     0x22a5
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_abbrev  0x000004a3      0x10e Source/APP/main.o
@@ -1538,12 +1548,12 @@ END GROUP
  .debug_abbrev  0x000016c8       0xf2 Source/SERVICE/Door/Source/door.o
  .debug_abbrev  0x000017ba       0xbd Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
  .debug_abbrev  0x00001877      0x2e6 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_abbrev  0x00001b5d      0x271 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_abbrev  0x00001dce      0x220 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_abbrev  0x00001fee      0x206 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .debug_abbrev  0x000021f4       0x85 Source/SERVICE/Stop/Source/Stop.o
+ .debug_abbrev  0x00001b5d      0x29d Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_abbrev  0x00001dfa      0x220 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_abbrev  0x0000201a      0x206 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_abbrev  0x00002220       0x85 Source/SERVICE/Stop/Source/Stop.o
 
-.debug_line     0x00000000     0x3b51
+.debug_line     0x00000000     0x3bbb
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_line    0x00000116      0x3c8 Source/APP/main.o
@@ -1566,16 +1576,16 @@ END GROUP
  .debug_line    0x0000193b      0x1ce Source/MCAL/Timer1/Source/timer1.o
  .debug_line    0x00001b09      0x1b8 Source/MCAL/Timer2/Source/timer2.o
  .debug_line    0x00001cc1      0x194 Source/MCAL/UART/Source/uart.o
- .debug_line    0x00001e55      0x1c0 Source/SERVICE/AC/Source/ac.o
- .debug_line    0x00002015      0x14c Source/SERVICE/Door/Source/door.o
- .debug_line    0x00002161       0xfb Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_line    0x0000225c      0x614 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_line    0x00002870      0x8a1 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_line    0x00003111      0x390 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_line    0x000034a1      0x625 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .debug_line    0x00003ac6       0x8b Source/SERVICE/Stop/Source/Stop.o
+ .debug_line    0x00001e55      0x1d6 Source/SERVICE/AC/Source/ac.o
+ .debug_line    0x0000202b      0x14c Source/SERVICE/Door/Source/door.o
+ .debug_line    0x00002177       0xfb Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_line    0x00002272      0x614 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_line    0x00002886      0x8f5 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_line    0x0000317b      0x390 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_line    0x0000350b      0x625 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_line    0x00003b30       0x8b Source/SERVICE/Stop/Source/Stop.o
 
-.debug_frame    0x00000000     0x11bc
+.debug_frame    0x00000000     0x11d4
  *(.debug_frame)
  .debug_frame   0x00000000       0x24 Source/APP/main.o
  .debug_frame   0x00000024       0x34 Source/HAL/Buzzer/Source/buzzer.o
@@ -1597,16 +1607,16 @@ END GROUP
  .debug_frame   0x000007b8      0x10c Source/MCAL/Timer1/Source/timer1.o
  .debug_frame   0x000008c4      0x194 Source/MCAL/Timer2/Source/timer2.o
  .debug_frame   0x00000a58       0xa0 Source/MCAL/UART/Source/uart.o
- .debug_frame   0x00000af8       0x94 Source/SERVICE/AC/Source/ac.o
- .debug_frame   0x00000b8c       0x68 Source/SERVICE/Door/Source/door.o
- .debug_frame   0x00000bf4       0x54 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_frame   0x00000c48      0x17c Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_frame   0x00000dc4      0x180 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_frame   0x00000f44      0x158 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_frame   0x0000109c       0xec Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .debug_frame   0x00001188       0x34 Source/SERVICE/Stop/Source/Stop.o
+ .debug_frame   0x00000af8       0xa4 Source/SERVICE/AC/Source/ac.o
+ .debug_frame   0x00000b9c       0x68 Source/SERVICE/Door/Source/door.o
+ .debug_frame   0x00000c04       0x54 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_frame   0x00000c58      0x17c Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_frame   0x00000dd4      0x188 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_frame   0x00000f5c      0x158 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_frame   0x000010b4       0xec Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_frame   0x000011a0       0x34 Source/SERVICE/Stop/Source/Stop.o
 
-.debug_str      0x00000000     0x16e3
+.debug_str      0x00000000     0x172e
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32a/avr5/crtatmega32a.o
  .debug_str     0x00000196      0x2d2 Source/APP/main.o
@@ -1649,24 +1659,24 @@ END GROUP
                                 0x30d (size before relaxing)
  .debug_str     0x00000e27       0x95 Source/MCAL/UART/Source/uart.o
                                 0x272 (size before relaxing)
- .debug_str     0x00000ebc      0x111 Source/SERVICE/AC/Source/ac.o
-                                0x2f0 (size before relaxing)
- .debug_str     0x00000fcd       0x61 Source/SERVICE/Door/Source/door.o
+ .debug_str     0x00000ebc      0x126 Source/SERVICE/AC/Source/ac.o
+                                0x305 (size before relaxing)
+ .debug_str     0x00000fe2       0x61 Source/SERVICE/Door/Source/door.o
                                 0x236 (size before relaxing)
- .debug_str     0x0000102e       0x75 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_str     0x00001043       0x75 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
                                 0x247 (size before relaxing)
- .debug_str     0x000010a3      0x1e3 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_str     0x000010b8      0x1e3 Source/SERVICE/LocalMode_DB/Source/localDB.o
                                 0x476 (size before relaxing)
- .debug_str     0x00001286      0x1ca Source/SERVICE/LocalMode_Menu/Source/localMenu.o
-                                0x5c8 (size before relaxing)
- .debug_str     0x00001450      0x10b Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_str     0x0000129b      0x200 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+                                0x613 (size before relaxing)
+ .debug_str     0x0000149b      0x10b Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
                                 0x3c9 (size before relaxing)
- .debug_str     0x0000155b      0x150 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_str     0x000015a6      0x150 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
                                 0x48f (size before relaxing)
- .debug_str     0x000016ab       0x38 Source/SERVICE/Stop/Source/Stop.o
+ .debug_str     0x000016f6       0x38 Source/SERVICE/Stop/Source/Stop.o
                                 0x1d0 (size before relaxing)
 
-.debug_loc      0x00000000     0x304d
+.debug_loc      0x00000000     0x308e
  *(.debug_loc)
  .debug_loc     0x00000000       0x48 Source/APP/main.o
  .debug_loc     0x00000048       0x46 Source/HAL/Dimmer/Source/dimmer.o
@@ -1687,9 +1697,9 @@ END GROUP
  .debug_loc     0x000019d9       0x52 Source/SERVICE/AC/Source/ac.o
  .debug_loc     0x00001a2b       0x49 Source/SERVICE/Door/Source/door.o
  .debug_loc     0x00001a74      0x70a Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_loc     0x0000217e      0x75a Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_loc     0x000028d8      0x525 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_loc     0x00002dfd      0x250 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_loc     0x0000217e      0x79b Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_loc     0x00002919      0x525 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_loc     0x00002e3e      0x250 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1709,7 +1719,7 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x608
+.debug_ranges   0x00000000      0x610
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x10 Source/APP/main.o
  .debug_ranges  0x00000010       0x18 Source/HAL/Buzzer/Source/buzzer.o
@@ -1731,14 +1741,14 @@ END GROUP
  .debug_ranges  0x00000298       0x60 Source/MCAL/Timer1/Source/timer1.o
  .debug_ranges  0x000002f8       0x78 Source/MCAL/Timer2/Source/timer2.o
  .debug_ranges  0x00000370       0x38 Source/MCAL/UART/Source/uart.o
- .debug_ranges  0x000003a8       0x48 Source/SERVICE/AC/Source/ac.o
- .debug_ranges  0x000003f0       0x28 Source/SERVICE/Door/Source/door.o
- .debug_ranges  0x00000418       0x28 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
- .debug_ranges  0x00000440       0x70 Source/SERVICE/LocalMode_DB/Source/localDB.o
- .debug_ranges  0x000004b0       0x80 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
- .debug_ranges  0x00000530       0x68 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
- .debug_ranges  0x00000598       0x58 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
- .debug_ranges  0x000005f0       0x18 Source/SERVICE/Stop/Source/Stop.o
+ .debug_ranges  0x000003a8       0x50 Source/SERVICE/AC/Source/ac.o
+ .debug_ranges  0x000003f8       0x28 Source/SERVICE/Door/Source/door.o
+ .debug_ranges  0x00000420       0x28 Source/SERVICE/Lamp_Dim/Source/LED_Dim_Service.o
+ .debug_ranges  0x00000448       0x70 Source/SERVICE/LocalMode_DB/Source/localDB.o
+ .debug_ranges  0x000004b8       0x80 Source/SERVICE/LocalMode_Menu/Source/localMenu.o
+ .debug_ranges  0x00000538       0x68 Source/SERVICE/RemoteMode_DB/Source/remoteDB.o
+ .debug_ranges  0x000005a0       0x58 Source/SERVICE/RemoteMode_Menu/Source/remoteMenu.o
+ .debug_ranges  0x000005f8       0x18 Source/SERVICE/Stop/Source/Stop.o
 
 .debug_macro
  *(.debug_macro)

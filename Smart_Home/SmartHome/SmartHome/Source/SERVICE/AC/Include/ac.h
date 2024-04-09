@@ -37,4 +37,6 @@ void airConditioner_on(void);
 /* Air conditioner OFF */
 void airConditioner_off(void);
 
+boolean airConditioner_State(void);
+
 #endif /* AC_H_ */
