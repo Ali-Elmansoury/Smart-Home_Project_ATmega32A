@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
+    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <avrdevice>ATmega32A</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>Executable</OutputType>
+    <Language>C</Language>
+    <OutputFileName>$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <AssemblyName>SmartHome</AssemblyName>
+    <Name>SmartHome</Name>
+    <RootNamespace>SmartHome</RootNamespace>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <CacheFlash>true</CacheFlash>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <UncachedRange />
+    <preserveEEPROM>true</preserveEEPROM>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <BootSegment>2</BootSegment>
+    <ResetRule>0</ResetRule>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <EraseKey />
+    <AsfFrameworkConfig>
+      <framework-data xmlns="">
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.52.0" />
+        </dependencies>
+      </framework-data>
+    </AsfFrameworkConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <AvrGcc>
+        <avrgcc.common.Device>-mmcu=atmega32a -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a"</avrgcc.common.Device>
+        <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+        <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+        <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+        <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+        <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+        <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+        <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+        <avrgcc.compiler.symbols.DefSymbols>
+          <ListValues>
+            <Value>NDEBUG</Value>
+          </ListValues>
+        </avrgcc.compiler.symbols.DefSymbols>
+        <avrgcc.compiler.directories.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+          </ListValues>
+        </avrgcc.compiler.directories.IncludePaths>
+        <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+        <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+        <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+        <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+        <avrgcc.linker.libraries.Libraries>
+          <ListValues>
+            <Value>libm</Value>
+          </ListValues>
+        </avrgcc.linker.libraries.Libraries>
+        <avrgcc.assembler.general.IncludePaths>
+          <ListValues>
+            <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+          </ListValues>
+        </avrgcc.assembler.general.IncludePaths>
+      </AvrGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <AvrGcc>
+  <avrgcc.common.Device>-mmcu=atmega32a -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32a"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+      <Value>../Source/LIB</Value>
+      <Value>../Source/MCAL/ADC/Include</Value>
+      <Value>../Source/MCAL/DIO/Include</Value>
+      <Value>../Source/MCAL/GIE/Include</Value>
+      <Value>../Source/MCAL/Timer0/Include</Value>
+      <Value>../Source/MCAL/Timer1/Include</Value>
+      <Value>../Source/MCAL/UART/Include</Value>
+      <Value>../Source/HAL/Buzzer/Include</Value>
+      <Value>../Source/HAL/Dimmer/Include</Value>
+      <Value>../Source/HAL/Keypad/Include</Value>
+      <Value>../Source/HAL/L293D/Include</Value>
+      <Value>../Source/HAL/LCD/Include</Value>
+      <Value>../Source/HAL/LM35/Include</Value>
+      <Value>../Source/HAL/Relay/Include</Value>
+      <Value>../Source/HAL/Servo/Include</Value>
+      <Value>../Source/MCAL/EEPROM/Include</Value>
+      <Value>../Source/HAL/Lamp/Include</Value>
+      <Value>../Source/HAL/DC_Motor/Include</Value>
+      <Value>../Source/HAL/MM74C922/Include</Value>
+      <Value>../Source/HAL/POT/Include</Value>
+      <Value>../Source/SERVICE/LocalMode_DB/Include</Value>
+      <Value>../Source/SERVICE/RemoteMode_DB/Include</Value>
+      <Value>../Source/MCAL/Timer2/Include</Value>
+      <Value>../Source/SERVICE/AC/Include</Value>
+      <Value>../Source/SERVICE/LocalMode_Menu/Include</Value>
+      <Value>../Source/SERVICE/Lamp_Dim/Include</Value>
+      <Value>../Source/SERVICE/RemoteMode_Menu/Include</Value>
+      <Value>../Source/SERVICE/Door/Include</Value>
+      <Value>../Source/MCAL/EXT_INT/Include</Value>
+      <Value>../Source/SERVICE/Stop/Include</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.Libraries>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.7.374\include\</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
+  <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
+</AvrGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Source\APP\main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Buzzer\Include\buzzer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Buzzer\Source\buzzer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\DC_Motor\Include\dc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\DC_Motor\Source\dc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Dimmer\Include\dimmer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Dimmer\Source\dimmer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Keypad\Include\keypad.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Keypad\Source\keypad.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\L293D\Include\l293d.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\L293D\Source\l293d.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Lamp\Include\lamp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Lamp\Source\lamp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LCD\Include\lcd.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LCD\Include\lcd_cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LCD\Source\lcd.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LCD\Source\lcd_cfg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LM35\Include\lm35.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\LM35\Source\lm35.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\MM74C922\Include\MM74C922.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\MM74C922\Include\MM74C922_Cfg_Priv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\MM74C922\Source\MM74C922.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\POT\Include\pot.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\POT\Source\pot.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Relay\Include\relay.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Relay\Source\relay.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Servo\Include\servo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\HAL\Servo\Source\servo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\LIB\bit_math.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\LIB\sfr.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\LIB\std_types.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\ADC\Include\adc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\ADC\Include\adc_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\ADC\Source\adc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\DIO\Include\dio.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\DIO\Include\dio_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\DIO\Source\dio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EEPROM\Include\eeprom.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EEPROM\Include\eeprom_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EEPROM\Source\eeprom.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EXT_INT\Include\ext_int.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EXT_INT\Include\ext_int_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\EXT_INT\Source\ext_int.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\GIE\Include\gie.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\GIE\Include\gie_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\GIE\Source\gie.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer0\Include\timer0.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer0\Include\timer0_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer0\Source\timer0.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer1\Include\timer1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer1\Include\timer1_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer1\Source\timer1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer2\Include\timer2.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer2\Include\timer2_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\Timer2\Source\timer2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\UART\Include\uart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\UART\Include\uart_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\MCAL\UART\Source\uart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\AC\Include\ac.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\AC\Source\ac.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\Door\Include\door.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\Door\Source\door.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\Lamp_Dim\Include\Lamp_Dim_Service.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\Lamp_Dim\Source\LED_Dim_Service.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\LocalMode_DB\Include\localDB.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\LocalMode_DB\Source\localDB.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\LocalMode_Menu\Include\localMenu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\LocalMode_Menu\Source\localMenu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\RemoteMode_DB\Include\remoteDB.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\RemoteMode_DB\Source\remoteDB.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\RemoteMode_Menu\Include\remoteMenu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\RemoteMode_Menu\Source\remoteMenu.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\Stop\Include\Stop.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Source\SERVICE\Stop\Source\Stop.c">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source" />
+    <Folder Include="Source\HAL\Buzzer\Include" />
+    <Folder Include="Source\HAL\Buzzer\Source" />
+    <Folder Include="Source\HAL\DC_Motor\Include" />
+    <Folder Include="Source\HAL\DC_Motor\Source" />
+    <Folder Include="Source\HAL\Dimmer\Include" />
+    <Folder Include="Source\HAL\Dimmer\Source" />
+    <Folder Include="Source\HAL\Keypad\Include" />
+    <Folder Include="Source\HAL\Keypad\Source" />
+    <Folder Include="Source\HAL\L293D" />
+    <Folder Include="Source\HAL\L293D\Include" />
+    <Folder Include="Source\HAL\L293D\Source" />
+    <Folder Include="Source\HAL\Lamp\Include" />
+    <Folder Include="Source\HAL\Lamp\Source" />
+    <Folder Include="Source\HAL\LCD\Include" />
+    <Folder Include="Source\HAL\LCD\Source" />
+    <Folder Include="Source\HAL\LM35" />
+    <Folder Include="Source\HAL\LCD" />
+    <Folder Include="Source\HAL\Buzzer" />
+    <Folder Include="Source\HAL\Keypad" />
+    <Folder Include="Source\HAL\LM35\Include" />
+    <Folder Include="Source\HAL\LM35\Source" />
+    <Folder Include="Source\HAL\Dimmer" />
+    <Folder Include="Source\HAL\Lamp" />
+    <Folder Include="Source\HAL\DC_Motor" />
+    <Folder Include="Source\HAL\MM74C922" />
+    <Folder Include="Source\HAL\MM74C922\Include" />
+    <Folder Include="Source\HAL\MM74C922\Source" />
+    <Folder Include="Source\HAL\POT" />
+    <Folder Include="Source\HAL\POT\Include" />
+    <Folder Include="Source\HAL\POT\Source" />
+    <Folder Include="Source\HAL\Relay\Include" />
+    <Folder Include="Source\HAL\Relay\Source" />
+    <Folder Include="Source\HAL\Servo" />
+    <Folder Include="Source\HAL\Relay" />
+    <Folder Include="Source\HAL\Servo\Include" />
+    <Folder Include="Source\HAL\Servo\Source" />
+    <Folder Include="Source\MCAL" />
+    <Folder Include="Source\HAL" />
+    <Folder Include="Source\LIB" />
+    <Folder Include="Source\APP" />
+    <Folder Include="Source\MCAL\ADC\Include" />
+    <Folder Include="Source\MCAL\ADC\Source" />
+    <Folder Include="Source\MCAL\DIO" />
+    <Folder Include="Source\MCAL\DIO\Include" />
+    <Folder Include="Source\MCAL\DIO\Source" />
+    <Folder Include="Source\MCAL\EEPROM\Include" />
+    <Folder Include="Source\MCAL\EEPROM\Source" />
+    <Folder Include="Source\MCAL\EXT_INT\" />
+    <Folder Include="Source\MCAL\EXT_INT\Include\" />
+    <Folder Include="Source\MCAL\EXT_INT\Source\" />
+    <Folder Include="Source\MCAL\GIE" />
+    <Folder Include="Source\MCAL\ADC" />
+    <Folder Include="Source\MCAL\GIE\Include" />
+    <Folder Include="Source\MCAL\GIE\Source" />
+    <Folder Include="Source\MCAL\EEPROM" />
+    <Folder Include="Source\MCAL\Timer2" />
+    <Folder Include="Source\MCAL\Timer0\Include" />
+    <Folder Include="Source\MCAL\Timer0\Source" />
+    <Folder Include="Source\MCAL\Timer1" />
+    <Folder Include="Source\MCAL\Timer0" />
+    <Folder Include="Source\MCAL\Timer1\Include" />
+    <Folder Include="Source\MCAL\Timer1\Source" />
+    <Folder Include="Source\MCAL\Timer2\Include" />
+    <Folder Include="Source\MCAL\Timer2\Source" />
+    <Folder Include="Source\MCAL\UART" />
+    <Folder Include="Source\MCAL\UART\Include" />
+    <Folder Include="Source\MCAL\UART\Source" />
+    <Folder Include="Source\SERVICE" />
+    <Folder Include="Source\SERVICE\AC\" />
+    <Folder Include="Source\SERVICE\AC\Include\" />
+    <Folder Include="Source\SERVICE\AC\Source\" />
+    <Folder Include="Source\SERVICE\Door\Include" />
+    <Folder Include="Source\SERVICE\Door\Source" />
+    <Folder Include="Source\SERVICE\Lamp_Dim\" />
+    <Folder Include="Source\SERVICE\Lamp_Dim\Include\" />
+    <Folder Include="Source\SERVICE\Lamp_Dim\Source\" />
+    <Folder Include="Source\SERVICE\LocalMode_DB" />
+    <Folder Include="Source\SERVICE\LocalMode_DB\Include" />
+    <Folder Include="Source\SERVICE\LocalMode_DB\Source" />
+    <Folder Include="Source\SERVICE\LocalMode_Menu\" />
+    <Folder Include="Source\SERVICE\LocalMode_Menu\Include\" />
+    <Folder Include="Source\SERVICE\LocalMode_Menu\Source\" />
+    <Folder Include="Source\SERVICE\Door" />
+    <Folder Include="Source\SERVICE\Stop" />
+    <Folder Include="Source\SERVICE\RemoteMode_DB" />
+    <Folder Include="Source\SERVICE\RemoteMode_DB\Include" />
+    <Folder Include="Source\SERVICE\RemoteMode_DB\Source" />
+    <Folder Include="Source\SERVICE\RemoteMode_Menu\" />
+    <Folder Include="Source\SERVICE\RemoteMode_Menu\Include\" />
+    <Folder Include="Source\SERVICE\RemoteMode_Menu\Source\" />
+    <Folder Include="Source\SERVICE\Stop\Include" />
+    <Folder Include="Source\SERVICE\Stop\Source" />
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>
