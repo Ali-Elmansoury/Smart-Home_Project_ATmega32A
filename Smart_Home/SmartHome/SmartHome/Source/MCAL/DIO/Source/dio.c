@@ -1,10 +1,3 @@
-/*
- * dio.c
- *
- * Created: 9/27/2023 7:16:20 PM
- *  Author: ali_e
- */ 
-
 #include "dio.h"
 #include "bit_math.h"
 

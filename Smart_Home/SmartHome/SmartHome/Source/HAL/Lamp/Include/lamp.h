@@ -1,11 +1,3 @@
-/*
- * lamp.h
- *
- * Created: 2/5/2024 3:04:59 AM
- *  Author: ali_e
- */ 
-
-
 #ifndef LAMP_H_
 #define LAMP_H_
 

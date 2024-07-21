@@ -1,9 +1,3 @@
-/*
- * keypad.c
- *
- * Created: 2/5/2024 5:38:27 AM
- *  Author: ali_e
- */ 
 
 #include "keypad.h"
 #include "dio.h"

@@ -1,11 +1,3 @@
-/*
- * dio_reg.h
- *
- * Created: 10/2/2023 7:19:22 PM
- *  Author: ali_e
- */ 
-
-
 #ifndef DIO_REG_H_
 #define DIO_REG_H_
 

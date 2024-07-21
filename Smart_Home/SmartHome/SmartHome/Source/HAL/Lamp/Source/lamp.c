@@ -1,10 +1,3 @@
-/*
- * lamp.c
- *
- * Created: 2/5/2024 3:06:05 AM
- *  Author: ali_e
- */ 
-
 #include "relay.h"
 #include "lamp.h"
 
